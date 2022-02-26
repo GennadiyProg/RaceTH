@@ -1,6 +1,6 @@
 Welkom to nash project RaceTH!!!
 
-### Первые действия при установке
+## Первые действия при установке
 Воспользуйтесь IDE [Intellij IDEA](https://www.jetbrains.com/ru-ru/idea/download/#section=windows) для работы с проектом. <br><br>
 
 При первом запуске и открытии .java файла среда
@@ -18,10 +18,10 @@ Welkom to nash project RaceTH!!!
 Теперь открываем выпадающее окно Run и нажимаем кнопку Edit Configurations <br>
 ![](./rdmscrs/setup_sdk3.png?raw=true) <br>
 
-В этом окне жмакаем Modify options и выбираем Add VM options <br>
+В этом окне жмакаем Modify options и выбираем Add VM options.
+И теперь в только что появившемся поле прописываем: <br>
+<span style="color:blue">`--module-path ".\path\to\javafx-sdk-17.0.2\lib" --add-modules javafx.controls,javafx.fxml`</span> <br>
+
 ![](./rdmscrs/setup_sdk4.png?raw=true) <br>
 
-И теперь в только что появившемся поле прописываем: <br>
-<span style="color:lightblue">--module-path ".\path\to\javafx-sdk-17.0.2\lib" --add-modules javafx.controls,javafx.fxml</span> <br>
-
-На этом пока всё. В дальнейшем, вероятно, доработаем инструкцию.
+На этом пока всё. В дальнейшем, вероятно, доработаем инструкцию.<br>
