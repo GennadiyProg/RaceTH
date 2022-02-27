@@ -25,3 +25,4 @@ Welkom to nash project RaceTH!!!
 ![](./rdmscrs/setup_sdk4.png?raw=true) <br>
 
 На этом пока всё. В дальнейшем, вероятно, доработаем инструкцию.<br>
+
