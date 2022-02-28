@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1-create-test-table"
+      author: gennadiy.rumyantsev
+      changes:
+        - createTable:
+            tableName: Test
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false

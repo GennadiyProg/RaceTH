@@ -5,12 +5,14 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.text.Text;
+import org.hibernate.Session;
 
 public class Main extends Application{
 
     public static void main(String[] args) {
-
+        Session session = HibernateUtil.getSessionFactory().openSession();
         launch(args);
+        session.close();
     }
 
     @Override
