@@ -5,12 +5,20 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.text.Text;
+import liquibase.configuration.LiquibaseConfiguration;
 import org.hibernate.Session;
+import ru.corporateproduct.raceth.model.Test;
 
 public class Main extends Application{
 
     public static void main(String[] args) {
         Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Test test = new Test();
+
+        session.save(test);
+        session.getTransaction().commit();
+
         launch(args);
         session.close();
     }
