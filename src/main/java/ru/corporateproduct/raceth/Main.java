@@ -12,7 +12,7 @@ import javax.usb.UsbException;
 public class Main extends Application{
 
     public static void main(String[] args) throws UsbException {
-        UsbReader usbReader = new UsbReader();
+        UsbReader usbReader = new UsbReader((short) 2522, (short) 62995);
         usbReader.main();
 //        launch(args);
     }
