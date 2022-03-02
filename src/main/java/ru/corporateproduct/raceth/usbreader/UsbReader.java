@@ -9,12 +9,17 @@ import java.util.List;
 
 public class UsbReader {
 
+    private final UsbHub usbHub = new Services().getRootUsbHub();
+
+    public UsbReader() throws UsbException {
+    }
+
     public void main() throws UsbException {
         UsbHub hub = new Services().getRootUsbHub();
         System.out.println(FindDevice(hub, (short) 2522, (short) 62995));
     }
 
-    public UsbDeviceDescriptor FindDevice(UsbHub hub, int vendorId, int productId) {
+    public UsbDeviceDescriptor FindDevice(UsbHub hub, short vendorId, short productId) {
         List<UsbDevice> devices = hub.getAttachedUsbDevices();
         for (UsbDevice device : devices) {
             UsbDeviceDescriptor dev = device.getUsbDeviceDescriptor();
@@ -24,5 +29,9 @@ public class UsbReader {
 //                FindDevice((UsbHub) device, vendorId, productId);
         }
         return null;
+    }
+
+    public void FindDevice(short vendorId, short productId) {
+        this.FindDevice(usbHub, vendorId, productId);
     }
 }
