@@ -1,10 +1,14 @@
 package ru.corporateproduct.raceth;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.text.Text;
+
+import java.io.IOException;
 
 public class Main extends Application{
 
@@ -14,20 +18,10 @@ public class Main extends Application{
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
 
-        // установка надписи
-        Text text = new Text("Hello my student work!");
-        text.setLayoutY(80);    // установка положения надписи по оси Y
-        text.setLayoutX(80);   // установка положения надписи по оси X
-
-        Group group = new Group(text);
-
-        Scene scene = new Scene(group);
-        stage.setScene(scene);
-        stage.setTitle("JavaFX Application");
-        stage.setWidth(300);
-        stage.setHeight(250);
+        Parent root = FXMLLoader.load(getClass().getResource("StartUp_Page.fxml"));
+        stage.setScene(new Scene(root));
         stage.show();
     }
 }
