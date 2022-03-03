@@ -8,11 +8,12 @@ import javafx.scene.text.Text;
 import ru.corporateproduct.raceth.usbreader.UsbReader;
 
 import javax.usb.UsbException;
+import java.io.UnsupportedEncodingException;
 
 public class Main extends Application{
 
     public static void main(String[] args) throws UsbException {
-        UsbReader usbReader = new UsbReader((short) 2522, (short) 62995);
+        UsbReader usbReader = new UsbReader((short) 0x09da, (short) 0xf613);
         usbReader.main();
 //        launch(args);
     }
