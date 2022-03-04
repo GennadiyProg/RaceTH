@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #626262;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.corporateproduct.raceth.Switch_Controller">
+    <children>
+      <TabPane layoutX="263.0" prefHeight="700.0" prefWidth="893.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Print Start Doc">
+               <graphic>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="649.0" prefWidth="860.0">
+                     <children>
+                        <ComboBox editable="true" layoutX="14.0" layoutY="42.0" prefHeight="44.0" prefWidth="262.0" promptText="Выберите мероприятие" style="-fx-background-color: #494949;" />
+                        <ComboBox editable="true" layoutX="315.0" layoutY="42.0" prefHeight="44.0" prefWidth="262.0" promptText="Формат печати" style="-fx-background-color: #494949;" />
+                        <Button layoutX="701.0" layoutY="614.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="ПЕЧАТЬ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="Arial Black" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </graphic>
+            </Tab>
+            <Tab text="Print Finish Doc">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ComboBox editable="true" prefHeight="44.0" prefWidth="262.0" promptText="Выберите мероприятие" style="-fx-background-color: #494949;" />
+                        <ComboBox editable="true" prefHeight="44.0" prefWidth="262.0" promptText="Формат печати" style="-fx-background-color: #494949;" />
+                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="ПЕЧАТЬ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="Arial Black" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+        <VBox alignment="TOP_CENTER" layoutX="102.0" layoutY="-131.0" prefHeight="700.0" prefWidth="262.0" style="-fx-background-color: #414141;">
+            <children>
+                <Button mnemonicParsing="false" onAction="#switchToScene2" prefHeight="44.0" prefWidth="177.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="РЕГИСТРАЦИЯ НОВОГО СПОРТСМЕНА" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <VBox.margin>
+                        <Insets bottom="30.0" top="70.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="РЕГИСТРАЦИЯ УЧАСТНИКА" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="СОЗДАНИЕ СОРЕВНОВАНИЯ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="177.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="ДОБАВЛЕНИЕ ЗАБЕГА" textFill="WHITE">
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="ПРОСМОТР УЧАСТНИКОВ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="ПРОТОКОЛЫ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+            </children>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <padding>
+                <Insets bottom="20.0" />
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

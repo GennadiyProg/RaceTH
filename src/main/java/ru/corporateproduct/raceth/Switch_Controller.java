@@ -38,4 +38,12 @@ public class Switch_Controller {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void switchToScene4(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("PrintRes_Page.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
