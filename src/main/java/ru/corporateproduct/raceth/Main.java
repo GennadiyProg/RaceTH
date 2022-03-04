@@ -5,16 +5,28 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.text.Text;
-import liquibase.configuration.LiquibaseConfiguration;
+import liquibase.Liquibase;
 import org.hibernate.Session;
 import ru.corporateproduct.raceth.model.Test;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.Properties;
 
 public class Main extends Application{
 
     public static void main(String[] args) {
         Session session = HibernateUtil.getSessionFactory().openSession();
+
+
         session.beginTransaction();
         Test test = new Test();
+
+
 
         session.save(test);
         session.getTransaction().commit();
@@ -24,8 +36,13 @@ public class Main extends Application{
     }
 
     @Override
-    public void start(Stage stage) {
-
+    public void start(Stage stage) throws IOException {
+        File f = new File("filea.txt");
+        System.out.println(f.getAbsolutePath());
+        Properties p = new Properties();
+        p.load(new FileReader("src/main/resources/prop.properties"));
+        System.out.println(p.getProperty("a"));
+//        Connection conn = DriverManager.getConnection("url", )
         // установка надписи
         Text text = new Text("Hello my student work!");
         text.setLayoutY(80);    // установка положения надписи по оси Y

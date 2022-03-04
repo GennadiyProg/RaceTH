@@ -11,7 +11,7 @@
     <property name="dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
 
     <!-- DB schema will be updated if needed -->
-<!--    <property name="hibernate.hbm2ddl.auto">create</property>-->
+    <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
     <mapping class="ru.corporateproduct.raceth.model.Test"/>
   </session-factory>
