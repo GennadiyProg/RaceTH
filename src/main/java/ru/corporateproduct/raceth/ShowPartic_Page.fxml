@@ -51,7 +51,7 @@
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="ПРОТОКОЛЫ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                <Button mnemonicParsing="false" onAction="#switchToScene4" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="ПРОТОКОЛЫ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                     <VBox.margin>
                         <Insets bottom="30.0" />
                     </VBox.margin>

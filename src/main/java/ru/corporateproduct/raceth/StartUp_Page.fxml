@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="1200.0" style="-fx-background-color: #626262;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.corporateproduct.raceth.Switch_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="1200.0" style="-fx-background-color: #626262;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.corporateproduct.raceth.Switch_Controller">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="662.0" prefWidth="262.0" style="-fx-background-color: #414141;">
          <children>
@@ -127,7 +127,7 @@
                         <Font name="Arial Black" size="12.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="ПРОТОКОЛЫ" textAlignment="CENTER" textFill="#c6c6c6" wrapText="true">
+                  <Button mnemonicParsing="false" onAction="#switchToScene4" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="ПРОТОКОЛЫ" textAlignment="CENTER" textFill="#c6c6c6" wrapText="true">
                      <VBox.margin>
                         <Insets bottom="30.0" />
                      </VBox.margin>
