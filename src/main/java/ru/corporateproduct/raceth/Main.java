@@ -7,6 +7,8 @@ import javafx.scene.Group;
 import javafx.scene.text.Text;
 import liquibase.Liquibase;
 import org.hibernate.Session;
+import ru.corporateproduct.raceth.model.Chip;
+import ru.corporateproduct.raceth.model.Participant;
 import ru.corporateproduct.raceth.model.Test;
 
 import java.io.File;
@@ -21,27 +23,32 @@ public class Main extends Application{
 
     public static void main(String[] args) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-
-
         session.beginTransaction();
-        Test test = new Test();
 
-
-
+        Test test = new Test(12,"danya");
+//        Chip chip = new Chip(1,0001);
+//        Participant participant = new Participant(1,chip);
+//Fixme: Ген, ничего не работает(((((((((
+//        При добавлении mappingа на другие папки в конфиг оно просто игнорирует новые классы
+//        Если оставлять 1 mapping с любым классом, он просто создает таблицу с названием класса
+//        Также он создает таблицу даже если тут все в коментариях и только сессия открывается
         session.save(test);
+//        session.save(chip);
+//        session.save(participant);
         session.getTransaction().commit();
 
         launch(args);
+
         session.close();
     }
 
     @Override
     public void start(Stage stage) throws IOException {
-        File f = new File("filea.txt");
-        System.out.println(f.getAbsolutePath());
-        Properties p = new Properties();
-        p.load(new FileReader("src/main/resources/prop.properties"));
-        System.out.println(p.getProperty("a"));
+//        File f = new File("filea.txt");
+//        System.out.println(f.getAbsolutePath());
+//        Properties p = new Properties();
+//        p.load(new FileReader("src/main/resources/prop.properties"));
+//        System.out.println(p.getProperty("a"));
 //        Connection conn = DriverManager.getConnection("url", )
         // установка надписи
         Text text = new Text("Hello my student work!");

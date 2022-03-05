@@ -14,5 +14,8 @@
     <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
     <mapping class="ru.corporateproduct.raceth.model.Test"/>
+<!--    <mapping class="ru.corporateproduct.raceth.model.Chip"/>-->
+<!--    <mapping class="ru.corporateproduct.raceth.model.Participant"/>-->
+
   </session-factory>
 </hibernate-configuration>
