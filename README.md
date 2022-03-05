@@ -20,9 +20,15 @@ Welkom to nash project RaceTH!!!
 
 В этом окне жмакаем Modify options и выбираем Add VM options.
 И теперь в только что появившемся поле прописываем: <br>
-<span style="color:blue">`--module-path ".\path\to\javafx-sdk-17.0.2\lib" --add-modules javafx.controls,javafx.fxml`</span> <br>
+<span style="color:blue">`--module-path ".\lib\javafx-sdk-17.0.2\lib" --add-modules javafx.controls,javafx.fxml`</span> <br>
 
 ![](./rdmscrs/setup_sdk4.png?raw=true) <br>
+
+В папке lib нужно выбрать все .jar файлы, ПКМ, нижняя кнопка(что-то на подобии Use like libraries) <br>
+Папку resources сделать папкой "Resoures root": <br>
+![](./rdmscrs/setup_sdk5.png?raw=true) <br>
+
+<span>`!!!При установке Postgresql пароль для root желательно выбрать "postgres"`</span>
 
 На этом пока всё. В дальнейшем, вероятно, доработаем инструкцию.<br>
 
