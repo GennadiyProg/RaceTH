@@ -1,6 +1,8 @@
 package ru.corporateproduct.raceth.usbreader;
 
 import org.usb4java.Device;
+import org.usb4java.DeviceList;
+import org.usb4java.LibUsb;
 import org.usb4java.javax.Services;
 
 import javax.usb.*;
@@ -27,20 +29,42 @@ public class UsbReader {
             UsbDeviceDescriptor dev = device.getUsbDeviceDescriptor();
             if (dev.idVendor() == vendorId && dev.idProduct() == productId)
                 return device;
-//            if (device.isUsbHub())
-//                FindDevice((UsbHub) device, vendorId, productId);
+            if (device.isUsbHub())
+                FindDevice((UsbHub) device, vendorId, productId);
         }
         return null;
     }
 
-    public void main() {
-        var device = FindDevice();
-        System.out.println(device.getUsbDeviceDescriptor());
-        for (UsbConfiguration item : (List<UsbConfiguration>) device.getUsbConfigurations()) {
-            System.out.println(item.getUsbConfigurationDescriptor());
+    public void ReceiveMessage() {
 
-            for (var item0 : (List<UsbInterface>) item.getUsbInterfaces())
-                System.out.println(item0.getUsbInterfaceDescriptor());
+    }
+
+    public void main() throws UsbException {
+        UsbDevice device = FindDevice();
+        System.out.println(device.getUsbDeviceDescriptor());
+
+        UsbInterface infc = device.getActiveUsbConfiguration().getUsbInterface((byte) 0);
+
+        infc.claim();
+//        infc.claim(new UsbInterfacePolicy() {
+//                       @Override
+//                       public boolean forceClaim(UsbInterface usbInterface) {
+//                           return true;
+//                       }
+//                   }
+//        );
+
+        UsbEndpoint receptionEndPoint = (UsbEndpoint) infc.getUsbEndpoints().get(0);
+
+        UsbPipe receptionPipe = receptionEndPoint.getUsbPipe();
+        receptionPipe.open();
+
+        byte[] b = new byte[64];
+        int length = 27;
+        while (true) {
+            var Длина = receptionPipe.syncSubmit(b);
+            for (byte i : b)
+                System.out.println(i);
         }
     }
 }

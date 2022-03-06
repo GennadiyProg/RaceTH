@@ -13,9 +13,7 @@ import java.io.UnsupportedEncodingException;
 public class Main extends Application{
 
     public static void main(String[] args) throws UsbException {
-        UsbReader usbReader = new UsbReader((short) 0x09da, (short) 0xf613);
-        usbReader.main();
-//        launch(args);
+        launch(args);
     }
 
     @Override
