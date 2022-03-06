@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -13,7 +15,8 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class Distance {
     @Id
-    private long id; //ID
-    private String location; //Местоположение
-    private int length; //Протяженность
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String located;
+    private int length;
 }

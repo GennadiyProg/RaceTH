@@ -1,11 +1,12 @@
 package ru.corporateproduct.raceth.model;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Data
@@ -13,13 +14,18 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class Participant {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; //ID
-    private Chip chipById; //Чип по ID
+    @ManyToOne
+    private Chip chip; //Чип по ID
     //тут должен быть спортсмен
-    private Run runById; //Забег по ID
-    private RelayTeam relayTeamById; //Команда эстафеты по ID
+    @ManyToOne
+    private Run run; //Забег по ID
+    @ManyToOne
+    @NotNull
+    private RelayTeam relayTeam; //Команда эстафеты по ID
     private int relayStage; //Этап эстафеты
+    @NotNull
     private int tag; //Порядковый номер в забеге
-
 
 }

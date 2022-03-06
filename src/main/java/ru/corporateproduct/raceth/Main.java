@@ -3,43 +3,137 @@ package ru.corporateproduct.raceth;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.Group;
 import javafx.scene.text.Text;
-import liquibase.Liquibase;
+import javafx.scene.Group;
 import org.hibernate.Session;
-import ru.corporateproduct.raceth.model.Chip;
-import ru.corporateproduct.raceth.model.Participant;
-import ru.corporateproduct.raceth.model.Test;
+import org.hibernate.SessionFactory;
+import ru.corporateproduct.raceth.dao.*;
+import ru.corporateproduct.raceth.model.*;
+import org.hibernate.cfg.Configuration;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+//import javax.security.auth.login.Configuration;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.Properties;
+import java.util.Calendar;
 
 public class Main extends Application{
 
-    public static void main(String[] args) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
 
-        Test test = new Test(12,"danya");
-//        Chip chip = new Chip(1,0001);
-//        Participant participant = new Participant(1,chip);
-//Fixme: Ген, ничего не работает(((((((((
-//        При добавлении mappingа на другие папки в конфиг оно просто игнорирует новые классы
-//        Если оставлять 1 mapping с любым классом, он просто создает таблицу с названием класса
-//        Также он создает таблицу даже если тут все в коментариях и только сессия открывается
-        session.save(test);
-//        session.save(chip);
-//        session.save(participant);
-        session.getTransaction().commit();
+    public static void main(String[] args) {
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+//
+//
+//        session.beginTransaction();
+//        Test test = new Test();
+//
+//
+//
+//        session.save(test);
+//        session.getTransaction().commit();
+//
+//        launch(args);
+//        session.close();
+
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+
+        // Determine all DAO controllers
+        DAO<Test> testDAO = new TestDAO(session);
+        DAO<Competition> competitionDAO = new CompetitionDAO(session);
+        DAO<Run> runDAO = new RunDAO(session);
+        DAO<Chip> chipDAO = new ChipDAO(session);
+        DAO<Participant> participantDAO = new ParticipantDAO(session);
+        DAO<RelayTeam> relayTeamDAO = new RelayTeamDAO(session);
+        DAO<Distance> distanceDAO = new DistanceDAO(session);
+        DAO<CompetitionGroup> competitionGroupDAO = new GroupDAO(session);
+        DAO<Checkpoint> checkpointDAO = new CheckpointDAO(session);
+        DAO<Sportsman> sportsmanDAO = new SportsmanDAO(session);
+
+        // Creating Test
+        final Test test = new Test();
+        testDAO.create(test);
+
+        // Creating Competition
+        final Competition competition = new Competition();
+        competition.setNameCompetition("First competition");
+        competitionDAO.create(competition);
+
+        // Creating Group
+        final CompetitionGroup competitionGroup = new CompetitionGroup();
+        competitionGroup.setNameGroup("Дети");
+        competitionGroup.setAge(14);
+        competitionGroup.setGender("Ж");
+        competitionGroupDAO.create(competitionGroup);
+
+        // Creating Distance
+        final Distance distance = new Distance();
+        distance.setLocated("Баринова роща");
+        distance.setLength(1000);
+        distanceDAO.create(distance);
+
+        // Creating Run
+        final Run run = new Run();
+        run.setCompetition(competition);
+        run.setDateRun(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+        run.setDistance(distance);
+        run.setGroup(competitionGroup);
+        runDAO.create(run);
+
+        // Creating Chip
+        final Chip chip = new Chip();
+        chip.setChipNumber(123456789);
+        chipDAO.create(chip);
+
+        // Creating RelayTeam
+        final RelayTeam relayTeam = new RelayTeam();
+        relayTeam.setNameRelayTeam("ВГДе");
+        relayTeamDAO.create(relayTeam);
+
+        final RelayTeam relayTeam1 = new RelayTeam();
+        relayTeam1.setNameRelayTeam("БББ");
+        relayTeamDAO.create(relayTeam1);
+
+
+        // Creating Participant
+        final Participant participant = new Participant();
+        participant.setRun(run);
+        participant.setChip(chip);
+        participant.setRelayTeam(relayTeam);
+        participant.setRelayStage(1);
+        participant.setTag(237);
+        participantDAO.create(participant);
+
+        // Creating Checkpoint
+        final Checkpoint checkpoint1 = new Checkpoint();
+        checkpoint1.setCrossingTime(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+        checkpoint1.setParticipant(participant);
+        checkpointDAO.create(checkpoint1);
+
+        final Checkpoint checkpoint2 = new Checkpoint();
+        checkpoint2.setCrossingTime(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+        checkpoint2.setParticipant(participant);
+        checkpointDAO.create(checkpoint2);
+
+        // Creating sportsman
+        final Sportsman sportsman = new Sportsman();
+        sportsman.setGender(Gender.MALE);
+        sportsman.setBirthdate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+        sportsman.setName("Mole");
+        sportsman.setLastname("Ass");
+        sportsman.setRegion("Vladimir");
+        sportsmanDAO.create(sportsman);
+
+        final Sportsman sportsman1 = new Sportsman();
+        sportsman1.setGender(Gender.MALE);
+        sportsman1.setBirthdate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+        sportsman1.setName("Den");
+        sportsman1.setLastname("ewfwfg");
+        sportsman1.setRegion("Kam");
+        sportsmanDAO.create(sportsman1);
 
         launch(args);
 
         session.close();
+        factory.close();
     }
 
     @Override

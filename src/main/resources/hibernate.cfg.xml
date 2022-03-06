@@ -9,13 +9,21 @@
     <property name="connection.username">postgres</property>
     <property name="connection.password">postgres</property>
     <property name="dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
+    <property name="show_sql">true</property>
 
     <!-- DB schema will be updated if needed -->
     <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
     <mapping class="ru.corporateproduct.raceth.model.Test"/>
-<!--    <mapping class="ru.corporateproduct.raceth.model.Chip"/>-->
-<!--    <mapping class="ru.corporateproduct.raceth.model.Participant"/>-->
+    <mapping class="ru.corporateproduct.raceth.model.Competition"/>
+    <mapping class="ru.corporateproduct.raceth.model.Run"/>
+    <mapping class="ru.corporateproduct.raceth.model.Distance"/>
+    <mapping class="ru.corporateproduct.raceth.model.CompetitionGroup"/>
+    <mapping class="ru.corporateproduct.raceth.model.Participant"/>
+    <mapping class="ru.corporateproduct.raceth.model.Checkpoint"/>
+    <mapping class="ru.corporateproduct.raceth.model.Chip"/>
+    <mapping class="ru.corporateproduct.raceth.model.RelayTeam"/>
+    <mapping class="ru.corporateproduct.raceth.model.Sportsman"/>
 
   </session-factory>
 </hibernate-configuration>
