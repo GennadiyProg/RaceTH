@@ -14,7 +14,6 @@
     <!-- DB schema will be updated if needed -->
     <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
-    <mapping class="ru.corporateproduct.raceth.model.Test"/>
     <mapping class="ru.corporateproduct.raceth.model.Competition"/>
     <mapping class="ru.corporateproduct.raceth.model.Run"/>
     <mapping class="ru.corporateproduct.raceth.model.Distance"/>

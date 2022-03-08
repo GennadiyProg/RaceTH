@@ -1,5 +1,6 @@
 package ru.corporateproduct.raceth;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -19,7 +20,11 @@ public class HibernateUtil {
         }
     }
 
-    public static SessionFactory getSessionFactory(){
-        return sessionFactory;
+    public static Session getSession(){
+        return sessionFactory.openSession();
+    }
+
+    public static void closeSessionFactory(){
+        sessionFactory.close();
     }
 }

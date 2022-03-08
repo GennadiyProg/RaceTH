@@ -6,38 +6,20 @@ import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.scene.Group;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import ru.corporateproduct.raceth.dao.*;
 import ru.corporateproduct.raceth.model.*;
-import org.hibernate.cfg.Configuration;
 
-//import javax.security.auth.login.Configuration;
-import java.io.IOException;
 import java.util.Calendar;
 
 public class Main extends Application{
 
 
     public static void main(String[] args) {
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//
-//
-//        session.beginTransaction();
-//        Test test = new Test();
-//
-//
-//
-//        session.save(test);
-//        session.getTransaction().commit();
-//
-//        launch(args);
-//        session.close();
+        Session session = HibernateUtil.getSession();
 
-        SessionFactory factory = new Configuration().configure().buildSessionFactory();
-        Session session = factory.openSession();
+        launch(args);
 
         // Determine all DAO controllers
-        DAO<Test> testDAO = new TestDAO(session);
         DAO<Competition> competitionDAO = new CompetitionDAO(session);
         DAO<Run> runDAO = new RunDAO(session);
         DAO<Chip> chipDAO = new ChipDAO(session);
@@ -47,10 +29,6 @@ public class Main extends Application{
         DAO<CompetitionGroup> competitionGroupDAO = new GroupDAO(session);
         DAO<Checkpoint> checkpointDAO = new CheckpointDAO(session);
         DAO<Sportsman> sportsmanDAO = new SportsmanDAO(session);
-
-        // Creating Test
-        final Test test = new Test();
-        testDAO.create(test);
 
         // Creating Competition
         final Competition competition = new Competition();
@@ -133,17 +111,11 @@ public class Main extends Application{
         launch(args);
 
         session.close();
-        factory.close();
+        HibernateUtil.closeSessionFactory();
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
-//        File f = new File("filea.txt");
-//        System.out.println(f.getAbsolutePath());
-//        Properties p = new Properties();
-//        p.load(new FileReader("src/main/resources/prop.properties"));
-//        System.out.println(p.getProperty("a"));
-//        Connection conn = DriverManager.getConnection("url", )
+    public void start(Stage stage) {
         // установка надписи
         Text text = new Text("Hello my student work!");
         text.setLayoutY(80);    // установка положения надписи по оси Y
