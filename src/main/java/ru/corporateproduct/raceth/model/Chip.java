@@ -17,5 +17,5 @@ public class Chip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; //ID
-    private int chipNumber; //Номер чипа
+    private String chipNumber; //Номер чипа
 }

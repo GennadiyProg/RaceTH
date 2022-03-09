@@ -9,7 +9,10 @@ import org.hibernate.Session;
 import ru.corporateproduct.raceth.dao.*;
 import ru.corporateproduct.raceth.model.*;
 
+import java.awt.event.KeyEvent;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main extends Application{
 
@@ -58,7 +61,7 @@ public class Main extends Application{
 
         // Creating Chip
         final Chip chip = new Chip();
-        chip.setChipNumber(123456789);
+        chip.setChipNumber("Donda");
         chipDAO.create(chip);
 
         // Creating RelayTeam
