@@ -5,14 +5,10 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.text.Text;
-import ru.corporateproduct.raceth.usbreader.UsbReader;
-
-import javax.usb.UsbException;
-import java.io.UnsupportedEncodingException;
 
 public class Main extends Application{
 
-    public static void main(String[] args) throws UsbException {
+    public static void main(String[] args) {
         launch(args);
     }
 
