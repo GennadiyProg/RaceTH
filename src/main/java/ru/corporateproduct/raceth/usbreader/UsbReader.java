@@ -1,9 +1,37 @@
 package ru.corporateproduct.raceth.usbreader;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class UsbReader {
+
+    private final static Map<Character, Character> letters = Map.ofEntries(
+            Map.entry('й', 'q'),
+            Map.entry('ц', 'w'),
+            Map.entry('у', 'e'),
+            Map.entry('к', 'r'),
+            Map.entry('е', 't'),
+            Map.entry('н', 'y'),
+            Map.entry('г', 'u'),
+            Map.entry('ш', 'i'),
+            Map.entry('щ', 'o'),
+            Map.entry('з', 'p'),
+            Map.entry('ф', 'a'),
+            Map.entry('ы', 's'),
+            Map.entry('в', 'd'),
+            Map.entry('а', 'f'),
+            Map.entry('п', 'g'),
+            Map.entry('р', 'h'),
+            Map.entry('о', 'j'),
+            Map.entry('л', 'k'),
+            Map.entry('д', 'l'),
+            Map.entry('я', 'z'),
+            Map.entry('ч', 'x'),
+            Map.entry('с', 'c'),
+            Map.entry('м', 'v'),
+            Map.entry('и', 'b'),
+            Map.entry('т', 'n'),
+            Map.entry('ь', 'm')
+    );
 
     public String IdParser(String id) {
         char[] idArray = id.toCharArray();
@@ -17,34 +45,10 @@ public class UsbReader {
                 continue;
             }
 
-                 if (letter == 'й') idArray[i] = 'q';
-            else if (letter == 'ц') idArray[i] = 'w';
-            else if (letter == 'у') idArray[i] = 'e';
-            else if (letter == 'к') idArray[i] = 'r';
-            else if (letter == 'е') idArray[i] = 't';
-            else if (letter == 'н') idArray[i] = 'y';
-            else if (letter == 'г') idArray[i] = 'u';
-            else if (letter == 'ш') idArray[i] = 'i';
-            else if (letter == 'щ') idArray[i] = 'o';
-            else if (letter == 'з') idArray[i] = 'p';
-            else if (letter == 'ф') idArray[i] = 'a';
-            else if (letter == 'ы') idArray[i] = 's';
-            else if (letter == 'в') idArray[i] = 'd';
-            else if (letter == 'а') idArray[i] = 'f';
-            else if (letter == 'п') idArray[i] = 'g';
-            else if (letter == 'р') idArray[i] = 'h';
-            else if (letter == 'о') idArray[i] = 'j';
-            else if (letter == 'л') idArray[i] = 'k';
-            else if (letter == 'д') idArray[i] = 'l';
-            else if (letter == 'я') idArray[i] = 'z';
-            else if (letter == 'ч') idArray[i] = 'x';
-            else if (letter == 'с') idArray[i] = 'c';
-            else if (letter == 'м') idArray[i] = 'v';
-            else if (letter == 'и') idArray[i] = 'b';
-            else if (letter == 'т') idArray[i] = 'n';
-            else if (letter == 'ь') idArray[i] = 'm';
+            idArray[i] = letters.get(letter);
         }
 
         return String.valueOf(idArray);
     }
+
 }
