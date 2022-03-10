@@ -3,6 +3,8 @@ package ru.corporateproduct.raceth;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -17,9 +19,9 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("StartUp_Page.fxml"));
-        stage.setScene(new Scene(root));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StartUp_Page.fxml"));
+        AnchorPane pain = loader.load();
+        stage.setScene(new Scene(pain));
         stage.show();
     }
 }
