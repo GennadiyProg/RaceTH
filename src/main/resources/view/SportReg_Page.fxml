@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #626262;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.corporateproduct.raceth.gui.Switch_Controller">
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="262.0" style="-fx-background-color: #414141;">
+            <children>
+                <Button mnemonicParsing="false" onAction="#switchToScene1" prefHeight="44.0" prefWidth="177.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="РЕГИСТРАЦИЯ НОВОГО СПОРТСМЕНА" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <VBox.margin>
+                        <Insets bottom="30.0" top="70.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="РЕГИСТРАЦИЯ УЧАСТНИКА" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="СОЗДАНИЕ СОРЕВНОВАНИЯ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="177.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="ДОБАВЛЕНИЕ ЗАБЕГА" textFill="WHITE">
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#switchToScene3" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="ПРОСМОТР УЧАСТНИКОВ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#switchToScene4" prefHeight="42.0" prefWidth="178.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="ПРОТОКОЛЫ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+            </children>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <padding>
+                <Insets bottom="20.0" />
+            </padding>
+        </VBox>
+      <VBox alignment="TOP_RIGHT" layoutX="176.0" layoutY="62.0" prefHeight="455.0" prefWidth="262.0">
+         <children>
+            <Label text="ФАМИЛИЯ" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="ИМЯ" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="ДАТА РОЖДЕНИЯ" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="ПОЛ" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="РЕГИОН" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="РАЗРЯД" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="КОМАНДА" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="446.0" layoutY="61.0" prefHeight="152.0" prefWidth="321.0">
+         <children>
+            <TextField layoutX="10.0" style="-fx-background-color: #DCDCDC;">
+               <VBox.margin>
+                  <Insets top="22.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField layoutX="10.0" style="-fx-background-color: #DCDCDC;">
+               <VBox.margin>
+                  <Insets top="22.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField layoutX="10.0" style="-fx-background-color: #DCDCDC;">
+               <VBox.margin>
+                  <Insets top="22.0" />
+               </VBox.margin>
+            </TextField>
+         </children>
+      </VBox>
+      <HBox layoutX="802.0" layoutY="517.0" prefHeight="44.0" prefWidth="273.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="111.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="СОХРАНИТЬ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-text-fill: #fafafafa; -fx-background-color: #494949;" text="РЕГИСТРАЦИЯ УЧАСТНИКА" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <HBox layoutX="446.0" layoutY="215.0" prefHeight="44.0" prefWidth="374.0">
+         <children>
+            <RadioButton mnemonicParsing="false" selected="true" text="Мужской" textFill="WHITE">
+               <HBox.margin>
+                  <Insets top="12.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="Gender" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Женский" textFill="WHITE" toggleGroup="$Gender">
+               <HBox.margin>
+                  <Insets left="20.0" top="12.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </HBox>
+      <VBox layoutX="446.0" layoutY="249.0" prefHeight="152.0" prefWidth="321.0">
+         <children>
+            <TextField layoutX="10.0" style="-fx-background-color: #DCDCDC;">
+               <VBox.margin>
+                  <Insets top="22.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField layoutX="10.0" style="-fx-background-color: #DCDCDC;">
+               <VBox.margin>
+                  <Insets top="22.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField layoutX="10.0" style="-fx-background-color: #DCDCDC;">
+               <VBox.margin>
+                  <Insets top="22.0" />
+               </VBox.margin>
+            </TextField>
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>
