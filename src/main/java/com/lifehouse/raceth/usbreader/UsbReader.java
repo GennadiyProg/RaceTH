@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.usbreader;
 
+import java.lang.reflect.Executable;
 import java.util.Map;
 
 public class UsbReader {
@@ -33,7 +34,18 @@ public class UsbReader {
             Map.entry('ь', 'm')
     );
 
-    public String IdParser(String id) {
+    private class CharacterDetectionExeption extends RuntimeException {
+
+        public CharacterDetectionExeption(String message) {
+            super(message);
+        }
+
+        public CharacterDetectionExeption(String message, Exception e) {
+            super(message, e);
+        }
+    }
+
+    public String IdParser(String id) throws CharacterDetectionExeption{
         char[] idArray = id.toCharArray();
 
         for (int i = 0; i < idArray.length; i++) {
@@ -45,10 +57,15 @@ public class UsbReader {
                 continue;
             }
 
-            idArray[i] = letters.get(letter);
+            try {
+                idArray[i] = letters.get(letter);
+            }
+            catch (Exception exp) {
+                String errorMessage = String.format("Символ '%c' отсутствует в библиотеке. Строка: '%s'", letter, id);
+                throw new CharacterDetectionExeption(errorMessage);
+            }
         }
 
         return String.valueOf(idArray);
     }
-
 }
