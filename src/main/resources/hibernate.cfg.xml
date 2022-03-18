@@ -14,15 +14,15 @@
     <!-- DB schema will be updated if needed -->
     <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
-    <mapping class="ru.corporateproduct.raceth.model.Competition"/>
-    <mapping class="ru.corporateproduct.raceth.model.Run"/>
-    <mapping class="ru.corporateproduct.raceth.model.Distance"/>
-    <mapping class="ru.corporateproduct.raceth.model.CompetitionGroup"/>
-    <mapping class="ru.corporateproduct.raceth.model.Participant"/>
-    <mapping class="ru.corporateproduct.raceth.model.Checkpoint"/>
-    <mapping class="ru.corporateproduct.raceth.model.Chip"/>
-    <mapping class="ru.corporateproduct.raceth.model.RelayTeam"/>
-    <mapping class="ru.corporateproduct.raceth.model.Sportsman"/>
+    <mapping class="com.lifehouse.raceth.model.Competition"/>
+    <mapping class="com.lifehouse.raceth.model.Run"/>
+    <mapping class="com.lifehouse.raceth.model.Distance"/>
+    <mapping class="com.lifehouse.raceth.model.CompetitionGroup"/>
+    <mapping class="com.lifehouse.raceth.model.Participant"/>
+    <mapping class="com.lifehouse.raceth.model.Checkpoint"/>
+    <mapping class="com.lifehouse.raceth.model.Chip"/>
+    <mapping class="com.lifehouse.raceth.model.RelayTeam"/>
+    <mapping class="com.lifehouse.raceth.model.Sportsman"/>
 
   </session-factory>
 </hibernate-configuration>
