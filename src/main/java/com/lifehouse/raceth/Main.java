@@ -4,7 +4,10 @@ import com.lifehouse.raceth.dao.*;
 import com.lifehouse.raceth.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -118,7 +121,11 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StartUp_Page.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StartPage.fxml"));
+
+//        Image imageOk = new Image(getClass().getResourceAsStream("123.jpg"));
+
+        stage.setResizable(false); //Отключение изменения размеров окна
         AnchorPane pain = loader.load();
         stage.setScene(new Scene(pain));
         stage.show();
