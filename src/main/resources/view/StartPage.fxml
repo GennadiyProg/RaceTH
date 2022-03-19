@@ -3,11 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
@@ -15,78 +17,16 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.Switch_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: ECF1FE;" stylesheets="@table.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.Switch_Controller">
    <children>
-      <AnchorPane layoutY="125.0" prefHeight="595.0" prefWidth="212.0" style="-fx-background-color: white;">
-         <children>
-            <Button fx:id="sorevButt" alignment="CENTER" contentDisplay="TOP" graphicTextGap="8.0" layoutX="51.0" layoutY="42.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="74.0" prefWidth="161.0" style="-fx-border-color: white; -fx-background-color: white;" text="Соревнование     " wrapText="true">
-               <font>
-                  <Font name="Calibri" size="18.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="zabegButt" alignment="CENTER" contentDisplay="TOP" graphicTextGap="8.0" layoutX="51.0" layoutY="116.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="74.0" prefWidth="161.0" style="-fx-border-color: white; -fx-background-color: white;" text="Забег                      " wrapText="true">
-               <font>
-                  <Font name="Calibri" size="18.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="esta" alignment="CENTER" contentDisplay="TOP" graphicTextGap="8.0" layoutX="51.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleButtonAction2" prefHeight="74.0" prefWidth="161.0" style="-fx-border-color: white; -fx-background-color: white;" text="Эстафета                " wrapText="true">
-               <font>
-                  <Font name="Calibri" size="18.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button alignment="CENTER" contentDisplay="TOP" graphicTextGap="8.0" layoutX="51.0" layoutY="264.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="161.0" style="-fx-border-color: white; -fx-background-color: white;" text="Монитор отметок" wrapText="true">
-               <font>
-                  <Font name="Calibri" size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button alignment="CENTER" contentDisplay="TOP" graphicTextGap="8.0" layoutX="51.0" layoutY="338.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="161.0" style="-fx-border-color: white; -fx-background-color: white;" text="Протоколы           " wrapText="true">
-               <font>
-                  <Font name="Calibri" size="18.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <effect>
-            <DropShadow height="0.0" radius="1.7000000000000002" width="8.8" />
-         </effect>
-      </AnchorPane>
       <AnchorPane prefHeight="67.0" prefWidth="1280.0" style="-fx-background-color: white;">
          <effect>
             <DropShadow radius="13.665" width="35.66" />
          </effect>
          <children>
-            <Label layoutX="86.0" layoutY="14.0" text="RaceTH">
+            <Label layoutX="39.0" layoutY="12.0" text="RaceTH">
                <font>
-                  <Font name="System Bold" size="27.0" />
+                  <Font name="System Bold" size="30.0" />
                </font>
                <textFill>
                   <LinearGradient endX="1.0" endY="0.7345971563981043" startY="1.0">
@@ -104,31 +44,138 @@
                      </stops>
                   </LinearGradient>
                </textFill>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons/more%20(1).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Label>
-            <ChoiceBox fx:id="actSorev" layoutX="1090.0" layoutY="21.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: grey;" />
-            <Label layoutX="935.0" layoutY="24.0" text="Текущее соревнование">
+            <Label layoutX="917.0" layoutY="24.0" text="Текущее соревнование:">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
+            <ComboBox fx:id="ActiveComp" layoutX="1075.0" layoutY="22.0" minWidth="150.0" />
          </children>
       </AnchorPane>
-      <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="212.0" layoutY="67.0" prefHeight="653.0" prefWidth="1068.0">
+      <AnchorPane layoutY="125.0" prefHeight="595.0" prefWidth="212.0" style="-fx-background-color: white;">
          <children>
-            <AnchorPane fx:id="secAnch" prefHeight="653.0" prefWidth="840.0">
+            <Button fx:id="sorevButt" alignment="CENTER" graphicTextGap="8.0" layoutX="-1.0" layoutY="42.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="77.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Соревнование     " wrapText="true">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons/home%20(2).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="zabegButt" alignment="CENTER" graphicTextGap="8.0" layoutX="-1.0" layoutY="116.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="74.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Забег                      " wrapText="true">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons/running.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="esta" alignment="CENTER" graphicTextGap="8.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleButtonAction2" prefHeight="78.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Эстафета                " wrapText="true">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons/relay.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button alignment="CENTER" graphicTextGap="8.0" layoutX="-1.0" layoutY="264.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Монитор отметок" wrapText="true">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons/cctv-camera%20(1).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button alignment="CENTER" graphicTextGap="8.0" layoutX="-1.0" layoutY="338.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Протоколы           " wrapText="true">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons/document.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <effect>
+            <DropShadow height="0.0" radius="1.7000000000000002" width="8.8" />
+         </effect>
+      </AnchorPane>
+      <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="212.0" layoutY="83.0" prefHeight="698.0" prefWidth="1082.0">
+         <children>
+            <AnchorPane fx:id="secAnch" layoutX="14.0" layoutY="59.0" prefHeight="650.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;">
                <children>
-                  <Pane layoutY="33.0" prefHeight="620.0" prefWidth="1068.0" style="-fx-background-color: #f4f4f4;" />
+                  <Pane layoutY="33.0" prefHeight="620.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" />
                   <Label layoutX="104.0" layoutY="143.0" prefHeight="39.0" prefWidth="192.0" text="111111111111111" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="firstAnch" layoutY="18.0" prefHeight="653.0" prefWidth="1068.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="firstAnch" layoutX="14.0" layoutY="18.0" prefHeight="650.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Pane layoutY="33.0" prefHeight="620.0" prefWidth="1068.0" style="-fx-background-color: #f4f4f4;">
+                  <Pane layoutX="12.0" layoutY="24.0" prefHeight="654.0" prefWidth="1046.0" style="-fx-background-color: ECF1FE;">
                      <children>
-                        <TableView layoutX="27.0" layoutY="89.0" prefHeight="339.0" prefWidth="1000.0" stylesheets="@table.css">
+                        <TableView layoutX="27.0" layoutY="89.0" prefHeight="339.0" stylesheets="@table.css">
                           <columns>
                             <TableColumn prefWidth="192.0" text="Название" />
                             <TableColumn prefWidth="179.0" text="Место" />
+                              <TableColumn prefWidth="179.0" text="Дата начала" />
+                              <TableColumn prefWidth="179.0" text="Дата конца" />
+                              <TableColumn prefWidth="179.0" text="Организатор" />
                           </columns>
                         </TableView>
                      </children>

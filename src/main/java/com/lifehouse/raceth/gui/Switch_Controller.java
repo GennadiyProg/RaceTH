@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -26,6 +27,9 @@ public class Switch_Controller implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    public Switch_Controller() {
+    }
 
     public void switchToScene1(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StartUp_Page.fxml"));
@@ -66,14 +70,14 @@ public class Switch_Controller implements Initializable {
 
     //Вехнее меню выбора
     @FXML
-    private ChoiceBox<String> actSorev;
+    private ComboBox<String> ActiveComp;
 
-    private String[] sorev = {"1", "2", "3"};
+    private String[] Competition = {"Марафон 2022", "Кросс лето", "Соревнование весна"};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        actSorev.setValue("2");
-        actSorev.getItems().addAll(sorev);
+        ActiveComp.setValue("Марафон 2022");
+        ActiveComp.getItems().addAll(Competition);
     }
 
 
@@ -97,6 +101,4 @@ public class Switch_Controller implements Initializable {
             firstAnch.toFront();
         }
     }
-
-
 }
