@@ -82,7 +82,7 @@ public class Switch_Controller implements Initializable {
 
 
     @FXML
-    private AnchorPane firstAnch, secAnch, run_anch;
+    private AnchorPane firstAnch, secAnch, run_anch, run_page;
     @FXML
     private Button sorevButt, zabegButt, esta;
     @FXML
@@ -92,6 +92,6 @@ public class Switch_Controller implements Initializable {
 
     @FXML
     private void handleButtonAction2(ActionEvent event) {
-            run_anch.toFront();
+        run_page.toFront();
     }
 }
