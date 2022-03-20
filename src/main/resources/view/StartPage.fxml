@@ -84,7 +84,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="zabegButt" alignment="CENTER" graphicTextGap="8.0" layoutX="-1.0" layoutY="116.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="74.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Забег                      " wrapText="true">
+            <Button fx:id="zabegButt" alignment="CENTER" graphicTextGap="8.0" layoutX="-1.0" layoutY="116.0" mnemonicParsing="false" onAction="#handleButtonAction2" prefHeight="74.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Забег                      " wrapText="true">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
@@ -102,7 +102,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="esta" alignment="CENTER" graphicTextGap="8.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleButtonAction2" prefHeight="78.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Эстафета                " wrapText="true">
+            <Button fx:id="esta" alignment="CENTER" graphicTextGap="8.0" layoutY="190.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Эстафета                " wrapText="true">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
@@ -169,7 +169,6 @@
                   <Label layoutX="104.0" layoutY="143.0" prefHeight="39.0" prefWidth="192.0" text="111111111111111" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="firstAnch" layoutX="14.0" layoutY="18.0" prefHeight="650.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <AnchorPane fx:id="run_anch" layoutY="18.0" prefHeight="653.0" prefWidth="1068.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Pane layoutX="12.0" layoutY="24.0" prefHeight="654.0" prefWidth="1046.0" style="-fx-background-color: ECF1FE;">
