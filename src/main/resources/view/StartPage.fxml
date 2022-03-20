@@ -7,11 +7,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -166,18 +170,97 @@
                </children>
             </AnchorPane>
             <AnchorPane fx:id="firstAnch" layoutX="14.0" layoutY="18.0" prefHeight="650.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="run_anch" layoutY="18.0" prefHeight="653.0" prefWidth="1068.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Pane layoutX="12.0" layoutY="24.0" prefHeight="654.0" prefWidth="1046.0" style="-fx-background-color: ECF1FE;">
                      <children>
-                        <TableView layoutX="27.0" layoutY="89.0" prefHeight="339.0" stylesheets="@table.css">
-                          <columns>
-                            <TableColumn prefWidth="192.0" text="Название" />
-                            <TableColumn prefWidth="179.0" text="Место" />
-                              <TableColumn prefWidth="179.0" text="Дата начала" />
-                              <TableColumn prefWidth="179.0" text="Дата конца" />
-                              <TableColumn prefWidth="179.0" text="Организатор" />
-                          </columns>
-                        </TableView>
+                        <GridPane layoutX="1.0" layoutY="4.0" prefHeight="514.0" prefWidth="1065.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="109.93338623046876" minHeight="10.0" prefHeight="12.866674804687506" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="387.7333129882812" minHeight="10.0" prefHeight="387.7333129882812" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="174.00000610351566" minHeight="10.0" prefHeight="15.066687011718784" vgrow="SOMETIMES" />
+                             <RowConstraints maxHeight="174.00000610351566" minHeight="10.0" prefHeight="15.066687011718784" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <GridPane>
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                          <Label prefHeight="18.0" prefWidth="127.0" text="Найти забег:" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                                       </children>
+                                    </GridPane>
+                                    <GridPane GridPane.columnIndex="1">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                          <Label prefHeight="18.0" prefWidth="114.0" text="Поиск участников:" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </GridPane>
+                              <GridPane GridPane.rowIndex="3">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Редактировать забег" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Button mnemonicParsing="false" text="Присвоить чип" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                 </children>
+                              </GridPane>
+                              <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
+                              <GridPane GridPane.rowIndex="2">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.3333435058594" minWidth="0.0" prefWidth="37.73332214355469" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="645.2" minWidth="0.0" prefWidth="41.466677856445315" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="818.6" minWidth="10.0" prefWidth="108.40004272460936" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="867.9332885742188" minWidth="10.0" prefWidth="861.5332946777344" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button mnemonicParsing="false" text="+" />
+                                    <Button mnemonicParsing="false" text="-" GridPane.columnIndex="1" />
+                                    <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="2" />
+                                    <Button mnemonicParsing="false" text="Загрузить из файла" GridPane.columnIndex="3" />
+                                 </children>
+                              </GridPane>
+                           </children>
+
+                        </GridPane>
                      </children>
                   </Pane>
                </children>

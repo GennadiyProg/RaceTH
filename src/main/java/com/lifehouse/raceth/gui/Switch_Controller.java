@@ -82,17 +82,12 @@ public class Switch_Controller implements Initializable {
 
 
     @FXML
-    private AnchorPane firstAnch, secAnch;
+    private AnchorPane firstAnch, secAnch, run_anch;
     @FXML
     private Button sorevButt, zabegButt, esta;
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        if (event.getSource() == sorevButt){
-            firstAnch.toFront();
-        }
-        else if (event.getSource() == zabegButt){
-            secAnch.toFront();
-        }
+        run_anch.toFront();
     }
 
     @FXML
