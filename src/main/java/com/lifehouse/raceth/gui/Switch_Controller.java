@@ -76,7 +76,7 @@ public class Switch_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ActiveComp.setValue("Марафон 2022");
+        ActiveComp.setValue(Competition[0]);
         ActiveComp.getItems().addAll(Competition);
     }
 

@@ -94,6 +94,7 @@
                                     <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="2" />
                                     <Button mnemonicParsing="false" text="Загрузить из файла" GridPane.columnIndex="3" />
                                 </children>
+                                <ComboBox fx:id="ActiveComp"></ComboBox>
                             </GridPane>
                         </children>
 

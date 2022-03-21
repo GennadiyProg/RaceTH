@@ -169,7 +169,7 @@
                   <Label layoutX="104.0" layoutY="143.0" prefHeight="39.0" prefWidth="192.0" text="111111111111111" />
                </children>
             </AnchorPane>
-            <fx:include fx:id="run_page" source="run.fxml" />
+            <fx:include fx:id="run_page" source="run.fxml" fx:controller="com.lifehouse.raceth.gui.Switch_Controller" />
 
          </children></AnchorPane>
    </children>
