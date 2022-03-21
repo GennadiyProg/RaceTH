@@ -5,23 +5,16 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: ECF1FE;" stylesheets="@table.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.Switch_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: ECF1FE;" stylesheets="@table.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.StartPageController">
    <children>
       <AnchorPane prefHeight="67.0" prefWidth="1280.0" style="-fx-background-color: white;">
          <effect>
@@ -64,7 +57,7 @@
             <ComboBox fx:id="ActiveComp" layoutX="1075.0" layoutY="22.0" minWidth="150.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="125.0" prefHeight="595.0" prefWidth="212.0" style="-fx-background-color: white;">
+      <AnchorPane layoutY="110.0" prefHeight="610.0" prefWidth="214.0" style="-fx-background-color: white;">
          <children>
             <Button fx:id="sorevButt" alignment="CENTER" graphicTextGap="8.0" layoutX="-1.0" layoutY="42.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="77.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Соревнование     " wrapText="true">
                <font>
@@ -161,16 +154,12 @@
             <DropShadow height="0.0" radius="1.7000000000000002" width="8.8" />
          </effect>
       </AnchorPane>
-      <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="212.0" layoutY="83.0" prefHeight="698.0" prefWidth="1082.0">
+      <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="212.0" layoutY="110.0" prefHeight="610.0" prefWidth="1068.0">
          <children>
-            <AnchorPane fx:id="secAnch" layoutX="14.0" layoutY="59.0" prefHeight="650.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;">
-               <children>
-                  <Pane layoutY="33.0" prefHeight="620.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" />
-                  <Label layoutX="104.0" layoutY="143.0" prefHeight="39.0" prefWidth="192.0" text="111111111111111" />
-               </children>
-            </AnchorPane>
-            <fx:include fx:id="run_page" source="run.fxml" />
+            <fx:include fx:id="competition_page" maxHeight="-Infinity" maxWidth="-Infinity" source="CompetitionPage.fxml" />
+            <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RunPage.fxml" />
 
-         </children></AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
