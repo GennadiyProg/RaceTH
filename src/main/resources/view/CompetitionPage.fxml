@@ -1,11 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1068.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="com.lifehouse.raceth.gui.CompetitionPageController">
+<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.CompetitionPageController">
    <children>
+      <GridPane prefHeight="76.0" prefWidth="1130.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="675.2" minWidth="0.0" prefWidth="217.59998779296876" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="824.0" minWidth="10.0" prefWidth="518.4000122070313" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="784.5999450683594" minWidth="10.0" prefWidth="401.5999877929686" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" prefWidth="205.0" text="Сделать текущим" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefWidth="137.0" text="Удалить" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Text boundsType="LOGICAL_VERTICAL_CENTER" strokeType="OUTSIDE" strokeWidth="0.0" text="Поиск" textAlignment="CENTER" wrappingWidth="55.899658203125" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="309.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <GridPane layoutY="103.0" prefHeight="344.0" prefWidth="1129.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TableView minWidth="-Infinity" prefHeight="200.0" prefWidth="1112.0">
+              <columns>
+                <TableColumn prefWidth="200.0" text="Название" />
+                <TableColumn prefWidth="200.0" text="Место" />
+                  <TableColumn prefWidth="200.0" text="Дата начала" />
+                  <TableColumn prefWidth="200.0" text="Дата конца" />
+                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" text="Организатор" />
+              </columns>
+            </TableView>
+         </children>
+      </GridPane>
+      <GridPane layoutY="447.0" prefHeight="162.0" prefWidth="1150.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
       <Label layoutX="464.0" layoutY="229.0" text="Competition" />
+      <ScrollBar layoutX="1128.0" orientation="VERTICAL" prefHeight="610.0" prefWidth="22.0" />
    </children>
 </AnchorPane>
