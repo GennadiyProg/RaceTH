@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1068.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RunPageController">
+<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RunPageController">
    <children>
       <GridPane layoutX="11.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="610.0" prefWidth="1068.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
@@ -71,7 +70,7 @@
             <GridPane GridPane.rowIndex="2">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.3333435058594" minWidth="0.0" prefWidth="37.73332214355469" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="645.2" minWidth="0.0" prefWidth="41.466677856445315" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="645.2" minWidth="0.0" prefWidth="41.466677856445315" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="818.6" minWidth="10.0" prefWidth="108.40004272460936" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="867.9332885742188" minWidth="10.0" prefWidth="861.5332946777344" />
                </columnConstraints>
@@ -79,16 +78,16 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" text="+" />
+                  <Button mnemonicParsing="false" text="+" GridPane.halignment="CENTER" />
                   <Button mnemonicParsing="false" text="-" GridPane.columnIndex="1" />
-                  <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="2" />
+                  <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                   <Button mnemonicParsing="false" text="Загрузить из файла" GridPane.columnIndex="3" />
                </children>
             </GridPane>
-            <GridPane GridPane.rowIndex="3">
+            <GridPane alignment="TOP_CENTER" prefWidth="820.0" GridPane.rowIndex="3">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="519.199951171875" minWidth="10.0" prefWidth="497.6000061035156" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="553.6000061035156" minWidth="10.0" prefWidth="550.3999938964844" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

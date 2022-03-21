@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="610.0" prefWidth="1068.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="com.lifehouse.raceth.gui.CompetitionPageController">
+<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1068.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="com.lifehouse.raceth.gui.CompetitionPageController">
    <children>
       <Label layoutX="464.0" layoutY="229.0" text="Competition" />
    </children>
