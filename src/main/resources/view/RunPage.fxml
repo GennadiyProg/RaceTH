@@ -135,10 +135,10 @@
                   </Button>
                </children>
             </GridPane>
-            <GridPane GridPane.rowIndex="3">
+            <GridPane alignment="TOP_CENTER" prefWidth="820.0" GridPane.rowIndex="3">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="519.199951171875" minWidth="10.0" prefWidth="497.6000061035156" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="553.6000061035156" minWidth="10.0" prefWidth="550.3999938964844" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

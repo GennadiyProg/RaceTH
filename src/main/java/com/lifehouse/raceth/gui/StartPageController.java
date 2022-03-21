@@ -15,6 +15,8 @@ public class StartPageController implements Initializable {
     public AnchorPane competition_page;
     @FXML
     public AnchorPane run_page;
+    @FXML
+    public AnchorPane protocol_page;
     //Вехнее меню выбора
     @FXML
     private ComboBox<String> ActiveComp;
@@ -25,15 +27,19 @@ public class StartPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ActiveComp.setValue("Марафон 2022");
         ActiveComp.getItems().addAll(Competition);
+        protocol_page.managedProperty().bind(protocol_page.visibleProperty());
     }
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
         competition_page.toFront();
     }
-
     @FXML
     private void handleButtonAction2(ActionEvent event) {
         run_page.toFront();
+    }
+    @FXML
+    private void handleButtonAction3(ActionEvent event) {
+        protocol_page.toFront();
     }
 }
