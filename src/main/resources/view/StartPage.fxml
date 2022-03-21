@@ -43,9 +43,7 @@
                </textFill>
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/icons/more%20(1).png" />
-                     </image>
+                     <Image url="@images/icons/more%20(1).png"/>
                   </ImageView>
                </graphic>
             </Label>
@@ -71,9 +69,7 @@
                </cursor>
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/icons/home%20(2).png" />
-                     </image>
+                     <Image url="@images/icons/home%20(2).png"/>
                   </ImageView>
                </graphic>
             </Button>
@@ -158,7 +154,6 @@
          <children>
             <fx:include fx:id="competition_page" maxHeight="-Infinity" maxWidth="-Infinity" source="CompetitionPage.fxml" />
             <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RunPage.fxml" />
-
          </children>
       </AnchorPane>
    </children>
