@@ -30,17 +30,20 @@
             <RowConstraints maxHeight="224.0" minHeight="10.0" prefHeight="62.59999389648431" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="424.0" style="-fx-background-color: #3C76F1; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Cоздать эстафету" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+
+            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="342.0" style="-fx-background-color: #3C76F1; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Cоздать эстафету" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+
+
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
             <Pane prefHeight="340.0" prefWidth="343.0" GridPane.rowIndex="2">
                <children>
-                  <TableView layoutX="31.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="282.0" stylesheets="@table.css">
+                  <TableView layoutX="47.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="282.0" stylesheets="@table.css">
                     <columns>
-                      <TableColumn prefWidth="30.0" resizable="false" />
-                      <TableColumn prefWidth="250.0" text="Название" />
+                      <TableColumn prefWidth="32.0" resizable="false" />
+                      <TableColumn prefWidth="248.0" text="Название" />
                     </columns>
                   </TableView>
                   <Button contentDisplay="CENTER" layoutX="93.0" layoutY="390.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #FF4040; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE">
@@ -52,7 +55,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="CENTER" layoutX="47.0" layoutY="390.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #FFBB38; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="editButton" contentDisplay="CENTER" layoutX="47.0" layoutY="390.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#EditCommand" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #FFBB38; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -61,7 +64,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="CENTER" layoutY="390.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #3C76F1; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="newCommand" contentDisplay="CENTER" layoutY="390.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#NewCommand" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #3C76F1; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -101,7 +104,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="220.0" style="-fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="197.0" style="-fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                   <Label prefHeight="26.0" prefWidth="126.0" text="Текущая эстафета" textFill="#555555" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="14.0" />
