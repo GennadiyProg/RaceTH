@@ -88,8 +88,8 @@
             </GridPane>
             <GridPane alignment="TOP_CENTER" GridPane.rowIndex="5">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="219.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="146.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="230.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="135.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="33.0" minHeight="2.0" prefHeight="2.0" vgrow="SOMETIMES" />
@@ -102,7 +102,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="73.0" prefWidth="73.0" style="-fx-background-radius: 120px; -fx-background-color: #89db76; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Старт" textAlignment="CENTER" textFill="#fffffff5" translateX="100.0" GridPane.rowIndex="1">
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="73.0" prefWidth="73.0" style="-fx-background-radius: 120px; -fx-background-color: #89db76; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Старт" textAlignment="CENTER" textFill="#fffffff5" translateX="110.0" GridPane.rowIndex="1">
                      <font>
                         <Font size="16.0" />
                      </font>
