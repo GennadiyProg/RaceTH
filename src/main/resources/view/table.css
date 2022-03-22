@@ -16,5 +16,8 @@
 .table-view .column-header-background .filler {
     -fx-background-color: transparent;
 }
-
+.yellow-button{
+    -fx-background-radius: 8px;
+    -fx-background-color: #FFBB38;
+    -fx-effect:  dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);}
 
