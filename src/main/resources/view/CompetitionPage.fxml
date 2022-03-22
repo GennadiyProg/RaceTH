@@ -1,69 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.CompetitionPageController">
+<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.CompetitionPageController">
    <children>
-      <GridPane prefHeight="76.0" prefWidth="1076.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="675.2" minWidth="0.0" prefWidth="217.59998779296876" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="824.0" minWidth="10.0" prefWidth="518.4000122070313" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="784.5999450683594" minWidth="10.0" prefWidth="401.5999877929686" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button mnemonicParsing="false" prefWidth="205.0" text="Сделать текущим" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefWidth="137.0" text="Удалить" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Text boundsType="LOGICAL_VERTICAL_CENTER" strokeType="OUTSIDE" strokeWidth="0.0" text="Поиск" textAlignment="CENTER" wrappingWidth="55.899658203125" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="309.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
-      <GridPane layoutY="103.0" prefHeight="344.0" prefWidth="1076.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="344.0" prefWidth="1076.0">
-              <columns>
-                <TableColumn prefWidth="200.0" text="Название" />
-                <TableColumn prefWidth="200.0" text="Место" />
-                  <TableColumn prefWidth="200.0" text="Дата начала" />
-                  <TableColumn prefWidth="200.0" text="Дата конца" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" text="Организатор" />
-              </columns>
-            </TableView>
-         </children>
-      </GridPane>
-      <GridPane layoutY="447.0" prefHeight="162.0" prefWidth="1150.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
-      <Label layoutX="464.0" layoutY="229.0" text="Competition" />
-      <ScrollBar layoutX="1113.0" orientation="VERTICAL" prefHeight="610.0" prefWidth="22.0" />
+      <ScrollPane hbarPolicy="NEVER" prefHeight="610.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" vbarPolicy="ALWAYS">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <content>
+            <AnchorPane prefHeight="779.0" prefWidth="1061.0" style="-fx-background-color: ECF1FE;">
+               <children>
+                  <TableView layoutY="44.0" prefHeight="400.0" prefWidth="1031.0">
+                    <columns>
+                      <TableColumn prefWidth="200.0" text="Название" />
+                      <TableColumn prefWidth="248.8000030517578" text="Место" />
+                        <TableColumn prefWidth="185.59994506835938" text="Дата начала" />
+                        <TableColumn prefWidth="203.20001220703125" text="Дата конца" />
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="194.4000244140625" text="Организатор" />
+                    </columns>
+                  </TableView>
+                  <GridPane prefHeight="41.0" prefWidth="1060.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.20001220703125" minWidth="10.0" prefWidth="153.20000610351562" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="509.4" minWidth="10.0" prefWidth="492.6000122070312" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.1999877929687" minWidth="10.0" prefWidth="162.19998779296873" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.4000000000001" minWidth="10.0" prefWidth="255.9999755859376" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="195.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                        <Button mnemonicParsing="false" prefWidth="137.0" text="Удалить" GridPane.columnIndex="1" />
+                        <Button mnemonicParsing="false" prefWidth="137.0" text="Сделать текущим" />
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="136.0" text="Поиск" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                     </children>
+                  </GridPane>
+                  <Pane layoutX="1.0" layoutY="457.0" prefHeight="266.0" prefWidth="1031.0">
+                     <children>
+                        <GridPane layoutX="-4.0" layoutY="52.0" prefHeight="135.0" prefWidth="1042.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="521.0" minWidth="10.0" prefWidth="282.80002746582034" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="742.3999572753906" minWidth="10.0" prefWidth="314.3999572753906" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="742.3999572753906" minWidth="10.0" prefWidth="427.20004272460926" />
+                              <ColumnConstraints />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="283.0" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                              <Label text="Название" GridPane.halignment="LEFT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Дата начала" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <GridPane GridPane.rowIndex="3">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.40002136230468" minWidth="10.0" prefWidth="130.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.199951171875" minWidth="0.0" prefWidth="8.800000000000011" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.6000518798828" minWidth="10.0" prefWidth="130.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="250.0" />
+                                    <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="250.0" GridPane.columnIndex="2" />
+                                 </children>
+                              </GridPane>
+                              <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="283.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="283.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <Label text="Место проведения" GridPane.columnIndex="2">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Организатор" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </GridPane>
+                         <Button layoutX="3.0" layoutY="219.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #00C781; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Сохранить" textAlignment="CENTER" textFill="WHITE">
+                             <font>
+                                 <Font size="14.0" />
+                             </font>
+                        </Button>
+                        <Label layoutX="3.0" layoutY="23.0" text="Создать(Изменить) соревнование" textFill="#305ec1">
+                           <font>
+                              <Font name="System Bold" size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>
