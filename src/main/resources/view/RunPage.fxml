@@ -103,7 +103,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="addButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #3C76F1; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                  <Button fx:id="addButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#AddRow" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #3C76F1; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -111,11 +111,11 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #394E75; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
+                  <Button mnemonicParsing="false" onAction="#AddExternalData" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #394E75; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
                      <font>
                         <Font size="14.0" />
                      </font></Button>
-                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #FF4040; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#RemoveRows" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #FF4040; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -124,7 +124,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="CENTER" layoutX="79.0" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #FFBB38; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                  <Button contentDisplay="CENTER" layoutX="79.0" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#UpdateRow" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #FFBB38; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
