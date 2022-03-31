@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Data;
 
@@ -32,6 +33,7 @@ public class RelayRunPageController implements Initializable {
             Parent root1 = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
+            stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
             stage.show();
         } catch (Exception e) {
             System.out.println("Cant load");
@@ -44,6 +46,7 @@ public class RelayRunPageController implements Initializable {
             Parent root1 = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
+            stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
             stage.show();
         } catch (Exception e) {
             System.out.println("Cant load");

@@ -40,7 +40,7 @@
             </Button>
             <Pane prefHeight="340.0" prefWidth="343.0" GridPane.rowIndex="2">
                <children>
-                  <TableView layoutX="47.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="282.0" stylesheets="@table.css">
+                  <TableView layoutX="47.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="282.0" stylesheets="@css/table.css">
                     <columns>
                       <TableColumn prefWidth="32.0" resizable="false" />
                       <TableColumn prefWidth="248.0" text="Название" />
@@ -82,7 +82,7 @@
             </Button>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <TableView layoutX="1.0" prefHeight="370.0" stylesheets="@table.css">
+                  <TableView layoutX="1.0" prefHeight="370.0" stylesheets="@css/table.css">
                      <columns>
                         <TableColumn prefWidth="30.0" resizable="false" />
                         <TableColumn prefWidth="100.0" resizable="false" text="Фамилия" />

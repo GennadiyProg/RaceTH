@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.CommandPopupController">
    <children>
-      <Label layoutX="44.0" prefHeight="124.0" prefWidth="345.0" text="Создание команду" textFill="#305ec1">
+      <Label layoutX="44.0" prefHeight="124.0" prefWidth="345.0" text="Создание команды" textFill="#305ec1">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>
@@ -20,7 +20,7 @@
          </font>
       </Label>
       <TextField layoutX="44.0" layoutY="148.0" prefHeight="31.0" prefWidth="409.0" />
-      <Button layoutX="44.0" layoutY="228.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" stylesheets="@AgreeButton.css" text="Сохранить" />
-      <Button layoutX="199.0" layoutY="228.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" stylesheets="@DisagreeButton.css" text="Отменить" />
+      <Button layoutX="44.0" layoutY="228.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/AgreeButton.css" text="Сохранить" />
+      <Button layoutX="199.0" layoutY="228.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/DisagreeButton.css" text="Отменить" />
    </children>
 </AnchorPane>
