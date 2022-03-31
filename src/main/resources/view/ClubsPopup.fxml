@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.CommandPopupController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="170.0" layoutY="19.0" prefHeight="31.0" prefWidth="195.0" text="Создание клуба" textFill="#305ec1">
+         <font>
+            <Font name="System Bold Italic" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="58.0" prefHeight="25.0" prefWidth="131.0" text="Название клуба">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField layoutX="44.0" layoutY="90.0" prefHeight="31.0" prefWidth="414.0" />
+      <Button layoutX="175.0" layoutY="273.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" stylesheets="@AgreeButton.css" text="Сохранить">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button layoutX="346.0" layoutY="273.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" stylesheets="@DisagreeButton.css" text="Отменить" />
+      <TextField layoutX="44.0" layoutY="162.0" prefHeight="31.0" prefWidth="414.0" />
+      <Label layoutX="44.0" layoutY="130.0" prefHeight="25.0" prefWidth="131.0" text="Тренер">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="217.0" prefHeight="25.0" prefWidth="70.0" text="Регион">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutX="122.0" layoutY="217.0" prefHeight="25.0" prefWidth="164.0" />
+      <AnchorPane layoutX="313.0" layoutY="214.0">
+         <children>
+            <Button contentDisplay="CENTER" mnemonicParsing="false" opacity="0.69" prefHeight="31.0" prefWidth="164.0" stylesheets="@DisagreeButton.css" text="Добавить регион" textFill="#ffffffd6">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
