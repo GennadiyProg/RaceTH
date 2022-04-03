@@ -9,14 +9,14 @@
 
 <AnchorPane prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.CommandPopupController">
    <children>
-      <Label contentDisplay="CENTER" layoutX="170.0" layoutY="19.0" prefHeight="31.0" prefWidth="195.0" text="Создание клуба" textFill="#305ec1">
+      <Label contentDisplay="CENTER" layoutX="170.0" layoutY="19.0" prefHeight="31.0" prefWidth="195.0" text="Создание клуба" textFill="#4f6da8">
          <font>
             <Font name="System Bold Italic" size="23.0" />
          </font>
       </Label>
       <Label layoutX="44.0" layoutY="58.0" prefHeight="25.0" prefWidth="131.0" text="Название клуба">
          <font>
-            <Font size="16.0" />
+            <Font size="17.0" />
          </font>
       </Label>
       <TextField layoutX="44.0" layoutY="90.0" prefHeight="31.0" prefWidth="414.0" />
@@ -37,14 +37,11 @@
          </font>
       </Label>
       <ChoiceBox layoutX="122.0" layoutY="217.0" prefHeight="25.0" prefWidth="164.0" />
-      <AnchorPane layoutX="313.0" layoutY="214.0">
-         <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" opacity="0.69" prefHeight="31.0" prefWidth="164.0" stylesheets="@DisagreeButton.css" text="Добавить регион" textFill="#ffffffd6">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
+      <AnchorPane layoutX="313.0" layoutY="214.0" />
+      <Button layoutX="326.0" layoutY="217.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="147.0" text="Добавить регион">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

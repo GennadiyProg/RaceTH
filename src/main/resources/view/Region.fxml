@@ -19,8 +19,8 @@
       <GridPane layoutX="11.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="610.0" prefWidth="1068.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="522.0" minWidth="3.0" prefWidth="117.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="522.0" minWidth="0.0" prefWidth="324.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="702.0000366210938" minWidth="10.0" prefWidth="589.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="522.0" minWidth="0.0" prefWidth="371.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="702.0000366210938" minWidth="10.0" prefWidth="541.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="154.13331451416016" minHeight="10.0" prefHeight="92.0" valignment="TOP" vgrow="SOMETIMES" />
@@ -31,52 +31,46 @@
          </rowConstraints>
          <children>
             <Pane prefHeight="340.0" prefWidth="343.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="427.0" style="-fx-background-color: #16bf65; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Открыть базу регионов для редактирования" textFill="WHITE" translateY="-10.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
             <Pane prefHeight="380.0" prefWidth="721.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <TableView layoutX="-348.0" prefHeight="312.0" prefWidth="815.0" stylesheets="@table.css">
+                  <TableView layoutX="-399.0" prefHeight="312.0" prefWidth="839.0" stylesheets="@table.css">
                      <columns>
                         <TableColumn prefWidth="30.0" resizable="false" />
-                        <TableColumn prefWidth="76.0" resizable="false" text="№ клуба" />
-                        <TableColumn prefWidth="269.0" text="Название" />
-                        <TableColumn prefWidth="224.0" resizable="false" text="Тренер/Представитель" />
-                        <TableColumn minWidth="0.0" prefWidth="215.0" resizable="false" text="Регион" />
+                        <TableColumn prefWidth="76.0" resizable="false" text="№ региона" />
+                        <TableColumn prefWidth="434.0" text="Регион" />
+                        <TableColumn prefWidth="183.0" resizable="false" text="Код региона" />
                      </columns>
                   </TableView>
                </children>
             </Pane>
             <GridPane alignment="TOP_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="125.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="116.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="82.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="133.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="118.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="72.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="33.0" minHeight="2.0" prefHeight="2.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="28.0" minHeight="0.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="33.0" minHeight="0.0" prefHeight="22.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="67.0" prefWidth="67.0" style="-fx-background-radius: 12px; -fx-background-color: #FF4040; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="-" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 12px; -fx-background-color: #FF4040; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="-" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font size="34.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="67.0" prefWidth="67.0" style="-fx-background-radius: 12px; -fx-background-color: #ffc412; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="#fffffff5" translateX="11.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 12px; -fx-background-color: #ffc412; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="#fffffff5" translateX="11.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="33.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="69.0" prefWidth="66.0" style="-fx-background-radius: 12px; -fx-background-color: #4f3ee8; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="+" textAlignment="CENTER" textFill="#fffffff5" translateX="35.0" GridPane.rowIndex="1">
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 12px; -fx-background-color: #4f3ee8; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="+" textAlignment="CENTER" textFill="#fffffff5" translateX="35.0" GridPane.rowIndex="1">
                      <font>
-                        <Font size="32.0" />
+                        <Font size="34.0" />
                      </font>
                   </Button>
-                  <ImageView fitHeight="42.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" translateX="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <ImageView fitHeight="50.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" translateX="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <image>
                         <Image url="@images/icons/edit.png" />
                      </image>
@@ -97,9 +91,9 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label prefHeight="26.0" prefWidth="126.0" text="Клубы" textFill="#555555" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label prefHeight="47.0" prefWidth="154.0" text="Регионы" textFill="#555555" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font size="40.0" />
+                  <Font size="32.0" />
                </font>
             </Label>
          </children>
