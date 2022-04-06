@@ -56,7 +56,7 @@
             </Button>
             <Pane prefHeight="380.0" prefWidth="721.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <TableView layoutX="-296.0" prefHeight="312.0" prefWidth="934.0" stylesheets="@table.css">
+                  <TableView layoutX="-296.0" prefHeight="312.0" prefWidth="934.0" stylesheets="@css/table.css">
                      <columns>
                         <TableColumn prefWidth="30.0" resizable="false" />
                         <TableColumn prefWidth="100.0" resizable="false" text="Участник" />

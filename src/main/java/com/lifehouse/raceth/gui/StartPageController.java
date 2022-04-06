@@ -19,7 +19,8 @@ public class StartPageController implements Initializable {
     public AnchorPane protocol_page;
     @FXML
     public AnchorPane relay_run_page;
-    //Вехнее меню выбора
+    @FXML
+    public AnchorPane marks_monitor_page;//Вехнее меню выбора
     @FXML
     private ComboBox<String> ActiveComp;
 
@@ -36,16 +37,24 @@ public class StartPageController implements Initializable {
     private void handleButtonAction(ActionEvent event) {
         competition_page.toFront();
     }
+
     @FXML
     private void handleButtonAction2(ActionEvent event) {
         run_page.toFront();
     }
+
     @FXML
     private void handleButtonAction3(ActionEvent event) {
         protocol_page.toFront();
     }
+
     @FXML
     private void handleButtonAction4(ActionEvent event) {
         relay_run_page.toFront();
+    }
+
+    @FXML
+    private void handleButtonAction5(ActionEvent event) {
+        marks_monitor_page.toFront();
     }
 }
