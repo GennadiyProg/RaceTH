@@ -1,8 +1,11 @@
 package com.lifehouse.raceth.gui;
 
+import com.lifehouse.raceth.dao.DistanceDAO;
+import com.lifehouse.raceth.model.Distance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lombok.Data;
@@ -12,16 +15,28 @@ public class DistancePopupController {
     @FXML
     private AnchorPane main_pane;
     @FXML
-    private TextField distName;
+    private TextField distLocation;
     @FXML
     private TextField high;
     @FXML
     private TextField length;
-
+    public TableView distancesTable;
 
     @FXML
     void Saving(ActionEvent event) {
         try{
+            Distance distance = new Distance();
+            DistanceDAO distanceDAO = new DistanceDAO();
+
+            distance.setLocation(distLocation.getText());
+            distance.setLength(Integer.parseInt(length.getText()));
+            distance.setHeight(Integer.parseInt(high.getText()));
+            distance.setId(distancesTable.getItems().stream().count());
+
+            distanceDAO.Create(distance);
+
+            distancesTable.getItems().add(distance);
+            distancesTable.refresh();
 
             ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
         } catch (Exception e) {

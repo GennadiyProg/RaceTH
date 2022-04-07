@@ -69,6 +69,11 @@ public class RunPageController implements Initializable {
     }
 
     @FXML
+    private void AddRun(ActionEvent event) {
+
+    }
+
+    @FXML
     //todo: РЕАЛИЗОВАТЬ ОКНО ДОБАВЛЕНИЯ УЧАСТНИКА И ДОРАБОТАТЬ ЭТОТ МЕТОД
     private void AddRow(ActionEvent event) {
         //Sportsman sportsman = ВызовОкнаДобавленияСпортсмена();

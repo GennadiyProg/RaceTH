@@ -96,8 +96,9 @@
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.3333435058594" minWidth="0.0" prefWidth="40.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="645.2" minWidth="0.0" prefWidth="53.600006103515625" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="818.6" minWidth="0.0" prefWidth="50.39998168945314" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="944.8" minWidth="10.0" prefWidth="903.2000183105469" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="818.6" minWidth="0.0" prefWidth="52.000019836425764" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="818.6" minWidth="10.0" prefWidth="220.2000274658203" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="944.8" minWidth="10.0" prefWidth="689.7999725341797" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -111,7 +112,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button mnemonicParsing="false" onAction="#AddExternalData" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #394E75; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
+                  <Button mnemonicParsing="false" onAction="#AddExternalData" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #394E75; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="4">
                      <font>
                         <Font size="14.0" />
                      </font></Button>
@@ -132,6 +133,11 @@
                            </image>
                         </ImageView>
                      </graphic>
+                  </Button>
+                  <Button fx:id="createCompretition_button" mnemonicParsing="false" onAction="#AddRun" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #394E75; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Создать забег" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Button>
                </children>
             </GridPane>
