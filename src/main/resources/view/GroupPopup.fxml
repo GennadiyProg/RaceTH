@@ -9,9 +9,9 @@
 
 <AnchorPane prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.CommandPopupController">
    <children>
-      <Label contentDisplay="CENTER" layoutX="170.0" prefHeight="71.0" prefWidth="195.0" text="Создание групп" textFill="#305ec1">
+      <Label contentDisplay="CENTER" layoutX="46.0" prefHeight="66.0" prefWidth="195.0" text="Создание групп" textFill="#305ec1">
          <font>
-            <Font name="System Bold Italic" size="23.0" />
+            <Font name="System Bold" size="23.0" />
          </font>
       </Label>
       <Label layoutX="44.0" layoutY="71.0" prefHeight="25.0" prefWidth="131.0" text="Название группы">
@@ -20,11 +20,11 @@
          </font>
       </Label>
       <TextField layoutX="46.0" layoutY="109.0" prefHeight="31.0" prefWidth="414.0" />
-      <Button layoutX="175.0" layoutY="265.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" stylesheets="@AgreeButton.css" text="Сохранить">
+      <Button layoutX="175.0" layoutY="265.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/AgreeButton.css" text="Сохранить">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="340.0" layoutY="265.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" stylesheets="@DisagreeButton.css" text="Отменить" />
+      <Button layoutX="340.0" layoutY="265.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/DisagreeButton.css" text="Отменить" />
       <Label layoutX="46.0" layoutY="162.0" prefHeight="25.0" prefWidth="92.0" text="Возраст  от">
          <font>
             <Font size="16.0" />

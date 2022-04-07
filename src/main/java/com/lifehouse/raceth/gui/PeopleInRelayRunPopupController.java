@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import lombok.Data;
 
 @Data
-public class CommandPopupController {
+public class PeopleInRelayRunPopupController {
     @FXML
     private AnchorPane main_pane;
 
