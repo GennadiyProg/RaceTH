@@ -129,7 +129,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="distance" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="-2.0" layoutY="416.0" mnemonicParsing="false" onAction="#handleButtonAction5" prefHeight="78.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Дистанции" wrapText="true">
+            <Button fx:id="distanceButt" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="-2.0" layoutY="416.0" mnemonicParsing="false" onAction="#handleButtonAction5" prefHeight="78.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Дистанции" wrapText="true">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
@@ -147,7 +147,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="zabegButt1" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="1.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleButtonAction6" prefHeight="74.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Клубы                      " wrapText="true">
+            <Button fx:id="clubsButt" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="1.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleButtonAction6" prefHeight="74.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Группы                      " wrapText="true">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
@@ -161,6 +161,24 @@
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/icons/running.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="groupButt" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="5.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleButtonAction7" prefHeight="77.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Клубы" wrapText="true">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons/home%20(2).png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -180,6 +198,7 @@
          <children>
             <fx:include fx:id="competition_page" maxHeight="-Infinity" maxWidth="-Infinity" source="CompetitionPage.fxml" />
             <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="ClubPage.fxml" />
+            <fx:include fx:id="group_page" maxHeight="-Infinity" maxWidth="-Infinity" source="GroupPage.fxml" />
             <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RunPage.fxml" />
             <fx:include fx:id="relay_run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RelayRunPage.fxml" />
             <fx:include fx:id="distance_page" maxHeight="-Infinity" maxWidth="-Infinity" source="DistancePage.fxml" />
