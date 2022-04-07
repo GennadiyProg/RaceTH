@@ -22,7 +22,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="commandName" layoutX="41.0" layoutY="113.0" prefHeight="31.0" prefWidth="227.0" />
+      <TextField fx:id="surname" layoutX="41.0" layoutY="113.0" prefHeight="31.0" prefWidth="227.0" />
       <Button fx:id="saveButt" layoutX="41.0" layoutY="493.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/AgreeButton.css" text="Сохранить" />
       <Button fx:id="cancelButt" layoutX="196.0" layoutY="493.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/DisagreeButton.css" text="Отменить" />
       <Label layoutX="41.0" layoutY="153.0" text="Имя">
@@ -30,20 +30,20 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="commandName1" layoutX="41.0" layoutY="178.0" prefHeight="31.0" prefWidth="227.0" />
+      <TextField fx:id="name" layoutX="41.0" layoutY="178.0" prefHeight="31.0" prefWidth="227.0" />
       <Label layoutX="41.0" layoutY="222.0" text="Отчество">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="commandName2" layoutX="41.0" layoutY="246.0" prefHeight="31.0" prefWidth="227.0" />
+      <TextField fx:id="patronic" layoutX="41.0" layoutY="246.0" prefHeight="31.0" prefWidth="227.0" />
       <Label layoutX="364.0" layoutY="153.0" text="Город">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="commandName3" layoutX="363.0" layoutY="178.0" prefHeight="31.0" prefWidth="181.0" />
-      <DatePicker layoutX="363.0" layoutY="113.0" prefHeight="31.0" prefWidth="181.0" />
+      <TextField fx:id="city" layoutX="363.0" layoutY="178.0" prefHeight="31.0" prefWidth="181.0" />
+      <DatePicker fx:id="birth" layoutX="363.0" layoutY="113.0" prefHeight="31.0" prefWidth="181.0" />
       <Label layoutX="367.0" layoutY="90.0" text="Дата рождения">
          <font>
             <Font size="16.0" />
@@ -65,15 +65,15 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="commandName21" layoutX="42.0" layoutY="347.0" prefHeight="31.0" prefWidth="227.0" />
+      <TextField fx:id="chip" layoutX="42.0" layoutY="347.0" prefHeight="31.0" prefWidth="227.0" />
       <Button fx:id="saveButt1" layoutX="42.0" layoutY="390.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="227.0" stylesheets="@css/AgreeButton.css" text="Зачитать чип" />
-      <ComboBox layoutX="363.0" layoutY="249.0" prefHeight="25.0" prefWidth="181.0" />
+      <ComboBox fx:id="club" layoutX="363.0" layoutY="249.0" prefHeight="25.0" prefWidth="181.0" />
       <Label layoutX="363.0" layoutY="222.0" text="Клуб">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <ComboBox layoutX="363.0" layoutY="315.0" prefHeight="25.0" prefWidth="181.0" />
+      <ComboBox fx:id="rank" layoutX="363.0" layoutY="315.0" prefHeight="25.0" prefWidth="181.0" />
       <Label layoutX="361.0" layoutY="290.0" text="Разряд">
          <font>
             <Font size="16.0" />
@@ -84,6 +84,6 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="commandName31" layoutX="363.0" layoutY="393.0" prefHeight="31.0" prefWidth="181.0" />
+      <TextField fx:id="startNumber" layoutX="363.0" layoutY="393.0" prefHeight="31.0" prefWidth="181.0" />
    </children>
 </AnchorPane>
