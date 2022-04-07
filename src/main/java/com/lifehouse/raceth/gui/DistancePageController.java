@@ -24,33 +24,35 @@ import java.util.ResourceBundle;
 public class DistancePageController implements Initializable {
     @FXML
     private AnchorPane main_pane;
+
     @FXML
-    private TableView distancesTable;
-    @FXML
-    private TableColumn<Distance, Integer> heightColumn;
+    private TableView<Distance> distancesTable;
 
     @FXML
     private TableColumn<Distance, Long> idColumn;
 
     @FXML
+    private TableColumn<Distance, String> nameColumn;
+
+    @FXML
     private TableColumn<Distance, Integer> lengthColumn;
 
     @FXML
-    private TableColumn<Distance, String> nameColumn;
+    private TableColumn<Distance, Integer> heightColumn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        idColumn.setCellValueFactory(new PropertyValueFactory<Distance, Long>("id"));
-        heightColumn.setCellValueFactory(new PropertyValueFactory<Distance, Integer>("height"));
-        lengthColumn.setCellValueFactory(new PropertyValueFactory<Distance, Integer>("length"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Distance, String>("location"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        lengthColumn.setCellValueFactory(new PropertyValueFactory<>("length"));
+        heightColumn.setCellValueFactory(new PropertyValueFactory<>("height"));
     }
 
     @FXML
     void NewDistance(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DistancePopup.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
@@ -68,7 +70,7 @@ public class DistancePageController implements Initializable {
     void EditDistance(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DistancePopup.fxml"));
-            Parent root1 = (Parent)fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
