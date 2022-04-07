@@ -40,7 +40,7 @@
             </Button>
             <Pane prefHeight="429.0" prefWidth="343.0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <children>
-                  <TableView maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="282.0" stylesheets="@css/table.css">
+                  <TableView layoutX="27.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="282.0" stylesheets="@css/table.css">
                     <columns>
                       <TableColumn prefWidth="32.0" resizable="false" />
                       <TableColumn prefWidth="248.0" text="Название" />
