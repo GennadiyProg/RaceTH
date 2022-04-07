@@ -1,7 +1,12 @@
 package com.lifehouse.raceth.dao;
 
+import com.lifehouse.raceth.model.CompetitionGroup;
+import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Participant;
+import com.lifehouse.raceth.tmpstorage.TmpStorage;
 import org.hibernate.Session;
+
+import java.util.List;
 
 public class ParticipantDAO implements DAO<Participant> {
     private final Session session;
@@ -10,11 +15,32 @@ public class ParticipantDAO implements DAO<Participant> {
         this.session = session;
     }
 
-    public void create(Participant participant) {
-        session.beginTransaction();
+//    public void Create(Participant participant) {
+//        session.beginTransaction();
+//
+//        session.save(participant);
+//
+//        session.getTransaction().commit();
+//    }
 
-        session.save(participant);
+    public void Create(Participant participant) {
+        TmpStorage.participants.add(participant);
+    }
 
-        session.getTransaction().commit();
+    public Participant GetParticipant(long id) {
+        for (Participant item : TmpStorage.participants) {
+            if (item.getId() == id) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public List<Participant> GetAllParticipants() {
+        return TmpStorage.participants;
+    }
+
+    public void Delete(Participant participant) {
+        TmpStorage.participants.remove(participant);
     }
 }
