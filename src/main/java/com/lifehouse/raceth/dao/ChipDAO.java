@@ -10,7 +10,7 @@ public class ChipDAO implements DAO<Chip> {
         this.session = session;
     }
 
-    public void create(Chip chip) {
+    public void Create(Chip chip) {
         session.beginTransaction();
 
         session.save(chip);

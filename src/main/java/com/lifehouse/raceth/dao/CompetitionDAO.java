@@ -1,8 +1,12 @@
 package com.lifehouse.raceth.dao;
 
+import com.lifehouse.raceth.model.Checkpoint;
 import com.lifehouse.raceth.model.Competition;
+import com.lifehouse.raceth.tmpstorage.TmpStorage;
 import com.sun.istack.NotNull;
 import org.hibernate.Session;
+
+import java.util.List;
 
 public class CompetitionDAO implements DAO<Competition> {
     private final Session session;
@@ -11,14 +15,34 @@ public class CompetitionDAO implements DAO<Competition> {
         this.session = session;
     }
 
-    @Override
-    public void create(@NotNull final Competition competition) {
+//    public void Create(@NotNull final Competition competition) {
+//
+//        session.beginTransaction();
+//
+//        session.save(competition);
+//
+//        session.getTransaction().commit();
+//
+//    }
 
-        session.beginTransaction();
+    public void Create(Competition competition) {
+        TmpStorage.competitions.add(competition);
+    }
 
-        session.save(competition);
+    public Competition GetCompetition(long id) {
+        for (Competition item : TmpStorage.competitions) {
+            if (item.getId() == id) {
+                return item;
+            }
+        }
+        return null;
+    }
 
-        session.getTransaction().commit();
+    public List<Competition> GetAllCompetitions() {
+        return TmpStorage.competitions;
+    }
 
+    public void Delete(Competition competition) {
+        TmpStorage.competitions.remove(competition);
     }
 }
