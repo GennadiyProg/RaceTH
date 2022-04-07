@@ -21,9 +21,6 @@ public class RelayRunPageController implements Initializable {
     @FXML
     private AnchorPane main_pane;
 
-    @FXML
-    private Button newCommand;
-
 
     // Кнопки на панели команды
     @FXML
@@ -53,14 +50,33 @@ public class RelayRunPageController implements Initializable {
         }
     }
 
+    @FXML
+    void NewPeople(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AddPeopleInRelayRunPopup.fxml"));
+            Parent root1 = (Parent)fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Cant load");
+        }
+    }
 
-
-
-
-
-
-
-
+    @FXML
+    void EditPeople(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AddPeopleInRelayRunPopup.fxml"));
+            Parent root1 = (Parent)fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Cant load");
+        }
+    }
 
 
     @Override
