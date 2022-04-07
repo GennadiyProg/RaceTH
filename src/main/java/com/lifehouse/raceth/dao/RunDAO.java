@@ -11,11 +11,7 @@ import java.util.List;
 
 
 public class RunDAO implements DAO<Run> {
-    private final Session session;
 
-    public RunDAO(@NotNull final Session session) {
-        this.session = session;
-    }
 
 //    public void Create(@NotNull final Run run) {
 //        session.beginTransaction();
@@ -25,7 +21,7 @@ public class RunDAO implements DAO<Run> {
 //        session.getTransaction().commit();
 //    }
 
-    public void Create(Run run) {
+    public void create(Run run) {
         TmpStorage.runs.add(run);
     }
 

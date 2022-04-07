@@ -9,11 +9,11 @@ import org.hibernate.Session;
 import java.util.List;
 
 public class CompetitionGroupDAO implements DAO<CompetitionGroup> {
-    private final Session session;
-
-    public CompetitionGroupDAO(final Session session) {
-        this.session = session;
-    }
+//    private final Session session;
+//
+//    public CompetitionGroupDAO(final Session session) {
+//        this.session = session;
+//    }
 
 //    public void Create(CompetitionGroup group) {
 //
@@ -24,7 +24,7 @@ public class CompetitionGroupDAO implements DAO<CompetitionGroup> {
 //        session.getTransaction().commit();
 //    }
 
-    public void Create(CompetitionGroup group) {
+    public void create(CompetitionGroup group) {
         TmpStorage.competitionGroups.add(group);
     }
 

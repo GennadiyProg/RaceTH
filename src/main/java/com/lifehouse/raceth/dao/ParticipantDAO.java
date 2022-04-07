@@ -9,11 +9,11 @@ import org.hibernate.Session;
 import java.util.List;
 
 public class ParticipantDAO implements DAO<Participant> {
-    private final Session session;
-
-    public ParticipantDAO(final Session session) {
-        this.session = session;
-    }
+//    private final Session session;
+//
+//    public ParticipantDAO(final Session session) {
+//        this.session = session;
+//    }
 
 //    public void Create(Participant participant) {
 //        session.beginTransaction();
@@ -23,7 +23,7 @@ public class ParticipantDAO implements DAO<Participant> {
 //        session.getTransaction().commit();
 //    }
 
-    public void Create(Participant participant) {
+    public void create(Participant participant) {
         TmpStorage.participants.add(participant);
     }
 

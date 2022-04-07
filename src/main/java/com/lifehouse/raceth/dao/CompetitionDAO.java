@@ -9,11 +9,11 @@ import org.hibernate.Session;
 import java.util.List;
 
 public class CompetitionDAO implements DAO<Competition> {
-    private final Session session;
-
-    public CompetitionDAO(@NotNull final Session session) {
-        this.session = session;
-    }
+//    private final Session session;
+//
+//    public CompetitionDAO(@NotNull final Session session) {
+//        this.session = session;
+//    }
 
 //    public void Create(@NotNull final Competition competition) {
 //
@@ -25,11 +25,11 @@ public class CompetitionDAO implements DAO<Competition> {
 //
 //    }
 
-    public void Create(Competition competition) {
+    public void create(Competition competition) {
         TmpStorage.competitions.add(competition);
     }
 
-    public Competition GetCompetition(long id) {
+    public Competition getCompetition(long id) {
         for (Competition item : TmpStorage.competitions) {
             if (item.getId() == id) {
                 return item;
@@ -38,11 +38,11 @@ public class CompetitionDAO implements DAO<Competition> {
         return null;
     }
 
-    public List<Competition> GetAllCompetitions() {
+    public List<Competition> getAllCompetitions() {
         return TmpStorage.competitions;
     }
 
-    public void Delete(Competition competition) {
+    public void delete(Competition competition) {
         TmpStorage.competitions.remove(competition);
     }
 }

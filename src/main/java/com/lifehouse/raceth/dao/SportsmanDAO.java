@@ -9,11 +9,7 @@ import org.hibernate.Session;
 import java.util.List;
 
 public class SportsmanDAO implements DAO<Sportsman> {
-    private final Session session;
 
-    public SportsmanDAO(final Session session) {
-        this.session = session;
-    }
 
 //    public void Create(Sportsman sportsman) {
 //        session.beginTransaction();
@@ -23,7 +19,7 @@ public class SportsmanDAO implements DAO<Sportsman> {
 //        session.getTransaction().commit();
 //    }
 
-    public void Create(Sportsman sportsman) {
+    public void create(Sportsman sportsman) {
         TmpStorage.sportsmen.add(sportsman);
     }
 
