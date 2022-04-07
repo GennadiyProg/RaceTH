@@ -62,7 +62,7 @@
 
       <AnchorPane layoutY="110.0" prefHeight="610.0" prefWidth="214.0" style="-fx-background-color: #FAFAFA;">
          <children>
-            <Button fx:id="sorevButt" alignment="CENTER" graphicTextGap="8.0" layoutX="-1.0" layoutY="42.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="77.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Соревнование     " wrapText="true">
+            <Button fx:id="sorevButt" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="-1.0" layoutY="42.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="77.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Соревнование     " wrapText="true">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
@@ -78,7 +78,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="zabegButt" alignment="CENTER" graphicTextGap="8.0" layoutX="-1.0" layoutY="116.0" mnemonicParsing="false" onAction="#handleButtonAction2" prefHeight="74.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Забег                      " wrapText="true">
+            <Button fx:id="zabegButt" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="-1.0" layoutY="116.0" mnemonicParsing="false" onAction="#handleButtonAction2" prefHeight="74.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Забег                      " wrapText="true">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
@@ -96,7 +96,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="esta" alignment="CENTER" graphicTextGap="8.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleButtonAction3" prefHeight="78.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Эстафета                " wrapText="true">
+            <Button fx:id="esta" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="-1.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleButtonAction3" prefHeight="78.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Эстафета                " wrapText="true">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
@@ -114,7 +114,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" graphicTextGap="8.0" layoutX="-1.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleButtonAction4" prefHeight="77.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Монитор отметок" wrapText="true">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="-2.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleButtonAction4" prefHeight="77.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Монитор отметок" wrapText="true">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
@@ -129,7 +129,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="distance" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="-1.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleButtonAction5" prefHeight="78.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Дистанции" wrapText="true">
+            <Button fx:id="distance" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="-2.0" layoutY="416.0" mnemonicParsing="false" onAction="#handleButtonAction5" prefHeight="78.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Дистанции" wrapText="true">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
@@ -143,6 +143,24 @@
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/icons/relay.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="zabegButt1" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="1.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleButtonAction6" prefHeight="74.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Клубы                      " wrapText="true">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons/running.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -161,6 +179,7 @@
       <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="212.0" layoutY="110.0" prefHeight="610.0" prefWidth="1061.0">
          <children>
             <fx:include fx:id="competition_page" maxHeight="-Infinity" maxWidth="-Infinity" source="CompetitionPage.fxml" />
+            <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="ClubPage.fxml" />
             <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RunPage.fxml" />
             <fx:include fx:id="relay_run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RelayRunPage.fxml" />
             <fx:include fx:id="distance_page" maxHeight="-Infinity" maxWidth="-Infinity" source="DistancePage.fxml" />

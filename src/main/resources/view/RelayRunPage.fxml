@@ -17,9 +17,9 @@
 
 <AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RelayRunPageController">
    <children>
-      <GridPane layoutX="11.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="610.0" prefWidth="1068.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane alignment="CENTER" layoutX="48.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="610.0" prefWidth="1068.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="-6.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="518.4000244140625" minWidth="10.0" prefWidth="343.0000366210937" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="518.4000244140625" minWidth="10.0" prefWidth="343.0000366210937" />
             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="702.0000366210938" minWidth="10.0" prefWidth="683.7999633789061" />
          </columnConstraints>
          <rowConstraints>
@@ -38,9 +38,9 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Pane prefHeight="429.0" prefWidth="343.0" GridPane.rowIndex="2">
+            <Pane prefHeight="429.0" prefWidth="343.0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <children>
-                  <TableView layoutX="47.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="282.0" stylesheets="@css/table.css">
+                  <TableView maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="282.0" stylesheets="@css/table.css">
                     <columns>
                       <TableColumn prefWidth="32.0" resizable="false" />
                       <TableColumn prefWidth="248.0" text="Название" />
@@ -170,9 +170,6 @@
                </children>
             </GridPane>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
-         </padding>
       </GridPane>
    </children>
    <padding>
