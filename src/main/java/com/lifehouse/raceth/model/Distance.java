@@ -17,6 +17,7 @@ public class Distance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String located;
+    private String location;
     private int length;
+    private int height; // Набор высоты
 }

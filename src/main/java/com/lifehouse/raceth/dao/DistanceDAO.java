@@ -9,11 +9,11 @@ import org.hibernate.Session;
 import java.util.List;
 
 public class DistanceDAO implements DAO<Distance> {
-    private final Session session;
-
-    public DistanceDAO(final Session session) {
-        this.session = session;
-    }
+//    private final Session session;
+//
+//    public DistanceDAO(final Session session) {
+//        this.session = session;
+//    }
 
 //    public void Create(Distance distance) {
 //
