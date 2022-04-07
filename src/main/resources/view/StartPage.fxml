@@ -129,24 +129,6 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="protocol" alignment="CENTER" graphicTextGap="8.0" layoutX="-1.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleButtonAction3" prefHeight="77.0" prefWidth="214.0" style="-fx-border-color: white; -fx-background-color: white;" text="Протоколы           " wrapText="true">
-               <font>
-                  <Font name="Calibri" size="18.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/icons/document.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
          </children>
          <opaqueInsets>
             <Insets />
@@ -162,7 +144,6 @@
          <children>
             <fx:include fx:id="competition_page" maxHeight="-Infinity" maxWidth="-Infinity" source="CompetitionPage.fxml" />
             <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RunPage.fxml" />
-            <fx:include fx:id="protocol_page" maxHeight="-Infinity" maxWidth="-Infinity" source="ProtocolPage.fxml" />
             <fx:include fx:id="relay_run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RelayRunPage.fxml" />
             <fx:include fx:id="marks_monitor_page" maxHeight="-Infinity" maxWidth="-Infinity" source="MarksMonitorCompetition.fxml" />
          </children>
