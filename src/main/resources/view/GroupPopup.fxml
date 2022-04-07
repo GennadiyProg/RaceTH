@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.CommandPopupController">
+<AnchorPane prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.GroupPopupController">
    <children>
       <Label contentDisplay="CENTER" layoutX="46.0" prefHeight="66.0" prefWidth="195.0" text="Создание групп" textFill="#305ec1">
          <font>
@@ -19,12 +20,12 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="46.0" layoutY="109.0" prefHeight="31.0" prefWidth="414.0" />
-      <Button layoutX="175.0" layoutY="265.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/AgreeButton.css" text="Сохранить">
+      <TextField fx:id="groupName" layoutX="46.0" layoutY="109.0" prefHeight="31.0" prefWidth="414.0" />
+      <Button layoutX="44.0" layoutY="263.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/AgreeButton.css" text="Сохранить">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="340.0" layoutY="265.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/DisagreeButton.css" text="Отменить" />
+      <Button layoutX="209.0" layoutY="263.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/DisagreeButton.css" text="Отменить" />
       <Label layoutX="46.0" layoutY="162.0" prefHeight="25.0" prefWidth="92.0" text="Возраст  от">
          <font>
             <Font size="16.0" />
@@ -35,14 +36,18 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="142.0" layoutY="159.0" prefHeight="31.0" prefWidth="67.0" />
-      <TextField layoutX="272.0" layoutY="159.0" prefHeight="31.0" prefWidth="73.0" />
+      <TextField fx:id="ageFrom" layoutX="142.0" layoutY="159.0" prefHeight="31.0" prefWidth="67.0" />
+      <TextField fx:id="ageTo" layoutX="272.0" layoutY="159.0" prefHeight="31.0" prefWidth="73.0" />
       <Label layoutX="46.0" layoutY="214.0" prefHeight="25.0" prefWidth="55.0" text="Пол">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <CheckBox layoutX="136.0" layoutY="218.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="86.0" text="Мужской" />
-      <CheckBox layoutX="260.0" layoutY="218.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="92.0" text="Женский" />
+      <RadioButton fx:id="genderM" layoutX="144.0" layoutY="218.0" mnemonicParsing="false" text="Мужской">
+         <toggleGroup>
+            <ToggleGroup fx:id="gender" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="genderW" layoutX="247.0" layoutY="218.0" mnemonicParsing="false" text="Женский" toggleGroup="$gender" />
    </children>
 </AnchorPane>
