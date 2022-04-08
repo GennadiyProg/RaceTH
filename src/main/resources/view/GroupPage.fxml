@@ -87,7 +87,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FF4040; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Удалить" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" onAction="#RemoveRows" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FF4040; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Удалить" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>

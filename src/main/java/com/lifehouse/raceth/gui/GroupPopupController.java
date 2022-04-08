@@ -34,6 +34,8 @@ public class GroupPopupController implements Initializable {
     @FXML
     private TableView<CompetitionGroup> competitionGroupsTable;
 
+    private CompetitionGroup ChangedGroup; // Сюда поступает группа, которая будет редактироваться
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // toDo: Поменять текст гендера на русский, сложность в том что русские символы криво считыываются.

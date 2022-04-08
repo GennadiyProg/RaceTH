@@ -2,12 +2,14 @@ package com.lifehouse.raceth.gui;
 
 import com.lifehouse.raceth.model.CompetitionGroup;
 import com.lifehouse.raceth.model.Gender;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,6 +19,7 @@ import javafx.stage.Stage;
 import lombok.Data;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Data
@@ -49,6 +52,7 @@ public class GroupPageController implements Initializable {
         genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
         ageFromColumn.setCellValueFactory(new PropertyValueFactory<>("ageFrom"));
         ageToColumn.setCellValueFactory(new PropertyValueFactory<>("ageTo"));
+        competitionGroupsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     @FXML
@@ -68,8 +72,8 @@ public class GroupPageController implements Initializable {
             System.out.println("Cant load");
         }
     }
-    @FXML
 
+    @FXML
     void EditGroup(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/GroupPopup.fxml"));
@@ -77,10 +81,26 @@ public class GroupPageController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
+
+            GroupPopupController groupPopupController = fxmlLoader.getController();
+            List<CompetitionGroup> competitionGroups = competitionGroupsTable.getSelectionModel().getSelectedItems();
+
+            if (competitionGroups.size() >  1) {
+                throw new Exception();
+                // todo: тут показ ошибки о том что выбранно слишком много элементов для редактирования
+            }
+
+            groupPopupController.setChangedGroup(competitionGroups.get(0));
             stage.show();
         } catch (Exception e) {
             System.out.println("Cant load");
         }
+    }
+
+    @FXML
+    private void RemoveRows(ActionEvent event) {
+        List<CompetitionGroup> competitionGroups = competitionGroupsTable.getSelectionModel().getSelectedItems();
+        competitionGroupsTable.getItems().removeAll(competitionGroups);
     }
 }
 
