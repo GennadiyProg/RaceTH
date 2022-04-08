@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="333.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RelayRunCreateRelayRunController">
+   <children>
+      <Label layoutX="41.0" prefHeight="124.0" prefWidth="345.0" text="Создание забега" textFill="#305ec1">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="41.0" layoutY="90.0" text="Я не знаю какие тут поля должны быть">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="surname" layoutX="41.0" layoutY="113.0" prefHeight="31.0" prefWidth="227.0" />
+      <Button fx:id="saveButt" layoutX="41.0" layoutY="260.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/AgreeButton.css" text="Сохранить" />
+      <Button fx:id="cancelButt" layoutX="196.0" layoutY="260.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/DisagreeButton.css" text="Отменить" />
+      <Label layoutX="41.0" layoutY="153.0" text="И тут тоже :\">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="name" layoutX="41.0" layoutY="178.0" prefHeight="31.0" prefWidth="227.0" />
+   </children>
+</AnchorPane>
