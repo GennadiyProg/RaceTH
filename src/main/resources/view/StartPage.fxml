@@ -60,7 +60,7 @@
          </children>
       </AnchorPane>
 
-      <AnchorPane layoutY="110.0" minWidth="-Infinity" prefHeight="610.0" prefWidth="180.0" style="-fx-background-color: #FAFAFA;">
+      <AnchorPane layoutY="110.0" minWidth="-Infinity" prefHeight="610.0" prefWidth="190.0" style="-fx-background-color: #FAFAFA;">
          <children>
             <ToggleButton fx:id="sorevButt" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleButtonAction" stylesheets="@css/table.css" text="Соревнование" wrapText="true">
                <font>
@@ -96,7 +96,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/icons/running.png" />
+                        <Image url="@images/icons/relay.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -105,7 +105,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/icons/running.png" />
+                        <Image url="@images/icons/cctv-camera.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -123,7 +123,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/icons/running.png" />
+                        <Image url="@images/icons/document.png" />
                      </image>
                   </ImageView>
                </graphic>
