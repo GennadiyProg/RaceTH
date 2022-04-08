@@ -78,7 +78,7 @@
 
 .toggle-button {
     -fx-background-color :#FAFAFA;
-    -fx-pref-width: 200px;
+    -fx-pref-width: 180px;
     -fx-pref-height: 65px;
      -fx-font-size:16px;
 }

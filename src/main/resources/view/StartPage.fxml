@@ -60,7 +60,7 @@
          </children>
       </AnchorPane>
 
-      <AnchorPane layoutY="110.0" minWidth="-Infinity" prefHeight="610.0" prefWidth="200.0" style="-fx-background-color: #FAFAFA;">
+      <AnchorPane layoutY="110.0" minWidth="-Infinity" prefHeight="610.0" prefWidth="180.0" style="-fx-background-color: #FAFAFA;">
          <children>
             <ToggleButton fx:id="sorevButt" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleButtonAction" stylesheets="@css/table.css" text="Соревнование" wrapText="true">
                <font>
@@ -74,7 +74,7 @@
                <toggleGroup>
                   <ToggleGroup fx:id="ButtGroup" />
                </toggleGroup></ToggleButton>
-            <ToggleButton fx:id="groupsButt" alignment="CENTER_LEFT" layoutX="5.0" layoutY="198.0" mnemonicParsing="false" onAction="#handleButtonAction4" stylesheets="@css/table.css" text="Группы" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="groupsButt" alignment="CENTER_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#handleButtonAction4" stylesheets="@css/table.css" text="Группы" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -101,7 +101,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="checkButt" alignment="CENTER_LEFT" layoutX="3.0" layoutY="396.0" mnemonicParsing="false" onAction="#handleButtonAction7" stylesheets="@css/table.css" text="Монитор отметок" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="checkButt" alignment="CENTER_LEFT" layoutY="396.0" mnemonicParsing="false" onAction="#handleButtonAction7" stylesheets="@css/table.css" text="Монитор отметок" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -110,7 +110,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="distanceButt" alignment="CENTER_LEFT" layoutX="5.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleButtonAction5" stylesheets="@css/table.css" text="Дистанции" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="distanceButt" alignment="CENTER_LEFT" layoutY="264.0" mnemonicParsing="false" onAction="#handleButtonAction5" stylesheets="@css/table.css" text="Дистанции" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -119,7 +119,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="clubsButt" alignment="CENTER_LEFT" layoutX="5.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleButtonAction6" stylesheets="@css/table.css" text="Клубы" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="clubsButt" alignment="CENTER_LEFT" layoutY="330.0" mnemonicParsing="false" onAction="#handleButtonAction6" stylesheets="@css/table.css" text="Клубы" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
