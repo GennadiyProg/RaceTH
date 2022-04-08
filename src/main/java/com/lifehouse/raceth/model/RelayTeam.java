@@ -17,5 +17,5 @@ public class RelayTeam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; //ID
-    private String nameRelayTeam; //Название команды эстафеты
+    private String name; //Название команды эстафеты
 }

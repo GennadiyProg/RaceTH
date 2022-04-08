@@ -40,10 +40,10 @@
             </Button>
             <Pane prefHeight="429.0" prefWidth="343.0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <children>
-                  <TableView layoutX="27.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="282.0" stylesheets="@css/table.css">
+                  <TableView fx:id="relayTeamsTable" layoutX="27.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="282.0" stylesheets="@css/table.css">
                     <columns>
-                      <TableColumn prefWidth="32.0" resizable="false" />
-                      <TableColumn prefWidth="248.0" text="Название" />
+                      <TableColumn fx:id="relayTeamIdColumn" prefWidth="32.0" resizable="false" text="№" />
+                      <TableColumn fx:id="relayTeamNameColumn" prefWidth="248.0" text="Название" />
                     </columns>
                   </TableView>
                </children>
@@ -98,7 +98,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="newCommand" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#NewCommand" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #3C76F1; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="newCommand" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#addRelayTeam" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #3C76F1; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -107,7 +107,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="editButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#EditCommand" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #FFBB38; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                  <Button fx:id="editButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editRelayTeam" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #FFBB38; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -140,7 +140,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="newPeople" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#NewPeople" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #3C76F1; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="newPeople" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#newPeople" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #3C76F1; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -149,7 +149,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="editPeople" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#EditPeople" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #FFBB38; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                  <Button fx:id="editPeople" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editPeople" prefHeight="34.0" prefWidth="34.0" style="-fx-background-radius: 12px; -fx-background-color: #FFBB38; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
