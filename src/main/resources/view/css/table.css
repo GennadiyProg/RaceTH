@@ -80,7 +80,7 @@
     -fx-background-color :#FAFAFA;
     -fx-pref-width: 190px;
     -fx-pref-height: 65px;
-     -fx-font-size:16px;
+     -fx-font-size:14px;
 }
 .toggle-button:selected{
     -fx-background-color :#EDF1F8;

@@ -139,7 +139,7 @@
                </color></DropShadow>
          </effect>
       </AnchorPane>
-      <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="212.0" layoutY="110.0" prefHeight="610.0" prefWidth="1061.0">
+      <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="212.0" layoutY="110.0" prefHeight="610.0" prefWidth="1068.0">
          <children>
             <fx:include fx:id="competition_page" maxHeight="-Infinity" maxWidth="-Infinity" source="CompetitionPage.fxml" />
             <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="ClubPage.fxml" />
