@@ -54,13 +54,13 @@
                   </GridPane>
                </children>
             </GridPane>
-            <TableView fx:id="runTable" maxWidth="-Infinity" prefHeight="434.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <TableView fx:id="competitionGroupsTable" maxWidth="-Infinity" prefHeight="434.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <columns>
-                  <TableColumn fx:id="lastnameColumn" prefWidth="57.60000169277191" resizable="false" text="№" />
+                  <TableColumn fx:id="idColumn" prefWidth="57.60000169277191" resizable="false" text="№" />
                   <TableColumn fx:id="nameColumn" prefWidth="268.00007247924805" resizable="false" text="Название" />
-                  <TableColumn fx:id="middlenameColumn" prefWidth="248.0" text="Возраст от" />
-                  <TableColumn fx:id="genderColumn" prefWidth="221.0" resizable="false" text="Возраст до" />
-                  <TableColumn prefWidth="107.0" text="Пол" />
+                  <TableColumn fx:id="ageFromColumn" prefWidth="248.0" text="Возраст от" />
+                  <TableColumn fx:id="ageToColumn" prefWidth="221.0" resizable="false" text="Возраст до" />
+                  <TableColumn fx:id="genderColumn" prefWidth="107.0" text="Пол" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

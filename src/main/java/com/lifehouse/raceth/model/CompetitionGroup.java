@@ -17,7 +17,8 @@ public class CompetitionGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; //ID
-    private String nameGroup; // Название группы
-    private String gender; // Пол
-    private int age; // Возраст
+    private String name; // Название группы
+    private Gender gender; // Пол
+    private int ageFrom;
+    private int ageTo;
 }
