@@ -1,10 +1,7 @@
 package com.lifehouse.raceth.dao;
 
-import com.lifehouse.raceth.model.Checkpoint;
 import com.lifehouse.raceth.model.Competition;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
-import com.sun.istack.NotNull;
-import org.hibernate.Session;
 
 import java.util.List;
 

@@ -1,62 +1,52 @@
 package com.lifehouse.raceth.gui;
 
-import com.lifehouse.raceth.dao.CompetitionDAO;
-import com.lifehouse.raceth.dao.DAO;
 import com.lifehouse.raceth.model.Competition;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lombok.Data;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.net.URL;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
-import java.util.ResourceBundle;
 
 @Data
 public class CompetitionPageController {
 
+    @FXML
+    private DatePicker dateDatePicker;
 
     @FXML
-    private DatePicker date_dp;
+    private TextField locationTextField;
 
     @FXML
-    private TextField location_tf;
+    private TextField mainJudgeTextField;
 
     @FXML
-    private TextField mainJudge_tf;
-
-    @FXML
-    private TextField mainSecretary_tf;
+    private TextField mainSecretaryTextField;
 
     @FXML
     private AnchorPane main_pane;
 
     @FXML
-    private TextField organizer_tf;
+    private TextField organizerTextField;
 
     @FXML
-    private TextField title_tf;
+    private TextField titleTextField;
 
     @FXML
     private void saveCompetitionAction(ActionEvent event) {
-        LocalDate localDate = date_dp.getValue();
-        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-        Date date = Date.from(instant);
-        Competition competition = new Competition(title_tf.getText(),
-                organizer_tf.getText(),
-                location_tf.getText(),
+        Date date = new Date(java.sql.Date.valueOf(dateDatePicker.getValue()).getTime());
+        Competition competition = new Competition(titleTextField.getText(),
+                organizerTextField.getText(),
+                locationTextField.getText(),
                 date,
-                mainJudge_tf.getText(),
-                mainSecretary_tf.getText());
+                mainJudgeTextField.getText(),
+                mainSecretaryTextField.getText());
         TmpStorage.competitions.add(competition);
-        System.out.println("hello");
+        System.out.println(TmpStorage.competitions.get(0));
     }
+
 }
 

@@ -82,25 +82,25 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="title_tf" maxWidth="-Infinity" prefHeight="26.0" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+                              <TextField fx:id="titleTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
                               <Label text="Организатор" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="organizer_tf" maxWidth="-Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="organizerTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label text="Место проведения" GridPane.rowIndex="3">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="location_tf" maxWidth="-Infinity" prefHeight="26.0" GridPane.rowIndex="4" />
+                              <TextField fx:id="locationTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.rowIndex="4" />
                               <Label text="Дата проведения" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <DatePicker fx:id="date_dp" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <DatePicker fx:id="dateDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Label text="Создать(Изменить) соревнование" textFill="#305ec1">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
@@ -116,8 +116,8 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="mainJudge_tf" maxWidth="-Infinity" prefHeight="26.0" GridPane.rowIndex="6" />
-                              <TextField fx:id="mainSecretary_tf" maxWidth="-Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <TextField fx:id="mainJudgeTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.rowIndex="6" />
+                              <TextField fx:id="mainSecretaryTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <Label text="Считать возраст участников по состонянию на" GridPane.rowIndex="7">
                                  <font>
                                     <Font size="16.0" />
