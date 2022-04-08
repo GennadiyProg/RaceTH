@@ -72,7 +72,7 @@ public class GroupPopupController implements Initializable {
             }
 
             newCompetitionGroup.setId(competitionGroupsTable.getItems().size());
-            competitionGroupDAO.Create(newCompetitionGroup);
+            competitionGroupDAO.create(newCompetitionGroup);
             competitionGroupsTable.getItems().add(newCompetitionGroup);
             competitionGroupsTable.refresh();
 
