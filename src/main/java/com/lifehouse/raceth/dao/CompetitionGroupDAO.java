@@ -24,7 +24,7 @@ public class CompetitionGroupDAO implements DAO<CompetitionGroup> {
 //        session.getTransaction().commit();
 //    }
 
-    public void Create(CompetitionGroup group) {
+    public void create(CompetitionGroup group) {
         TmpStorage.competitionGroups.add(group);
     }
     public CompetitionGroup GetGroup(long id) {

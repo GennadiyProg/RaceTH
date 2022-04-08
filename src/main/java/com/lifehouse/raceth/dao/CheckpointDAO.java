@@ -7,11 +7,11 @@ import org.hibernate.Session;
 import java.util.List;
 
 public class CheckpointDAO implements DAO<Checkpoint> {
-    private final Session session;
-
-    public CheckpointDAO(final Session session) {
-        this.session = session;
-    }
+//    private final Session session;
+//
+//    public CheckpointDAO(final Session session) {
+//        this.session = session;
+//    }
 
 //    public void create(Checkpoint checkpoint) {
 //        session.beginTransaction();
@@ -21,7 +21,7 @@ public class CheckpointDAO implements DAO<Checkpoint> {
 //        session.getTransaction().commit();
 //    }
 
-    public void Create(Checkpoint checkpoint) {
+    public void create(Checkpoint checkpoint) {
         TmpStorage.checkpoints.add(checkpoint);
     }
 
