@@ -17,7 +17,15 @@ public class CompetitionGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; //ID
-    private String nameGroup; // Название группы
-    private String gender; // Пол
-    private int age; // Возраст
+    private String name; // Название группы
+    private Gender gender; // Пол
+    private int ageFrom;
+    private int ageTo;
+
+    public void setFields(CompetitionGroup group) {
+        this.name = group.getName();
+        this.gender = group.getGender();
+        this.ageFrom = group.getAgeFrom();
+        this.ageTo = group.getAgeTo();
+    }
 }
