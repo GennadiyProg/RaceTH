@@ -46,8 +46,10 @@
                   </LinearGradient>
                </textFill>
                <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@images/icons/more%20(1).png" />
+                  <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons/more.png" />
+                     </image>
                   </ImageView>
                </graphic>
             </Label>
@@ -139,7 +141,7 @@
                </color></DropShadow>
          </effect>
       </AnchorPane>
-      <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="212.0" layoutY="110.0" prefHeight="610.0" prefWidth="1068.0">
+      <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="191.0" layoutY="110.0" minWidth="-Infinity" prefHeight="610.0" prefWidth="1090.0">
          <children>
             <fx:include fx:id="competition_page" maxHeight="-Infinity" maxWidth="-Infinity" source="CompetitionPage.fxml" />
             <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="ClubPage.fxml" />
