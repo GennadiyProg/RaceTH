@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.gui;
 
+import com.lifehouse.raceth.dao.CompetitionGroupDAO;
 import com.lifehouse.raceth.model.CompetitionGroup;
 import com.lifehouse.raceth.model.Gender;
 import javafx.collections.ObservableList;
@@ -44,6 +45,7 @@ public class GroupPageController implements Initializable {
 
     @FXML
     private TableColumn<CompetitionGroup, Integer> ageToColumn;
+    private CompetitionGroupDAO competitionGroupDAO;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,7 +54,13 @@ public class GroupPageController implements Initializable {
         genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
         ageFromColumn.setCellValueFactory(new PropertyValueFactory<>("ageFrom"));
         ageToColumn.setCellValueFactory(new PropertyValueFactory<>("ageTo"));
+
+        competitionGroupDAO = new CompetitionGroupDAO();
+
         competitionGroupsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        System.out.println("IN INITIALIZE");
+        ObservableList<CompetitionGroup> competitionGroups = competitionGroupsTable.getItems();
+        competitionGroups.addAll(competitionGroupDAO.GetAllGroups());
     }
 
     @FXML
@@ -83,14 +91,16 @@ public class GroupPageController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
 
             GroupPopupController groupPopupController = fxmlLoader.getController();
+            groupPopupController.setCompetitionGroupsTable(competitionGroupsTable);
             List<CompetitionGroup> competitionGroups = competitionGroupsTable.getSelectionModel().getSelectedItems();
 
-            if (competitionGroups.size() >  1) {
+            if (competitionGroups.size() != 1) {
                 throw new Exception();
                 // todo: тут показ ошибки о том что выбранно слишком много элементов для редактирования
             }
 
-            groupPopupController.setChangedGroup(competitionGroups.get(0));
+            groupPopupController.Edit(competitionGroups.get(0));
+
             stage.show();
         } catch (Exception e) {
             System.out.println("Cant load");
@@ -101,6 +111,7 @@ public class GroupPageController implements Initializable {
     private void RemoveRows(ActionEvent event) {
         List<CompetitionGroup> competitionGroups = competitionGroupsTable.getSelectionModel().getSelectedItems();
         competitionGroupsTable.getItems().removeAll(competitionGroups);
+
     }
 }
 

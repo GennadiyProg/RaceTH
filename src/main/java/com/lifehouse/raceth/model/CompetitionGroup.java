@@ -21,4 +21,11 @@ public class CompetitionGroup {
     private Gender gender; // Пол
     private int ageFrom;
     private int ageTo;
+
+    public void setFields(CompetitionGroup group) {
+        this.name = group.getName();
+        this.gender = group.getGender();
+        this.ageFrom = group.getAgeFrom();
+        this.ageTo = group.getAgeTo();
+    }
 }

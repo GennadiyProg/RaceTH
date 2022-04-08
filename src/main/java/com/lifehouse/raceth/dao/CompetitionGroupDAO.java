@@ -27,7 +27,6 @@ public class CompetitionGroupDAO implements DAO<CompetitionGroup> {
     public void Create(CompetitionGroup group) {
         TmpStorage.competitionGroups.add(group);
     }
-
     public CompetitionGroup GetGroup(long id) {
         for (CompetitionGroup item : TmpStorage.competitionGroups) {
             if (item.getId() == id) {
@@ -43,5 +42,17 @@ public class CompetitionGroupDAO implements DAO<CompetitionGroup> {
 
     public void Delete(CompetitionGroup group) {
         TmpStorage.competitionGroups.remove(group);
+    }
+
+    public void update(CompetitionGroup group) {
+        try {
+            TmpStorage.competitionGroups.set(TmpStorage.competitionGroups.indexOf(
+                    TmpStorage.competitionGroups.stream().filter(
+                            g -> g.getId() == group.getId()
+                    ).findFirst().orElse(null)
+            ), group);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
