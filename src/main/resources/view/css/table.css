@@ -76,3 +76,12 @@
     -fx-background-radius : 0.0em;
 }
 
+.toggle-button {
+    -fx-background-color :#FAFAFA;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 65px;
+     -fx-font-size:16px;
+}
+.toggle-button:selected{
+    -fx-background-color :black;
+    }
