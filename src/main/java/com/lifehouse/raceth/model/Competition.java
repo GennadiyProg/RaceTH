@@ -16,19 +16,21 @@ public class Competition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; //ID
-    private String nameCompetition; //Название соревнования
+    private String name; //Название соревнования
     private String organizer; //Организатор
     private String location; //Место проведения
     private Date date; //Дата соревнования
     private String mainJudge; //Главный судья
     private String mainSecretary; //Главный секретарь
+    private PrincipalAgeCalculation calculationSystemAge; //Принцип расчета возраста участника
 
-    public Competition(String nameCompetition, String organizer, String location, Date date, String mainJudge, String mainSecretary) {
-        this.nameCompetition = nameCompetition;
+    public Competition(String name, String organizer, String location, Date date, String mainJudge, String mainSecretary, PrincipalAgeCalculation calculationSystemAge) {
+        this.name = name;
         this.organizer = organizer;
         this.location = location;
         this.date = date;
         this.mainJudge = mainJudge;
         this.mainSecretary = mainSecretary;
+        this.calculationSystemAge = calculationSystemAge;
     }
 }

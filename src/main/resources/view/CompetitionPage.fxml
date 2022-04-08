@@ -2,9 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1068.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.CompetitionPageController">
    <children>
@@ -49,13 +48,14 @@
                               <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="136.0" text="Поиск" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
                            </children>
                         </GridPane>
-                        <TableView prefHeight="400.0" prefWidth="1031.0" GridPane.rowIndex="1">
+                        <TableView fx:id="competitionTable" prefHeight="400.0" prefWidth="1031.0" GridPane.rowIndex="1">
                           <columns>
-                            <TableColumn prefWidth="200.0" text="Название" />
-                            <TableColumn prefWidth="248.8000030517578" text="Место" />
-                              <TableColumn prefWidth="185.59994506835938" text="Дата начала" />
-                              <TableColumn prefWidth="203.20001220703125" text="Дата конца" />
-                              <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="194.4000244140625" text="Организатор" />
+                            <TableColumn fx:id="nameColumn" prefWidth="144.00002479553223" text="Название" />
+                            <TableColumn fx:id="organizerColumn" prefWidth="145.60000610351562" text="Организатор" />
+                              <TableColumn fx:id="locationColumn" prefWidth="152.0" text="Место проведения" />
+                              <TableColumn fx:id="dateColumn" prefWidth="165.5999755859375" text="Дата проведения" />
+                              <TableColumn fx:id="mainJudgeColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="211.99993896484375" text="Главный судья" />
+                              <TableColumn fx:id="mainSecretaryColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="209.5999755859375" text="Главный секретарь" />
                           </columns>
                         </TableView>
                         <GridPane prefHeight="162.0" prefWidth="1042.0" GridPane.rowIndex="2">
@@ -132,8 +132,8 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <CheckBox mnemonicParsing="false" text="31. 12  Текущего года" GridPane.columnIndex="1" />
-                                    <CheckBox mnemonicParsing="false" text="Дата старта" />
+                                    <RadioButton fx:id="currentTimeRadioButton" mnemonicParsing="false" text="Дата старта" />
+                                    <RadioButton fx:id="yearEndRadioButton" mnemonicParsing="false" text="31.12 текущего года" GridPane.columnIndex="1" />
                                  </children>
                               </GridPane>
                                <Button fx:id="saveCompetition_b" mnemonicParsing="false" onAction="#saveCompetitionAction" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #00C781; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Сохранить" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="9">
