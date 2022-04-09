@@ -74,6 +74,13 @@ public class DistancePageController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
+
+            Distance selectedDistance = distancesTable.getSelectionModel().getSelectedItem();
+
+            DistancePopupController distancePopupController = fxmlLoader.getController();
+            distancePopupController.distancesTable = distancesTable;
+            distancePopupController.startEdit(selectedDistance);
+
             stage.show();
         } catch (Exception e) {
             System.out.println("Cant load");

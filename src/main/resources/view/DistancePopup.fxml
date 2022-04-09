@@ -31,7 +31,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="high" layoutX="30.0" layoutY="237.0" prefHeight="31.0" prefWidth="290.0" />
+      <TextField fx:id="height" layoutX="30.0" layoutY="237.0" prefHeight="31.0" prefWidth="290.0" />
       <Label layoutX="30.0" layoutY="205.0" prefHeight="25.0" prefWidth="226.0" text="Набор высоты, метров">
          <font>
             <Font size="16.0" />

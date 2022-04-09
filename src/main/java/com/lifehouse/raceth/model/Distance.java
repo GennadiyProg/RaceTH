@@ -20,4 +20,10 @@ public class Distance {
     private String location;
     private int length;
     private int height; // Набор высоты
+
+    public void setFields(Distance distance) {
+        this.location = distance.getLocation();
+        this.length = distance.getLength();
+        this.height = distance.getHeight();
+    }
 }
