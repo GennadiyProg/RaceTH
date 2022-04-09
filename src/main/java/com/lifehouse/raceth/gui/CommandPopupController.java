@@ -47,7 +47,7 @@ public class CommandPopupController {
 
             ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
         }
     }
 
@@ -56,7 +56,7 @@ public class CommandPopupController {
         try{
             ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
         } catch (Exception e) {
-            System.out.println("cant loading");
+            e.printStackTrace();
         }
     }
 

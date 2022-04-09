@@ -25,7 +25,7 @@ public class RelayRunPageController implements Initializable {
     private AnchorPane main_pane;
 
     @FXML
-    private TableView<RelayTeam> relayTeamsTable;
+    private TableView<RelayTeam> relayTeamTable;
 
     @FXML
     private TableColumn<RelayTeam, Integer> relayTeamIdColumn;
@@ -52,7 +52,7 @@ public class RelayRunPageController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
 
             CommandPopupController controller = fxmlLoader.getController();
-            controller.setRelayTeamTable(relayTeamsTable);
+            controller.setRelayTeamTable(relayTeamTable);
 
             stage.show();
         } catch (Exception e) {
@@ -70,8 +70,8 @@ public class RelayRunPageController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
 
             CommandPopupController controller = fxmlLoader.getController();
-            controller.setRelayTeamTable(relayTeamsTable);
-            RelayTeam relayTeam = relayTeamsTable.getSelectionModel().getSelectedItem();
+            controller.setRelayTeamTable(relayTeamTable);
+            RelayTeam relayTeam = relayTeamTable.getSelectionModel().getSelectedItem();
             if (relayTeam == null) return;
             controller.startEdit(relayTeam);
 
@@ -84,11 +84,11 @@ public class RelayRunPageController implements Initializable {
     @FXML
     void removeRelayTeam(ActionEvent event) {
         try {
-            RelayTeam relayTeam = relayTeamsTable.getSelectionModel().getSelectedItem();
-            relayTeamsTable.getItems().remove(relayTeam);
+            RelayTeam relayTeam = relayTeamTable.getSelectionModel().getSelectedItem();
+            relayTeamTable.getItems().remove(relayTeam);
             relayTeamDAO.delete(relayTeam);
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
         }
     }
 
