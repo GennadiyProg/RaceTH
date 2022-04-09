@@ -86,5 +86,12 @@ public class DistancePageController implements Initializable {
             System.out.println("Cant load");
         }
     }
+
+    @FXML
+    void DeleteDistance(ActionEvent event) {
+        Distance selectedDistance = distancesTable.getSelectionModel().getSelectedItem();
+        distancesTable.getItems().remove(selectedDistance);
+        distancesTable.refresh();
+    }
 }
 
