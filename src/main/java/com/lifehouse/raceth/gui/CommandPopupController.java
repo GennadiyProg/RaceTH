@@ -33,22 +33,30 @@ public class CommandPopupController {
     void Saving(ActionEvent event) {
         try{
             if (selectedRelayTeam == null) {
-                selectedRelayTeam = new RelayTeam();
-                selectedRelayTeam.setId(relayTeamTable.getItems().size());
-                selectedRelayTeam.setName(commandName.getText());
-                relayTeamTable.getItems().add(selectedRelayTeam);
-                relayTeamDAO.create(selectedRelayTeam);
+                createRelayTeam();
             }
             else {
-                selectedRelayTeam.setName(commandName.getText());
-                relayTeamTable.refresh();
-                relayTeamDAO.update(selectedRelayTeam);
+                updateRelayTeam();
             }
 
-            ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
+            closePopup(event);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void createRelayTeam() {
+        selectedRelayTeam = new RelayTeam();
+        selectedRelayTeam.setId(relayTeamTable.getItems().size());
+        selectedRelayTeam.setName(commandName.getText());
+        relayTeamTable.getItems().add(selectedRelayTeam);
+        relayTeamDAO.create(selectedRelayTeam);
+    }
+
+    private void updateRelayTeam() {
+        selectedRelayTeam.setName(commandName.getText());
+        relayTeamTable.refresh();
+        relayTeamDAO.update(selectedRelayTeam);
     }
 
     @FXML
@@ -63,6 +71,10 @@ public class CommandPopupController {
     public void startEdit(RelayTeam team) {
         selectedRelayTeam = team;
         commandName.setText(team.getName());
+    }
+
+    private void closePopup(ActionEvent event) {
+        ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
     }
 }
 
