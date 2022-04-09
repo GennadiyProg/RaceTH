@@ -46,7 +46,7 @@
                   </LinearGradient>
                </textFill>
                <graphic>
-                  <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/icons/more.png" />
                      </image>
@@ -58,7 +58,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <ComboBox fx:id="ActiveComp" layoutX="1075.0" layoutY="22.0" minWidth="150.0" />
+            <ComboBox fx:id="ActiveComp" layoutX="1075.0" layoutY="22.0" minWidth="150.0" styleClass="combo-box" stylesheets="@css/table.css" />
          </children>
       </AnchorPane>
 
