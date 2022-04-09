@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.gui;
 
+import com.lifehouse.raceth.dao.RelayTeamDAO;
 import com.lifehouse.raceth.model.RelayTeam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,6 +33,8 @@ public class RelayRunPageController implements Initializable {
     @FXML
     private TableColumn<RelayTeam, String> relayTeamNameColumn;
 
+    private RelayTeamDAO relayTeamDAO = new RelayTeamDAO();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         relayTeamIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -56,6 +59,7 @@ public class RelayRunPageController implements Initializable {
             System.out.println("Cant load");
         }
     }
+
     @FXML
     void editRelayTeam(ActionEvent event) {
         try {
@@ -69,11 +73,22 @@ public class RelayRunPageController implements Initializable {
             controller.setRelayTeamTable(relayTeamsTable);
             RelayTeam relayTeam = relayTeamsTable.getSelectionModel().getSelectedItem();
             if (relayTeam == null) return;
-            controller.edit(relayTeam);
+            controller.startEdit(relayTeam);
 
             stage.show();
         } catch (Exception e) {
             System.out.println("Cant load");
+        }
+    }
+
+    @FXML
+    void removeRelayTeam(ActionEvent event) {
+        try {
+            RelayTeam relayTeam = relayTeamsTable.getSelectionModel().getSelectedItem();
+            relayTeamsTable.getItems().remove(relayTeam);
+            relayTeamDAO.delete(relayTeam);
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
         }
     }
 

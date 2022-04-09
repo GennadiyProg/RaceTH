@@ -4,16 +4,12 @@ import com.lifehouse.raceth.dao.RelayTeamDAO;
 import com.lifehouse.raceth.model.RelayTeam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lombok.Data;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 @Data
 public class CommandPopupController {
@@ -64,7 +60,7 @@ public class CommandPopupController {
         }
     }
 
-    public void edit(RelayTeam team) {
+    public void startEdit(RelayTeam team) {
         selectedRelayTeam = team;
         commandName.setText(team.getName());
     }
