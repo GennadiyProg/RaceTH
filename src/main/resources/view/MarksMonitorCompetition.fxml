@@ -16,9 +16,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RelayRunPageController">
+<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RelayRunPageController">
    <children>
-      <GridPane layoutX="11.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="610.0" prefWidth="1068.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="1090.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="20.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="522.0" minWidth="10.0" prefWidth="365.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="702.0000366210938" minWidth="10.0" prefWidth="663.0" />
@@ -102,7 +102,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="73.0" prefWidth="73.0" style="-fx-background-radius: 120px; -fx-background-color: #89db76; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Старт" textAlignment="CENTER" textFill="#fffffff5" translateX="110.0" GridPane.rowIndex="1">
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="73.0" prefWidth="73.0" style="-fx-background-radius: 120px; -fx-background-color: #00C781; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Старт" textAlignment="CENTER" textFill="#fffffff5" translateX="110.0" GridPane.rowIndex="1">
                      <font>
                         <Font size="16.0" />
                      </font>
