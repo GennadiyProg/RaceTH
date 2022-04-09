@@ -16,7 +16,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RelayRunPageController">
+<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.MarksMonitorCompetitionController">
    <children>
       <GridPane layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="1090.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="20.0">
          <columnConstraints>

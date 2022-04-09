@@ -40,7 +40,19 @@ public class RelayTeamDAO implements DAO<RelayTeam> {
         return TmpStorage.relayTeams;
     }
 
-    public void Delete(RelayTeam relayTeam) {
+    public void delete(RelayTeam relayTeam) {
         TmpStorage.relayTeams.remove(relayTeam);
+    }
+
+    public void update(RelayTeam relayTeam) {
+        try {
+            TmpStorage.relayTeams.set(TmpStorage.relayTeams.indexOf(
+                    TmpStorage.relayTeams.stream().filter(
+                            g -> g.getId() == relayTeam.getId()
+                    ).findFirst().orElse(null)
+            ), relayTeam);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -42,7 +42,8 @@
                <children>
                   <TableView layoutX="14.0" maxHeight="-Infinity" prefHeight="370.0" prefWidth="288.0" stylesheets="@css/table.css">
                     <columns>
-                      <TableColumn prefWidth="287.1999988555908" text="Название" />
+                      <TableColumn fx:id="relayTeamIdColumn" prefWidth="32.0" resizable="false" text="№" />
+                      <TableColumn fx:id="relayTeamNameColumn" prefWidth="248.0" text="Название" />
                     </columns>
                   </TableView>
                </children>

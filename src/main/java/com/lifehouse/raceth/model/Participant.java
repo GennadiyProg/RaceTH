@@ -17,7 +17,8 @@ public class Participant {
     private long id; //ID
     @ManyToOne
     private Chip chip; //Чип по ID
-    //тут должен быть спортсмен
+    @ManyToOne
+    private Sportsman sportsman;
     @ManyToOne
     private Run run; //Забег по ID
     @ManyToOne
