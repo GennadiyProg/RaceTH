@@ -1,17 +1,19 @@
 package com.lifehouse.raceth.gui;
 
+import com.lifehouse.raceth.dao.RelayTeamDAO;
 import com.lifehouse.raceth.model.RelayTeam;
-import com.lifehouse.raceth.tmpstorage.TmpStorage;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lombok.Data;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 @Data
 public class CommandPopupController {
@@ -27,21 +29,29 @@ public class CommandPopupController {
     @FXML
     private TextField commandName;
 
-    public TableView<RelayTeam> relayTeamTable;
+    private TableView<RelayTeam> relayTeamTable;
+    private RelayTeam selectedRelayTeam = null;
+    private RelayTeamDAO relayTeamDAO = new RelayTeamDAO();
 
     @FXML
     void Saving(ActionEvent event) {
         try{
-            RelayTeam team = new RelayTeam();
-            team.setId(relayTeamTable.getItems().size());
-            team.setName(commandName.getText());
-
-            TmpStorage.relayTeams.add(team);
-            relayTeamTable.getItems().add(team);
+            if (selectedRelayTeam == null) {
+                selectedRelayTeam = new RelayTeam();
+                selectedRelayTeam.setId(relayTeamTable.getItems().size());
+                selectedRelayTeam.setName(commandName.getText());
+                relayTeamTable.getItems().add(selectedRelayTeam);
+                relayTeamDAO.create(selectedRelayTeam);
+            }
+            else {
+                selectedRelayTeam.setName(commandName.getText());
+                relayTeamTable.refresh();
+                relayTeamDAO.update(selectedRelayTeam);
+            }
 
             ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
         } catch (Exception e) {
-            System.out.println("cant loading");
+            System.out.println(e.getStackTrace());
         }
     }
 
@@ -52,6 +62,11 @@ public class CommandPopupController {
         } catch (Exception e) {
             System.out.println("cant loading");
         }
+    }
+
+    public void edit(RelayTeam team) {
+        selectedRelayTeam = team;
+        commandName.setText(team.getName());
     }
 }
 

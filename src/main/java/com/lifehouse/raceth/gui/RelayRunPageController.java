@@ -49,7 +49,7 @@ public class RelayRunPageController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
 
             CommandPopupController controller = fxmlLoader.getController();
-            controller.relayTeamTable = relayTeamsTable;
+            controller.setRelayTeamTable(relayTeamsTable);
 
             stage.show();
         } catch (Exception e) {
@@ -64,6 +64,13 @@ public class RelayRunPageController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
+
+            CommandPopupController controller = fxmlLoader.getController();
+            controller.setRelayTeamTable(relayTeamsTable);
+            RelayTeam relayTeam = relayTeamsTable.getSelectionModel().getSelectedItem();
+            if (relayTeam == null) return;
+            controller.edit(relayTeam);
+
             stage.show();
         } catch (Exception e) {
             System.out.println("Cant load");
