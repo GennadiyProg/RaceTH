@@ -143,7 +143,7 @@
                                    </font>
                               </Button>
                            </children>
-                        </Pane>
+                        </GridPane>
                         <TableView maxWidth="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="1046.0" stylesheets="@css/table.css" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                           <columns>
                             <TableColumn prefWidth="177.60002440214157" text="Название" />
