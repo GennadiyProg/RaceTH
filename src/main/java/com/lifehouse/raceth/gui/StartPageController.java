@@ -65,8 +65,6 @@ public class StartPageController implements Initializable {
         club_page.toFront();
     }
     @FXML
-    private void handleButtonAction7(ActionEvent event) {
-        marks_monitor_page.toFront();
-    }
+    private void handleButtonAction7(ActionEvent event) { marks_monitor_page.toFront();}
 
 }
