@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
@@ -27,6 +28,8 @@ public class StartPageController implements Initializable {
     public AnchorPane marks_monitor_page;//Вехнее меню выбора
     @FXML
     private ComboBox<String> ActiveComp;
+    @FXML
+    private ToggleGroup ButtGroup;
 
     private String[] Competition = {"Марафон 2022", "Кросс лето", "Соревнование весна"};
 
@@ -41,20 +44,17 @@ public class StartPageController implements Initializable {
     private void handleButtonAction(ActionEvent event) {
         competition_page.toFront();
     }
-
     @FXML
     private void handleButtonAction2(ActionEvent event) {
         run_page.toFront();
     }
-
     @FXML
     private void handleButtonAction3(ActionEvent event) {
         relay_run_page.toFront();
     }
-
     @FXML
     private void handleButtonAction4(ActionEvent event) {
-        marks_monitor_page.toFront();
+        group_page.toFront();
     }
     @FXML
     private void handleButtonAction5(ActionEvent event) {
@@ -66,6 +66,7 @@ public class StartPageController implements Initializable {
     }
     @FXML
     private void handleButtonAction7(ActionEvent event) {
-        group_page.toFront();
+        marks_monitor_page.toFront();
     }
+
 }
