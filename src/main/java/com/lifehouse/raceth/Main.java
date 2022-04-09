@@ -128,6 +128,7 @@ public class Main extends Application{
         stage.setResizable(false); //Отключение изменения размеров окна
         AnchorPane pain = loader.load();
         stage.setScene(new Scene(pain));
+        stage.getIcons().add(new Image("D:/RaceTH/src/main/resources/view/images/icons/more.png"));
         stage.show();
     }
 }
