@@ -37,7 +37,7 @@ public class DistancePopupController {
             distance.setLength(Integer.parseInt(length.getText()));
             distance.setHeight(Integer.parseInt(high.getText()));
 
-            distanceDAO.Create(distance);
+            distanceDAO.create(distance);
 
             distancesTable.getItems().add(distance);
             distancesTable.refresh();

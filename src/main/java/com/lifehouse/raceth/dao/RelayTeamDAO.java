@@ -9,11 +9,11 @@ import org.hibernate.Session;
 import java.util.List;
 
 public class RelayTeamDAO implements DAO<RelayTeam> {
-    private final Session session;
-
-    public RelayTeamDAO(final Session session) {
-        this.session = session;
-    }
+//    private final Session session;
+//
+//    public RelayTeamDAO(final Session session) {
+//        this.session = session;
+//    }
 
 //    public void Create(RelayTeam relayTeam) {
 //        session.beginTransaction();
@@ -23,7 +23,7 @@ public class RelayTeamDAO implements DAO<RelayTeam> {
 //        session.getTransaction().commit();
 //    }
 
-    public void Create(RelayTeam relayTeam) {
+    public void create(RelayTeam relayTeam) {
         TmpStorage.relayTeams.add(relayTeam);
     }
 
