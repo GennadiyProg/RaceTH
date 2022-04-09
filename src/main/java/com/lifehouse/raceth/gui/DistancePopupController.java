@@ -3,6 +3,7 @@ package com.lifehouse.raceth.gui;
 import com.lifehouse.raceth.dao.DistanceDAO;
 import com.lifehouse.raceth.model.Distance;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
@@ -19,30 +20,30 @@ public class DistancePopupController {
     private TextField distLocation;
 
     @FXML
-    private TextField high;
+    private TextField height;
 
     @FXML
     private TextField length;
 
     public TableView<Distance> distancesTable;
+    private Distance selectedDistance = null;
+
+    private DistanceDAO distanceDAO = new DistanceDAO();
 
     @FXML
     void Saving(ActionEvent event) {
         try{
-            Distance distance = new Distance();
-            DistanceDAO distanceDAO = new DistanceDAO();
+            Distance newDistance = buildNewEntity();
 
-            distance.setId(distancesTable.getItems().size());
-            distance.setLocation(distLocation.getText());
-            distance.setLength(Integer.parseInt(length.getText()));
-            distance.setHeight(Integer.parseInt(high.getText()));
+            if (selectedDistance != null) {
+                updateEntity(newDistance);
+                closePopup(event);
+                return;
+            }
 
-            distanceDAO.create(distance);
+            createEntity(newDistance);
+            closePopup(event);
 
-            distancesTable.getItems().add(distance);
-            distancesTable.refresh();
-
-            ((Node)(event.getSource())).getScene().getWindow().hide();
         } catch (Exception e) {
             System.out.println("cant loading");
         }
@@ -55,6 +56,45 @@ public class DistancePopupController {
         } catch (Exception e) {
             System.out.println("cant loading");
         }
+    }
+
+    private Distance buildNewEntity() {
+        Distance distance = new Distance();
+
+        distance.setLocation(distLocation.getText());
+        distance.setLength(Integer.parseInt(length.getText()));
+        distance.setHeight(Integer.parseInt(height.getText()));
+
+        return distance;
+    }
+
+    private void fillFieldsFromEntity(Distance distance) {
+        distLocation.setText(distance.getLocation());
+        height.setText(String.valueOf(distance.getHeight()));
+        length.setText(String.valueOf(distance.getLength()));
+    }
+
+    public void startEdit(Distance distance) {
+        fillFieldsFromEntity(distance);
+        selectedDistance = distance;
+    }
+
+    private void updateEntity(Distance distance) {
+        System.out.println(distance);
+        distanceDAO.update(distance);
+        selectedDistance.setFields(distance);
+        distancesTable.refresh();
+    }
+
+    private void createEntity(Distance distance) {
+        distance.setId(distancesTable.getItems().size());
+        distanceDAO.create(distance);
+        distancesTable.getItems().add(distance);
+        distancesTable.refresh();
+    }
+
+    public void closePopup(Event e) {
+        ((Node)(e.getSource())).getScene().getWindow().hide();
     }
 }
 
