@@ -33,4 +33,14 @@ public class Competition {
         this.mainSecretary = mainSecretary;
         this.calculationSystemAge = calculationSystemAge;
     }
+
+    public void setFields(Competition competition){
+        this.name = competition.name;
+        this.organizer = competition.organizer;
+        this.location = competition.location;
+        this.date = competition.date;
+        this.mainJudge = competition.mainJudge;
+        this.mainSecretary = competition.mainSecretary;
+        this.calculationSystemAge = competition.calculationSystemAge;
+    }
 }

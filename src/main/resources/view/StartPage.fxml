@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -56,7 +55,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <ComboBox fx:id="ActiveComp" layoutX="1075.0" layoutY="22.0" minWidth="150.0" />
+            <Label fx:id="activeCompetitionLabel" layoutX="1101.0" layoutY="25.0" text="Label" />
          </children>
       </AnchorPane>
 
@@ -196,7 +195,7 @@
       </AnchorPane>
       <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="212.0" layoutY="110.0" prefHeight="610.0" prefWidth="1061.0">
          <children>
-            <fx:include fx:id="competition_page" maxHeight="-Infinity" maxWidth="-Infinity" source="CompetitionPage.fxml" />
+            <fx:include fx:id="competitionPage" maxHeight="-Infinity" maxWidth="-Infinity" source="CompetitionPage.fxml" />
             <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="ClubPage.fxml" />
             <fx:include fx:id="group_page" maxHeight="-Infinity" maxWidth="-Infinity" source="GroupPage.fxml" />
             <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RunPage.fxml" />
