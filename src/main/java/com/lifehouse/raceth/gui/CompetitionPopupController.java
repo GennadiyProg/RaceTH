@@ -71,27 +71,28 @@ public class CompetitionPopupController implements Initializable {
             competitionDAO.update(newCompetition);
             changedCompetitionId = -1;
 
-            ((Node)(event.getSource())).getScene().getWindow().hide();
+            cancel(event);
 
             competitionTable.getSelectionModel().getSelectedItem().setFields(newCompetition);
             competitionTable.refresh();
             return;
         }
-
         newCompetition.setId(competitionTable.getItems().size());
         competitionDAO.create(newCompetition);
         competitionTable.getItems().add(newCompetition);
         competitionTable.refresh();
 
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        cancel(event);
     }
 
     private Competition buildNewCompetition() {
-        Date date = new Date(java.sql.Date.valueOf(dateDatePicker.getValue()).getTime());
         RadioButton selectedToggle = (RadioButton) principalAgeCalculation.getSelectedToggle();
-        if (selectedToggle == null){
+        LocalDate localDate = dateDatePicker.getValue();
+        if (localDate == null || selectedToggle == null){
             return null;
         }
+
+        Date date = new Date(java.sql.Date.valueOf(localDate).getTime());
         return new Competition(nameTextField.getText(),
                 organizerTextField.getText(),
                 locationTextField.getText(),

@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="610.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.CompetitionPageController">
    <children>
       <GridPane prefHeight="779.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -35,7 +34,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="195.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" />
+                  <TextField fx:id="searchTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="195.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#deleteCompetition" style="-fx-background-color: #FF4040; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Удалить" GridPane.columnIndex="3" />
                   <Button fx:id="makeCurrentButton" mnemonicParsing="false" onAction="#makeCompetitionCurrent" text="Сделать текущим" />
                   <Button mnemonicParsing="false" prefHeight="26.0" text="Поиск" GridPane.columnIndex="4" GridPane.halignment="RIGHT" />
