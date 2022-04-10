@@ -1,12 +1,13 @@
 package com.lifehouse.raceth.gui;
 
+import com.lifehouse.raceth.dao.RelayTeamDAO;
+import com.lifehouse.raceth.model.RelayTeam;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lombok.Data;
 
@@ -24,14 +25,38 @@ public class CommandPopupController {
     @FXML
     private TextField commandName;
 
+    private TableView<RelayTeam> relayTeamTable;
+    private RelayTeam selectedRelayTeam = null;
+    private RelayTeamDAO relayTeamDAO = new RelayTeamDAO();
+
     @FXML
     void Saving(ActionEvent event) {
         try{
-            System.out.println(commandName.getText()); //Сохранения названия
-            ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
+            if (selectedRelayTeam == null) {
+                createRelayTeam();
+            }
+            else {
+                updateRelayTeam();
+            }
+
+            closePopup(event);
         } catch (Exception e) {
-            System.out.println("cant loading");
+            e.printStackTrace();
         }
+    }
+
+    private void createRelayTeam() {
+        selectedRelayTeam = new RelayTeam();
+        selectedRelayTeam.setId(relayTeamTable.getItems().size());
+        selectedRelayTeam.setName(commandName.getText());
+        relayTeamTable.getItems().add(selectedRelayTeam);
+        relayTeamDAO.create(selectedRelayTeam);
+    }
+
+    private void updateRelayTeam() {
+        selectedRelayTeam.setName(commandName.getText());
+        relayTeamTable.refresh();
+        relayTeamDAO.update(selectedRelayTeam);
     }
 
     @FXML
@@ -39,8 +64,17 @@ public class CommandPopupController {
         try{
             ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
         } catch (Exception e) {
-            System.out.println("cant loading");
+            e.printStackTrace();
         }
+    }
+
+    public void startEdit(RelayTeam team) {
+        selectedRelayTeam = team;
+        commandName.setText(team.getName());
+    }
+
+    private void closePopup(ActionEvent event) {
+        ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
     }
 }
 

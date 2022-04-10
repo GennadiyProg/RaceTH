@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import lombok.Data;
 
@@ -45,20 +47,17 @@ public class StartPageController implements Initializable {
     private void handleButtonAction(ActionEvent event) {
         competitionPage.toFront();
     }
-
     @FXML
     private void handleButtonAction2(ActionEvent event) {
         run_page.toFront();
     }
-
     @FXML
     private void handleButtonAction3(ActionEvent event) {
         relay_run_page.toFront();
     }
-
     @FXML
     private void handleButtonAction4(ActionEvent event) {
-        marks_monitor_page.toFront();
+        group_page.toFront();
     }
 
     @FXML
@@ -72,7 +71,6 @@ public class StartPageController implements Initializable {
     }
 
     @FXML
-    private void handleButtonAction7(ActionEvent event) {
-        group_page.toFront();
-    }
+    private void handleButtonAction7(ActionEvent event) { marks_monitor_page.toFront();}
+
 }

@@ -1,3 +1,8 @@
+.combo-box{
+    -fx-background-color: white;
+    -fx-border-color: #D3D3D3;
+    -fx-border-width: 1 1 1 1;
+}
 .table-view {
     -fx-background-color: rgb(255, 255, 255);
 }
@@ -76,3 +81,46 @@
     -fx-background-radius : 0.0em;
 }
 
+.toggle-button {
+    -fx-background-color :#FAFAFA;
+    -fx-pref-width: 190px;
+    -fx-pref-height: 65px;
+     -fx-font-size:14px;
+}
+.toggle-button:selected{
+    -fx-background-color :#EDF1F8;
+    }
+.toggle-button:hover{
+    -fx-background-color :#EDF1F8;
+    -fx-transition: 3s;
+    }
+.little-button-add{
+    -fx-background-radius: 12px;
+    -fx-background-color:   #3C76F1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+}
+.little-button-edit{
+    -fx-background-radius: 12px;
+    -fx-background-color:   #FFBB38;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+}
+.little-button-del{
+-fx-background-radius: 12px;
+    -fx-background-color:   #FF4040;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+}
+.middle-button-add{
+    -fx-background-radius: 12px;
+    -fx-background-color:   #3C76F1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+}
+.middle-button-edit{
+    -fx-background-radius: 12px;
+    -fx-background-color:   #FFBB38;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+}
+.middle-button-del{
+-fx-background-radius: 12px;
+    -fx-background-color:   #FF4040;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+}
