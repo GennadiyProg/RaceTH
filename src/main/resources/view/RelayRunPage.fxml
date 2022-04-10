@@ -24,21 +24,24 @@
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="154.13331451416016" minHeight="10.0" prefHeight="67.59999084472656" valignment="TOP" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="154.13331451416016" minHeight="10.0" prefHeight="50.80000915527344" valignment="TOP" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="583.7333251953125" minHeight="10.0" prefHeight="402.4000061035156" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="224.0" minHeight="10.0" prefHeight="62.59999389648431" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="224.0" minHeight="10.0" prefHeight="62.59999389648431" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="154.13331451416016" minHeight="10.0" prefHeight="50.599993896484364" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="154.13331451416016" minHeight="10.0" prefHeight="53.800006103515614" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="583.7333251953125" minHeight="10.0" prefHeight="392.6000122070312" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="224.0" minHeight="10.0" prefHeight="53.200000000000045" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="224.0" minHeight="10.0" prefHeight="23.599963378906295" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
 
-            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="332.0" style="-fx-background-color: #3C76F1; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Cоздать эстафету" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+
+            <Button mnemonicParsing="false" onAction="#NewRelay" prefHeight="34.0" prefWidth="342.0" style="-fx-background-color: #3C76F1; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Cоздать эстафету" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+
 
 
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Pane prefHeight="429.0" prefWidth="343.0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <Pane prefHeight="429.0" prefWidth="343.0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <children>
                   <TableView fx:id="relayTeamTable" layoutX="14.0" maxHeight="-Infinity" prefHeight="370.0" prefWidth="288.0" stylesheets="@css/table.css">
                     <columns>
@@ -48,7 +51,7 @@
                   </TableView>
                </children>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <TableView layoutX="1.0" prefHeight="370.0" stylesheets="@css/table.css">
                      <columns>
@@ -64,8 +67,8 @@
             </Pane>
             <GridPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="39.0" prefWidth="337.0" GridPane.rowIndex="1">
               <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="224.20001220703125" minWidth="10.0" prefWidth="128.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.4000244140625" minWidth="10.0" prefWidth="229.60000000000002" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.20001220703125" minWidth="10.0" prefWidth="114.00000610351563" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.4000244140625" minWidth="10.0" prefWidth="209.99999389648437" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -79,11 +82,13 @@
                   </Label>
                </children>
             </GridPane>
-            <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="250.0" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+
+            <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="250.0" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -110,7 +115,9 @@
                         </ImageView>
                      </graphic>
                   </Button>
+
                   <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#removeRelayTeam" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-del" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -121,14 +128,13 @@
                   </Button>
                </children>
             </GridPane>
-            <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="54.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="40.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="40.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="40.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="210.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="210.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -152,7 +158,9 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-del" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+
+                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#DeletePeople" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-del" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -161,6 +169,48 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Button fx:id="loadBase" mnemonicParsing="false" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #394E75; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #00C781; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Присвоить чип" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane GridPane.rowIndex="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.20001220703125" minWidth="10.0" prefWidth="26.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="298.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Команды" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.20001220703125" minWidth="10.0" prefWidth="26.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="298.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Участники команды" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
             <GridPane prefHeight="51.0" prefWidth="668.0" GridPane.columnIndex="1" GridPane.rowIndex="4">

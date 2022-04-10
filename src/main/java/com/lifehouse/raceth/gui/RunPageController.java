@@ -5,10 +5,15 @@ import com.lifehouse.raceth.model.Sportsman;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import lombok.Data;
 
 import java.net.URL;
@@ -68,9 +73,19 @@ public class RunPageController implements Initializable {
         }
     }
 
+    //Создание нового забега
     @FXML
     private void AddRun(ActionEvent event) {
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RunCreateRunPopup.fxml"));
+            Parent root1 = (Parent)fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Cant load");
+        }
     }
 
     @FXML
@@ -93,4 +108,6 @@ public class RunPageController implements Initializable {
         ObservableList<Sportsman> sportsmen = runTable.getSelectionModel().getSelectedItems();
         runTable.getItems().removeAll(sportsmen);
     }
+
+
 }

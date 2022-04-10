@@ -82,6 +82,7 @@ public class RelayRunPageController implements Initializable {
     }
 
     @FXML
+
     void removeRelayTeam(ActionEvent event) {
         try {
             RelayTeam relayTeam = relayTeamTable.getSelectionModel().getSelectedItem();
@@ -118,6 +119,34 @@ public class RelayRunPageController implements Initializable {
         } catch (Exception e) {
             System.out.println("Cant load");
         }
+    }
+
+    @FXML
+    void DeletePeople(ActionEvent event) {
+
+    }
+
+    @FXML
+    void NewRelay(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RelayRunCreateRelayRunPopup.fxml"));
+            Parent root1 = (Parent)fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Cant load");
+        }
+    }
+
+
+
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }
 
