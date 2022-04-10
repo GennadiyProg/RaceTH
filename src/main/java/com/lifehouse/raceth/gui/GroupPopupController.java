@@ -45,8 +45,6 @@ public class GroupPopupController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // toDo: Поменять текст гендера на русский, сложность в том что русские символы криво считыываются.
-        // toDo: В таком случае надо будет менять еще функцию determineGender
         genderM.setToggleGroup(gender);
         genderW.setToggleGroup(gender);
         competitionGroupDAO = new CompetitionGroupDAO();

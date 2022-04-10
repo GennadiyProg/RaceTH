@@ -58,7 +58,6 @@ public class GroupPageController implements Initializable {
         competitionGroupDAO = new CompetitionGroupDAO();
 
         competitionGroupsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        System.out.println("IN INITIALIZE");
         ObservableList<CompetitionGroup> competitionGroups = competitionGroupsTable.getItems();
         competitionGroups.addAll(competitionGroupDAO.GetAllGroups());
     }
@@ -67,7 +66,7 @@ public class GroupPageController implements Initializable {
     void NewGroup(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/GroupPopup.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
@@ -85,7 +84,7 @@ public class GroupPageController implements Initializable {
     void EditGroup(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/GroupPopup.fxml"));
-            Parent root1 = (Parent)fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
