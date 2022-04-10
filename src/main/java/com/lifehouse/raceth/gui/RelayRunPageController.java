@@ -139,14 +139,5 @@ public class RelayRunPageController implements Initializable {
             System.out.println("Cant load");
         }
     }
-
-
-
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
 }
 
