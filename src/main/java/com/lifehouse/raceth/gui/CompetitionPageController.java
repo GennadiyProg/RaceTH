@@ -131,8 +131,9 @@ public class CompetitionPageController implements Initializable {
 
     @FXML
     void deleteCompetition(ActionEvent event) {
-        List<Competition> competitions = competitionTable.getSelectionModel().getSelectedItems();
-        competitionTable.getItems().removeAll(competitions);
+        Competition competition = competitionTable.getSelectionModel().getSelectedItem();
+        competitionTable.getItems().removeAll(competition);
+        competitionDAO.delete(competition);
     }
 }
 
