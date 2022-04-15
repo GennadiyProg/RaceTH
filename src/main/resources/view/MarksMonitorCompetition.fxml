@@ -15,15 +15,15 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.MarksMonitorCompetitionController">
+<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1068.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.MarksMonitorCompetitionController">
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <children>
-      <GridPane prefHeight="630.0" prefWidth="1088.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane layoutX="30.0" layoutY="42.0" prefHeight="558.0" prefWidth="1028.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="446.0" minWidth="10.0" prefWidth="386.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="644.0" minWidth="10.0" prefWidth="435.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="644.0" minWidth="10.0" prefWidth="350.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="405.0" minWidth="10.0" prefWidth="227.0" />
         </columnConstraints>
         <rowConstraints>
@@ -36,7 +36,7 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="3">
                <children>
-                  <TableView prefHeight="323.0" prefWidth="1048.0" stylesheets="@css/table.css">
+                  <TableView prefHeight="303.0" prefWidth="1008.0" stylesheets="@css/table.css">
                      <columns>
                         <TableColumn prefWidth="30.0" resizable="false" text="№" />
                         <TableColumn prefWidth="100.0" resizable="false" text="Участник" />
@@ -143,6 +143,22 @@
                   </Pane>
                </children>
             </GridPane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <TableView layoutY="-1.0" prefHeight="115.0" prefWidth="366.0" stylesheets="@css/table.css">
+                     <columns>
+                        <TableColumn prefWidth="125.0" text="Группа" />
+                        <TableColumn prefWidth="130.40003204345703" text="Стартовое время" />
+                        <TableColumn minWidth="0.0" prefWidth="108.39999389648438" text="Кол-во кругов" />
+                     </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" minHeight="32.0" minWidth="100.0" mnemonicParsing="false" onAction="#AddingGroup" prefHeight="32.0" prefWidth="298.0" style="-fx-background-color: #00C781; -fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Добавить (удалить) в заезд группы" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS" GridPane.columnIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
          </children>
       </GridPane>
    </children>
