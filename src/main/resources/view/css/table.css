@@ -94,10 +94,17 @@
     -fx-background-color :#EDF1F8;
     -fx-transition: 3s;
     }
-.little-button-add{
+.little-button-add-blue{
     -fx-background-radius: 12px;
     -fx-background-color:   #3C76F1;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+}
+.little-button-add{
+    -fx-background-radius: 12px;
+    -fx-background-color:    #00C781;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+    -fx-pref-width: 100px;
+    -fx-pref-height: 34px;
 }
 .little-button-edit{
     -fx-background-radius: 12px;
@@ -111,16 +118,31 @@
 }
 .middle-button-add{
     -fx-background-radius: 12px;
+    -fx-background-color:   #00C781;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+    -fx-pref-width: 200px;
+    -fx-pref-height: 34px;
+}
+.middle-button-add-blue{
+    -fx-background-radius: 12px;
     -fx-background-color:   #3C76F1;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+    -fx-pref-width: 200px;
+    -fx-pref-height: 34px;
 }
 .middle-button-edit{
     -fx-background-radius: 12px;
     -fx-background-color:   #FFBB38;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+    -fx-pref-width: 200px;
+    -fx-pref-height: 34px;
 }
 .middle-button-del{
 -fx-background-radius: 12px;
     -fx-background-color:   #FF4040;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+}
+.tab:top
+{
+-fx-background-color: # ECF1FE;
 }

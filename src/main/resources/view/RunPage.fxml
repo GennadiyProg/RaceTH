@@ -112,7 +112,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button mnemonicParsing="false" onAction="#AddExternalData" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #394E75; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="4">
+                  <Button mnemonicParsing="false" onAction="#AddExternalData" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: #394E75; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="4">
                      <font>
                         <Font size="14.0" />
                      </font></Button>
@@ -134,7 +134,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="createCompretition_button" mnemonicParsing="false" onAction="#AddRun" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #394E75; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Создать забег" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
+                  <Button fx:id="createCompretition_button" mnemonicParsing="false" onAction="#AddRun" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: #394E75; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Создать забег" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
                      <font>
                         <Font size="14.0" />
                      </font>
