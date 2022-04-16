@@ -36,7 +36,7 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="3">
                <children>
-                  <TableView prefHeight="303.0" prefWidth="1008.0" stylesheets="@css/table.css">
+                  <TableView fx:id="checkpointTable" prefHeight="303.0" prefWidth="1008.0" stylesheets="@css/table.css">
                      <columns>
                         <TableColumn prefWidth="30.0" resizable="false" text="№" />
                         <TableColumn prefWidth="100.0" resizable="false" text="Участник" />
@@ -145,16 +145,16 @@
             </GridPane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <TableView layoutY="-1.0" prefHeight="115.0" prefWidth="366.0" stylesheets="@css/table.css">
+                  <TableView fx:id="runTable" layoutY="-1.0" prefHeight="115.0" prefWidth="366.0" stylesheets="@css/table.css">
                      <columns>
-                        <TableColumn prefWidth="125.0" text="Группа" />
-                        <TableColumn prefWidth="130.40003204345703" text="Стартовое время" />
-                        <TableColumn minWidth="0.0" prefWidth="108.39999389648438" text="Кол-во кругов" />
+                        <TableColumn fx:id="groupColumn" prefWidth="125.0" text="Группа" />
+                        <TableColumn fx:id="startTimeColumn" prefWidth="130.40003204345703" text="Стартовое время" />
+                        <TableColumn fx:id="lapColumn" minWidth="0.0" prefWidth="108.39999389648438" text="Кол-во кругов" />
                      </columns>
                   </TableView>
                </children>
             </Pane>
-            <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" minHeight="32.0" minWidth="100.0" mnemonicParsing="false" onAction="#AddingGroup" prefHeight="32.0" prefWidth="298.0" style="-fx-background-color: #00C781; -fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Добавить (удалить) в заезд группы" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS" GridPane.columnIndex="1">
+            <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" minHeight="32.0" minWidth="100.0" mnemonicParsing="false" onAction="#addingGroup" prefHeight="32.0" prefWidth="298.0" style="-fx-background-color: #00C781; -fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Добавить (удалить) в заезд группы" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS" GridPane.columnIndex="1">
                <font>
                   <Font size="16.0" />
                </font>

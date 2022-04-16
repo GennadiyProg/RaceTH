@@ -22,6 +22,11 @@ public class CompetitionGroup {
     private int ageFrom;
     private int ageTo;
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
     public void setFields(CompetitionGroup group) {
         this.name = group.getName();
         this.gender = group.getGender();
