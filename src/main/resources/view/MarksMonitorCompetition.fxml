@@ -45,37 +45,37 @@
                         <TableColumn minWidth="0.0" prefWidth="134.4000305175781" text="Кол-во кругов" />
                      </columns>
                   </TableView>
-                  <TextField maxWidth="150.0" minWidth="100.0" prefHeight="120.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <TextField alignment="CENTER" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" promptText="№" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                      <font>
                         <Font size="48.0" />
                      </font>
                   </TextField>
                   <GridPane>
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="234.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="240.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.20001220703125" minWidth="10.0" prefWidth="178.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="110.0" prefHeight="110.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                        <TextField alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="99.0" promptText="12:00:00" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin></TextField>
-                        <Button mnemonicParsing="false" styleClass="little-button-add" stylesheets="@css/table.css" text="Старт" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                        <Button mnemonicParsing="false" styleClass="little-button-add" stylesheets="@css/table.css" text="Старт" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <TextField maxWidth="-Infinity" prefHeight="102.0" prefWidth="229.0" GridPane.rowIndex="1">
+                        <TextField maxWidth="-Infinity" prefHeight="110.0" promptText="00:00:00" GridPane.rowIndex="1">
                            <font>
                               <Font size="48.0" />
                            </font>
                         </TextField>
-                        <Label text="Начало отсчета времени" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM" />
+                        <Label text="Начало отсчета времени" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                      </children>
                      <padding>
                         <Insets right="10.0" />
@@ -112,8 +112,11 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" styleClass="middle-button-edit" stylesheets="@css/table.css" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.halignment="CENTER" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="219.0" style="-fx-pref-width: 230;" styleClass="middle-button-edit" stylesheets="@css/table.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="3">
+                  <Button mnemonicParsing="false" styleClass="middle-button-add-blue" stylesheets="@css/table.css" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="212.0" style="-fx-pref-width: 230;" styleClass="middle-button-add" stylesheets="@css/table.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="3">
                      <font>
                         <Font size="14.0" />
                      </font>
