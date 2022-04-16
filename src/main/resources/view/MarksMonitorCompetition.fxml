@@ -65,7 +65,7 @@
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin></TextField>
-                        <Button mnemonicParsing="false" styleClass="little-button-add" stylesheets="@css/table.css" text="Старт" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <Button mnemonicParsing="false" prefWidth="66.0" styleClass="little-button-add" stylesheets="@css/table.css" text="Старт" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -76,6 +76,11 @@
                            </font>
                         </TextField>
                         <Label text="Начало отсчета времени" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <Button mnemonicParsing="false" styleClass="little-button-add" stylesheets="@css/table.css" text="Старт" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
                      </children>
                      <padding>
                         <Insets right="10.0" />
