@@ -114,7 +114,7 @@
                   </Button>
                </children>
             </GridPane>
-            <TabPane maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="2">
+            <TabPane fx:id="tabPane" maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="2">
               <tabs>
                 <Tab text="Untitled Tab 1">
                   <content>
