@@ -61,7 +61,10 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                        <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin></TextField>
                         <Button mnemonicParsing="false" styleClass="little-button-add" stylesheets="@css/table.css" text="Старт" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="14.0" />
@@ -77,6 +80,9 @@
                      <padding>
                         <Insets right="10.0" />
                      </padding>
+                     <GridPane.margin>
+                        <Insets bottom="1.0" />
+                     </GridPane.margin>
                   </GridPane>
                   <Label text="Прошедший участник" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
                </children>
@@ -143,11 +149,6 @@
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   </content>
                 </Tab>
-                  <Tab text="Untitled Tab">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
               </tabs>
             </TabPane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.valignment="TOP">

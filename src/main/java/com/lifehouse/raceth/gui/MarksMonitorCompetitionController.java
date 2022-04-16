@@ -50,52 +50,39 @@ public class MarksMonitorCompetitionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
             Tab tab = new Tab("Tab_");
 
-            // create a label
-            Label label = new Label("This is Tab: ");
-
+            Label label = new Label("This is Tab");
 
             // add label to the tab
             tab.setContent(label);
 
-            // add tab
             tabPane.getTabs().add(tab);
 
-            // create a tab which
-            // when pressed creates a new tab
+            // create a tab which when pressed creates a new tab
             Tab newtab = new Tab();
 
-
-            EventHandler<Event> event = new EventHandler<Event>() {
-
-                public void handle(Event e)
+            EventHandler<Event> event = e -> {
+                if (newtab.isSelected())
                 {
-                    if (newtab.isSelected())
-                    {
+                    // create Tab
+                    Tab tab1 = new Tab("Tab_");
 
-                        // create Tab
-                        Tab tab = new Tab("Tab_");
+                    // create a label
+                    Label label1 = new Label("This is Tab: ");
 
-                        // create a label
-                        Label label = new Label("This is Tab: ");
+                    // add label to the tab
+                    tab1.setContent(label1);
 
+                    // add tab
+                    tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab1);
 
-
-                        // add label to the tab
-                        tab.setContent(label);
-
-                        // add tab
-                        tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab);
-
-                        // select the last tab
-                        tabPane.getSelectionModel().select(tabPane.getTabs().size() - 2);
-                    }
+                    // select the last tab
+                    tabPane.getSelectionModel().select(tabPane.getTabs().size() - 2);
                 }
             };
 
             // set event handler to the tab
             newtab.setOnSelectionChanged(event);
 
-            // add newtab
             tabPane.getTabs().add(newtab);
         };
 };
