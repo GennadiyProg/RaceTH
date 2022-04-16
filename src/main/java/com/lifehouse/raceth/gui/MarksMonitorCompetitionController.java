@@ -58,13 +58,6 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     private TableColumn<Run, String> lapColumn;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
-        startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-        lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
-    }
-
     @FXML
     void addingGroup(ActionEvent event) {
         try {
@@ -82,6 +75,10 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+            groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
+            startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+            lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
+
             Tab tab = new Tab("Tab_");
 
             Label label = new Label("This is Tab");

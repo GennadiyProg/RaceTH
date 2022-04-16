@@ -40,9 +40,9 @@
                <children>
                   <TableView fx:id="checkpointTable" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="434.0" stylesheets="@css/table.css" GridPane.columnIndex="1">
                      <columns>
-                        <TableColumn prefWidth="125.0" text="Группа" />
-                        <TableColumn prefWidth="172.80006408691406" text="Стартовое время" />
-                        <TableColumn minWidth="0.0" prefWidth="134.4000305175781" text="Кол-во кругов" />
+                        <TableColumn fx:id="groupColumn" prefWidth="125.0" text="Группа" />
+                        <TableColumn fx:id="startTimeColumn" prefWidth="172.80006408691406" text="Стартовое время" />
+                        <TableColumn fx:id="lapColumn" minWidth="0.0" prefWidth="134.4000305175781" text="Кол-во кругов" />
                      </columns>
                   </TableView>
                   <TextField maxWidth="150.0" minWidth="100.0" prefHeight="120.0" GridPane.columnIndex="2" GridPane.halignment="CENTER">
@@ -153,7 +153,7 @@
             </TabPane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.valignment="TOP">
                <children>
-                  <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" layoutX="408.0" layoutY="-2.0" minHeight="26.0" minWidth="100.0" mnemonicParsing="false" onAction="#AddingGroup" prefHeight="32.0" prefWidth="298.0" styleClass="middle-button-add-blue" stylesheets="@css/table.css" text="Редактировать группы" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS">
+                  <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" layoutX="408.0" layoutY="-2.0" minHeight="26.0" minWidth="100.0" mnemonicParsing="false" onAction="#addingGroup" prefHeight="32.0" prefWidth="298.0" styleClass="middle-button-add-blue" stylesheets="@css/table.css" text="Редактировать группы" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS">
                      <font>
                         <Font size="14.0" />
                      </font>
