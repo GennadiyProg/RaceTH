@@ -38,7 +38,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView maxWidth="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="434.0" stylesheets="@css/table.css" GridPane.columnIndex="1">
+                  <TableView fx:id="checkpointTable" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="434.0" stylesheets="@css/table.css" GridPane.columnIndex="1">
                      <columns>
                         <TableColumn prefWidth="125.0" text="Группа" />
                         <TableColumn prefWidth="172.80006408691406" text="Стартовое время" />
