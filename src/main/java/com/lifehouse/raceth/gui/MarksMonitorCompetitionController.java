@@ -18,6 +18,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Data;
+import javafx.scene.control.*;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.fxml.Initializable;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import java.net.URL;
 import java.time.LocalTime;
@@ -28,6 +36,9 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     @FXML
     private Button addGroup;
+
+    @FXML
+    private  TabPane tabPane;
 
     @FXML
     private AnchorPane main_pane;
@@ -68,4 +79,44 @@ public class MarksMonitorCompetitionController implements Initializable {
             System.out.println("Cant load");
         }
     }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+            Tab tab = new Tab("Tab_");
+
+            Label label = new Label("This is Tab");
+
+            // add label to the tab
+            tab.setContent(label);
+
+            tabPane.getTabs().add(tab);
+
+            // create a tab which when pressed creates a new tab
+            Tab newtab = new Tab();
+
+            EventHandler<Event> event = e -> {
+                if (newtab.isSelected())
+                {
+                    // create Tab
+                    Tab tab1 = new Tab("Tab_");
+
+                    // create a label
+                    Label label1 = new Label("This is Tab: ");
+
+                    // add label to the tab
+                    tab1.setContent(label1);
+
+                    // add tab
+                    tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab1);
+
+                    // select the last tab
+                    tabPane.getSelectionModel().select(tabPane.getTabs().size() - 2);
+                }
+            };
+
+            // set event handler to the tab
+            newtab.setOnSelectionChanged(event);
+
+            tabPane.getTabs().add(newtab);
+        }
 }
