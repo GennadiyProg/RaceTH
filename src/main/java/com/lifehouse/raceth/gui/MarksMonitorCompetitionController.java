@@ -75,6 +75,35 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+            Tab tab = new Tab("Забег #");
+            tab.setClosable(true);
+            TableView tableView = new TableView();
+            tableView.setPrefWidth(1072);
+            tableView.setPrefHeight(318);
+            TableColumn number = new TableColumn("№");
+            number.setPrefWidth(50);
+            TableColumn participant = new TableColumn("Участник");
+            participant.setPrefWidth(100);
+            TableColumn gender = new TableColumn("Пол");
+            gender.setPrefWidth(50);
+            TableColumn chip = new TableColumn("Чип");
+            chip.setPrefWidth(130);
+            TableColumn start_number = new TableColumn("Стартовый номер");
+            start_number.setPrefWidth(130);
+            TableColumn date_birth = new TableColumn("Дата рождения");
+            date_birth.setPrefWidth(130);
+            TableColumn city = new TableColumn("Город");
+            city.setPrefWidth(120);
+            TableColumn club = new TableColumn("Клуб");
+            club.setPrefWidth(120);
+            TableColumn category = new TableColumn("Разряд");
+            category.setPrefWidth(120);
+            TableColumn group = new TableColumn("Группа");
+            group.setPrefWidth(120);
+            tableView.getColumns().addAll(number,participant,gender,chip,start_number,date_birth,city,
+                    club,category,group);
+
             groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
             startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
             lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
@@ -83,8 +112,9 @@ public class MarksMonitorCompetitionController implements Initializable {
 
             Label label = new Label("This is Tab");
 
+
             // add label to the tab
-            tab.setContent(label);
+            tab.setContent(tableView);
 
             tabPane.getTabs().add(tab);
 
@@ -95,14 +125,37 @@ public class MarksMonitorCompetitionController implements Initializable {
                 if (newtab.isSelected())
                 {
                     // create Tab
-                    Tab tab1 = new Tab("Tab_");
+                    Tab tab1 = new Tab("Забег #");
 
-                    // create a label
-                    Label label1 = new Label("This is Tab: ");
+                    TableView tableView1 = new TableView();
+                    tableView1.setPrefWidth(1072);
+                    tableView1.setPrefHeight(318);
+                    TableColumn nnumber = new TableColumn("№");
+                    nnumber.setPrefWidth(50);
+                    TableColumn nparticipant = new TableColumn("Участник");
+                    nparticipant.setPrefWidth(100);
+                    TableColumn ngender = new TableColumn("Пол");
+                    ngender.setPrefWidth(50);
+                    TableColumn nchip = new TableColumn("Чип");
+                    nchip.setPrefWidth(130);
+                    TableColumn nstart_number = new TableColumn("Стартовый номер");
+                    nstart_number.setPrefWidth(130);
+                    TableColumn ndate_birth = new TableColumn("Дата рождения");
+                    ndate_birth.setPrefWidth(130);
+                    TableColumn ncity = new TableColumn("Город");
+                    ncity.setPrefWidth(120);
+                    TableColumn nclub = new TableColumn("Клуб");
+                    nclub.setPrefWidth(120);
+                    TableColumn ncategory = new TableColumn("Разряд");
+                    ncategory.setPrefWidth(120);
+                    TableColumn ngroup = new TableColumn("Группа");
+                    ngroup.setPrefWidth(120);
+                    tableView1.getColumns().addAll(nnumber,nparticipant,ngender,nchip,nstart_number,ndate_birth,ncity,
+                    nclub,ncategory,ngroup);
 
-                    // add label to the tab
-                    tab1.setContent(label1);
-
+                    // add content to the tab
+                    tab1.setContent(tableView1);
+                    tab1.setClosable(true);
                     // add tab
                     tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab1);
 
