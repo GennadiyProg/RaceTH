@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.BindException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,34 +26,31 @@ public class RFID{
         try{
             // Создайте новый экземпляр DatagramSocket, чтобы получать ответы от клиента
             DatagramSocket serverSocket = new DatagramSocket(SERVICE_PORT);
-//            while (true) {
-                /* Буфер для хранения получаемых данных,он временно хранит данные в случае задержек связи */
-                byte[] receivingDataBuffer = new byte[1024];
+            /* Буфер для хранения получаемых данных,он временно хранит данные в случае задержек связи */
+            byte[] receivingDataBuffer = new byte[1024];
 
-                /* Создайте экземпляр UDP-пакета для хранения получаемых данных с использованием буфера для полученных данных */
-                DatagramPacket inputPacket = new DatagramPacket(receivingDataBuffer, receivingDataBuffer.length);
-                System.out.println("Waiting for a client to connect...");
+            /* Создайте экземпляр UDP-пакета для хранения получаемых данных с использованием буфера для полученных данных */
+            DatagramPacket inputPacket = new DatagramPacket(receivingDataBuffer, receivingDataBuffer.length);
+            System.out.println("Waiting for a client to connect...");
 
-                // Получите данные от клиента и сохраните их в inputPacket
-                serverSocket.receive(inputPacket);
+            // Получите данные от клиента и сохраните их в inputPacket
+            serverSocket.receive(inputPacket);
 
-                // Выведите на экран отправленные клиентом данные
-                String receivedData = new String(inputPacket.getData());
-//                int lastNumber = Integer.parseInt(receivedData.substring(receivedData.indexOf("Tag:")+4,receivedData.indexOf(0x0)));
-                receivedData = receivedData.substring(receivedData.indexOf("Tag:")+4,receivedData.indexOf(0x0));
-                System.out.println("SoutFromClass: "+ receivedData);
-                int delZeros = Integer.parseInt(receivedData);
-                receivedData = Integer.toString(delZeros);
+            // Выведите на экран отправленные клиентом данные
+            String receivedData = new String(inputPacket.getData());
+//          int lastNumber = Integer.parseInt(receivedData.substring(receivedData.indexOf("Tag:")+4,receivedData.indexOf(0x0)));
+            receivedData = receivedData.substring(receivedData.indexOf("Tag:")+4,receivedData.indexOf(0x0));
+            System.out.println("SoutFromClass: "+ receivedData);
+            int delZeros = Integer.parseInt(receivedData);
+            receivedData = Integer.toString(delZeros);
 
 
-//                if (false) {
-                    serverSocket.close();
-//                }
-                return receivedData;
-//            }
             // Закройте соединение сокетов
+            serverSocket.close();
+            return receivedData;
+
         } catch (IOException e){
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return "Упс";
     }

@@ -89,7 +89,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <children>
-                  <Button layoutX="4.0" layoutY="19.0" maxHeight="35.0" maxWidth="220.0" minHeight="35.0" minWidth="220.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="220.0" style="-fx-background-color: ffbb00; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Печать стартового протоккола" textFill="WHITE">
+                  <Button fx:id="printProtocolButton" layoutX="4.0" layoutY="19.0" maxHeight="35.0" maxWidth="220.0" minHeight="35.0" minWidth="220.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="220.0" style="-fx-background-color: ffbb00; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 20px, 0, 0, 10px);" text="Печать стартового протоккола" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -98,17 +98,17 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
-                  <Button layoutX="14.0" layoutY="11.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="106.0" style="-fx-background-color: ffbb00; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+                  <Button fx:id="inputFromFileButton" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="106.0" style="-fx-background-color: ffbb00; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 20px, 0, 0, 10px);" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="140.0" layoutY="11.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="106.0" style="-fx-background-color: ffbb00; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Добавить из базы" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+                  <Button fx:id="inputFromDBButton" layoutX="140.0" layoutY="11.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="106.0" style="-fx-background-color: ffbb00; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 20px, 0, 0, 10px);" text="Добавить из базы" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="266.0" layoutY="11.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="106.0" style="-fx-background-color: ffbb00; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Добавить вручную" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+                  <Button fx:id="inputManuallyButton" layoutX="266.0" layoutY="11.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="106.0" style="-fx-background-color: ffbb00; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 20px, 0, 0, 10px);" text="Добавить вручную" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -138,9 +138,9 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Button layoutX="28.0" layoutY="6.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" onAction="#newLastNumber" style="-fx-background-color: #00C781; -fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Старт" textFill="WHITE">
+                        <Button fx:id="startButton" layoutX="28.0" layoutY="6.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" onAction="#startButtonClick" style="-fx-background-color: #00C781; -fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 20px, 0, 0, 10px);" text="Старт" textFill="WHITE">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="System Bold" size="19.0" />
                            </font>
                         </Button>
                      </children>
