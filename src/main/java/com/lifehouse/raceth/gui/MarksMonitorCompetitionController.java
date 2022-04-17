@@ -48,8 +48,8 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-            Tab tab = new Tab("Tab_");
-
+            Tab tab = new Tab("Забег #");
+            tab.setClosable(true);
             TableView tableView = new TableView();
             tableView.setPrefWidth(1072);
             tableView.setPrefHeight(318);
@@ -88,7 +88,7 @@ public class MarksMonitorCompetitionController implements Initializable {
                 if (newtab.isSelected())
                 {
                     // create Tab
-                    Tab tab1 = new Tab("Tab_");
+                    Tab tab1 = new Tab("Забег #");
 
                     TableView tableView1 = new TableView();
                     tableView1.setPrefWidth(1072);
@@ -118,7 +118,7 @@ public class MarksMonitorCompetitionController implements Initializable {
 
                     // add content to the tab
                     tab1.setContent(tableView1);
-
+                    tab1.setClosable(true);
                     // add tab
                     tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab1);
 

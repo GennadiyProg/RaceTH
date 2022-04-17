@@ -131,13 +131,13 @@
                   </Button>
                </children>
             </GridPane>
-            <TabPane fx:id="tabPane" maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="2">
+            <TabPane fx:id="tabPane" maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" tabClosingPolicy="SELECTED_TAB" GridPane.rowIndex="2">
               <tabs>
-                <Tab text="Untitled Tab 1">
+                <Tab text="Участники">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView layoutX="-6.0" prefHeight="318.0" stylesheets="@css/table.css">
+                              <TableView layoutX="-3.0" layoutY="-1.0" prefHeight="318.0" stylesheets="@css/table.css">
                                  <columns>
                                     <TableColumn prefWidth="50.0" resizable="false" text="№" />
                                     <TableColumn prefWidth="100.0" resizable="false" text="Участник" />
@@ -155,9 +155,25 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Untitled Tab 2">
+                <Tab text="Забег #">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView layoutX="-3.0" layoutY="-1.0" prefHeight="318.0" stylesheets="@css/table.css">
+                                 <columns>
+                                    <TableColumn prefWidth="50.0" resizable="false" text="№" />
+                                    <TableColumn prefWidth="100.0" resizable="false" text="Участник" />
+                                    <TableColumn prefWidth="50.0" resizable="false" text="Пол" />
+                                    <TableColumn prefWidth="130.0" resizable="false" text="Чип" />
+                                    <TableColumn prefWidth="130.0" resizable="false" text="Стартовый номер" />
+                                    <TableColumn prefWidth="130.0" resizable="false" text="Дата рождения" />
+                                    <TableColumn prefWidth="120.0" resizable="false" text="Город" />
+                                    <TableColumn prefWidth="120.0" resizable="false" text="Клуб" />
+                                    <TableColumn prefWidth="120.0" resizable="false" text="Разряд" />
+                                    <TableColumn prefWidth="120.0" resizable="false" text="Группа" />
+                                 </columns>
+                              </TableView>
+                           </children></AnchorPane>
                   </content>
                 </Tab>
               </tabs>
