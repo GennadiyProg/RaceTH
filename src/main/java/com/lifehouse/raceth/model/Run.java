@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalTime;
+import java.util.Timer;
 
 
 @Entity
@@ -17,7 +19,8 @@ public class Run {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; //ID
-    private Date dateRun; // Надо сделать время до секунд
+//    private Date dateRun; // Надо сделать время до секунд
+    private LocalTime time;
     @ManyToOne()
     @NotNull
     private Competition competition; //Соревнование по ID
@@ -27,4 +30,5 @@ public class Run {
     @ManyToOne()
     @NotNull
     private CompetitionGroup group; //Группа по ID
+    private int laps;
 }

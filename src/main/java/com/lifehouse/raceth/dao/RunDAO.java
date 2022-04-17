@@ -1,11 +1,7 @@
 package com.lifehouse.raceth.dao;
 
-import com.lifehouse.raceth.model.CompetitionGroup;
-import com.lifehouse.raceth.model.RelayTeam;
 import com.lifehouse.raceth.model.Run;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
-import com.sun.istack.NotNull;
-import org.hibernate.Session;
 
 import java.util.List;
 
@@ -25,7 +21,13 @@ public class RunDAO implements DAO<Run> {
         TmpStorage.runs.add(run);
     }
 
-    public Run GetRun(long id) {
+    public void update(Run run) {
+        Run chRun = getRun(run.getId());
+        chRun.setTime(run.getTime());
+        chRun.setLaps(run.getLaps());
+    }
+
+    public Run getRun(long id) {
         for (Run item : TmpStorage.runs) {
             if (item.getId() == id) {
                 return item;
@@ -34,7 +36,7 @@ public class RunDAO implements DAO<Run> {
         return null;
     }
 
-    public List<Run> GetAllRuns() {
+    public List<Run> getAllRuns() {
         return TmpStorage.runs;
     }
 
