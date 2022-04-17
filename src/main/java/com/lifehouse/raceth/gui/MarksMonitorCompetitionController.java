@@ -75,6 +75,9 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+            groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
+            startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+            lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
 
             Tab tab = new Tab("Забег #");
             tab.setClosable(true);
@@ -104,16 +107,7 @@ public class MarksMonitorCompetitionController implements Initializable {
             tableView.getColumns().addAll(number,participant,gender,chip,start_number,date_birth,city,
                     club,category,group);
 
-            groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
-            startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-            lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
-
-            Tab tab = new Tab("Tab_");
-
-            Label label = new Label("This is Tab");
-
-
-            // add label to the tab
+            // add tableview to the tab
             tab.setContent(tableView);
 
             tabPane.getTabs().add(tab);
@@ -155,7 +149,6 @@ public class MarksMonitorCompetitionController implements Initializable {
 
                     // add content to the tab
                     tab1.setContent(tableView1);
-                    tab1.setClosable(true);
                     // add tab
                     tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab1);
 
