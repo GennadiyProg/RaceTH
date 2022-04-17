@@ -7,7 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -36,7 +36,7 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="3">
                <children>
-                  <TableView prefHeight="323.0" prefWidth="1048.0" stylesheets="@css/table.css">
+                  <TableView pickOnBounds="false" prefHeight="323.0" prefWidth="1048.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2); -fx-background-color: #fafafa;" stylesheets="@css/table.css">
                      <columns>
                         <TableColumn prefWidth="30.0" resizable="false" text="№" />
                         <TableColumn prefWidth="100.0" resizable="false" text="Участник" />
@@ -79,7 +79,11 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <TextArea layoutX="44.0" layoutY="20.0" prefHeight="94.0" prefWidth="121.0" />
+                  <TextField fx:id="lastNumber" alignment="CENTER" editable="false" layoutX="44.0" layoutY="20.0" maxHeight="94.0" maxWidth="121.0" minHeight="94.0" minWidth="121.0" prefColumnCount="0" prefHeight="94.0" prefWidth="121.0" promptText="№" style="-fx-background-color: #fafafa; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2); -fx-padding: 0 0 0 0;">
+                     <font>
+                        <Font name="System Bold" size="48.0" />
+                     </font>
+                  </TextField>
                   <Label layoutX="42.0" layoutY="2.0" text="Прошедший участник" />
                </children>
             </Pane>
@@ -123,18 +127,18 @@
                <children>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="2">
                      <children>
-                        <TextArea layoutX="11.0" layoutY="11.0" prefHeight="94.0" prefWidth="208.0" style="-fx-background-color: #fafafa; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" />
+                        <TextField layoutX="11.0" layoutY="11.0" maxHeight="94.0" maxWidth="208.0" minHeight="94.0" minWidth="208.0" prefHeight="94.0" prefWidth="208.0" style="-fx-background-color: #fafafa; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2); -fx-padding: 0 0 0 0;" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <TextArea layoutX="11.0" layoutY="17.0" maxHeight="27.0" prefHeight="20.0" prefWidth="137.0" />
-                        <Label layoutX="10.0" text="Начало отсчета времени" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" layoutX="10.0" layoutY="11.0" text="Начало отсчета времени" />
+                        <TextField layoutX="11.0" layoutY="27.0" maxHeight="30.0" maxWidth="137.0" minHeight="30.0" minWidth="137.0" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #fafafa; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2); -fx-padding: 0 0 0 0;" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Button layoutX="28.0" layoutY="6.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #00C781; -fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Старт" textFill="WHITE">
+                        <Button layoutX="28.0" layoutY="6.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" onAction="#newLastNumber" style="-fx-background-color: #00C781; -fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Старт" textFill="WHITE">
                            <font>
                               <Font size="19.0" />
                            </font>

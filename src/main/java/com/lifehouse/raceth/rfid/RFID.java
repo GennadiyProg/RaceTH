@@ -18,53 +18,52 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
-public class RFID {
+public class RFID{
 
-    public static class RFIDThread extends Thread {
-        @Override
-        public void run() {
-            final int SERVICE_PORT=50001;
+    public static String getTag() {
+        final int SERVICE_PORT=50001;
+        try{
+            // Создайте новый экземпляр DatagramSocket, чтобы получать ответы от клиента
+            DatagramSocket serverSocket = new DatagramSocket(SERVICE_PORT);
+//            while (true) {
+                /* Буфер для хранения получаемых данных,он временно хранит данные в случае задержек связи */
+                byte[] receivingDataBuffer = new byte[1024];
 
-            try{
-                // Создайте новый экземпляр DatagramSocket, чтобы получать ответы от клиента
-                DatagramSocket serverSocket = new DatagramSocket(SERVICE_PORT);
+                /* Создайте экземпляр UDP-пакета для хранения получаемых данных с использованием буфера для полученных данных */
+                DatagramPacket inputPacket = new DatagramPacket(receivingDataBuffer, receivingDataBuffer.length);
+                System.out.println("Waiting for a client to connect...");
 
+                // Получите данные от клиента и сохраните их в inputPacket
+                serverSocket.receive(inputPacket);
 
-                while (true) {
-                    /* Буфер для хранения получаемых данных,он временно хранит данные в случае задержек связи */
-                    byte[] receivingDataBuffer = new byte[1024];
-
-                    /* Создайте экземпляр UDP-пакета для хранения получаемых данных с использованием буфера для полученных данных */
-                    DatagramPacket inputPacket = new DatagramPacket(receivingDataBuffer, receivingDataBuffer.length);
-                    System.out.println("Waiting for a client to connect...");
-
-                    // Получите данные от клиента и сохраните их в inputPacket
-                    serverSocket.receive(inputPacket);
-
-                    // Выведите на экран отправленные клиентом данные
-                    String receivedData = new String(inputPacket.getData());
-                    receivedData = receivedData.substring(receivedData.indexOf("Tag:")+4,receivedData.indexOf(0x0));
-                    System.out.println(">>: "+receivedData);
+                // Выведите на экран отправленные клиентом данные
+                String receivedData = new String(inputPacket.getData());
+//                int lastNumber = Integer.parseInt(receivedData.substring(receivedData.indexOf("Tag:")+4,receivedData.indexOf(0x0)));
+                receivedData = receivedData.substring(receivedData.indexOf("Tag:")+4,receivedData.indexOf(0x0));
+                System.out.println("SoutFromClass: "+ receivedData);
+                int delZeros = Integer.parseInt(receivedData);
+                receivedData = Integer.toString(delZeros);
 
 
-                    if (false) {
+//                if (false) {
                     serverSocket.close();
-                    }
-                }
-
-                // Закройте соединение сокетов
-            } catch (IOException e){
-                e.printStackTrace();
-            }
+//                }
+                return receivedData;
+//            }
+            // Закройте соединение сокетов
+        } catch (IOException e){
+            e.printStackTrace();
         }
+        return "Упс";
     }
 
-    public HashMap<Integer, List<String>>[] RFIDMarkers = new HashMap[5];
 
-    public static void main(String[] args) {
-        Thread potok = new RFIDThread();
-        potok.start();
-    }
+//    public HashMap<Integer, List<String>>[] RFIDMarkers = new HashMap[5];
+//
+//    public static void main(String[] args) {
+//        Thread potok = new RFIDThread();
+//        potok.start();
+//    }
 
 
 
