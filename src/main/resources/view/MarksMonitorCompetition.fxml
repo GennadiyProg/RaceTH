@@ -65,7 +65,7 @@
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin></TextField>
-                        <Button mnemonicParsing="false" prefWidth="66.0" styleClass="little-button-del" stylesheets="@css/table.css" text="Стоп" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <Button fx:id="stopTime" mnemonicParsing="false" prefWidth="66.0" styleClass="little-button-del" stylesheets="@css/table.css" text="Стоп" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -76,7 +76,7 @@
                            </font>
                         </TextField>
                         <Label text="Начало отсчета времени" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                        <Button mnemonicParsing="false" styleClass="little-button-add-blue" stylesheets="@css/table.css" text="Старт" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <Button fx:id="startTime" mnemonicParsing="false" styleClass="little-button-add-blue" stylesheets="@css/table.css" text="Старт" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -131,7 +131,7 @@
                   </Button>
                </children>
             </GridPane>
-            <TabPane fx:id="tabPane" maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" tabClosingPolicy="SELECTED_TAB" GridPane.rowIndex="2">
+            <TabPane fx:id="tabPane" maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" stylesheets="@css/table.css" tabClosingPolicy="SELECTED_TAB" GridPane.rowIndex="2">
               <tabs>
                 <Tab text="Участники">
                   <content>

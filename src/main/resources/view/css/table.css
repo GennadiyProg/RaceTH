@@ -146,3 +146,7 @@
 {
 -fx-background-color: white;
 }
+.tab-pane *.tab-header-background
+{
+-fx-background-color: #ECF1FE;
+}
