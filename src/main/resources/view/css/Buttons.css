@@ -1,0 +1,28 @@
+.btn {
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+}
+.btn:hover {
+    -fx-effect: none;
+}
+.btn-small {
+    -fx-pref-width: 24px;
+    -fx-pref-height: 24px;
+    -fx-background-radius: 4px;
+}
+.btn-common {
+    -fx-pref-height: 30px;
+    -fx-background-radius: 4px;
+    -fx-padding: 8 16 8 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.1, 3, 4)
+
+}
+.btn-success {
+    -fx-background-color: #00C781;
+}
+.btn-warning {
+    -fx-background-color: #FFBB38;
+}
+.btn-danger {
+    -fx-background-color: #FF4040;
+}
