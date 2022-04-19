@@ -16,7 +16,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="timeTextField" layoutX="180.0" layoutY="444.0" prefHeight="31.0" prefWidth="185.0" />
+      <TextField fx:id="timeTextField" layoutX="180.0" layoutY="444.0" prefHeight="31.0" prefWidth="185.0" stylesheets="@css/TextField.css" />
       <Button layoutX="30.0" layoutY="536.0" mnemonicParsing="false" onAction="#saving" prefHeight="37.0" stylesheets="@css/Buttons.css" text="Сохранить">
          <font>
             <Font size="14.0" />
@@ -32,17 +32,17 @@
             <String fx:value="btn" />
             <String fx:value="btn-danger" />
          </styleClass></Button>
-      <Label layoutX="31.0" layoutY="447.0" prefHeight="25.0" prefWidth="131.0" text="Стартовое время">
+      <Label layoutX="31.0" layoutY="447.0" prefHeight="25.0" prefWidth="131.0" text="Стартовое время:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="396.0" prefHeight="25.0" prefWidth="185.0" text="Количество кругов">
+      <Label layoutX="26.0" layoutY="396.0" prefHeight="26.0" prefWidth="146.0" text="Количество кругов:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="lapTextField" layoutX="180.0" layoutY="393.0" prefHeight="31.0" prefWidth="185.0" />
+      <TextField fx:id="lapTextField" layoutX="180.0" layoutY="393.0" prefHeight="31.0" prefWidth="185.0" stylesheets="@css/TextField.css" />
       <Button fx:id="addInTable" layoutX="393.0" layoutY="441.0" mnemonicParsing="false" onAction="#updateTable" stylesheets="@css/Buttons.css" text="Применить">
          <font>
             <Font size="14.0" />
