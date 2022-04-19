@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -28,7 +29,7 @@
             <RowConstraints maxHeight="72.0" minHeight="46.39996337890625" prefHeight="50.39996337890625" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <GridPane GridPane.rowIndex="1">
+            <GridPane prefHeight="178.0" prefWidth="1069.0" GridPane.rowIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="466.39996948242185" minWidth="230.0" prefWidth="428.8000244140625" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="771.3999938964844" minWidth="10.0" prefWidth="451.4" />
@@ -65,10 +66,15 @@
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin></TextField>
-                        <Button fx:id="stopTime" mnemonicParsing="false" prefWidth="66.0" styleClass="little-button-del" stylesheets="@css/table.css" text="Стоп" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <Button fx:id="stopTime" mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Стоп" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-small" />
+                              <String fx:value="btn-danger" />
+                           </styleClass>
                         </Button>
                         <TextField maxWidth="-Infinity" prefHeight="110.0" promptText="00:00:00" GridPane.rowIndex="1">
                            <font>
@@ -76,13 +82,15 @@
                            </font>
                         </TextField>
                         <Label text="Начало отсчета времени" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                        <Button fx:id="startTime" mnemonicParsing="false" styleClass="little-button-add-blue" stylesheets="@css/table.css" text="Старт" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <Button fx:id="startTime" mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Старт" textFill="WHITE" translateX="65.0" translateY="41.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
-                           <GridPane.margin>
-                              <Insets right="30.0" />
-                           </GridPane.margin>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-small" />
+                              <String fx:value="btn-success" />
+                           </styleClass>
                         </Button>
                      </children>
                      <padding>
@@ -100,34 +108,54 @@
             </GridPane>
             <GridPane prefWidth="1058.0" GridPane.rowIndex="3">
               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.1999969482422" minWidth="10.0" prefWidth="174.39999389648438" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.00001525878906" minWidth="10.0" prefWidth="176.1999755859375" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.60001220703128" minWidth="10.0" prefWidth="177.79995117187502" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.7999328613281" minWidth="10.0" prefWidth="249.800048828125" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" styleClass="middle-button-edit" stylesheets="@css/table.css" text="Добавить вручную" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                  <Button mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Добавить вручную" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                        <String fx:value="btn-warning" />
+                     </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" styleClass="middle-button-edit" stylesheets="@css/table.css" text="Добавить из базы" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <Button mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Добавить из базы" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                        <String fx:value="btn-warning" />
+                     </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" styleClass="middle-button-add-blue" stylesheets="@css/table.css" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.halignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font></Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="212.0" style="-fx-pref-width: 230;" styleClass="middle-button-add" stylesheets="@css/table.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="3">
+                  <Button mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.halignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                        <String fx:value="btn-primary" />
+                     </styleClass></Button>
+                  <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="231.0" stylesheets="@css/Buttons.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                        <String fx:value="btn-success" />
+                     </styleClass>
                   </Button>
                </children>
             </GridPane>
@@ -180,10 +208,15 @@
             </TabPane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.valignment="TOP">
                <children>
-                  <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" layoutX="408.0" layoutY="-2.0" minHeight="26.0" minWidth="100.0" mnemonicParsing="false" onAction="#addingGroup" prefHeight="32.0" prefWidth="298.0" styleClass="middle-button-add-blue" stylesheets="@css/table.css" text="Редактировать группы" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS">
+                  <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" layoutX="410.0" layoutY="-8.0" mnemonicParsing="false" onAction="#addingGroup" stylesheets="@css/Buttons.css" text="Редактировать группы" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS">
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                        <String fx:value="btn-common" />
+                     </styleClass>
                   </Button>
                </children>
             </Pane>

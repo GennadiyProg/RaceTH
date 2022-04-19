@@ -1,0 +1,20 @@
+.text-field {
+    -fx-background-color: rgba(48, 94, 193, 0.7), white;
+    -fx-background-insets: -1, 0;
+}
+
+.text-field:focused {
+    -fx-background-color: rgba(48, 94, 193, 1), white;
+    -fx-background-insets: -1.7, 0;
+}
+
+
+/* Полоской
+.text-field {
+    -fx-background-color: #305EC1;
+    -fx-background-insets: 30 0 0 0;
+}
+.text-field:focused {
+    -fx-background-color: #305EC1;
+    -fx-background-insets: 29.3 0 0 0;
+}*/
