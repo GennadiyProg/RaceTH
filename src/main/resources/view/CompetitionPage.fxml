@@ -206,7 +206,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label text="Залупа:" GridPane.columnIndex="4" />
+                        <Label text="Поиск:" GridPane.columnIndex="4" />
                         <TextField fx:id="searchTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="195.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" />
                         <Button mnemonicParsing="false" onAction="#makeCompetitionCurrent" text="Сделать текущим" />
                      </children>
