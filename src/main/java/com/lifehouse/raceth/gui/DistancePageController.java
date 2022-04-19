@@ -1,7 +1,7 @@
 package com.lifehouse.raceth.gui;
 
+import com.lifehouse.raceth.gui.competitionpage.popups.DistancePopupController;
 import com.lifehouse.raceth.model.Distance;
-import com.lifehouse.raceth.model.Sportsman;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import lombok.Data;
 

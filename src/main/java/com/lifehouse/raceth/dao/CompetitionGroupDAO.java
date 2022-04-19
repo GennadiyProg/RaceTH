@@ -36,11 +36,11 @@ public class CompetitionGroupDAO implements DAO<CompetitionGroup> {
         return null;
     }
 
-    public List<CompetitionGroup> GetAllGroups() {
+    public List<CompetitionGroup> getAllGroups() {
         return TmpStorage.competitionGroups;
     }
 
-    public void Delete(CompetitionGroup group) {
+    public void delete(CompetitionGroup group) {
         TmpStorage.competitionGroups.remove(group);
     }
 

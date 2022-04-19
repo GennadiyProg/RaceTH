@@ -103,8 +103,6 @@
     -fx-background-radius: 12px;
     -fx-background-color:    #00C781;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
-    -fx-pref-width: 100px;
-    -fx-pref-height: 34px;
 }
 .little-button-edit{
     -fx-background-radius: 12px;
