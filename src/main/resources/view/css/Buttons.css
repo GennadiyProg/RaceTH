@@ -3,7 +3,9 @@
     -fx-font-size: 14px;
 }
 .btn:hover {
-    -fx-effect: none;
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+    -fx-scale-z: 1.01;
 }
 .btn-small {
     -fx-pref-width: 24px;
@@ -14,15 +16,26 @@
     -fx-pref-height: 30px;
     -fx-background-radius: 4px;
     -fx-padding: 8 16 8 16;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.1, 3, 4)
-
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.1, 2, 3)
 }
+/*.btn-common:hover { Криво работает, да и транзишена не хватает. В Javafx его только через контроллер можно сделать
+    -fx-effect: none;
+}*/
 .btn-success {
     -fx-background-color: #00C781;
+}
+.btn-success:hover {
+    -fx-background-color: #01B879;
 }
 .btn-warning {
     -fx-background-color: #FFBB38;
 }
+.btn-warning:hover {
+    -fx-background-color: #FBB123;
+}
 .btn-danger {
     -fx-background-color: #FF4040;
+}
+.btn-danger:hover {
+    -fx-background-color: #d63434;
 }
