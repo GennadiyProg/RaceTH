@@ -1,6 +1,7 @@
 package com.lifehouse.raceth.gui;
 
 import com.lifehouse.raceth.dao.CompetitionGroupDAO;
+import com.lifehouse.raceth.gui.competitionpage.popups.GroupPopupController;
 import com.lifehouse.raceth.model.CompetitionGroup;
 import com.lifehouse.raceth.model.Gender;
 import javafx.collections.ObservableList;
@@ -59,7 +60,7 @@ public class GroupPageController implements Initializable {
 
         competitionGroupsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ObservableList<CompetitionGroup> competitionGroups = competitionGroupsTable.getItems();
-        competitionGroups.addAll(competitionGroupDAO.GetAllGroups());
+        competitionGroups.addAll(competitionGroupDAO.getAllGroups());
     }
 
     @FXML

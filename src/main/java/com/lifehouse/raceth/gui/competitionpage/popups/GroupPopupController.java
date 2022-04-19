@@ -1,4 +1,4 @@
-package com.lifehouse.raceth.gui;
+package com.lifehouse.raceth.gui.competitionpage.popups;
 
 import com.lifehouse.raceth.dao.CompetitionGroupDAO;
 import com.lifehouse.raceth.model.CompetitionGroup;

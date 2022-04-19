@@ -1,11 +1,10 @@
 package com.lifehouse.raceth.gui;
 
+import com.lifehouse.raceth.gui.competitionpage.CompetitionPageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import lombok.Data;
 

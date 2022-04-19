@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.GroupPopupController">
+<AnchorPane prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.competitionpage.popups.GroupPopupController">
    <children>
       <Label contentDisplay="CENTER" layoutX="46.0" prefHeight="66.0" prefWidth="195.0" text="Создание групп" textFill="#305ec1">
          <font>

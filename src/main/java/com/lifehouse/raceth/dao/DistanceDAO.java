@@ -25,7 +25,7 @@ public class DistanceDAO implements DAO<Distance> {
         TmpStorage.distances.add(distance);
     }
 
-    public Distance GetDistance(long id) {
+    public Distance getDistance(long id) {
         for (Distance item : TmpStorage.distances) {
             if (item.getId() == id) {
                 return item;
