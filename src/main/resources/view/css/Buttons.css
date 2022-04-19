@@ -8,9 +8,11 @@
     -fx-scale-z: 1.01;
 }
 .btn-small {
-    -fx-pref-width: 24px;
     -fx-pref-height: 24px;
     -fx-background-radius: 4px;
+    -fx-padding: 4 8 4 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.1, 1, 2)
+
 }
 .btn-common {
     -fx-pref-height: 30px;
@@ -38,4 +40,10 @@
 }
 .btn-danger:hover {
     -fx-background-color: #d63434;
+}
+.btn-primary {
+    -fx-background-color: #3C76F1;
+}
+.btn-primary:hover {
+    -fx-background-color: #2761DE;
 }
