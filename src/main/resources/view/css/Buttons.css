@@ -1,5 +1,5 @@
 .btn {
-    -fx-text-fill: #fff;
+    -fx-text-fill: #000;
     -fx-font-size: 14px;
 }
 .btn:hover {
@@ -10,7 +10,7 @@
 .btn-small {
     -fx-pref-height: 24px;
     -fx-background-radius: 4px;
-    -fx-padding: 4 8 4 8;
+    -fx-padding: 1 8 1 8;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.1, 1, 2)
 
 }
@@ -46,4 +46,11 @@
 }
 .btn-primary:hover {
     -fx-background-color: #2761DE;
+}
+.btn-image{
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
+    -fx-pref-width: 26px;
+    -fx-pref-height: 26px;
+    -fx-padding: 4 8 4 8;
 }
