@@ -9,15 +9,15 @@
 .btn-small {
     -fx-pref-height: 24px;
     -fx-background-radius: 4px;
-    -fx-padding: 1 8 1 8;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.1, 1, 2)
+    -fx-padding: 4 8 4 8;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
 
 }
 .btn-common {
     -fx-pref-height: 30px;
     -fx-background-radius: 4px;
     -fx-padding: 8 16 8 16;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.1, 2, 3)
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
 }
 /*.btn-common:hover { Криво работает, да и транзишена не хватает. В Javafx его только через контроллер можно сделать
     -fx-effect: none;
@@ -49,7 +49,7 @@
 .btn-image{
     -fx-background-radius: 6px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
-    -fx-pref-width: 26px;
+    -fx-pref-width: 24px;
     -fx-pref-height: 26px;
     -fx-padding: 4 8 4 8;
 }
