@@ -46,12 +46,12 @@
                   </ImageView>
                </graphic>
             </Label>
-            <Label layoutX="917.0" layoutY="24.0" text="Текущее соревнование:">
+            <Label layoutX="794.0" layoutY="24.0" styleClass="label-bold" stylesheets="@css/AppLabel.css" text="Текущее соревнование:">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label fx:id="activeCompetitionLabel" layoutX="1101.0" layoutY="25.0" text="Label" />
+            <Label fx:id="activeCompetitionLabel" layoutX="998.0" layoutY="25.0" prefHeight="20.0" prefWidth="258.0" styleClass="label-Medium-italic" stylesheets="@css/AppLabel.css" text="Label" />
          </children>
       </AnchorPane>
 

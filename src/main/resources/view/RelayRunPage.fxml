@@ -34,7 +34,7 @@
          <children>
 
 
-            <Button mnemonicParsing="false" onAction="#NewRelay" style="-fx-pref-width: 1000px;" stylesheets="@css/Buttons.css" text="Cоздать эстафету" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#NewRelay" prefHeight="36.0" prefWidth="305.0" stylesheets="@css/Buttons.css" text="Cоздать эстафету" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
 
 
 
@@ -71,19 +71,19 @@
                   </TableView>
                </children>
             </Pane>
-            <GridPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="39.0" prefWidth="337.0" GridPane.rowIndex="1">
+            <GridPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="39.0" prefWidth="400.0" GridPane.columnIndex="1" GridPane.valignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.20001220703125" minWidth="10.0" prefWidth="114.00000610351563" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.4000244140625" minWidth="10.0" prefWidth="209.99999389648437" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.20001220703125" minWidth="0.0" prefWidth="104.00004272460939" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="556.8" minWidth="10.0" prefWidth="452.79995727539057" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="228.0" promptText="Поиск" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                  <Label prefHeight="26.0" prefWidth="154.0" text="Текущая эстафета:" textFill="#555555" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="316.0" promptText="Поиск" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                  <Label prefHeight="26.0" prefWidth="166.0" styleClass="label-bold" stylesheets="@css/AppLabel.css" text="Текущая эстафета:" textFill="#555555" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Agency FB Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -230,10 +230,13 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Команды" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                  <Label styleClass="label-bold" stylesheets="@css/AppLabel.css" text="Команды" textFill="#555555" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
                   </Label>
                </children>
             </GridPane>
@@ -246,10 +249,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label text="Участники команды" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                  <Label styleClass="label-bold" stylesheets="@css/AppLabel.css" text="Участники команды" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
                   </Label>
                </children>
             </GridPane>

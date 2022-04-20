@@ -1,6 +1,11 @@
+@font-face {
+    src: url('../../assets/fonts/Roboto-Regular.ttf');
+}
+
 .btn {
     -fx-text-fill: #000;
     -fx-font-size: 14px;
+    -fx-font-family: "Roboto Regular";
 }
 .btn:hover {
     -fx-scale-x: 1.01;
