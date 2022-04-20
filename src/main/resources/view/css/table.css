@@ -95,26 +95,7 @@
     -fx-background-color :#EDF1F8;
     -fx-transition: 3s;
     }
-.little-button-add-blue{
-    -fx-background-radius: 12px;
-    -fx-background-color:   #3C76F1;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
-}
-.little-button-add{
-    -fx-background-radius: 12px;
-    -fx-background-color:    #00C781;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
-}
-.little-button-edit{
-    -fx-background-radius: 12px;
-    -fx-background-color:   #FFBB38;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
-}
-.little-button-del{
--fx-background-radius: 12px;
-    -fx-background-color:   #FF4040;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
-}
+
 .middle-button-add{
     -fx-background-radius: 12px;
     -fx-background-color:   #00C781;
