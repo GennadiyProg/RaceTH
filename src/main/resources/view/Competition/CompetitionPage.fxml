@@ -37,7 +37,7 @@
                <children>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="groupTable" maxWidth="-Infinity" prefHeight="274.0" prefWidth="535.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css">
+                        <TableView fx:id="groupTable" maxWidth="-Infinity" prefHeight="274.0" prefWidth="535.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@../../assets/css/table.css">
                            <columns>
                               <TableColumn fx:id="gNameColumn" prefWidth="175.20004272460938" resizable="false" text="Название" />
                               <TableColumn fx:id="gAgeFromColumn" prefWidth="87.99996948242188" text="Возраст от" />
@@ -59,29 +59,29 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="26.0" prefWidth="26.0" styleClass="little-button-add" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE">
+                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="26.0" prefWidth="26.0" styleClass="little-button-add" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@images/icons/plus.png" />
+                                          <Image url="@../images/icons/plus.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="26.0" styleClass="little-button-edit" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="26.0" styleClass="little-button-edit" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@images/icons/edit.png" />
+                                          <Image url="@../images/icons/edit.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="26.0" styleClass="little-button-del" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="26.0" styleClass="little-button-del" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@images/icons/minus.png" />
+                                          <Image url="@../images/icons/minus.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -93,7 +93,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <TableView fx:id="distanceTable" layoutX="5.0" maxWidth="-Infinity" prefHeight="274.0" prefWidth="530.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css">
+                        <TableView fx:id="distanceTable" layoutX="5.0" maxWidth="-Infinity" prefHeight="274.0" prefWidth="530.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@../../assets/css/table.css">
                            <columns>
                               <TableColumn fx:id="dNameColumn" prefWidth="184.80005264282227" resizable="false" text="Название дистанции" />
                               <TableColumn fx:id="dLengthColumn" prefWidth="102.39994812011719" text="Длина, метров" />
@@ -114,29 +114,29 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="34.0" prefWidth="26.0" styleClass="little-button-add" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE">
+                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="34.0" prefWidth="26.0" styleClass="little-button-add" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@images/icons/plus.png" />
+                                          <Image url="@../images/icons/plus.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" prefHeight="34.0" prefWidth="26.0" styleClass="little-button-edit" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" prefHeight="34.0" prefWidth="26.0" styleClass="little-button-edit" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@images/icons/edit.png" />
+                                          <Image url="@../images/icons/edit.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="34.0" prefWidth="26.0" styleClass="little-button-del" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="34.0" prefWidth="26.0" styleClass="little-button-del" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
                                  <graphic>
                                     <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@images/icons/minus.png" />
+                                          <Image url="@../images/icons/minus.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -156,7 +156,7 @@
             </GridPane>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="competitionTable" prefHeight="306.0" prefWidth="1070.0" stylesheets="@css/table.css">
+                  <TableView fx:id="competitionTable" prefHeight="306.0" prefWidth="1070.0" stylesheets="@../../assets/css/table.css">
                      <columns>
                         <TableColumn fx:id="cNameColumn" prefWidth="144.00002479553223" text="Название" />
                         <TableColumn fx:id="cOrganizerColumn" prefWidth="145.60000610351562" text="Организатор" />
@@ -179,29 +179,29 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="create" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-add" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                        <Button fx:id="create" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-add" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                            <graphic>
                               <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/icons/plus.png" />
+                                    <Image url="@../images/icons/plus.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-edit" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                        <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-edit" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
                            <graphic>
                               <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/icons/edit.png" />
+                                    <Image url="@../images/icons/edit.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-del" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
+                        <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-del" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
                            <graphic>
                               <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/icons/minus.png" />
+                                    <Image url="@../images/icons/minus.png" />
                                  </image>
                               </ImageView>
                            </graphic>

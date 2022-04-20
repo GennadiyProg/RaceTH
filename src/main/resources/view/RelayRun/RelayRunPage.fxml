@@ -43,7 +43,7 @@
             </Button>
             <Pane prefHeight="429.0" prefWidth="343.0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <children>
-                  <TableView fx:id="relayTeamTable" layoutX="14.0" maxHeight="-Infinity" prefHeight="370.0" prefWidth="288.0" stylesheets="@css/table.css">
+                  <TableView fx:id="relayTeamTable" layoutX="14.0" maxHeight="-Infinity" prefHeight="370.0" prefWidth="288.0" stylesheets="@../../assets/css/table.css">
                     <columns>
                       <TableColumn fx:id="relayTeamIdColumn" prefWidth="32.0" resizable="false" text="№" />
                       <TableColumn fx:id="relayTeamNameColumn" prefWidth="248.0" text="Название" />
@@ -53,7 +53,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <TableView layoutX="1.0" prefHeight="370.0" stylesheets="@css/table.css">
+                  <TableView layoutX="1.0" prefHeight="370.0" stylesheets="@../../assets/css/table.css">
                      <columns>
                         <TableColumn prefWidth="100.0" resizable="false" text="Фамилия" />
                         <TableColumn prefWidth="150.0" text="Дата рождения" />
@@ -97,31 +97,31 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="newCommand" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#addRelayTeam" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-add" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="newCommand" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#addRelayTeam" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-add" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/plus.png" />
+                              <Image url="@../images/icons/plus.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="editButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editRelayTeam" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-edit" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                  <Button fx:id="editButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editRelayTeam" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-edit" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/edit.png" />
+                              <Image url="@../images/icons/edit.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
 
-                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#removeRelayTeam" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-del" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#removeRelayTeam" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-del" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
 
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/minus.png" />
+                              <Image url="@../images/icons/minus.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -140,31 +140,31 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="newPeople" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#newPeople" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-add" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="newPeople" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#newPeople" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-add" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/plus.png" />
+                              <Image url="@../images/icons/plus.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="editPeople" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editPeople" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-edit" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                  <Button fx:id="editPeople" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editPeople" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-edit" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/edit.png" />
+                              <Image url="@../images/icons/edit.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
 
-                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#DeletePeople" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-del" stylesheets="@css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#DeletePeople" prefHeight="34.0" prefWidth="34.0" styleClass="little-button-del" stylesheets="@../../assets/css/table.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
 
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/minus.png" />
+                              <Image url="@../images/icons/minus.png" />
                            </image>
                         </ImageView>
                      </graphic>

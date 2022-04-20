@@ -66,7 +66,7 @@ public class GroupPageController implements Initializable {
     @FXML
     void NewGroup(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/GroupPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Group/GroupPopup.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -84,7 +84,7 @@ public class GroupPageController implements Initializable {
     @FXML
     void EditGroup(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/GroupPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Group/GroupPopup.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));

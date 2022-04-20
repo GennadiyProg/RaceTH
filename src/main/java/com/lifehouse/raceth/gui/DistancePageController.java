@@ -50,7 +50,7 @@ public class DistancePageController implements Initializable {
     @FXML
     void NewDistance(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DistancePopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Distance/DistancePopup.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -68,7 +68,7 @@ public class DistancePageController implements Initializable {
     @FXML
     void EditDistance(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DistancePopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Distance/DistancePopup.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));

@@ -23,8 +23,8 @@
          </font>
       </Label>
       <TextField fx:id="surname" layoutX="41.0" layoutY="113.0" prefHeight="31.0" prefWidth="227.0" />
-      <Button fx:id="saveButt" layoutX="41.0" layoutY="493.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/AgreeButton.css" text="Сохранить" />
-      <Button fx:id="cancelButt" layoutX="196.0" layoutY="493.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/DisagreeButton.css" text="Отменить" />
+      <Button fx:id="saveButt" layoutX="41.0" layoutY="493.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" stylesheets="@../assets/css/AgreeButton.css" text="Сохранить" />
+      <Button fx:id="cancelButt" layoutX="196.0" layoutY="493.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" stylesheets="@../assets/css/DisagreeButton.css" text="Отменить" />
       <Label layoutX="41.0" layoutY="153.0" text="Имя">
          <font>
             <Font size="16.0" />
@@ -66,7 +66,7 @@
          </font>
       </Label>
       <TextField fx:id="chip" layoutX="42.0" layoutY="347.0" prefHeight="31.0" prefWidth="227.0" />
-      <Button fx:id="saveButt1" layoutX="42.0" layoutY="390.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="227.0" stylesheets="@css/AgreeButton.css" text="Зачитать чип" />
+      <Button fx:id="saveButt1" layoutX="42.0" layoutY="390.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="227.0" stylesheets="@../assets/css/AgreeButton.css" text="Зачитать чип" />
       <ComboBox fx:id="club" layoutX="363.0" layoutY="249.0" prefHeight="25.0" prefWidth="181.0" />
       <Label layoutX="363.0" layoutY="222.0" text="Клуб">
          <font>

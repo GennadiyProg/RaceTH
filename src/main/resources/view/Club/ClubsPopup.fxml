@@ -15,11 +15,11 @@
          </font>
       </Label>
       <TextField fx:id="clubName" layoutX="33.0" layoutY="98.0" prefHeight="31.0" prefWidth="414.0" />
-      <Button layoutX="33.0" layoutY="273.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/AgreeButton.css" text="Сохранить">
+      <Button layoutX="33.0" layoutY="273.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" stylesheets="@../../assets/css/AgreeButton.css" text="Сохранить">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="204.0" layoutY="273.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/DisagreeButton.css" text="Отменить" />
+      <Button layoutX="204.0" layoutY="273.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" stylesheets="@../../assets/css/DisagreeButton.css" text="Отменить" />
       <TextField fx:id="coach" layoutX="30.0" layoutY="162.0" prefHeight="31.0" prefWidth="290.0" />
       <Label layoutX="30.0" layoutY="130.0" prefHeight="25.0" prefWidth="131.0" text="Тренер">
          <font>

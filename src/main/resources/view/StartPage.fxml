@@ -15,7 +15,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: ECF1FE;" stylesheets="@css/table.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.StartPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: ECF1FE;" stylesheets="@../assets/css/table.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.StartPageController">
    <children>
 
       <AnchorPane prefHeight="67.0" prefWidth="1280.0" style="-fx-background-color: #FAFAFA;">
@@ -65,7 +65,7 @@
 
       <AnchorPane layoutY="110.0" minWidth="-Infinity" prefHeight="610.0" prefWidth="190.0" style="-fx-background-color: #FAFAFA;">
          <children>
-            <ToggleButton fx:id="sorevButt" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleButtonAction" stylesheets="@css/table.css" text="Соревнование" wrapText="true">
+            <ToggleButton fx:id="sorevButt" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleButtonAction" stylesheets="@../assets/css/table.css" text="Соревнование" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -77,7 +77,7 @@
                <toggleGroup>
                   <ToggleGroup fx:id="ButtGroup" />
                </toggleGroup></ToggleButton>
-            <ToggleButton fx:id="groupsButt" alignment="CENTER_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#handleButtonAction4" stylesheets="@css/table.css" text="Группы" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="groupsButt" alignment="CENTER_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#handleButtonAction4" stylesheets="@../assets/css/table.css" text="Группы" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -86,7 +86,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="zabegButt" alignment="CENTER_LEFT" layoutY="66.0" mnemonicParsing="false" onAction="#handleButtonAction2" stylesheets="@css/table.css" text="Забег" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="zabegButt" alignment="CENTER_LEFT" layoutY="66.0" mnemonicParsing="false" onAction="#handleButtonAction2" stylesheets="@../assets/css/table.css" text="Забег" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -95,7 +95,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="relayButt" alignment="CENTER_LEFT" layoutY="132.0" mnemonicParsing="false" onAction="#handleButtonAction3" stylesheets="@css/table.css" text="Эстафета" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="relayButt" alignment="CENTER_LEFT" layoutY="132.0" mnemonicParsing="false" onAction="#handleButtonAction3" stylesheets="@../assets/css/table.css" text="Эстафета" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -104,7 +104,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="checkButt" alignment="CENTER_LEFT" layoutY="396.0" mnemonicParsing="false" onAction="#handleButtonAction7" stylesheets="@css/table.css" text="Монитор отметок" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="checkButt" alignment="CENTER_LEFT" layoutY="396.0" mnemonicParsing="false" onAction="#handleButtonAction7" stylesheets="@../assets/css/table.css" text="Монитор отметок" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -113,7 +113,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="distanceButt" alignment="CENTER_LEFT" layoutY="264.0" mnemonicParsing="false" onAction="#handleButtonAction5" stylesheets="@css/table.css" text="Дистанции" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="distanceButt" alignment="CENTER_LEFT" layoutY="264.0" mnemonicParsing="false" onAction="#handleButtonAction5" stylesheets="@../assets/css/table.css" text="Дистанции" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -122,7 +122,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="clubsButt" alignment="CENTER_LEFT" layoutY="330.0" mnemonicParsing="false" onAction="#handleButtonAction6" stylesheets="@css/table.css" text="Клубы" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="clubsButt" alignment="CENTER_LEFT" layoutY="330.0" mnemonicParsing="false" onAction="#handleButtonAction6" stylesheets="@../assets/css/table.css" text="Клубы" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -144,13 +144,13 @@
       </AnchorPane>
       <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="191.0" layoutY="110.0" minWidth="-Infinity" prefHeight="610.0" prefWidth="1090.0">
          <children>
-            <fx:include fx:id="competitionPage" maxHeight="-Infinity" maxWidth="-Infinity" source="CompetitionPage.fxml" />
-            <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="ClubPage.fxml" />
-            <fx:include fx:id="group_page" maxHeight="-Infinity" maxWidth="-Infinity" source="GroupPage.fxml" />
-            <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RunPage.fxml" />
-            <fx:include fx:id="relay_run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RelayRunPage.fxml" />
-            <fx:include fx:id="distance_page" maxHeight="-Infinity" maxWidth="-Infinity" source="DistancePage.fxml" />
-            <fx:include fx:id="marks_monitor_page" maxHeight="-Infinity" maxWidth="-Infinity" source="MarksMonitorCompetition.fxml" />
+            <fx:include fx:id="competitionPage" maxHeight="-Infinity" maxWidth="-Infinity" source="Competition/CompetitionPage.fxml" />
+            <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="Club/ClubPage.fxml" />
+            <fx:include fx:id="group_page" maxHeight="-Infinity" maxWidth="-Infinity" source="Group/GroupPage.fxml" />
+            <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="Run/RunPage.fxml" />
+            <fx:include fx:id="relay_run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RelayRun/RelayRunPage.fxml" />
+            <fx:include fx:id="distance_page" maxHeight="-Infinity" maxWidth="-Infinity" source="Distance/DistancePage.fxml" />
+            <fx:include fx:id="marks_monitor_page" maxHeight="-Infinity" maxWidth="-Infinity" source="Timing/MarksMonitorCompetition.fxml" />
          </children>
       </AnchorPane>
    </children>

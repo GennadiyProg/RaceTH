@@ -77,7 +77,7 @@ public class RunPageController implements Initializable {
     @FXML
     private void AddRun(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RunCreateRunPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Run/RunCreateRunPopup.fxml"));
             Parent root1 = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));

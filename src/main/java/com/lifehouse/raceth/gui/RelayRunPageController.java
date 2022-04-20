@@ -45,7 +45,7 @@ public class RelayRunPageController implements Initializable {
     @FXML
     void addRelayTeam(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/CommandPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RelayRun/CommandPopup.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -63,7 +63,7 @@ public class RelayRunPageController implements Initializable {
     @FXML
     void editRelayTeam(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/CommandPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RelayRun/CommandPopup.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -129,7 +129,7 @@ public class RelayRunPageController implements Initializable {
     @FXML
     void NewRelay(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RelayRunCreateRelayRunPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RelayRun/RelayRunCreateRelayRunPopup.fxml"));
             Parent root1 = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));

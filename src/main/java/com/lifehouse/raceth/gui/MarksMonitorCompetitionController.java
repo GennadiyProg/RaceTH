@@ -1,9 +1,7 @@
 package com.lifehouse.raceth.gui;
 
 import com.lifehouse.raceth.model.Checkpoint;
-import com.lifehouse.raceth.model.CompetitionGroup;
 import com.lifehouse.raceth.model.Run;
-import com.lifehouse.raceth.model.Sportsman;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,14 +19,8 @@ import lombok.Data;
 import javafx.scene.control.*;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.fxml.Initializable;
 
 import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import java.net.URL;
-import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 @Data
@@ -61,7 +53,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     void addingGroup(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MarksGroupPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Timing/MarksGroupPopup.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));

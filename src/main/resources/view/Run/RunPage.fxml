@@ -74,7 +74,7 @@
                   </GridPane>
                </children>
             </GridPane>
-            <TableView fx:id="runTable" prefHeight="419.0" prefWidth="1047.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css" GridPane.rowIndex="1">
+            <TableView fx:id="runTable" prefHeight="419.0" prefWidth="1047.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@../../assets/css/table.css" GridPane.rowIndex="1">
                <columns>
                   <TableColumn fx:id="lastnameColumn" prefWidth="75.0" text="Фамилия" />
                   <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Имя" />
@@ -108,7 +108,7 @@
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/plus.png" />
+                              <Image url="@../images/icons/plus.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>
@@ -120,7 +120,7 @@
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/minus.png" />
+                              <Image url="@../images/icons/minus.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -129,7 +129,7 @@
                      <graphic>
                         <ImageView fitHeight="19.34" fitWidth="16.39" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/edit.png" />
+                              <Image url="@../images/icons/edit.png" />
                            </image>
                         </ImageView>
                      </graphic>

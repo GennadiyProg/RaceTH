@@ -170,7 +170,7 @@ public class CompetitionPageController implements Initializable {
     }
 
     private FXMLLoader loadResources() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/CompetitionPopup.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Competition/CompetitionPopup.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

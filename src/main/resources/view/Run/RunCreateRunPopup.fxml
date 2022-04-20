@@ -19,8 +19,8 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="saveButt" layoutX="41.0" layoutY="317.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/AgreeButton.css" text="Сохранить" />
-      <Button fx:id="cancelButt" layoutX="196.0" layoutY="317.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/DisagreeButton.css" text="Отменить" />
+      <Button fx:id="saveButt" layoutX="41.0" layoutY="317.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" stylesheets="@../../assets/css/AgreeButton.css" text="Сохранить" />
+      <Button fx:id="cancelButt" layoutX="196.0" layoutY="317.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" stylesheets="@../../assets/css/DisagreeButton.css" text="Отменить" />
       <Label layoutX="307.0" layoutY="90.0" text="Соревнование">
          <font>
             <Font size="16.0" />
