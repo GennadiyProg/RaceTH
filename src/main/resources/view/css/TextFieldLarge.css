@@ -1,0 +1,15 @@
+@font-face {
+    src: url('../../assets/fonts/Roboto-Medium.ttf');
+}
+.text-field {
+    -fx-background-color: red, white;
+    -fx-background-insets: -1, 0;
+    -fx-font-family: "Roboto Medium";
+    -fx-text-fill: red;
+    -fx-font-size: 45px;
+}
+
+.text-field:focused {
+    -fx-background-color: red, white;
+    -fx-background-insets: -1.7, 0;
+}

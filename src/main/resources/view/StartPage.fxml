@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -15,16 +13,10 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: ECF1FE;" stylesheets="@css/table.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.StartPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: ECF1FE; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.StartPageController">
    <children>
 
-      <AnchorPane prefHeight="67.0" prefWidth="1280.0" style="-fx-background-color: #FAFAFA;">
-         <effect>
-            <DropShadow height="7.0" offsetY="2.0" radius="10.165" width="35.66">
-               <color>
-                  <Color opacity="0.25" />
-               </color></DropShadow>
-         </effect>
+      <AnchorPane prefHeight="67.0" prefWidth="1280.0" style="-fx-background-color: linear-gradient(to bottom, #fff, #fafafa); -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);">
          <children>
             <Label layoutX="39.0" layoutY="12.0" text="RaceTH">
                <font>
@@ -54,12 +46,12 @@
                   </ImageView>
                </graphic>
             </Label>
-            <Label layoutX="917.0" layoutY="24.0" text="Текущее соревнование:">
+            <Label layoutX="794.0" layoutY="24.0" styleClass="label-bold" stylesheets="@css/AppLabel.css" text="Текущее соревнование:">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label fx:id="activeCompetitionLabel" layoutX="1101.0" layoutY="25.0" text="Label" />
+            <Label fx:id="activeCompetitionLabel" layoutX="998.0" layoutY="25.0" prefHeight="20.0" prefWidth="258.0" styleClass="label-Medium-italic" stylesheets="@css/AppLabel.css" text="Label" />
          </children>
       </AnchorPane>
 

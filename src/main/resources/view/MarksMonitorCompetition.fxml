@@ -46,7 +46,7 @@
                         <TableColumn fx:id="lapColumn" minWidth="0.0" prefWidth="134.4000305175781" text="Кол-во кругов" />
                      </columns>
                   </TableView>
-                  <TextField alignment="CENTER" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" promptText="№" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <TextField alignment="CENTER" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="12" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                      <font>
                         <Font size="48.0" />
                      </font>
@@ -62,11 +62,11 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="99.0" promptText="12:00:00" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <TextField alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin></TextField>
-                        <Button fx:id="stopTime" mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Стоп" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <Button fx:id="stopTime" mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Стоп" textFill="WHITE" translateX="-30.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -76,13 +76,13 @@
                               <String fx:value="btn-danger" />
                            </styleClass>
                         </Button>
-                        <TextField maxWidth="-Infinity" prefHeight="110.0" promptText="00:00:00" GridPane.rowIndex="1">
+                        <TextField maxWidth="-Infinity" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="00:00:00" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="48.0" />
                            </font>
                         </TextField>
-                        <Label text="Начало отсчета времени" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                        <Button fx:id="startTime" mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Старт" textFill="WHITE" translateX="65.0" translateY="41.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Время начала" translateY="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <Button fx:id="startTime" mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Старт" textFill="WHITE" translateX="30.0" translateY="41.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -100,7 +100,7 @@
                         <Insets bottom="1.0" />
                      </GridPane.margin>
                   </GridPane>
-                  <Label text="Прошедший участник" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+                  <Label styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Прошедший участник" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
                </children>
                <padding>
                   <Insets bottom="10.0" />
@@ -159,7 +159,7 @@
                   </Button>
                </children>
             </GridPane>
-            <TabPane fx:id="tabPane" maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" stylesheets="@css/table.css" tabClosingPolicy="SELECTED_TAB" GridPane.rowIndex="2">
+            <TabPane fx:id="tabPane" maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" styleClass="tab" stylesheets="@css/table.css" tabClosingPolicy="SELECTED_TAB" GridPane.rowIndex="2">
               <tabs>
                 <Tab text="Участники">
                   <content>

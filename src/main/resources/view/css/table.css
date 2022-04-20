@@ -1,19 +1,25 @@
+@font-face {
+    src: url('../../assets/fonts/Roboto-Regular.ttf');
+}
+
 .combo-box{
     -fx-background-color: white;
     -fx-border-color: #D3D3D3;
     -fx-border-width: 1 1 1 1;
 }
 .table-view {
-    -fx-background-color: rgb(255, 255, 255);
-    /*-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.1, 2, 3);*/
+    -fx-background-color: #fafafa;
+   /* -fx-background-radius: 17px 17px 0px 0px;*/
+    -fx-effect:  dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 6, 0, 0, 2);
 }
 
 .table-view .column-header-background{
-    -fx-background-color: transparent;
-    -fx-background-radius: 7px 7px 0px 0px;
-    -fx-background-insets: 0 11px 0 0;
-    -fx-padding: 10px 0 5px 0;
-    -fx-border-style: solid none; -fx-border-width: 0.2; -fx-border-color: black;
+    -fx-background-color: #E5E8E8;
+    -fx-background-radius: 7px 7px 0 0;
+    -fx-background-insets: 0, 1 2.5;
+    -fx-padding: 10px 0 8px 0;
+    -fx-effect:dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 1, 1);
+    /*-fx-border-style: solid none; -fx-border-width: 5; -fx-border-color: rgba(48, 94, 193, 0.1);*/
 }
 .table-view .column-header {
     -fx-background-color: transparent;
@@ -22,10 +28,6 @@
 .table-view .column-header-background .filler {
     -fx-background-color: transparent;
 }
-.yellow-button{
-    -fx-background-radius: 8px;
-    -fx-background-color: #FFBB38;
-    -fx-effect:  dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);}
 
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
@@ -86,17 +88,20 @@
     -fx-background-color :#FAFAFA;
     -fx-pref-width: 190px;
     -fx-pref-height: 65px;
-     -fx-font-size:14px;
+    -fx-font-size:15px;
+    -fx-font-family: "Roboto Regular";
+    -fx-text-fill: #727272;
 }
 .toggle-button:selected{
     -fx-background-color :#EDF1F8;
+    -fx-text-fill: #2A53A9;
     }
 .toggle-button:hover{
     -fx-background-color :#EDF1F8;
     -fx-transition: 3s;
     }
 
-.middle-button-add{
+/*.middle-button-add{
     -fx-background-radius: 12px;
     -fx-background-color:   #00C781;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
@@ -121,7 +126,7 @@
 -fx-background-radius: 12px;
     -fx-background-color:   #FF4040;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);
-}
+}*/
 .tab:top
 {
 -fx-background-color: white;
