@@ -2,10 +2,8 @@ package com.lifehouse.raceth.gui.competitionpage.popups;
 
 
 import com.lifehouse.raceth.dao.CompetitionDAO;
-import com.lifehouse.raceth.model.Competition;
-import com.lifehouse.raceth.model.CompetitionGroup;
-import com.lifehouse.raceth.model.Gender;
-import com.lifehouse.raceth.model.PrincipalAgeCalculation;
+import com.lifehouse.raceth.model.competition.Competition;
+import com.lifehouse.raceth.model.competition.PrincipalAgeCalculation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

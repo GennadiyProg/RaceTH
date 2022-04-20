@@ -3,12 +3,17 @@ package com.lifehouse.raceth.gui.competitionpage;
 import com.lifehouse.raceth.dao.CompetitionDAO;
 import com.lifehouse.raceth.dao.CompetitionGroupDAO;
 import com.lifehouse.raceth.dao.DistanceDAO;
+import com.lifehouse.raceth.gui.competitionpage.impl.DistanceServiceImpl;
+import com.lifehouse.raceth.gui.competitionpage.impl.GroupServiceImpl;
 import com.lifehouse.raceth.gui.competitionpage.popups.CompetitionPopupController;
-import com.lifehouse.raceth.gui.competitionpage.popups.impl.CompetitionServiceImpl;
-import com.lifehouse.raceth.model.Competition;
+import com.lifehouse.raceth.gui.competitionpage.impl.CompetitionServiceImpl;
+import com.lifehouse.raceth.model.competition.CompetitionButtons;
+import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.CompetitionGroup;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Gender;
+import com.lifehouse.raceth.model.competition.DistanceButtons;
+import com.lifehouse.raceth.model.competition.GroupButtons;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -79,15 +84,13 @@ public class CompetitionPageController implements Initializable {
     private CompetitionGroupDAO competitionGroupDAO;
     private DistanceDAO distanceDAO;
 
-    private CompetitionServiceImpl competitionService;
+    private CompetitionPageElementService competitionPageElementService;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         competitionDAO = new CompetitionDAO();
         competitionGroupDAO = new CompetitionGroupDAO();
         distanceDAO = new DistanceDAO();
-
-        competitionService = new CompetitionServiceImpl(competitionTable, competitionDAO);
 
         initializeCompetitionTable();
         initializeGroupTable();
@@ -146,42 +149,51 @@ public class CompetitionPageController implements Initializable {
     }
 
     @FXML
-    void create(ActionEvent event) throws IOException {
-        Node node = (Node)event.getSource();
-        System.out.println(node.getId().equals(Button.CREATE.toString().toLowerCase()));
+    void create(ActionEvent event) {
+        String id = ((Node)event.getSource()).getId().toLowerCase();
 
-        FXMLLoader fxmlLoader = loadResources();
-
-        CompetitionPopupController competitionPopupController = fxmlLoader.getController();
-        competitionPopupController.setCompetitionTable(competitionTable);
+        if (id.equals(CompetitionButtons.CREATECOMPETITIONBUTTON.toString().toLowerCase())){
+            competitionPageElementService = new CompetitionServiceImpl();
+            competitionPageElementService.create(competitionTable);
+        } else if (id.equals(GroupButtons.CREATEGROUPBUTTON.toString())){
+            competitionPageElementService = new GroupServiceImpl();
+            competitionPageElementService.create(groupTable);
+        } else if (id.equals(DistanceButtons.CREATEDISTANCEBUTTON.toString())){
+            competitionPageElementService = new DistanceServiceImpl();
+            competitionPageElementService.create(distanceTable);
+        }
     }
 
     @FXML
-    void edit(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = loadResources();
-        CompetitionPopupController competitionPopupController = fxmlLoader.getController();
-        Competition competition = competitionTable.getSelectionModel().getSelectedItem();
-        if (competition == null){
-            return;
+    void edit(ActionEvent event) {
+        String id = ((Node)event.getSource()).getId().toLowerCase();
+
+        if (id.equals(CompetitionButtons.EDITCOMPETITIONBUTTON.toString())){
+            competitionPageElementService = new CompetitionServiceImpl();
+            competitionPageElementService.edit(competitionTable);
+        } else if (id.equals(GroupButtons.EDITGROUPBUTTON.toString())){
+            competitionPageElementService = new GroupServiceImpl();
+            competitionPageElementService.edit(groupTable);
+        } else if (id.equals(DistanceButtons.EDITDISTANCEBUTTON.toString())){
+            competitionPageElementService = new DistanceServiceImpl();
+            competitionPageElementService.edit(distanceTable);
         }
-
-        competitionPopupController.edit(competition);
-        competitionPopupController.setCompetitionTable(competitionTable);
-    }
-
-    private FXMLLoader loadResources() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/CompetitionPopup.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
-        return fxmlLoader;
     }
 
     @FXML
     void delete(ActionEvent event) {
-        competitionService.delete();
+        String id = ((Node)event.getSource()).getId().toLowerCase();
+
+        if (id.equals(CompetitionButtons.DELETECOMPETITIONBUTTON.toString())){
+            competitionPageElementService = new CompetitionServiceImpl();
+            competitionPageElementService.delete(competitionTable);
+        } else if (id.equals(GroupButtons.DELETEGROUPBUTTON.toString())){
+            competitionPageElementService = new GroupServiceImpl();
+            competitionPageElementService.delete(groupTable);
+        } else if (id.equals(DistanceButtons.DELETEDISTANCEBUTTON.toString())){
+            competitionPageElementService = new DistanceServiceImpl();
+            competitionPageElementService.delete(distanceTable);
+        }
     }
 }
 

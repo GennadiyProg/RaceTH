@@ -58,7 +58,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                              <Button fx:id="editDistanceButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -71,7 +71,7 @@
                                     <String fx:value="btn-warning" />
                                  </styleClass>
                               </Button>
-                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="createDistanceButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -84,7 +84,7 @@
                                     <String fx:value="btn-primary" />
                                  </styleClass>
                               </Button>
-                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                              <Button fx:id="deleteDistanceButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -129,7 +129,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="26.0" prefWidth="26.0" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="createGroupButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="26.0" prefWidth="26.0" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -142,7 +142,7 @@
                                     <String fx:value="btn-primary" />
                                  </styleClass>
                               </Button>
-                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="26.0" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                              <Button fx:id="editGroupButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="26.0" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -155,7 +155,7 @@
                                     <String fx:value="btn-warning" />
                                  </styleClass>
                               </Button>
-                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                              <Button fx:id="deleteGroupButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -209,7 +209,7 @@
                               <String fx:value="btn" />
                               <String fx:value="btn-success" />
                            </styleClass></Button>
-                        <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
+                        <Button fx:id="deleteCompetitionButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
                            <graphic>
                               <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -222,7 +222,7 @@
                               <String fx:value="btn-image" />
                            </styleClass>
                         </Button>
-                        <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                        <Button fx:id="editCompetitionButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
                            <graphic>
                               <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -235,7 +235,7 @@
                               <String fx:value="btn-warning" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="create" contentDisplay="CENTER" mnemonicParsing="false" onAction="#create" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                        <Button fx:id="createCompetitionButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#create" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                            <graphic>
                               <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

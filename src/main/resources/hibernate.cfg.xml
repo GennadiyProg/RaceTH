@@ -14,7 +14,7 @@
     <!-- DB schema will be updated if needed -->
     <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
-    <mapping class="com.lifehouse.raceth.model.Competition"/>
+    <mapping class="com.lifehouse.raceth.model.competition.Competition"/>
     <mapping class="com.lifehouse.raceth.model.Run"/>
     <mapping class="com.lifehouse.raceth.model.Distance"/>
     <mapping class="com.lifehouse.raceth.model.CompetitionGroup"/>

@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.model;
 
+import com.lifehouse.raceth.model.competition.Competition;
 import javafx.scene.control.CheckBox;
 import lombok.AllArgsConstructor;
 import lombok.Data;

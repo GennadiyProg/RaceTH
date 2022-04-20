@@ -1,7 +1,6 @@
 package com.lifehouse.raceth.dao;
 
-import com.lifehouse.raceth.model.Competition;
-import com.lifehouse.raceth.model.CompetitionGroup;
+import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
 
 import java.util.List;

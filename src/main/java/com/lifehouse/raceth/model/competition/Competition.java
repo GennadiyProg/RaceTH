@@ -1,6 +1,5 @@
-package com.lifehouse.raceth.model;
+package com.lifehouse.raceth.model.competition;
 
-import javafx.print.Collation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

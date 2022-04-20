@@ -1,6 +1,7 @@
 package com.lifehouse.raceth.tmpstorage;
 
 import com.lifehouse.raceth.model.*;
+import com.lifehouse.raceth.model.competition.Competition;
 
 import java.util.ArrayList;
 import java.util.List;
