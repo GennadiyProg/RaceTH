@@ -5,7 +5,6 @@
 .btn:hover {
     -fx-scale-x: 1.01;
     -fx-scale-y: 1.01;
-    -fx-scale-z: 1.01;
 }
 .btn-small {
     -fx-pref-height: 24px;
@@ -27,25 +26,25 @@
     -fx-background-color: #00C781;
 }
 .btn-success:hover {
-    -fx-background-color: #01B879;
+    -fx-background-color: #1AD895;
 }
 .btn-warning {
     -fx-background-color: #FFBB38;
 }
 .btn-warning:hover {
-    -fx-background-color: #FBB123;
+    -fx-background-color: #FEC558;
 }
 .btn-danger {
-    -fx-background-color: #FF4040;
+    -fx-background-color: #ED3535;
 }
 .btn-danger:hover {
-    -fx-background-color: #d63434;
+    -fx-background-color: #F15959;
 }
 .btn-primary {
-    -fx-background-color: #3C76F1;
+    -fx-background-color: #4D86FF;
 }
 .btn-primary:hover {
-    -fx-background-color: #2761DE;
+    -fx-background-color: #6093FF;
 }
 .btn-image{
     -fx-background-radius: 10px;
