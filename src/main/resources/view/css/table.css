@@ -17,7 +17,7 @@
     -fx-background-color: #E5E8E8;
     -fx-background-radius: 7px 7px 0 0;
     -fx-background-insets: 0, 1 2.5;
-    -fx-padding: 10px 0 8px 0;
+    -fx-padding: 10px 0 8px;
     -fx-effect:dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 1, 1);
     /*-fx-border-style: solid none; -fx-border-width: 5; -fx-border-color: rgba(48, 94, 193, 0.1);*/
 }

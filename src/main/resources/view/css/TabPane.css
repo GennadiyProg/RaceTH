@@ -1,0 +1,35 @@
+.tab-pane {
+    -fx-tab-min-height: 2.7em;
+    -fx-tab-max-height: 2.7em;
+}
+.tab-content-area {
+/*Место где располагаются таблицы*/
+}
+.tab {
+    -fx-background-color: #ECECEC; /*#C5D6FB;*/
+}
+.tab .tab-label {
+    -fx-text-fill: black;
+    -fx-padding: 5px 30px;
+}
+.tab:selected {
+    -fx-background-color: white;
+}
+.tab:focused {
+    -fx-border: none;
+}
+.tab:hover {
+    -fx-background-color: #E5E8E8; /*#B4CBFC;*/
+}
+.tab:selected:hover {
+    -fx-background-color: white;
+}
+.tab-close-button:hover {
+    -fx-background-color: red;
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
+.tab-pane *.tab-header-background {
+    /*-fx-background-color: #CCD1D1;*/
+}

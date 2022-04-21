@@ -159,9 +159,9 @@
                   </Button>
                </children>
             </GridPane>
-            <TabPane fx:id="tabPane" maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" styleClass="tab" stylesheets="@css/table.css" tabClosingPolicy="SELECTED_TAB" GridPane.rowIndex="2">
+            <TabPane fx:id="tabPane" maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" stylesheets="@css/TabPane.css" tabClosingPolicy="SELECTED_TAB" GridPane.rowIndex="2">
               <tabs>
-                <Tab text="Участники">
+                <Tab closable="false" text="Участники">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -183,7 +183,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Забег #">
+                <Tab text="Забег 1">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
