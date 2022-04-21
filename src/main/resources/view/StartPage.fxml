@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -77,15 +75,6 @@
                <toggleGroup>
                   <ToggleGroup fx:id="ButtGroup" />
                </toggleGroup></ToggleButton>
-            <ToggleButton fx:id="groupsButt" alignment="CENTER_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#handleButtonAction4" stylesheets="@css/table.css" text="Группы" toggleGroup="$ButtGroup">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/icons/group.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
             <ToggleButton fx:id="zabegButt" alignment="CENTER_LEFT" layoutY="66.0" mnemonicParsing="false" onAction="#handleButtonAction2" stylesheets="@css/table.css" text="Забег" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -104,7 +93,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="checkButt" alignment="CENTER_LEFT" layoutY="396.0" mnemonicParsing="false" onAction="#handleButtonAction7" stylesheets="@css/table.css" text="Монитор отметок" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="checkButt" alignment="CENTER_LEFT" layoutY="264.0" mnemonicParsing="false" onAction="#handleButtonAction7" stylesheets="@css/table.css" text="Монитор отметок" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -113,16 +102,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="distanceButt" alignment="CENTER_LEFT" layoutY="264.0" mnemonicParsing="false" onAction="#handleButtonAction5" stylesheets="@css/table.css" text="Дистанции" toggleGroup="$ButtGroup">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/icons/distance.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
-            <ToggleButton fx:id="clubsButt" alignment="CENTER_LEFT" layoutY="330.0" mnemonicParsing="false" onAction="#handleButtonAction6" stylesheets="@css/table.css" text="Клубы" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="clubsButt" alignment="CENTER_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#handleButtonAction6" stylesheets="@css/table.css" text="Клубы" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -146,10 +126,8 @@
          <children>
             <fx:include fx:id="competitionPage" maxHeight="-Infinity" maxWidth="-Infinity" source="CompetitionPage.fxml" />
             <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="ClubPage.fxml" />
-            <fx:include fx:id="group_page" maxHeight="-Infinity" maxWidth="-Infinity" source="GroupPage.fxml" />
             <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RunPage.fxml" />
             <fx:include fx:id="relay_run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RelayRunPage.fxml" />
-            <fx:include fx:id="distance_page" maxHeight="-Infinity" maxWidth="-Infinity" source="DistancePage.fxml" />
             <fx:include fx:id="marks_monitor_page" maxHeight="-Infinity" maxWidth="-Infinity" source="MarksMonitorCompetition.fxml" />
          </children>
       </AnchorPane>
