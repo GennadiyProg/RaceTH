@@ -97,7 +97,7 @@
                                     <String fx:value="btn-image" />
                                  </styleClass>
                               </Button>
-                              <TextField fx:id="searchTextField11" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="108.0" promptText="поиск" stylesheets="@css/TextField.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                              <TextField fx:id="searchDistanceTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="108.0" promptText="поиск" stylesheets="@css/TextField.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
                            </children>
                         </GridPane>
                      </children>
@@ -168,7 +168,7 @@
                                     <String fx:value="btn-image" />
                                  </styleClass>
                               </Button>
-                              <TextField fx:id="searchTextField1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="108.0" promptText="поиск" stylesheets="@css/TextField.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                              <TextField fx:id="searchGroupTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="108.0" promptText="поиск" stylesheets="@css/TextField.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
                            </children>
                         </GridPane>
                      </children>
@@ -179,78 +179,75 @@
                </GridPane.margin>
             </GridPane>
             <Pane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <TableView fx:id="competitionTable" layoutX="1.0" prefHeight="306.0" prefWidth="1070.0" stylesheets="@css/table.css">
-                     <columns>
-                        <TableColumn fx:id="cNameColumn" prefWidth="178.0" text="Название" />
-                        <TableColumn fx:id="cOrganizerColumn" prefWidth="178.0" text="Организатор" />
-                        <TableColumn fx:id="cLocationColumn" prefWidth="178.0" text="Место проведения" />
-                        <TableColumn fx:id="cDateColumn" prefWidth="178.0" text="Дата проведения" />
-                        <TableColumn fx:id="cMainJudgeColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="178.0" text="Главный судья" />
-                        <TableColumn fx:id="cMainSecretaryColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="178.0" text="Главный секретарь" />
-                     </columns>
-                  </TableView>
-                  <GridPane layoutX="10.0" layoutY="260.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="444.0">
-                     <columnConstraints>
-                        <ColumnConstraints maxWidth="-Infinity" minWidth="-Infinity" prefWidth="135.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="34.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="34.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="34.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <TextField fx:id="searchTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="195.0" promptText="поиск" stylesheets="@css/TextField.css" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
-                        <Button mnemonicParsing="false" onAction="#makeCompetitionCurrent" stylesheets="@css/Buttons.css" text="Сделать текущим" GridPane.halignment="LEFT">
-                           <styleClass>
-                              <String fx:value="btn-small" />
-                              <String fx:value="btn" />
-                              <String fx:value="btn-success" />
-                           </styleClass></Button>
-                        <Button fx:id="competitionButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
-                           <graphic>
-                              <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/icons/minus.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <styleClass>
-                              <String fx:value="btn-danger" />
-                              <String fx:value="btn-image" />
-                           </styleClass>
-                        </Button>
-                        <Button fx:id="competitionButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
-                           <graphic>
-                              <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/icons/edit.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <styleClass>
-                              <String fx:value="btn-image" />
-                              <String fx:value="btn-warning" />
-                           </styleClass>
-                        </Button>
-                        <Button fx:id="competitionButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#create" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
-                           <graphic>
-                              <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/icons/plus.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <styleClass>
-                              <String fx:value="btn-image" />
-                              <String fx:value="btn-primary" />
-                           </styleClass>
-                        </Button>
-                     </children>
-                  </GridPane>
-               </children>
+               <TableView fx:id="competitionTable" layoutX="1.0" prefHeight="306.0" prefWidth="1070.0" stylesheets="@css/table.css">
+                  <columns>
+                     <TableColumn fx:id="cNameColumn" prefWidth="178.0" text="Название" />
+                     <TableColumn fx:id="cOrganizerColumn" prefWidth="178.0" text="Организатор" />
+                     <TableColumn fx:id="cLocationColumn" prefWidth="178.0" text="Место проведения" />
+                     <TableColumn fx:id="cDateColumn" prefWidth="178.0" text="Дата проведения" />
+                     <TableColumn fx:id="cMainJudgeColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="178.0" text="Главный судья" />
+                     <TableColumn fx:id="cMainSecretaryColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="178.0" text="Главный секретарь" />
+                  </columns>
+               </TableView>
+               <GridPane layoutX="10.0" layoutY="260.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="444.0">
+                  <columnConstraints>
+                     <ColumnConstraints maxWidth="-Infinity" minWidth="-Infinity" prefWidth="135.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="34.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="34.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="34.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <children>
+                     <TextField fx:id="searchCompetitionTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="195.0" promptText="поиск" stylesheets="@css/TextField.css" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
+                     <Button mnemonicParsing="false" onAction="#makeCompetitionCurrent" stylesheets="@css/Buttons.css" text="Сделать текущим" GridPane.halignment="LEFT">
+                        <styleClass>
+                           <String fx:value="btn-small" />
+                           <String fx:value="btn" />
+                           <String fx:value="btn-success" />
+                        </styleClass>
+                     </Button>
+                     <Button fx:id="competitionButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
+                        <graphic>
+                           <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@images/icons/minus.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                        <styleClass>
+                           <String fx:value="btn-danger" />
+                           <String fx:value="btn-image" />
+                        </styleClass>
+                     </Button>
+                     <Button fx:id="competitionButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                        <graphic>
+                           <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                              <Image url="@images/icons/edit.png" />
+                           </ImageView>
+                        </graphic>
+                        <styleClass>
+                           <String fx:value="btn-image" />
+                           <String fx:value="btn-warning" />
+                        </styleClass>
+                     </Button>
+                     <Button fx:id="competitionButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#create" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                        <graphic>
+                           <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@images/icons/plus.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                        <styleClass>
+                           <String fx:value="btn-image" />
+                           <String fx:value="btn-primary" />
+                        </styleClass>
+                     </Button>
+                  </children>
+               </GridPane>
             </Pane>
          </children>
       </GridPane>

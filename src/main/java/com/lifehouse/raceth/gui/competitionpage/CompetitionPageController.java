@@ -24,7 +24,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.Data;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -68,7 +70,15 @@ public class CompetitionPageController implements Initializable {
     private TableColumn<Distance, Integer> dHeightColumn;
 
     @FXML
-    private TextField searchTextField;
+    private TextField searchCompetitionTextField;
+    @FXML
+    private TextField searchGroupTextField;
+    @FXML
+    private TextField searchDistanceTextField;
+
+    private final List<Competition> competitions = new ArrayList<>();
+    private final List<Group> groups = new ArrayList<>();
+    private final List<Distance> distances = new ArrayList<>();
 
     private final StringProperty value = new SimpleStringProperty();
     private CompetitionDAO competitionDAO;
@@ -122,10 +132,48 @@ public class CompetitionPageController implements Initializable {
     }
 
     private void searchEngine(){
-        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> competitionTable.setItems(
-                competitionDAO.getAllCompetitions()
+        searchCompetitionTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    competitions.addAll(competitionDAO.getAllCompetitions());
+                } else {
+                    competitions.clear();
+                }
+            }
+        );
+        searchCompetitionTextField.textProperty().addListener((observable, oldValue, newValue) -> competitionTable.setItems(
+               competitions
                         .stream()
                         .filter(c -> c.getName().contains(newValue))
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
+        );
+
+        searchGroupTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    groups.addAll(groupDAO.getAllGroups());
+                } else {
+                    groups.clear();
+                }
+            }
+        );
+        searchGroupTextField.textProperty().addListener((observable, oldValue, newValue) -> groupTable.setItems(
+                groups
+                        .stream()
+                        .filter(c -> c.getName().contains(newValue))
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
+        );
+
+        searchDistanceTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    distances.addAll(distanceDAO.getAllDistances());
+                } else {
+                    distances.clear();
+                }
+            }
+        );
+        searchDistanceTextField.textProperty().addListener((observable, oldValue, newValue) -> distanceTable.setItems(
+                distances
+                        .stream()
+                        .filter(c -> c.getLocation().contains(newValue))
                         .collect(Collectors.toCollection(FXCollections::observableArrayList)))
         );
     }
