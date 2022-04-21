@@ -71,7 +71,7 @@ public class MarksMonitorCompetitionController implements Initializable {
             startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
             lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
 
-            Tab tab = new Tab("Забег #");
+            Tab tab = new Tab("Забег " + tabPane.getTabs().size());
             tab.setClosable(true);
             TableView tableView = new TableView();
             tableView.setPrefWidth(1072);
@@ -105,13 +105,13 @@ public class MarksMonitorCompetitionController implements Initializable {
             tabPane.getTabs().add(tab);
 
             // create a tab which when pressed creates a new tab
-            Tab newtab = new Tab();
+            Tab newtab = new Tab("+");
 
             EventHandler<Event> event = e -> {
                 if (newtab.isSelected())
                 {
                     // create Tab
-                    Tab tab1 = new Tab("Забег #");
+                    Tab tab1 = new Tab("Забег " + tabPane.getTabs().size());
 
                     TableView tableView1 = new TableView();
                     tableView1.setPrefWidth(1072);
