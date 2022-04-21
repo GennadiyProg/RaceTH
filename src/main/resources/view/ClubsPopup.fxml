@@ -42,7 +42,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="region" layoutX="111.0" layoutY="217.0" prefHeight="25.0" prefWidth="164.0" />
+      <ChoiceBox fx:id="region" layoutX="111.0" layoutY="217.0" prefHeight="25.0" prefWidth="164.0" stylesheets="@css/ChoiseBox.css" />
       <AnchorPane layoutX="313.0" layoutY="214.0" />
       <Button fx:id="regionButt" layoutX="323.0" layoutY="214.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="154.0" stylesheets="@css/Buttons.css" text="Добавить регион">
          <font>

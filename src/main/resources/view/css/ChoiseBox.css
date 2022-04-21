@@ -1,0 +1,42 @@
+@font-face {
+    src: url('../../assets/fonts/Roboto-Medium.ttf');
+}
+
+.choice-box {
+    -fx-background-color: rgba(48, 94, 193, 0.7), white;
+    -fx-background-insets: -1, 0;
+}
+.choice-box:hover {
+    -fx-background-color: rgba(48, 94, 193, 0.7), white;
+    -fx-background-insets: -1.7, 0;
+    -fx-cursor: hand;
+}
+.choice-box .open-button {
+    -fx-background-color: rgba(48, 94, 193, 1);
+    -fx-padding: 12px 10px;
+}
+.choice-box .open-button:hover {
+    -fx-background-color: rgba(48, 94, 193, 0.7);
+    -fx-padding: 12px 10px;
+}
+.choice-box .arrow {
+    -fx-background-color: white;
+}
+.choice-box .context-menu {
+    -fx-pref-width: 180px;
+    -fx-background-color: rgba(48, 94, 193, 0.7), white;
+    -fx-background-insets: -1.7, 0;
+    -fx-background-radius: 4, 3, 2;
+}
+.choice-box .menu-item {
+    -fx-accelerator-gutter: 0;
+    -fx-font-family: "Roboto Medium"
+}
+.choice-box .label {
+    -fx-padding: 2 4 3 6;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-font-family: "Roboto Medium"
+}
+.choice-box .menu-item:focused {
+    -fx-background-color: #EDF1F8;
+}
