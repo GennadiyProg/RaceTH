@@ -22,3 +22,8 @@
     -fx-font-size: 14px;
     -fx-text-fill: #555;
 }
+.popup-header {
+    -fx-font-family: "Roboto Bold";
+    -fx-font-size: 25px;
+    -fx-text-fill: #305EC1;
+}
