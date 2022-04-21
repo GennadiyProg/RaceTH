@@ -10,6 +10,7 @@
 .btn:hover {
     -fx-scale-x: 1.01;
     -fx-scale-y: 1.01;
+    -fx-cursor: hand;
 }
 .btn-small {
     -fx-pref-height: 24px;
@@ -57,6 +58,7 @@
     -fx-pref-width: 24px;
     -fx-pref-height: 26px;
     -fx-padding: 4 8 4 8;
+    -fx-cursor: hand;
 }
 .btn-image-large {
     -fx-background-radius: 6px;

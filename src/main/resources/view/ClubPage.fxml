@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -37,15 +38,15 @@
                   <GridPane prefHeight="34.0" prefWidth="499.0" GridPane.columnIndex="1">
                      <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="256.4000244140625" minWidth="10.0" prefWidth="176.7999755859375" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="408.39996337890625" minWidth="10.0" prefWidth="282.4000244140625" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="408.39996337890625" minWidth="10.0" prefWidth="114.19995117187506" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="408.39996337890625" minWidth="10.0" prefWidth="274.000048828125" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="408.39996337890625" minWidth="10.0" prefWidth="119.59995117187498" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="274.0" style="-fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                        <Label prefHeight="26.0" prefWidth="102.0" text="Поиск клуба:" textFill="#555555" GridPane.halignment="RIGHT">
+                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="274.0" styleClass="text-field" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                        <Label styleClass="label-bold" stylesheets="@css/AppLabel.css" text="Поиск клуба:" textFill="#555555" translateX="-10.0" GridPane.halignment="RIGHT">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -65,36 +66,56 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <GridPane alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="64.0" prefWidth="1028.0" GridPane.rowIndex="2">
+            <GridPane alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="950.0" GridPane.rowIndex="2">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="553.0" minWidth="10.0" prefWidth="28.199993515014654" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="553.0" minWidth="10.0" prefWidth="209.000048828125" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="553.6000061035156" minWidth="10.0" prefWidth="209.20002441406254" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="625.1999877929687" minWidth="10.0" prefWidth="262.79997558593755" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="553.6000061035156" minWidth="10.0" prefWidth="342.79999999999995" />
+                  <ColumnConstraints hgrow="SOMETIMES" prefWidth="95.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" prefWidth="120.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="342.79999999999995" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#EditClub" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FFBB38; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Редактировать" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font></Button>
-                  <Button mnemonicParsing="false" onAction="#NewClub" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #00C781; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Добавить клуб" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font></Button>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FF4040; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Удалить" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" onAction="#EditClub" stylesheets="@css/Buttons.css" text="Редактировать" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                        <String fx:value="btn-warning" />
+                     </styleClass></Button>
+                  <Button mnemonicParsing="false" onAction="#NewClub" stylesheets="@css/Buttons.css" text="Добавить клуб" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                        <String fx:value="btn-success" />
+                     </styleClass></Button>
+                  <Button mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Удалить" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                        <String fx:value="btn-danger" />
+                     </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="174.0" style="-fx-background-color: #FFBB38; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Открыть базу регионов для редактирования" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                  <Button mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Открыть базу регионов для редактирования" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="btn-primary" />
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                     </styleClass>
                   </Button>
                </children>
             </GridPane>
