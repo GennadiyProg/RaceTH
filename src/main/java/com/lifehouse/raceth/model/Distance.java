@@ -21,6 +21,12 @@ public class Distance {
     private int length;
     private int height; // Набор высоты
 
+    public Distance(String location, int length, int height) {
+        this.location = location;
+        this.length = length;
+        this.height = height;
+    }
+
     public void setFields(Distance distance) {
         this.location = distance.getLocation();
         this.length = distance.getLength();

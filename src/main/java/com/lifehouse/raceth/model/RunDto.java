@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.model;
 
+import com.lifehouse.raceth.model.competition.Competition;
 import javafx.scene.control.CheckBox;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class RunDto {
     private LocalTime time;
     private Competition competition;
     private Distance distance;
-    private CompetitionGroup group;
+    private Group group;
     private int laps;
 
     public static RunDto convertToDto(Run run) {

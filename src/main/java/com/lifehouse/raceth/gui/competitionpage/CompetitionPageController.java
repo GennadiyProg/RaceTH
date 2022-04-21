@@ -1,12 +1,14 @@
 package com.lifehouse.raceth.gui.competitionpage;
 
 import com.lifehouse.raceth.dao.CompetitionDAO;
-import com.lifehouse.raceth.dao.CompetitionGroupDAO;
+import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.DistanceDAO;
-import com.lifehouse.raceth.gui.competitionpage.popups.CompetitionPopupController;
-import com.lifehouse.raceth.gui.competitionpage.popups.impl.CompetitionServiceImpl;
-import com.lifehouse.raceth.model.Competition;
-import com.lifehouse.raceth.model.CompetitionGroup;
+import com.lifehouse.raceth.gui.competitionpage.impl.DistanceServiceImpl;
+import com.lifehouse.raceth.gui.competitionpage.impl.GroupServiceImpl;
+import com.lifehouse.raceth.gui.competitionpage.impl.CompetitionServiceImpl;
+import com.lifehouse.raceth.model.competition.CompetitionPageButton;
+import com.lifehouse.raceth.model.competition.Competition;
+import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Gender;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,20 +17,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import lombok.Data;
 
-import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -52,15 +50,15 @@ public class CompetitionPageController implements Initializable {
     private TableColumn<Competition, String> cMainSecretaryColumn;
 
     @FXML
-    private TableView<CompetitionGroup> groupTable;
+    private TableView<Group> groupTable;
     @FXML
-    private TableColumn<CompetitionGroup, String> gNameColumn;
+    private TableColumn<Group, String> gNameColumn;
     @FXML
-    private TableColumn<CompetitionGroup, Integer> gAgeFromColumn;
+    private TableColumn<Group, Integer> gAgeFromColumn;
     @FXML
-    private TableColumn<CompetitionGroup, Integer> gAgeToColumn;
+    private TableColumn<Group, Integer> gAgeToColumn;
     @FXML
-    private TableColumn<CompetitionGroup, Gender> gGenderColumn;
+    private TableColumn<Group, Gender> gGenderColumn;
 
     @FXML
     private TableView<Distance> distanceTable;
@@ -72,22 +70,28 @@ public class CompetitionPageController implements Initializable {
     private TableColumn<Distance, Integer> dHeightColumn;
 
     @FXML
-    private TextField searchTextField;
+    private TextField searchCompetitionTextField;
+    @FXML
+    private TextField searchGroupTextField;
+    @FXML
+    private TextField searchDistanceTextField;
+
+    private final List<Competition> competitions = new ArrayList<>();
+    private final List<Group> groups = new ArrayList<>();
+    private final List<Distance> distances = new ArrayList<>();
 
     private final StringProperty value = new SimpleStringProperty();
     private CompetitionDAO competitionDAO;
-    private CompetitionGroupDAO competitionGroupDAO;
+    private GroupDAO groupDAO;
     private DistanceDAO distanceDAO;
 
-    private CompetitionServiceImpl competitionService;
+    private CompetitionPageElementService competitionPageElementService;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         competitionDAO = new CompetitionDAO();
-        competitionGroupDAO = new CompetitionGroupDAO();
+        groupDAO = new GroupDAO();
         distanceDAO = new DistanceDAO();
-
-        competitionService = new CompetitionServiceImpl(competitionTable, competitionDAO);
 
         initializeCompetitionTable();
         initializeGroupTable();
@@ -114,8 +118,8 @@ public class CompetitionPageController implements Initializable {
         gAgeToColumn.setCellValueFactory(new PropertyValueFactory<>("ageTo"));
         gGenderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
 
-        ObservableList<CompetitionGroup> competitionGroups = groupTable.getItems();
-        competitionGroups.addAll(competitionGroupDAO.getAllGroups());
+        ObservableList<Group> groups = groupTable.getItems();
+        groups.addAll(groupDAO.getAllGroups());
     }
 
     private void initializeDistanceTable(){
@@ -128,10 +132,48 @@ public class CompetitionPageController implements Initializable {
     }
 
     private void searchEngine(){
-        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> competitionTable.setItems(
-                competitionDAO.getAllCompetitions()
+        searchCompetitionTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    competitions.addAll(competitionDAO.getAllCompetitions());
+                } else {
+                    competitions.clear();
+                }
+            }
+        );
+        searchCompetitionTextField.textProperty().addListener((observable, oldValue, newValue) -> competitionTable.setItems(
+               competitions
                         .stream()
                         .filter(c -> c.getName().contains(newValue))
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
+        );
+
+        searchGroupTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    groups.addAll(groupDAO.getAllGroups());
+                } else {
+                    groups.clear();
+                }
+            }
+        );
+        searchGroupTextField.textProperty().addListener((observable, oldValue, newValue) -> groupTable.setItems(
+                groups
+                        .stream()
+                        .filter(c -> c.getName().contains(newValue))
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
+        );
+
+        searchDistanceTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    distances.addAll(distanceDAO.getAllDistances());
+                } else {
+                    distances.clear();
+                }
+            }
+        );
+        searchDistanceTextField.textProperty().addListener((observable, oldValue, newValue) -> distanceTable.setItems(
+                distances
+                        .stream()
+                        .filter(c -> c.getLocation().contains(newValue))
                         .collect(Collectors.toCollection(FXCollections::observableArrayList)))
         );
     }
@@ -146,42 +188,31 @@ public class CompetitionPageController implements Initializable {
     }
 
     @FXML
-    void create(ActionEvent event) throws IOException {
-        Node node = (Node)event.getSource();
-        System.out.println(node.getId().equals(Button.CREATE.toString().toLowerCase()));
-
-        FXMLLoader fxmlLoader = loadResources();
-
-        CompetitionPopupController competitionPopupController = fxmlLoader.getController();
-        competitionPopupController.setCompetitionTable(competitionTable);
+    void create(ActionEvent event) {
+        setCompetitionPageElementService(((Node)event.getSource()).getId().toLowerCase());
+        competitionPageElementService.create();
     }
 
     @FXML
-    void edit(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = loadResources();
-        CompetitionPopupController competitionPopupController = fxmlLoader.getController();
-        Competition competition = competitionTable.getSelectionModel().getSelectedItem();
-        if (competition == null){
-            return;
-        }
-
-        competitionPopupController.edit(competition);
-        competitionPopupController.setCompetitionTable(competitionTable);
-    }
-
-    private FXMLLoader loadResources() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/CompetitionPopup.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
-        return fxmlLoader;
+    void edit(ActionEvent event) {
+        setCompetitionPageElementService(((Node)event.getSource()).getId().toLowerCase());
+        competitionPageElementService.edit();
     }
 
     @FXML
     void delete(ActionEvent event) {
-        competitionService.delete();
+        setCompetitionPageElementService(((Node)event.getSource()).getId().toLowerCase());
+        competitionPageElementService.delete();
+    }
+
+    private void setCompetitionPageElementService(String id){
+        if (id.equals(CompetitionPageButton.COMPETITIONBUTTON.toString())){
+            competitionPageElementService = new CompetitionServiceImpl(competitionTable);
+        } else if (id.equals(CompetitionPageButton.GROUPBUTTON.toString())){
+            competitionPageElementService = new GroupServiceImpl(groupTable);
+        } else if (id.equals(CompetitionPageButton.DISTANCEBUTTON.toString())){
+            competitionPageElementService = new DistanceServiceImpl(distanceTable);
+        }
     }
 }
 

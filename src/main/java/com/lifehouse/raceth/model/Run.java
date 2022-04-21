@@ -1,14 +1,13 @@
 package com.lifehouse.raceth.model;
 
+import com.lifehouse.raceth.model.competition.Competition;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalTime;
-import java.util.Timer;
 
 
 @Entity
@@ -29,6 +28,6 @@ public class Run {
     private Distance distance; //Дистанция по ID
     @ManyToOne()
     @NotNull
-    private CompetitionGroup group; //Группа по ID
+    private Group group; //Группа по ID
     private int laps;
 }

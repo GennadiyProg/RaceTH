@@ -1,10 +1,11 @@
 package com.lifehouse.raceth.gui.competitionpage.popups;
 
-import com.lifehouse.raceth.dao.CompetitionGroupDAO;
-import com.lifehouse.raceth.model.CompetitionGroup;
+import com.lifehouse.raceth.dao.GroupDAO;
+import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Gender;
-import com.lifehouse.raceth.model.Sportsman;
-import com.lifehouse.raceth.tmpstorage.TmpStorage;
+import com.lifehouse.raceth.model.competition.Competition;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,10 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lombok.Data;
 
-import java.lang.reflect.Executable;
 import java.net.URL;
-import java.util.Enumeration;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 @Data
@@ -35,81 +33,61 @@ public class GroupPopupController implements Initializable {
     private RadioButton genderW;
     @FXML
     private TextField groupName;
-    @FXML
-    private TableView<CompetitionGroup> competitionGroupsTable;
-    private CompetitionGroupDAO competitionGroupDAO;
 
-    //-----------------------------
-    private long changedGroupId = -1L;
-    //-----------------------------
+    private TableView<Group> groupTable;
+
+    public ObjectProperty<Group> newGroup = new SimpleObjectProperty<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         genderM.setToggleGroup(gender);
         genderW.setToggleGroup(gender);
-        competitionGroupDAO = new CompetitionGroupDAO();
     }
 
     @FXML
-    void Saving(ActionEvent event) {
-        try{
-            CompetitionGroup newCompetitionGroup = buildNewGroup();
-            if (newCompetitionGroup == null) {
-                return;
-            }
-
-            if (changedGroupId >= 0L) {
-                competitionGroupDAO.update(newCompetitionGroup);
-                changedGroupId = -1;
-
-                ((Node)(event.getSource())).getScene().getWindow().hide();
-
-                competitionGroupsTable.getSelectionModel().getSelectedItem().setFields(newCompetitionGroup);
-                competitionGroupsTable.refresh();
-                return;
-            }
-
-            newCompetitionGroup.setId(competitionGroupsTable.getItems().size());
-            competitionGroupDAO.create(newCompetitionGroup);
-            competitionGroupsTable.getItems().add(newCompetitionGroup);
-            competitionGroupsTable.refresh();
-
-            ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    void createOrUpdateGroup(ActionEvent event) {
+        Group group = buildNewGroup();
+        if (group == null) return;
+        newGroup.setValue(group);
+        cancel(event);
     }
 
     @FXML
-    void Cancel(ActionEvent event) {
-        try{
-            ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
-        } catch (Exception e) {
-            System.out.println("can't loading");
-        }
+    void cancel(ActionEvent event) {
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
-    private CompetitionGroup buildNewGroup() {
-        CompetitionGroup competitionGroup = new CompetitionGroup();
+    private Group buildNewGroup() {
         RadioButton selected = (RadioButton) gender.getSelectedToggle();
 
-        if (selected == null) {
-            // todo: Тут надо пометить что необходимо выбрать RadioButton
+        if (groupName.getText().equals("") ||
+                ageFrom.getText().equals("") ||
+                ageTo.getText().equals("") ||
+                selected == null) {
+            return null;
+        }
+        int localAgeFrom, localAgeTo;
+
+        try {
+            localAgeFrom = Integer.parseInt(ageFrom.getText());
+            localAgeTo = Integer.parseInt(ageTo.getText());
+        } catch (NumberFormatException e){
             return null;
         }
 
-        competitionGroup.setName(groupName.getText());
-        competitionGroup.setGender(determineGender(selected.getText()));
-        competitionGroup.setAgeFrom(Integer.parseInt(ageFrom.getText()));
-        competitionGroup.setAgeTo(Integer.parseInt(ageTo.getText()));
-        return competitionGroup;
+        return new Group(
+                groupName.getText(),
+                localAgeFrom,
+                localAgeTo,
+                determineGender(selected.getText())
+        );
     }
 
-    private void fillFieldsFromEntity(CompetitionGroup competitionGroup) {
-        groupName.setText(competitionGroup.getName());
-        ageFrom.setText(String.valueOf(competitionGroup.getAgeFrom()));
-        ageTo.setText(String.valueOf(competitionGroup.getAgeTo()));
-        gender.selectToggle(determineToggle(competitionGroup.getGender()));
+    private void fillFieldsFromEntity(Group group) {
+        groupName.setText(group.getName());
+        ageFrom.setText(String.valueOf(group.getAgeFrom()));
+        ageTo.setText(String.valueOf(group.getAgeTo()));
+        gender.selectToggle(determineToggle(group.getGender()));
     }
 
     private Gender determineGender(String gender) {
@@ -120,9 +98,8 @@ public class GroupPopupController implements Initializable {
         return gender == Gender.MALE ? genderM : genderW;
     }
 
-    public void Edit(CompetitionGroup competitionGroup) {
-        fillFieldsFromEntity(competitionGroup);
-        changedGroupId = competitionGroup.getId();
+    public void edit(Group group) {
+        fillFieldsFromEntity(group);
     }
 }
 

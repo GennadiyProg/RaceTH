@@ -1,4 +1,4 @@
-package com.lifehouse.raceth.model;
+package com.lifehouse.raceth.model.competition;
 
 public enum PrincipalAgeCalculation {
     CURRENT_TIME,

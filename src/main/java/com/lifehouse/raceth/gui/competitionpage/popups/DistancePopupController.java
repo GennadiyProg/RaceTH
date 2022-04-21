@@ -1,9 +1,9 @@
 package com.lifehouse.raceth.gui.competitionpage.popups;
 
-import com.lifehouse.raceth.dao.DistanceDAO;
 import com.lifehouse.raceth.model.Distance;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
@@ -25,47 +25,45 @@ public class DistancePopupController {
     @FXML
     private TextField length;
 
-    public TableView<Distance> distancesTable;
-    private Distance selectedDistance = null;
-
-    private DistanceDAO distanceDAO = new DistanceDAO();
+    public TableView<Distance> distanceTable;
+    public ObjectProperty<Distance> newDistance = new SimpleObjectProperty<>();
 
     @FXML
-    void Saving(ActionEvent event) {
-        try{
-            Distance newDistance = buildNewEntity();
+    void createOrUpdateDistance(ActionEvent event) {
+        Distance distance = buildNewEntity();
 
-            if (selectedDistance != null) {
-                updateEntity(newDistance);
-                closePopup(event);
-                return;
-            }
+        if (distance == null) return;
+        newDistance.setValue(distance);
 
-            createEntity(newDistance);
-            closePopup(event);
-
-        } catch (Exception e) {
-            System.out.println("cant loading");
-        }
+        cancel(event);
     }
 
     @FXML
-    void Cancel(ActionEvent event) {
-        try{
-            ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
-        } catch (Exception e) {
-            System.out.println("cant loading");
-        }
+    void cancel(ActionEvent event) {
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     private Distance buildNewEntity() {
-        Distance distance = new Distance();
+        if (distLocation.getText().equals("") ||
+                length.getText().equals("") ||
+                height.getText().equals("")
+        ) {
+            return null;
+        }
 
-        distance.setLocation(distLocation.getText());
-        distance.setLength(Integer.parseInt(length.getText()));
-        distance.setHeight(Integer.parseInt(height.getText()));
+        int localLength, localHeight;
+        try {
+            localLength = Integer.parseInt(length.getText());
+            localHeight = Integer.parseInt(height.getText());
+        } catch (NumberFormatException e){
+            return null;
+        }
 
-        return distance;
+        return new Distance(
+                distLocation.getText(),
+                localLength,
+                localHeight
+        );
     }
 
     private void fillFieldsFromEntity(Distance distance) {
@@ -74,27 +72,8 @@ public class DistancePopupController {
         length.setText(String.valueOf(distance.getLength()));
     }
 
-    public void startEdit(Distance distance) {
+    public void edit(Distance distance) {
         fillFieldsFromEntity(distance);
-        selectedDistance = distance;
-    }
-
-    private void updateEntity(Distance distance) {
-        System.out.println(distance);
-        distanceDAO.update(distance);
-        selectedDistance.setFields(distance);
-        distancesTable.refresh();
-    }
-
-    private void createEntity(Distance distance) {
-        distance.setId(distancesTable.getItems().size());
-        distanceDAO.create(distance);
-        distancesTable.getItems().add(distance);
-        distancesTable.refresh();
-    }
-
-    public void closePopup(Event e) {
-        ((Node)(e.getSource())).getScene().getWindow().hide();
     }
 }
 

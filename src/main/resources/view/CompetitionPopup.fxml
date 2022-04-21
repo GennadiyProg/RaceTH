@@ -115,7 +115,7 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="createCompetitionButton" mnemonicParsing="false" onAction="#createCompetition" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #00C781; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Сохранить" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="createCompetitionButton" mnemonicParsing="false" onAction="#createOrUpdateCompetition" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #00C781; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Сохранить" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>

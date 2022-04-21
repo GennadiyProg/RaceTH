@@ -1,7 +1,7 @@
 package com.lifehouse.raceth.gui;
 
 import com.lifehouse.raceth.dao.RunDAO;
-import com.lifehouse.raceth.model.CompetitionGroup;
+import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Run;
 import com.lifehouse.raceth.model.RunDto;
 import javafx.beans.value.ChangeListener;
@@ -89,7 +89,7 @@ public class MarksGroupPopupController implements Initializable {
             RunDto run = new RunDto();
             run.setId(i);
             run.setTime(LocalTime.now());
-            CompetitionGroup group = new CompetitionGroup();
+            Group group = new Group();
             group.setName("Group" + i);
             run.setGroup(group);
             run.setLaps(i);

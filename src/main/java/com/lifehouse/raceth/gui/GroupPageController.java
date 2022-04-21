@@ -1,8 +1,8 @@
 package com.lifehouse.raceth.gui;
 
-import com.lifehouse.raceth.dao.CompetitionGroupDAO;
+import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.gui.competitionpage.popups.GroupPopupController;
-import com.lifehouse.raceth.model.CompetitionGroup;
+import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Gender;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,23 +30,23 @@ public class GroupPageController implements Initializable {
     private AnchorPane main_pane;
 
     @FXML
-    private TableView<CompetitionGroup> competitionGroupsTable;
+    private TableView<Group> competitionGroupsTable;
 
     @FXML
-    private TableColumn<CompetitionGroup, Long> idColumn;
+    private TableColumn<Group, Long> idColumn;
 
     @FXML
-    private TableColumn<CompetitionGroup, String> nameColumn;
+    private TableColumn<Group, String> nameColumn;
 
     @FXML
-    private TableColumn<CompetitionGroup, Gender> genderColumn;
+    private TableColumn<Group, Gender> genderColumn;
 
     @FXML
-    private TableColumn<CompetitionGroup, Integer> ageFromColumn;
+    private TableColumn<Group, Integer> ageFromColumn;
 
     @FXML
-    private TableColumn<CompetitionGroup, Integer> ageToColumn;
-    private CompetitionGroupDAO competitionGroupDAO;
+    private TableColumn<Group, Integer> ageToColumn;
+    private GroupDAO groupDAO;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,11 +56,11 @@ public class GroupPageController implements Initializable {
         ageFromColumn.setCellValueFactory(new PropertyValueFactory<>("ageFrom"));
         ageToColumn.setCellValueFactory(new PropertyValueFactory<>("ageTo"));
 
-        competitionGroupDAO = new CompetitionGroupDAO();
+        groupDAO = new GroupDAO();
 
         competitionGroupsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        ObservableList<CompetitionGroup> competitionGroups = competitionGroupsTable.getItems();
-        competitionGroups.addAll(competitionGroupDAO.getAllGroups());
+        ObservableList<Group> groups = competitionGroupsTable.getItems();
+        groups.addAll(groupDAO.getAllGroups());
     }
 
     @FXML
@@ -73,7 +73,7 @@ public class GroupPageController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
 
             GroupPopupController groupPopupController = fxmlLoader.getController();
-            groupPopupController.setCompetitionGroupsTable(competitionGroupsTable);
+            groupPopupController.setGroupTable(competitionGroupsTable);
 
             stage.show();
         } catch (Exception e) {
@@ -91,15 +91,15 @@ public class GroupPageController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
 
             GroupPopupController groupPopupController = fxmlLoader.getController();
-            groupPopupController.setCompetitionGroupsTable(competitionGroupsTable);
-            List<CompetitionGroup> competitionGroups = competitionGroupsTable.getSelectionModel().getSelectedItems();
+            groupPopupController.setGroupTable(competitionGroupsTable);
+            List<Group> groups = competitionGroupsTable.getSelectionModel().getSelectedItems();
 
-            if (competitionGroups.size() != 1) {
+            if (groups.size() != 1) {
                 throw new Exception();
                 // todo: тут показ ошибки о том что выбранно слишком много элементов для редактирования
             }
 
-            groupPopupController.Edit(competitionGroups.get(0));
+            groupPopupController.edit(groups.get(0));
 
             stage.show();
         } catch (Exception e) {
@@ -109,8 +109,8 @@ public class GroupPageController implements Initializable {
 
     @FXML
     private void RemoveRows(ActionEvent event) {
-        List<CompetitionGroup> competitionGroups = competitionGroupsTable.getSelectionModel().getSelectedItems();
-        competitionGroupsTable.getItems().removeAll(competitionGroups);
+        List<Group> groups = competitionGroupsTable.getSelectionModel().getSelectedItems();
+        competitionGroupsTable.getItems().removeAll(groups);
 
     }
 }
