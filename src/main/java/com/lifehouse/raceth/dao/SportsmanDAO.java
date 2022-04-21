@@ -1,10 +1,7 @@
 package com.lifehouse.raceth.dao;
 
-import com.lifehouse.raceth.model.CompetitionGroup;
-import com.lifehouse.raceth.model.Run;
 import com.lifehouse.raceth.model.Sportsman;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
-import org.hibernate.Session;
 
 import java.util.List;
 

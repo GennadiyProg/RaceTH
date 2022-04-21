@@ -1,11 +1,11 @@
 package com.lifehouse.raceth.dao;
 
-import com.lifehouse.raceth.model.CompetitionGroup;
+import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
 
 import java.util.List;
 
-public class CompetitionGroupDAO implements DAO<CompetitionGroup> {
+public class GroupDAO implements DAO<Group> {
 //    private final Session session;
 //
 //    public CompetitionGroupDAO(final Session session) {
@@ -21,11 +21,12 @@ public class CompetitionGroupDAO implements DAO<CompetitionGroup> {
 //        session.getTransaction().commit();
 //    }
 
-    public void create(CompetitionGroup group) {
-        TmpStorage.competitionGroups.add(group);
+    public void create(Group group) {
+        group.setId(TmpStorage.groups.size());
+        TmpStorage.groups.add(group);
     }
-    public CompetitionGroup GetGroup(long id) {
-        for (CompetitionGroup item : TmpStorage.competitionGroups) {
+    public Group GetGroup(long id) {
+        for (Group item : TmpStorage.groups) {
             if (item.getId() == id) {
                 return item;
             }
@@ -33,18 +34,18 @@ public class CompetitionGroupDAO implements DAO<CompetitionGroup> {
         return null;
     }
 
-    public List<CompetitionGroup> getAllGroups() {
-        return TmpStorage.competitionGroups;
+    public List<Group> getAllGroups() {
+        return TmpStorage.groups;
     }
 
-    public void delete(CompetitionGroup group) {
-        TmpStorage.competitionGroups.remove(group);
+    public void delete(Group group) {
+        TmpStorage.groups.remove(group);
     }
 
-    public void update(CompetitionGroup group) {
+    public void update(Group group) {
         try {
-            TmpStorage.competitionGroups.set(TmpStorage.competitionGroups.indexOf(
-                    TmpStorage.competitionGroups.stream().filter(
+            TmpStorage.groups.set(TmpStorage.groups.indexOf(
+                    TmpStorage.groups.stream().filter(
                             g -> g.getId() == group.getId()
                     ).findFirst().orElse(null)
             ), group);

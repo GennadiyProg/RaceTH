@@ -13,24 +13,31 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompetitionGroup {
+public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; //ID
     private String name; // Название группы
-    private Gender gender; // Пол
     private int ageFrom;
     private int ageTo;
+    private Gender gender; // Пол
 
-    @Override
-    public String toString() {
-        return this.name;
+    public Group(String name, int ageFrom, int ageTo, Gender gender) {
+        this.name = name;
+        this.ageFrom = ageFrom;
+        this.ageTo = ageTo;
+        this.gender = gender;
     }
 
-    public void setFields(CompetitionGroup group) {
+    public void setFields(Group group) {
         this.name = group.getName();
         this.gender = group.getGender();
         this.ageFrom = group.getAgeFrom();
         this.ageTo = group.getAgeTo();
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

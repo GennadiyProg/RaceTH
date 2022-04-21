@@ -28,6 +28,6 @@ public class Run {
     private Distance distance; //Дистанция по ID
     @ManyToOne()
     @NotNull
-    private CompetitionGroup group; //Группа по ID
+    private Group group; //Группа по ID
     private int laps;
 }

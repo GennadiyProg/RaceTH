@@ -23,6 +23,7 @@ public class CompetitionDAO implements DAO<Competition> {
 //    }
 
     public void create(Competition competition) {
+        competition.setId(TmpStorage.competitions.size());
         TmpStorage.competitions.add(competition);
     }
 

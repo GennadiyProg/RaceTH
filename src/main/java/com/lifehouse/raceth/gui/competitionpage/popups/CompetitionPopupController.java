@@ -1,9 +1,9 @@
 package com.lifehouse.raceth.gui.competitionpage.popups;
 
-
-import com.lifehouse.raceth.dao.CompetitionDAO;
 import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.competition.PrincipalAgeCalculation;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,47 +46,36 @@ public class CompetitionPopupController implements Initializable {
 
     @FXML
     private ToggleGroup principalAgeCalculation;
+
     private TableView<Competition> competitionTable;
 
-    private CompetitionDAO competitionDAO;
-    private long changedCompetitionId = -1;
+    public ObjectProperty<Competition> newCompetition = new SimpleObjectProperty<>();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         yearEndRadioButton.setToggleGroup(principalAgeCalculation);
         currentTimeRadioButton.setToggleGroup(principalAgeCalculation);
-        competitionDAO = new CompetitionDAO();
     }
 
     @FXML
-    public void createCompetition(ActionEvent event) {
-        Competition newCompetition = buildNewCompetition();
-        if (newCompetition == null) {
-            return;
-        }
-
-        if (changedCompetitionId >= 0L) {
-            competitionDAO.update(newCompetition);
-            changedCompetitionId = -1;
-
-            cancel(event);
-
-            competitionTable.getSelectionModel().getSelectedItem().setFields(newCompetition);
-            competitionTable.refresh();
-            return;
-        }
-        newCompetition.setId(competitionTable.getItems().size());
-        competitionDAO.create(newCompetition);
-        competitionTable.getItems().add(newCompetition);
-        competitionTable.refresh();
-
+    public void createOrUpdateCompetition(ActionEvent event) {
+        Competition competition = buildNewCompetition();
+        if (competition == null) return;
+        newCompetition.setValue(competition);
         cancel(event);
     }
 
     private Competition buildNewCompetition() {
         RadioButton selectedToggle = (RadioButton) principalAgeCalculation.getSelectedToggle();
         LocalDate localDate = dateDatePicker.getValue();
-        if (localDate == null || selectedToggle == null){
+        if (nameTextField.getText().equals("") ||
+                organizerTextField.getText().equals("") ||
+                locationTextField.getText().equals("") ||
+                localDate == null ||
+                mainJudgeTextField.getText().equals("") ||
+                mainSecretaryTextField.getText().equals("") ||
+                selectedToggle == null){
             return null;
         }
 
@@ -111,7 +100,6 @@ public class CompetitionPopupController implements Initializable {
 
     public void edit(Competition competition) {
         fillFieldsFromEntity(competition);
-        changedCompetitionId = competition.getId();
     }
 
     private void fillFieldsFromEntity(Competition competition) {

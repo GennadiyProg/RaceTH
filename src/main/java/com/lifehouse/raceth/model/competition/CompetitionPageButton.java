@@ -1,9 +1,9 @@
 package com.lifehouse.raceth.model.competition;
 
-public enum DistanceButtons {
-    CREATEDISTANCEBUTTON,
-    EDITDISTANCEBUTTON,
-    DELETEDISTANCEBUTTON;
+public enum CompetitionPageButton {
+    COMPETITIONBUTTON,
+    GROUPBUTTON,
+    DISTANCEBUTTON;
 
     @Override
     public String toString() {

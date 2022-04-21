@@ -15,57 +15,70 @@ import java.io.IOException;
 
 public class CompetitionServiceImpl implements CompetitionPageElementService {
     private final CompetitionDAO competitionDAO;
+    private final TableView<Competition> competitionTable;
 
-    public CompetitionServiceImpl() {
+    public CompetitionServiceImpl(TableView<Competition> competitionTable) {
         this.competitionDAO = new CompetitionDAO();
+        this.competitionTable = competitionTable;
     }
 
     @Override
-    public void create(TableView<?> table) {
-        FXMLLoader fxmlLoader = loadResources();
-        if (fxmlLoader == null){
-            return;
-        }
-        CompetitionPopupController competitionPopupController = fxmlLoader.getController();
-        competitionPopupController.setCompetitionTable((TableView<Competition>) table);
+    public void create() {
+        CompetitionPopupController controller = createCompetitionPopup();
+        if (controller == null) return;
+        controller.getNewCompetition().addListener((observable, oldValue, newValue) -> {
+            competitionDAO.create(newValue);
+            competitionTable.getItems().add(newValue);
+            competitionTable.refresh();
+        });
     }
 
     @Override
-    public void edit(TableView<?> table) {
-        TableView<Competition> competitionTable = (TableView<Competition>)table;
+    public void edit() {
         Competition competition = competitionTable.getSelectionModel().getSelectedItem();
         if (competition == null){
             return;
         }
+        CompetitionPopupController controller = createCompetitionPopup();
+        if (controller == null) return;
 
-        FXMLLoader fxmlLoader = loadResources();
-        if (fxmlLoader == null){
-            return;
-        }
-        CompetitionPopupController competitionPopupController = fxmlLoader.getController();
-        competitionPopupController.edit(competition);
-        competitionPopupController.setCompetitionTable(competitionTable);
+        controller.edit(competition);
+        controller.getNewCompetition().addListener((observable, oldValue, newValue) -> {
+            competitionDAO.update(newValue);
+            competitionTable.getSelectionModel().getSelectedItem().setFields(newValue);
+            competitionTable.refresh();
+        });
     }
 
     @Override
-    public void delete(TableView<?> table) {
-        TableView<Competition> competitionTable = (TableView<Competition>) table;
+    public void delete() {
         Competition competition = competitionTable.getSelectionModel().getSelectedItem();
+        if (competition == null){
+            return;
+        }
         competitionTable.getItems().removeAll(competition);
         competitionDAO.delete(competition);
     }
 
+    private CompetitionPopupController createCompetitionPopup(){
+        FXMLLoader fxmlLoader = loadResources();
+        if (fxmlLoader == null){
+            return null;
+        }
+        CompetitionPopupController competitionPopupController = fxmlLoader.getController();
+        competitionPopupController.setCompetitionTable(competitionTable);
+        return competitionPopupController;
+    }
+
     private FXMLLoader loadResources() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/CompetitionPopup.fxml"));
-        Parent root;
+        Stage stage = new Stage();
         try {
-            root = fxmlLoader.load();
+            stage.setScene(new Scene(fxmlLoader.load()));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
         return fxmlLoader;

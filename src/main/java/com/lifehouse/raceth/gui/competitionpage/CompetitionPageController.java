@@ -1,37 +1,28 @@
 package com.lifehouse.raceth.gui.competitionpage;
 
 import com.lifehouse.raceth.dao.CompetitionDAO;
-import com.lifehouse.raceth.dao.CompetitionGroupDAO;
+import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.DistanceDAO;
 import com.lifehouse.raceth.gui.competitionpage.impl.DistanceServiceImpl;
 import com.lifehouse.raceth.gui.competitionpage.impl.GroupServiceImpl;
-import com.lifehouse.raceth.gui.competitionpage.popups.CompetitionPopupController;
 import com.lifehouse.raceth.gui.competitionpage.impl.CompetitionServiceImpl;
-import com.lifehouse.raceth.model.competition.CompetitionButtons;
+import com.lifehouse.raceth.model.competition.CompetitionPageButton;
 import com.lifehouse.raceth.model.competition.Competition;
-import com.lifehouse.raceth.model.CompetitionGroup;
+import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Gender;
-import com.lifehouse.raceth.model.competition.DistanceButtons;
-import com.lifehouse.raceth.model.competition.GroupButtons;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import lombok.Data;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -57,15 +48,15 @@ public class CompetitionPageController implements Initializable {
     private TableColumn<Competition, String> cMainSecretaryColumn;
 
     @FXML
-    private TableView<CompetitionGroup> groupTable;
+    private TableView<Group> groupTable;
     @FXML
-    private TableColumn<CompetitionGroup, String> gNameColumn;
+    private TableColumn<Group, String> gNameColumn;
     @FXML
-    private TableColumn<CompetitionGroup, Integer> gAgeFromColumn;
+    private TableColumn<Group, Integer> gAgeFromColumn;
     @FXML
-    private TableColumn<CompetitionGroup, Integer> gAgeToColumn;
+    private TableColumn<Group, Integer> gAgeToColumn;
     @FXML
-    private TableColumn<CompetitionGroup, Gender> gGenderColumn;
+    private TableColumn<Group, Gender> gGenderColumn;
 
     @FXML
     private TableView<Distance> distanceTable;
@@ -81,7 +72,7 @@ public class CompetitionPageController implements Initializable {
 
     private final StringProperty value = new SimpleStringProperty();
     private CompetitionDAO competitionDAO;
-    private CompetitionGroupDAO competitionGroupDAO;
+    private GroupDAO groupDAO;
     private DistanceDAO distanceDAO;
 
     private CompetitionPageElementService competitionPageElementService;
@@ -89,7 +80,7 @@ public class CompetitionPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         competitionDAO = new CompetitionDAO();
-        competitionGroupDAO = new CompetitionGroupDAO();
+        groupDAO = new GroupDAO();
         distanceDAO = new DistanceDAO();
 
         initializeCompetitionTable();
@@ -117,8 +108,8 @@ public class CompetitionPageController implements Initializable {
         gAgeToColumn.setCellValueFactory(new PropertyValueFactory<>("ageTo"));
         gGenderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
 
-        ObservableList<CompetitionGroup> competitionGroups = groupTable.getItems();
-        competitionGroups.addAll(competitionGroupDAO.getAllGroups());
+        ObservableList<Group> groups = groupTable.getItems();
+        groups.addAll(groupDAO.getAllGroups());
     }
 
     private void initializeDistanceTable(){
@@ -150,49 +141,29 @@ public class CompetitionPageController implements Initializable {
 
     @FXML
     void create(ActionEvent event) {
-        String id = ((Node)event.getSource()).getId().toLowerCase();
-
-        if (id.equals(CompetitionButtons.CREATECOMPETITIONBUTTON.toString().toLowerCase())){
-            competitionPageElementService = new CompetitionServiceImpl();
-            competitionPageElementService.create(competitionTable);
-        } else if (id.equals(GroupButtons.CREATEGROUPBUTTON.toString())){
-            competitionPageElementService = new GroupServiceImpl();
-            competitionPageElementService.create(groupTable);
-        } else if (id.equals(DistanceButtons.CREATEDISTANCEBUTTON.toString())){
-            competitionPageElementService = new DistanceServiceImpl();
-            competitionPageElementService.create(distanceTable);
-        }
+        setCompetitionPageElementService(((Node)event.getSource()).getId().toLowerCase());
+        competitionPageElementService.create();
     }
 
     @FXML
     void edit(ActionEvent event) {
-        String id = ((Node)event.getSource()).getId().toLowerCase();
-
-        if (id.equals(CompetitionButtons.EDITCOMPETITIONBUTTON.toString())){
-            competitionPageElementService = new CompetitionServiceImpl();
-            competitionPageElementService.edit(competitionTable);
-        } else if (id.equals(GroupButtons.EDITGROUPBUTTON.toString())){
-            competitionPageElementService = new GroupServiceImpl();
-            competitionPageElementService.edit(groupTable);
-        } else if (id.equals(DistanceButtons.EDITDISTANCEBUTTON.toString())){
-            competitionPageElementService = new DistanceServiceImpl();
-            competitionPageElementService.edit(distanceTable);
-        }
+        setCompetitionPageElementService(((Node)event.getSource()).getId().toLowerCase());
+        competitionPageElementService.edit();
     }
 
     @FXML
     void delete(ActionEvent event) {
-        String id = ((Node)event.getSource()).getId().toLowerCase();
+        setCompetitionPageElementService(((Node)event.getSource()).getId().toLowerCase());
+        competitionPageElementService.delete();
+    }
 
-        if (id.equals(CompetitionButtons.DELETECOMPETITIONBUTTON.toString())){
-            competitionPageElementService = new CompetitionServiceImpl();
-            competitionPageElementService.delete(competitionTable);
-        } else if (id.equals(GroupButtons.DELETEGROUPBUTTON.toString())){
-            competitionPageElementService = new GroupServiceImpl();
-            competitionPageElementService.delete(groupTable);
-        } else if (id.equals(DistanceButtons.DELETEDISTANCEBUTTON.toString())){
-            competitionPageElementService = new DistanceServiceImpl();
-            competitionPageElementService.delete(distanceTable);
+    private void setCompetitionPageElementService(String id){
+        if (id.equals(CompetitionPageButton.COMPETITIONBUTTON.toString())){
+            competitionPageElementService = new CompetitionServiceImpl(competitionTable);
+        } else if (id.equals(CompetitionPageButton.GROUPBUTTON.toString())){
+            competitionPageElementService = new GroupServiceImpl(groupTable);
+        } else if (id.equals(CompetitionPageButton.DISTANCEBUTTON.toString())){
+            competitionPageElementService = new DistanceServiceImpl(distanceTable);
         }
     }
 }

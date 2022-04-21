@@ -19,7 +19,7 @@ public class RunDto {
     private LocalTime time;
     private Competition competition;
     private Distance distance;
-    private CompetitionGroup group;
+    private Group group;
     private int laps;
 
     public static RunDto convertToDto(Run run) {
