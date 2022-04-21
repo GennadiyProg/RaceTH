@@ -6,6 +6,10 @@ import com.lifehouse.raceth.dao.DistanceDAO;
 import com.lifehouse.raceth.gui.competitionpage.impl.DistanceServiceImpl;
 import com.lifehouse.raceth.gui.competitionpage.impl.GroupServiceImpl;
 import com.lifehouse.raceth.gui.competitionpage.impl.CompetitionServiceImpl;
+import com.lifehouse.raceth.gui.search.SearchEngine;
+import com.lifehouse.raceth.gui.search.impl.CompetitionTableSearchImpl;
+import com.lifehouse.raceth.gui.search.impl.DistanceTableSearchImpl;
+import com.lifehouse.raceth.gui.search.impl.GroupTableSearchImpl;
 import com.lifehouse.raceth.model.competition.CompetitionPageButton;
 import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.Group;
@@ -24,9 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.Data;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -76,9 +78,9 @@ public class CompetitionPageController implements Initializable {
     @FXML
     private TextField searchDistanceTextField;
 
-    private final List<Competition> competitions = new ArrayList<>();
-    private final List<Group> groups = new ArrayList<>();
-    private final List<Distance> distances = new ArrayList<>();
+    private SearchEngine competitionSearchEngine;
+    private SearchEngine groupSearchEngine;
+    private SearchEngine distanceSearchEngine;
 
     private final StringProperty value = new SimpleStringProperty();
     private CompetitionDAO competitionDAO;
@@ -96,6 +98,7 @@ public class CompetitionPageController implements Initializable {
         initializeCompetitionTable();
         initializeGroupTable();
         initializeDistanceTable();
+
 
         searchEngine();
     }
@@ -132,50 +135,9 @@ public class CompetitionPageController implements Initializable {
     }
 
     private void searchEngine(){
-        searchCompetitionTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue) {
-                    competitions.addAll(competitionDAO.getAllCompetitions());
-                } else {
-                    competitions.clear();
-                }
-            }
-        );
-        searchCompetitionTextField.textProperty().addListener((observable, oldValue, newValue) -> competitionTable.setItems(
-               competitions
-                        .stream()
-                        .filter(c -> c.getName().contains(newValue))
-                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
-        );
-
-        searchGroupTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue) {
-                    groups.addAll(groupDAO.getAllGroups());
-                } else {
-                    groups.clear();
-                }
-            }
-        );
-        searchGroupTextField.textProperty().addListener((observable, oldValue, newValue) -> groupTable.setItems(
-                groups
-                        .stream()
-                        .filter(c -> c.getName().contains(newValue))
-                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
-        );
-
-        searchDistanceTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue) {
-                    distances.addAll(distanceDAO.getAllDistances());
-                } else {
-                    distances.clear();
-                }
-            }
-        );
-        searchDistanceTextField.textProperty().addListener((observable, oldValue, newValue) -> distanceTable.setItems(
-                distances
-                        .stream()
-                        .filter(c -> c.getLocation().contains(newValue))
-                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
-        );
+        competitionSearchEngine = new CompetitionTableSearchImpl(competitionTable, competitionDAO, searchCompetitionTextField);
+        groupSearchEngine = new GroupTableSearchImpl(groupTable, groupDAO, searchGroupTextField);
+        distanceSearchEngine = new DistanceTableSearchImpl(distanceTable, distanceDAO, searchDistanceTextField);
     }
 
     @FXML
