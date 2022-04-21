@@ -7,10 +7,12 @@
 }
 .tab {
     -fx-background-color: #ECECEC; /*#C5D6FB;*/
+    -fx-focus-color: rgba(48, 94, 193, 1);
+    -fx-faint-focus-color: transparent;
 }
 .tab .tab-label {
     -fx-text-fill: black;
-    -fx-padding: 5px 30px;
+    -fx-padding: 5px 20px;
 }
 .tab:selected {
     -fx-background-color: white;
