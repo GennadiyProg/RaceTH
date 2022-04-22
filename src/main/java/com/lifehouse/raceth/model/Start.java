@@ -6,25 +6,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalTime;
+
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Participant {
+public class Start {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String chip;
-    @ManyToOne
-    private Sportsman sportsman;
-    @ManyToOne
-    private Start start;
+    private String name;
+    private LocalTime startTime;
     @ManyToOne
     @NotNull
-    private RelayTeam relayTeam;
-    private int relayStage;
+    private Group group;
+    @ManyToOne
     @NotNull
-    private int tag;
-
+    private Distance distance;
+    private int laps;
+    @ManyToOne
+    @NotNull
+    private CompetitionDay competitionDay;
+    @ManyToOne
+    private RunTab tab;
 }

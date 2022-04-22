@@ -1,13 +1,13 @@
 package com.lifehouse.raceth.model;
 
+import com.lifehouse.raceth.model.competition.Competition;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,6 +20,8 @@ public class Distance {
     private String location;
     private int length;
     private int height; // Набор высоты
+    @ManyToMany(mappedBy = "distances")
+    private List<Competition> competitions = new ArrayList<>();
 
     public Distance(String location, int length, int height) {
         this.location = location;
