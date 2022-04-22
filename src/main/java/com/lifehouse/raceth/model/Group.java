@@ -1,13 +1,13 @@
 package com.lifehouse.raceth.model;
 
+import com.lifehouse.raceth.model.competition.Competition;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,6 +21,8 @@ public class Group {
     private int ageFrom;
     private int ageTo;
     private Gender gender; // Пол
+    @ManyToMany(mappedBy = "groups")
+    private List<Competition> competitions = new ArrayList<>();
 
     public Group(String name, int ageFrom, int ageTo, Gender gender) {
         this.name = name;

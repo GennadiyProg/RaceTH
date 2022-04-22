@@ -1,7 +1,7 @@
 package com.lifehouse.raceth.gui;
 
 import com.lifehouse.raceth.model.Checkpoint;
-import com.lifehouse.raceth.model.Run;
+import com.lifehouse.raceth.model.Start;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,16 +39,16 @@ public class MarksMonitorCompetitionController implements Initializable {
     private TableView<Checkpoint> checkpointTable;
 
     @FXML
-    private TableView<Run> runTable;
+    private TableView<Start> runTable;
 
     @FXML
-    private TableColumn<Run, String> groupColumn;
+    private TableColumn<Start, String> groupColumn;
 
     @FXML
-    private TableColumn<Run, String> startTimeColumn;
+    private TableColumn<Start, String> startTimeColumn;
 
     @FXML
-    private TableColumn<Run, String> lapColumn;
+    private TableColumn<Start, String> lapColumn;
 
     @FXML
     void addingGroup(ActionEvent event) {
