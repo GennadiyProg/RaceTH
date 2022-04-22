@@ -15,8 +15,7 @@ public class Participant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; //ID
-    @ManyToOne
-    private Chip chip; //Чип по ID
+    private String chip; //Чип по ID
     @ManyToOne
     private Sportsman sportsman;
     @ManyToOne

@@ -1,8 +1,5 @@
 package com.lifehouse.raceth.dao;
 
-import com.lifehouse.raceth.model.Chip;
-import org.hibernate.Session;
-
 public class ChipDAO implements DAO<Chip> {
     @Override
     public void create(Chip chip) {
