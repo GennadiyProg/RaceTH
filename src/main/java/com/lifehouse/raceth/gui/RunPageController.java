@@ -34,30 +34,33 @@ public class RunPageController implements Initializable {
     //todo: ДОРАБОТАТЬ МОДЕЛЬ УЧАСТНИКА И ПОМЕНЯТЬ МОДЕЛЬ СПОРТСМЕНА НА УЧАСТНИКА
     //Столбцы
     @FXML
-    private TableColumn<Sportsman, String> lastnameColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Sportsman, String> namestartColumn; // = new TableColumn<SportsmanDto, String>();
     @FXML
-    private TableColumn<Sportsman, String> nameColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Sportsman, String> categoryColumn; // = new TableColumn<SportsmanDto, String>();
     @FXML
-    private TableColumn<Sportsman, String> birthdateColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Sportsman, String> distanceColumn; // = new TableColumn<SportsmanDto, String>();
     @FXML
-    private TableColumn<Sportsman, String> genderColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Sportsman, String> starttimeColumn; // = new TableColumn<SportsmanDto, String>();
     @FXML
-    private TableColumn<Sportsman, String> regionColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Sportsman, String> countlapsColumn; // = new TableColumn<SportsmanDto, String>();
+    @FXML
+    private TableColumn<Sportsman, String> compDayColumn; // = new TableColumn<SportsmanDto, String>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        lastnameColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("lastname"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("name"));
-        birthdateColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("birthdate"));
-        genderColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("gender"));
-        regionColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("region"));
+        namestartColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("lastname"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("name"));
+        distanceColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("birthdate"));
+        starttimeColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("gender"));
+        countlapsColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("region"));
+        compDayColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("region"));
         runTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     @FXML
     //todo: РЕАЛИЗОВАТЬ ЧТЕНИЕ С РЕАЛЬНЫХ ФАЙЛОВ (ЗДЕСЬ ФАЙЛЫ ГЕНЕРИРУЮТСЯ В ЦИКЛЕ)
     private void AddExternalData(ActionEvent event) {
-        ObservableList<Sportsman> sportsmans = runTable.getItems();
+        /*ObservableList<Sportsman> sportsmans = runTable.getItems();
         for (Integer i = 0; i < 15; i++)
         {
             Sportsman man = new Sportsman(
@@ -70,7 +73,7 @@ public class RunPageController implements Initializable {
                     );
 
             sportsmans.add(man);
-        }
+        }*/
     }
 
     //Создание нового забега
