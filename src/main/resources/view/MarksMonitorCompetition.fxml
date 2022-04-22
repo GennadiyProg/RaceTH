@@ -57,7 +57,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <TextField alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" >
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin></TextField>
@@ -71,7 +71,7 @@
                               <String fx:value="btn-danger" />
                            </styleClass>
                         </Button>
-                        <TextField maxWidth="-Infinity" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="00:00:00" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <TextField maxWidth="-Infinity" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="00:00:00" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" editable="false">
                            <font>
                               <Font size="48.0" />
                            </font>
@@ -95,7 +95,7 @@
                         <Insets bottom="1.0" />
                      </GridPane.margin>
                   </GridPane>
-                  <TextField alignment="CENTER" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="12" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <TextField alignment="CENTER" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="12" GridPane.columnIndex="2" GridPane.halignment="CENTER" editable="false">
                      <font>
                         <Font size="48.0" />
                      </font>
