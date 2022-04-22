@@ -2,8 +2,8 @@ package com.lifehouse.raceth.gui;
 
 import com.lifehouse.raceth.dao.RunDAO;
 import com.lifehouse.raceth.model.Group;
-import com.lifehouse.raceth.model.Run;
-import com.lifehouse.raceth.model.RunDto;
+import com.lifehouse.raceth.model.Start;
+import com.lifehouse.raceth.modeldto.RunDto;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -66,7 +66,7 @@ public class MarksGroupPopupController implements Initializable {
         lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
 
         tableList = runTable.getItems();
-        for (Run run : runDAO.getAllRuns()) {
+        for (Start run : runDAO.getAllRuns()) {
             tableList.add(RunDto.convertToDto(run));
         }
 
@@ -94,7 +94,7 @@ public class MarksGroupPopupController implements Initializable {
             run.setGroup(group);
             run.setLaps(i);
             runTable.getItems().add(run);
-            runDAO.create(RunDto.convertToRun(run));
+            runDAO.create(RunDto.convertToStart(run));
         }
         runTable.refresh();
     }
@@ -112,9 +112,9 @@ public class MarksGroupPopupController implements Initializable {
         }
 
         if (runDto != null) {
-            Run run = RunDto.convertToRun(runDto);
+            Start run = RunDto.convertToStart(runDto);
             run.setLaps(Integer.parseInt(lapTextField.getText()));
-            run.setTime(LocalTime.parse(timeTextField.getText()));
+            run.setStartTime(LocalTime.parse(timeTextField.getText()));
             runDAO.update(run);
             runTable.refresh();
         }

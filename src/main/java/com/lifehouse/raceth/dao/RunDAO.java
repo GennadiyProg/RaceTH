@@ -1,12 +1,12 @@
 package com.lifehouse.raceth.dao;
 
-import com.lifehouse.raceth.model.Run;
+import com.lifehouse.raceth.model.Start;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
 
 import java.util.List;
 
 
-public class RunDAO implements DAO<Run> {
+public class RunDAO implements DAO<Start> {
 
 
 //    public void Create(@NotNull final Run run) {
@@ -17,18 +17,18 @@ public class RunDAO implements DAO<Run> {
 //        session.getTransaction().commit();
 //    }
 
-    public void create(Run run) {
+    public void create(Start run) {
         TmpStorage.runs.add(run);
     }
 
-    public void update(Run run) {
-        Run chRun = getRun(run.getId());
-        chRun.setTime(run.getTime());
+    public void update(Start run) {
+        Start chRun = getRun(run.getId());
+        chRun.setStartTime(run.getStartTime());
         chRun.setLaps(run.getLaps());
     }
 
-    public Run getRun(long id) {
-        for (Run item : TmpStorage.runs) {
+    public Start getRun(long id) {
+        for (Start item : TmpStorage.runs) {
             if (item.getId() == id) {
                 return item;
             }
@@ -36,11 +36,11 @@ public class RunDAO implements DAO<Run> {
         return null;
     }
 
-    public List<Run> getAllRuns() {
+    public List<Start> getAllRuns() {
         return TmpStorage.runs;
     }
 
-    public void Delete(Run run) {
+    public void Delete(Start run) {
         TmpStorage.runs.remove(run);
     }
 }
