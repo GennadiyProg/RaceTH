@@ -22,7 +22,7 @@ public class StartDto {
     private Distance distance;
     private int laps;
     private CompetitionDay competitionDay;
-    private RunTab tab;
+    private StartTab tab;
 
     public static StartDto convertToDto(Start start) {
         StartDto startDto = new StartDto();

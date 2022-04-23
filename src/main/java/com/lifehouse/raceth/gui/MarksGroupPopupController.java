@@ -1,6 +1,6 @@
 package com.lifehouse.raceth.gui;
 
-import com.lifehouse.raceth.dao.RunDAO;
+import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Start;
 import com.lifehouse.raceth.modeldto.StartDto;
@@ -60,13 +60,13 @@ public class MarksGroupPopupController implements Initializable {
     @FXML
     private TableColumn<StartDto, String> lapColumn;
 
-    private RunDAO runDAO;
+    private StartDAO startDAO;
 
     private long chosenId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        runDAO = new RunDAO();
+        startDAO = new StartDAO();
         initTable();
         initListeners();
         addValues();
@@ -92,7 +92,7 @@ public class MarksGroupPopupController implements Initializable {
 
     private void addValues() {
         tableList = runTable.getItems();
-        for (Start run : runDAO.getAllRuns()) {
+        for (Start run : startDAO.getAllRuns()) {
             tableList.add(StartDto.convertToDto(run));
         }
 
@@ -113,7 +113,7 @@ public class MarksGroupPopupController implements Initializable {
                 System.out.println("Hi, I'm a test string " + newValue)
             );
             runTable.getItems().add(run);
-            runDAO.create(StartDto.convertToStart(run));
+            startDAO.create(StartDto.convertToStart(run));
         }
         runTable.refresh();
         //
@@ -137,7 +137,7 @@ public class MarksGroupPopupController implements Initializable {
             Start run = StartDto.convertToStart(startDto);
             run.setLaps(Integer.parseInt(lapTextField.getText()));
             run.setStartTime(LocalTime.parse(timeTextField.getText()));
-            runDAO.update(run);
+            startDAO.update(run);
             runTable.refresh();
         }
     }

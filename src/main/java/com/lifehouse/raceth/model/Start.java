@@ -30,5 +30,5 @@ public class Start {
     @NotNull
     private CompetitionDay competitionDay;
     @ManyToOne
-    private RunTab tab;
+    private StartTab tab;
 }
