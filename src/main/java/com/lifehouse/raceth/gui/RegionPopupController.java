@@ -1,27 +1,20 @@
 package com.lifehouse.raceth.gui;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import lombok.Data;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 @Data
-public class ClubPopupController implements Initializable {
+public class RegionPopupController implements Initializable {
     @FXML
     private AnchorPane main_pane;
     @FXML
@@ -53,20 +46,6 @@ public class ClubPopupController implements Initializable {
             ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
         } catch (Exception e) {
             System.out.println("cant loading");
-        }
-    }
-    @FXML
-
-    void OpenRegion(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RegionPage.fxml"));
-            Parent root1 = (Parent)fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
-            stage.show();
-        } catch (Exception e) {
-            System.out.println("Cant load");
         }
     }
 }

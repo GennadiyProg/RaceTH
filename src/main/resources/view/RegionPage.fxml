@@ -13,17 +13,17 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.ClubPageController">
+<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RegionPageController">
    <children>
-      <GridPane layoutX="11.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="610.0" prefWidth="1090.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane layoutX="-14.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="610.0" prefWidth="1090.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="154.13331451416016" minHeight="10.0" prefHeight="49.799993896484374" valignment="TOP" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="583.7333251953125" minHeight="10.0" prefHeight="435.40000610351564" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="174.00000610351566" minHeight="10.0" prefHeight="61.39999999999998" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="174.00000610351566" minHeight="10.0" prefHeight="51.200000000000045" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="174.00000610351566" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="174.00000610351566" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="1068.0">
@@ -46,7 +46,7 @@
                      </rowConstraints>
                      <children>
                         <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="274.0" styleClass="text-field" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                        <Label styleClass="label-bold" stylesheets="@css/AppLabel.css" text="Поиск клуба:" textFill="#555555" translateX="-10.0" GridPane.halignment="RIGHT">
+                        <Label prefHeight="20.0" prefWidth="128.0" styleClass="label-bold" stylesheets="@css/AppLabel.css" text="Поиск региона:" textFill="#555555" translateX="-10.0" GridPane.halignment="RIGHT">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -55,12 +55,11 @@
                   </GridPane>
                </children>
             </GridPane>
-            <TableView fx:id="runTable" maxWidth="-Infinity" prefHeight="434.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <TableView fx:id="runTable" maxWidth="-Infinity" prefHeight="433.0" prefWidth="710.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <columns>
                   <TableColumn prefWidth="57.60000169277191" resizable="false" text="№" />
-                  <TableColumn prefWidth="268.00007247924805" resizable="false" text="Название" />
-                  <TableColumn prefWidth="316.7999267578125" text="Тренер (представитель)" />
-                  <TableColumn prefWidth="183.19998779296873" resizable="false" text="Регион" />
+                  <TableColumn prefWidth="231.0" resizable="false" text="Код региона" />
+                  <TableColumn prefWidth="411.0" resizable="false" text="Регион" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -75,11 +74,11 @@
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="342.79999999999995" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="10.0" minHeight="5.0" prefHeight="10.0" />
+                  <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#EditClub" stylesheets="@css/Buttons.css" text="Редактировать" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Button mnemonicParsing="false" onAction="#EditRegion" stylesheets="@css/Buttons.css" text="Редактировать" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -88,7 +87,7 @@
                         <String fx:value="btn-common" />
                         <String fx:value="btn-warning" />
                      </styleClass></Button>
-                  <Button mnemonicParsing="false" onAction="#NewClub" stylesheets="@css/Buttons.css" text="Добавить клуб" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Button mnemonicParsing="false" onAction="#NewRegion" stylesheets="@css/Buttons.css" text="Добавить регион" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -96,7 +95,8 @@
                         <String fx:value="btn" />
                         <String fx:value="btn-common" />
                         <String fx:value="btn-success" />
-                     </styleClass></Button>
+                     </styleClass>
+                  </Button>
                   <Button mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Удалить" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
@@ -107,7 +107,7 @@
                         <String fx:value="btn-danger" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#OpenRegion" stylesheets="@css/Buttons.css" text="Открыть базу регионов для редактирования" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Button mnemonicParsing="false" onAction="#Saving" prefHeight="36.0" prefWidth="239.0" stylesheets="@css/Buttons.css" text="ОК" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>

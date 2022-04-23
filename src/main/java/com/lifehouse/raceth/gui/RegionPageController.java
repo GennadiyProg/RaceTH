@@ -3,6 +3,7 @@ package com.lifehouse.raceth.gui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -11,15 +12,15 @@ import javafx.stage.Stage;
 import lombok.Data;
 
 @Data
-public class ClubPageController {
+public class RegionPageController {
     @FXML
     private AnchorPane main_pane;
 
 
     @FXML
-    void NewClub(ActionEvent event) {
+    void NewRegion(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/ClubsPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RegionPopup.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -30,10 +31,9 @@ public class ClubPageController {
         }
     }
     @FXML
-
-    void EditClub(ActionEvent event) {
+    void EditRegion(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/ClubsPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RegionPopup.fxml"));
             Parent root1 = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -44,17 +44,12 @@ public class ClubPageController {
         }
     }
     @FXML
-
-    void OpenRegion(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RegionPage.fxml"));
-            Parent root1 = (Parent)fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
-            stage.show();
+    void Saving(ActionEvent event) {
+        try
+        {
+            ((Node)(event.getSource())).getScene().getWindow().hide(); //Закрытие окна
         } catch (Exception e) {
-            System.out.println("Cant load");
+            System.out.println("cant loading");
         }
     }
 }
