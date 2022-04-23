@@ -6,8 +6,7 @@ import com.lifehouse.raceth.tmpstorage.TmpStorage;
 import java.util.List;
 
 
-public class RunDAO implements DAO<Start> {
-
+public class StartDAO implements DAO<Start> {
 
 //    public void Create(@NotNull final Run run) {
 //        session.beginTransaction();

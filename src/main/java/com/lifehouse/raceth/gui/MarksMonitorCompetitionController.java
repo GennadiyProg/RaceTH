@@ -2,6 +2,7 @@ package com.lifehouse.raceth.gui;
 
 import com.lifehouse.raceth.model.Checkpoint;
 import com.lifehouse.raceth.model.Start;
+import com.lifehouse.raceth.model.StartTab;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

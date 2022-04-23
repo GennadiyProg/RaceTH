@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RunTab {
+public class StartTab {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
