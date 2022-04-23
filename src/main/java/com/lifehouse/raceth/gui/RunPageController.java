@@ -1,7 +1,7 @@
 package com.lifehouse.raceth.gui;
 
 import com.lifehouse.raceth.model.Gender;
-import com.lifehouse.raceth.model.Sportsman;
+import com.lifehouse.raceth.model.Start;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,31 +29,31 @@ public class RunPageController implements Initializable {
 
     //Табличка
     @FXML
-    private TableView<Sportsman> runTable;
+    private TableView<Start> runTable;
 
     //todo: ДОРАБОТАТЬ МОДЕЛЬ УЧАСТНИКА И ПОМЕНЯТЬ МОДЕЛЬ СПОРТСМЕНА НА УЧАСТНИКА
     //Столбцы
     @FXML
-    private TableColumn<Sportsman, String> namestartColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> namestartColumn; // = new TableColumn<SportsmanDto, String>();
     @FXML
-    private TableColumn<Sportsman, String> categoryColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> categoryColumn; // = new TableColumn<SportsmanDto, String>();
     @FXML
-    private TableColumn<Sportsman, String> distanceColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> distanceColumn; // = new TableColumn<SportsmanDto, String>();
     @FXML
-    private TableColumn<Sportsman, String> starttimeColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> starttimeColumn; // = new TableColumn<SportsmanDto, String>();
     @FXML
-    private TableColumn<Sportsman, String> countlapsColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> countlapsColumn; // = new TableColumn<SportsmanDto, String>();
     @FXML
-    private TableColumn<Sportsman, String> compDayColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> compDayColumn; // = new TableColumn<SportsmanDto, String>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        namestartColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("lastname"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("name"));
-        distanceColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("birthdate"));
-        starttimeColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("gender"));
-        countlapsColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("region"));
-        compDayColumn.setCellValueFactory(new PropertyValueFactory<Sportsman, String>("region"));
+        namestartColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("name"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("group"));
+        distanceColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("distance"));
+        starttimeColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("startTime"));
+        countlapsColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("laps"));
+        compDayColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("competitionDay"));
         runTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
@@ -94,22 +94,22 @@ public class RunPageController implements Initializable {
     @FXML
     //todo: РЕАЛИЗОВАТЬ ОКНО ДОБАВЛЕНИЯ УЧАСТНИКА И ДОРАБОТАТЬ ЭТОТ МЕТОД
     private void AddRow(ActionEvent event) {
-        //Sportsman sportsman = ВызовОкнаДобавленияСпортсмена();
+        //Start start = ВызовОкнаДобавленияСпортсмена();
         //runTable.getItems().add(sportsman);
     }
 
     @FXML
     //todo: РЕАЛИЗОВАТЬ ОКНО РЕДАКТИРОВАНИЯ УЧАСТНИКА
     private void UpdateRow(ActionEvent event) {
-        Sportsman sportsman = runTable.getSelectionModel().getSelectedItem();
-        //ВызовОкнаРедактирования(sportsman)
+        Start start = runTable.getSelectionModel().getSelectedItem();
+        //ВызовОкнаРедактирования(start)
         runTable.refresh();
     }
 
     @FXML
     private void RemoveRows(ActionEvent event) {
-        ObservableList<Sportsman> sportsmen = runTable.getSelectionModel().getSelectedItems();
-        runTable.getItems().removeAll(sportsmen);
+        ObservableList<Start> starts = runTable.getSelectionModel().getSelectedItems();
+        runTable.getItems().removeAll(starts);
     }
 
 
