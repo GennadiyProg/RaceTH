@@ -94,7 +94,7 @@ public class RunPageController implements Initializable {
     @FXML
     //todo: РЕАЛИЗОВАТЬ ОКНО ДОБАВЛЕНИЯ УЧАСТНИКА И ДОРАБОТАТЬ ЭТОТ МЕТОД
     private void AddRow(ActionEvent event) {
-        //Sportsman sportsman = ВызовОкнаДобавленияСпортсмена();
+        //Start start = ВызовОкнаДобавленияСпортсмена();
         //runTable.getItems().add(sportsman);
     }
 
@@ -102,14 +102,14 @@ public class RunPageController implements Initializable {
     //todo: РЕАЛИЗОВАТЬ ОКНО РЕДАКТИРОВАНИЯ УЧАСТНИКА
     private void UpdateRow(ActionEvent event) {
         Start start = runTable.getSelectionModel().getSelectedItem();
-        //ВызовОкнаРедактирования(sportsman)
+        //ВызовОкнаРедактирования(start)
         runTable.refresh();
     }
 
     @FXML
     private void RemoveRows(ActionEvent event) {
-        ObservableList<Start> sportsmen = runTable.getSelectionModel().getSelectedItems();
-        runTable.getItems().removeAll(sportsmen);
+        ObservableList<Start> starts = runTable.getSelectionModel().getSelectedItems();
+        runTable.getItems().removeAll(starts);
     }
 
 
