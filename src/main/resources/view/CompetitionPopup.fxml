@@ -27,10 +27,10 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <GridPane prefHeight="160.0" prefWidth="490.0" GridPane.rowIndex="1">
+            <GridPane prefHeight="175.0" prefWidth="242.0" GridPane.rowIndex="1">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="521.0" minWidth="10.0" prefWidth="282.80002746582034" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="742.3999572753906" minWidth="10.0" prefWidth="229.3999633789062" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="521.0" minWidth="10.0" prefWidth="264.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="742.3999572753906" minWidth="10.0" prefWidth="226.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -64,7 +64,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="dateDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <DatePicker fx:id="dateDatePicker" prefHeight="25.0" prefWidth="82.0" translateX="18.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Главный судья" GridPane.rowIndex="4">
                      <font>
                         <Font size="16.0" />
@@ -77,9 +77,20 @@
                   </Label>
                   <TextField fx:id="mainJudgeTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.rowIndex="5" />
                   <TextField fx:id="mainSecretaryTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <DatePicker fx:id="dateDatePicker1" prefHeight="25.0" prefWidth="80.0" translateX="135.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label prefHeight="25.0" prefWidth="17.0" text="C" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="25.0" prefWidth="26.0" text="по" translateX="108.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
-            <Label prefHeight="61.0" prefWidth="434.0" text="Создать(Изменить) соревнование" textFill="#305ec1">
+            <Label prefHeight="38.0" prefWidth="454.0" text="Создать/Изменить соревнование" textFill="#305ec1">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
