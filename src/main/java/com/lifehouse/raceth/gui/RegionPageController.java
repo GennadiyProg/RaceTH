@@ -20,27 +20,27 @@ public class RegionPageController {
     @FXML
     void NewRegion(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RegionPopup.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RegionsPopup.fxml"));
+            Parent root2 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
+            stage.setScene(new Scene(root2));
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
             stage.show();
         } catch (Exception e) {
-            System.out.println("Cant load");
+            System.out.println("Cant load ...");
         }
     }
     @FXML
     void EditRegion(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RegionPopup.fxml"));
-            Parent root1 = (Parent)fxmlLoader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RegionsPopup.fxml"));
+            Parent root3 = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
+            stage.setScene(new Scene(root3));
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
             stage.show();
         } catch (Exception e) {
-            System.out.println("Cant load");
+            System.out.println("Cant load !!!");
         }
     }
     @FXML
