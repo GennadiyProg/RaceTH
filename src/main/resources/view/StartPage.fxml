@@ -69,7 +69,7 @@
                <toggleGroup>
                   <ToggleGroup fx:id="ButtGroup" />
                </toggleGroup></ToggleButton>
-            <ToggleButton fx:id="zabegButt" alignment="CENTER_LEFT" layoutY="66.0" mnemonicParsing="false" onAction="#handleButtonAction2" stylesheets="@css/table.css" text="Забег" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="zabegButt" alignment="CENTER_LEFT" layoutY="66.0" mnemonicParsing="false" onAction="#handleButtonAction2" stylesheets="@css/table.css" text="Старты" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -78,7 +78,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="relayButt" alignment="CENTER_LEFT" layoutY="132.0" mnemonicParsing="false" onAction="#handleButtonAction3" stylesheets="@css/table.css" text="Эстафета" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="relayButt" alignment="CENTER_LEFT" layoutY="132.0" mnemonicParsing="false" onAction="#handleButtonAction3" stylesheets="@css/table.css" text="Эстафеты" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>

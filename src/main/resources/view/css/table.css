@@ -21,6 +21,9 @@
     -fx-effect:dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 1, 1);
     /*-fx-border-style: solid none; -fx-border-width: 5; -fx-border-color: rgba(48, 94, 193, 0.1);*/
 }
+.table-view{
+    -fx-padding: -2 -2.4 -1 -1.5;
+}
 .table-view .column-header {
     -fx-background-color: transparent;
 }
