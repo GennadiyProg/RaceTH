@@ -95,7 +95,7 @@
                   <Font name="System Bold" size="26.0" />
                </font>
             </Label>
-            <Label text="Считать возраст участников по состонянию на:" GridPane.rowIndex="2">
+            <Label text="Считать возраст участников по состоянию на:" GridPane.rowIndex="2">
                <font>
                   <Font size="16.0" />
                </font>

@@ -87,6 +87,8 @@ public class CompetitionPageController implements Initializable {
 
     private CompetitionPageElementService competitionPageElementService;
 
+    private Competition currentCompetition;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         competitionDAO = new CompetitionDAO();
@@ -180,11 +182,11 @@ public class CompetitionPageController implements Initializable {
 
     @FXML
     public void makeCompetitionCurrent(ActionEvent event){
-        Competition competition = competitionTable.getSelectionModel().getSelectedItem();
-        if (competition == null){
+        currentCompetition = competitionTable.getSelectionModel().getSelectedItem();
+        if (currentCompetition == null){
             return;
         }
-        value.setValue(competition.getName());
+        value.setValue(currentCompetition.getName());
     }
 
     @FXML

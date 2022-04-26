@@ -3,7 +3,7 @@ package com.lifehouse.raceth.gui;
 import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Start;
-import com.lifehouse.raceth.modeldto.StartDto;
+import com.lifehouse.raceth.viewmodel.StartView;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,24 +41,24 @@ public class MarksGroupPopupController implements Initializable {
     private TextField timeTextField;
 
     @FXML
-    private TableView<StartDto> runTable;
+    private TableView<StartView> runTable;
 
-    private ObservableList<StartDto> tableList;
-
-    @FXML
-    private TableColumn<StartDto, Boolean> selectionCheckboxColumn;
+    private ObservableList<StartView> tableList;
 
     @FXML
-    private TableColumn<StartDto, String> numberColumn;
+    private TableColumn<StartView, Boolean> selectionCheckboxColumn;
 
     @FXML
-    private TableColumn<StartDto, String> groupColumn;
+    private TableColumn<StartView, String> numberColumn;
 
     @FXML
-    private TableColumn<StartDto, String> startTimeColumn;
+    private TableColumn<StartView, String> groupColumn;
 
     @FXML
-    private TableColumn<StartDto, String> lapColumn;
+    private TableColumn<StartView, String> startTimeColumn;
+
+    @FXML
+    private TableColumn<StartView, String> lapColumn;
 
     private StartDAO startDAO;
 
@@ -93,7 +93,7 @@ public class MarksGroupPopupController implements Initializable {
     private void addValues() {
         tableList = runTable.getItems();
         for (Start run : startDAO.getAllRuns()) {
-            tableList.add(StartDto.convertToDto(run));
+            tableList.add(StartView.convertToView(run));
         }
 
         //
@@ -102,7 +102,7 @@ public class MarksGroupPopupController implements Initializable {
         int i = 0;
         while (i < 5) {
             i++;
-            StartDto run = new StartDto();
+            StartView run = new StartView();
             run.setId(i);
             run.setStartTime(LocalTime.now());
             Group group = new Group();
@@ -113,7 +113,7 @@ public class MarksGroupPopupController implements Initializable {
                 System.out.println("Hi, I'm a test string " + newValue)
             );
             runTable.getItems().add(run);
-            startDAO.create(StartDto.convertToStart(run));
+            startDAO.create(StartView.convertToModel(run));
         }
         runTable.refresh();
         //
@@ -123,18 +123,18 @@ public class MarksGroupPopupController implements Initializable {
 
     @FXML
     void updateTable(ActionEvent event)  {
-        StartDto startDto = null;
-        for (StartDto item : tableList) {
+        StartView startView = null;
+        for (StartView item : tableList) {
             if (item.getId() == chosenId) {
-                startDto = item;
-                startDto.setLaps(Integer.parseInt(lapTextField.getText()));
-                startDto.setStartTime(LocalTime.parse(timeTextField.getText()));
+                startView = item;
+                startView.setLaps(Integer.parseInt(lapTextField.getText()));
+                startView.setStartTime(LocalTime.parse(timeTextField.getText()));
                 break;
             }
         }
 
-        if (startDto != null) {
-            Start run = StartDto.convertToStart(startDto);
+        if (startView != null) {
+            Start run = StartView.convertToModel(startView);
             run.setLaps(Integer.parseInt(lapTextField.getText()));
             run.setStartTime(LocalTime.parse(timeTextField.getText()));
             startDAO.update(run);
