@@ -1,9 +1,12 @@
 package com.lifehouse.raceth.gui.competitionpage.impl;
 
 import com.lifehouse.raceth.dao.CompetitionDAO;
+import com.lifehouse.raceth.dao.CompetitionDayDAO;
 import com.lifehouse.raceth.gui.competitionpage.CompetitionPageElementService;
 import com.lifehouse.raceth.gui.competitionpage.popups.CompetitionPopupController;
+import com.lifehouse.raceth.model.CompetitionDay;
 import com.lifehouse.raceth.model.competition.Competition;
+import com.lifehouse.raceth.tmpstorage.TmpStorage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,14 +14,20 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.xml.bind.SchemaOutputResolver;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class CompetitionServiceImpl implements CompetitionPageElementService {
     private final CompetitionDAO competitionDAO;
+    private final CompetitionDayDAO competitionDayDAO;
     private final TableView<Competition> competitionTable;
 
     public CompetitionServiceImpl(TableView<Competition> competitionTable) {
         this.competitionDAO = new CompetitionDAO();
+        this.competitionDayDAO = new CompetitionDayDAO();
         this.competitionTable = competitionTable;
     }
 
@@ -28,6 +37,7 @@ public class CompetitionServiceImpl implements CompetitionPageElementService {
         if (controller == null) return;
         controller.getNewCompetition().addListener((observable, oldValue, newValue) -> {
             competitionDAO.create(newValue);
+            createCompetitionDays(newValue);
             competitionTable.getItems().add(newValue);
             competitionTable.refresh();
         });
@@ -45,6 +55,8 @@ public class CompetitionServiceImpl implements CompetitionPageElementService {
         controller.edit(competition);
         controller.getNewCompetition().addListener((observable, oldValue, newValue) -> {
             competitionDAO.update(newValue);
+            competitionDayDAO.deleteByCompetitionId(newValue.getId());
+            createCompetitionDays(newValue);
             competitionTable.getSelectionModel().getSelectedItem().setFields(newValue);
             competitionTable.refresh();
         });
@@ -58,6 +70,19 @@ public class CompetitionServiceImpl implements CompetitionPageElementService {
         }
         competitionTable.getItems().removeAll(competition);
         competitionDAO.delete(competition);
+        competitionDayDAO.deleteByCompetitionId(competition.getId());
+    }
+
+    private void createCompetitionDays(Competition competition){
+        Calendar fromCal = new GregorianCalendar();
+        Calendar toCal = new GregorianCalendar();
+
+        fromCal.setTime(competition.getFromDate());
+        toCal.setTime(competition.getToDate());
+        while (fromCal.before(toCal) || fromCal.equals(toCal)){
+            competitionDayDAO.create(new CompetitionDay(fromCal.getTime(), competition));
+            fromCal.add(Calendar.DATE, +1);
+        }
     }
 
     private CompetitionPopupController createCompetitionPopup(){

@@ -179,11 +179,10 @@
                   <columns>
                      <TableColumn fx:id="cNameColumn" prefWidth="178.0" text="Название" />
                      <TableColumn fx:id="cOrganizerColumn" prefWidth="154.9333953857422" text="Организатор" />
-                     <TableColumn fx:id="cLocationColumn" prefWidth="166.13323974609375" text="Место проведения" />
-                     <TableColumn fx:id="cFromDateColumn" prefWidth="135.73330688476562" text="Дата начала" />
-                     <TableColumn fx:id="cToDateColumn" prefWidth="131.4666748046875" text="Дата окончания" />
-                     <TableColumn fx:id="cMainJudgeColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="159.4666748046875" text="Главный судья" />
-                     <TableColumn fx:id="cMainSecretaryColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="143.60003662109375" text="Главный секретарь" />
+                     <TableColumn fx:id="cLocationColumn" prefWidth="223.20001220703125" text="Место проведения" />
+                     <TableColumn fx:id="cDateColumn" prefWidth="134.4000244140625" text="Дата начала" />
+                     <TableColumn fx:id="cMainJudgeColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="192.79998779296875" text="Главный судья" />
+                     <TableColumn fx:id="cMainSecretaryColumn" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="176.7999267578125" text="Главный секретарь" />
                   </columns>
                </TableView>
                <GridPane layoutX="10.0" layoutY="260.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="444.0">

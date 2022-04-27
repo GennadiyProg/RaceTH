@@ -22,4 +22,9 @@ public class CompetitionDay {
     @ManyToOne
     @NotNull
     private Competition competition;
+
+    public CompetitionDay(Date date, Competition competition) {
+        this.date = date;
+        this.competition = competition;
+    }
 }

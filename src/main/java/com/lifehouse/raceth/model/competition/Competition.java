@@ -7,9 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Entity
 @Data
@@ -57,6 +56,11 @@ public class Competition {
         this.mainJudge = mainJudge;
         this.mainSecretary = mainSecretary;
         this.calculationSystemAge = calculationSystemAge;
+    }
+
+    public String getDate() {
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy.MM.dd");
+        return formater.format(fromDate) + " - " + formater.format(toDate);
     }
 
     public void setFields(Competition competition){
