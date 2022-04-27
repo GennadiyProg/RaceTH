@@ -11,6 +11,7 @@ import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Gender;
+import com.lifehouse.raceth.model.viewmodel.GroupView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -50,15 +51,17 @@ public class CompetitionPageController implements Initializable {
     private TableColumn<Competition, String> cMainSecretaryColumn;
 
     @FXML
-    private TableView<Group> groupTable;
+    private TableView<GroupView> groupTable;
     @FXML
-    private TableColumn<Group, String> gNameColumn;
+    private TableColumn<GroupView, Boolean> gCheckboxColumn;
     @FXML
-    private TableColumn<Group, Integer> gAgeFromColumn;
+    private TableColumn<GroupView, String> gNameColumn;
     @FXML
-    private TableColumn<Group, Integer> gAgeToColumn;
+    private TableColumn<GroupView, Integer> gAgeFromColumn;
     @FXML
-    private TableColumn<Group, Gender> gGenderColumn;
+    private TableColumn<GroupView, Integer> gAgeToColumn;
+    @FXML
+    private TableColumn<GroupView, Gender> gGenderColumn;
 
     @FXML
     private TableView<Distance> distanceTable;
@@ -77,7 +80,7 @@ public class CompetitionPageController implements Initializable {
     private TextField searchDistanceTextField;
 
     private final List<Competition> competitions = new ArrayList<>();
-    private final List<Group> groups = new ArrayList<>();
+    private final List<GroupView> groups = new ArrayList<>();
     private final List<Distance> distances = new ArrayList<>();
 
     private final StringProperty value = new SimpleStringProperty();
@@ -115,13 +118,24 @@ public class CompetitionPageController implements Initializable {
     }
 
     private void initializeGroupTable(){
+        gCheckboxColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
         gNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         gAgeFromColumn.setCellValueFactory(new PropertyValueFactory<>("ageFrom"));
         gAgeToColumn.setCellValueFactory(new PropertyValueFactory<>("ageTo"));
         gGenderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
 
-        ObservableList<Group> groups = groupTable.getItems();
-        groups.addAll(groupDAO.getAllGroups());
+        ObservableList<GroupView> groups = groupTable.getItems();
+        groups.addAll(getAllGroupViews());
+    }
+
+    private List<GroupView> getAllGroupViews() {
+        List<Group> groups = groupDAO.getAllGroups();
+        List<GroupView> groupViews = new ArrayList<>();
+        for (Group group : groups) {
+            groupViews.add(GroupView.convertToView(group));
+        }
+
+        return  groupViews;
     }
 
     private void initializeDistanceTable(){
@@ -151,7 +165,7 @@ public class CompetitionPageController implements Initializable {
 
         searchGroupTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue) {
-                    groups.addAll(groupDAO.getAllGroups());
+                    groups.addAll(getAllGroupViews());
                 } else {
                     groups.clear();
                 }

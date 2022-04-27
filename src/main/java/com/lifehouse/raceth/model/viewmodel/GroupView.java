@@ -1,4 +1,4 @@
-package com.lifehouse.raceth.viewmodel;
+package com.lifehouse.raceth.model.viewmodel;
 
 import com.lifehouse.raceth.model.Gender;
 import com.lifehouse.raceth.model.Group;
@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GroupView {
-    private CheckBox check = new CheckBox();
+    private CheckBox checkBox = new CheckBox();
     private long id; //ID
     private String name; // Название группы
     private int ageFrom;
@@ -46,5 +46,12 @@ public class GroupView {
                 groupView.getGender(),
                 groupView.getCompetitions()
         );
+    }
+
+    public void setFields(GroupView groupView) {
+        this.name = groupView.getName();
+        this.gender = groupView.getGender();
+        this.ageFrom = groupView.getAgeFrom();
+        this.ageTo = groupView.getAgeTo();
     }
 }

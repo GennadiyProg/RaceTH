@@ -3,7 +3,7 @@ package com.lifehouse.raceth.gui.competitionpage.impl;
 import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.gui.competitionpage.CompetitionPageElementService;
 import com.lifehouse.raceth.gui.competitionpage.popups.GroupPopupController;
-import com.lifehouse.raceth.model.Group;
+import com.lifehouse.raceth.model.viewmodel.GroupView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
@@ -14,9 +14,9 @@ import java.io.IOException;
 
 public class GroupServiceImpl implements CompetitionPageElementService {
     private final GroupDAO groupDAO;
-    private final TableView<Group> groupTable;
+    private final TableView<GroupView> groupTable;
 
-    public GroupServiceImpl(TableView<Group> groupTable) {
+    public GroupServiceImpl(TableView<GroupView> groupTable) {
         this.groupDAO = new GroupDAO();
         this.groupTable = groupTable;
     }
@@ -27,35 +27,35 @@ public class GroupServiceImpl implements CompetitionPageElementService {
         if (controller == null) return;
         controller.getNewGroup().addListener((observable, oldValue, newValue) -> {
             groupDAO.create(newValue);
-            groupTable.getItems().add(newValue);
+            groupTable.getItems().add(GroupView.convertToView(newValue));
             groupTable.refresh();
         });
     }
 
     @Override
     public void edit() {
-        Group group = groupTable.getSelectionModel().getSelectedItem();
-        if (group == null){
+        GroupView groupView = groupTable.getSelectionModel().getSelectedItem();
+        if (groupView == null){
             return;
         }
         GroupPopupController controller = createGroupPopup();
         if (controller == null) return;
-        controller.edit(group);
+        controller.edit(groupView);
         controller.getNewGroup().addListener((observable, oldValue, newValue) -> {
             groupDAO.update(newValue);
-            groupTable.getSelectionModel().getSelectedItem().setFields(newValue);
+            groupTable.getSelectionModel().getSelectedItem().setFields(GroupView.convertToView(newValue));
             groupTable.refresh();
         });
     }
 
     @Override
     public void delete() {
-        Group group = groupTable.getSelectionModel().getSelectedItem();
-        if (group == null){
+        GroupView groupView = groupTable.getSelectionModel().getSelectedItem();
+        if (groupView == null){
             return;
         }
-        groupTable.getItems().removeAll(group);
-        groupDAO.delete(group);
+        groupTable.getItems().removeAll(groupView);
+        groupDAO.delete(GroupView.convertToModel(groupView));
     }
 
     private GroupPopupController createGroupPopup(){
@@ -64,7 +64,6 @@ public class GroupServiceImpl implements CompetitionPageElementService {
             return null;
         }
         GroupPopupController groupPopupController = fxmlLoader.getController();
-        groupPopupController.setGroupTable(groupTable);
         return groupPopupController;
     }
 

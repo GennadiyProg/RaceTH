@@ -103,12 +103,13 @@
                   </GridPane>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="groupTable" prefHeight="274.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css">
+                        <TableView fx:id="groupTable" prefHeight="274.0" prefWidth="528.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css">
                            <columns>
-                              <TableColumn fx:id="gNameColumn" prefWidth="196.0" resizable="false" text="Название" />
-                              <TableColumn fx:id="gAgeFromColumn" prefWidth="100.0" resizable="false" text="Возраст от" />
-                              <TableColumn fx:id="gAgeToColumn" prefWidth="100.0" resizable="false" text="Возраст до" />
-                              <TableColumn fx:id="gGenderColumn" prefWidth="132.0" resizable="false" text="Пол" />
+                              <TableColumn fx:id="gCheckboxColumn" prefWidth="73.60000324249268" resizable="false" text="Выбор" />
+                              <TableColumn fx:id="gNameColumn" prefWidth="126.39999389648438" resizable="false" text="Название" />
+                              <TableColumn fx:id="gAgeFromColumn" prefWidth="86.40003967285156" resizable="false" text="Возраст от" />
+                              <TableColumn fx:id="gAgeToColumn" prefWidth="124.79998779296875" resizable="false" text="Возраст до" />
+                              <TableColumn fx:id="gGenderColumn" prefWidth="116.79998779296875" resizable="false" text="Пол" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

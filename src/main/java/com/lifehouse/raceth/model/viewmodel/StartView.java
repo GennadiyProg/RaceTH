@@ -1,4 +1,4 @@
-package com.lifehouse.raceth.viewmodel;
+package com.lifehouse.raceth.model.viewmodel;
 
 import com.lifehouse.raceth.model.*;
 import javafx.scene.control.CheckBox;

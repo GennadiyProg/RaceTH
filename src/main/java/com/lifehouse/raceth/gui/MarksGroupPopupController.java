@@ -3,7 +3,7 @@ package com.lifehouse.raceth.gui;
 import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Start;
-import com.lifehouse.raceth.viewmodel.StartView;
+import com.lifehouse.raceth.model.viewmodel.StartView;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -74,7 +74,7 @@ public class MarksGroupPopupController implements Initializable {
 
     private void initTable() {
         runTable.setEditable(true);
-        selectionCheckboxColumn.setCellValueFactory(new PropertyValueFactory<>("check"));
+        selectionCheckboxColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
         numberColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
