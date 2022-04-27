@@ -29,8 +29,8 @@
          <children>
             <GridPane prefHeight="175.0" prefWidth="242.0" GridPane.rowIndex="1">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="521.0" minWidth="10.0" prefWidth="264.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="742.3999572753906" minWidth="10.0" prefWidth="226.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="521.0" minWidth="10.0" prefWidth="216.6" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="742.3999572753906" minWidth="10.0" prefWidth="272.6" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -64,7 +64,6 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="dateDatePicker" prefHeight="25.0" prefWidth="82.0" translateX="18.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Главный судья" GridPane.rowIndex="4">
                      <font>
                         <Font size="16.0" />
@@ -77,17 +76,31 @@
                   </Label>
                   <TextField fx:id="mainJudgeTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.rowIndex="5" />
                   <TextField fx:id="mainSecretaryTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <DatePicker fx:id="dateDatePicker1" prefHeight="25.0" prefWidth="80.0" translateX="135.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label prefHeight="25.0" prefWidth="17.0" text="C" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label prefHeight="25.0" prefWidth="26.0" text="по" translateX="108.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="62.400028228759766" minWidth="10.0" prefWidth="30.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.13334350585936" minWidth="10.0" prefWidth="105.13334350585936" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="79.20001220703126" minWidth="10.0" prefWidth="29.666668701171886" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.4000244140625" minWidth="10.0" prefWidth="108.33333129882811" />
+                    </columnConstraints>
+                     <children>
+                        <Label prefHeight="25.0" prefWidth="17.0" text="C">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="25.0" prefWidth="26.0" text="по" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <DatePicker fx:id="toDateDatePicker" prefHeight="26.0" prefWidth="142.0" GridPane.columnIndex="3" />
+                        <DatePicker fx:id="fromDateDatePicker" prefHeight="26.0" prefWidth="102.0" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                </children>
             </GridPane>
             <Label prefHeight="38.0" prefWidth="454.0" text="Создать/Изменить соревнование" textFill="#305ec1">

@@ -11,6 +11,7 @@ import java.util.List;
 public class TmpStorage {
     public static List<Checkpoint> checkpoints = new ArrayList<Checkpoint>();
     public static List<Competition> competitions = new ArrayList<Competition>();
+    public static List<CompetitionDay> competitionDays = new ArrayList<>();
     public static List<Group> groups = new ArrayList<Group>();
     public static List<Distance> distances = new ArrayList<Distance>();
     public static List<Participant> participants = new ArrayList<Participant>();

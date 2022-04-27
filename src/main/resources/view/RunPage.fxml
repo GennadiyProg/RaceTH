@@ -82,7 +82,7 @@
                         <String fx:value="btn-common" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="createCompretition_button" mnemonicParsing="false" onAction="#AddRun" stylesheets="@css/Buttons.css" text="Создать старт" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="createRun_button" mnemonicParsing="false" onAction="#AddRun" stylesheets="@css/Buttons.css" text="Создать старт" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
