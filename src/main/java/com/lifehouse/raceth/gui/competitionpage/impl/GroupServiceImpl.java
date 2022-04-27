@@ -1,11 +1,14 @@
 package com.lifehouse.raceth.gui.competitionpage.impl;
 
 import com.lifehouse.raceth.dao.GroupDAO;
+import com.lifehouse.raceth.gui.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.gui.competitionpage.CompetitionPageElementService;
 import com.lifehouse.raceth.gui.competitionpage.popups.GroupPopupController;
+import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.viewmodel.GroupView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -27,9 +30,34 @@ public class GroupServiceImpl implements CompetitionPageElementService {
         if (controller == null) return;
         controller.getNewGroup().addListener((observable, oldValue, newValue) -> {
             groupDAO.create(newValue);
-            groupTable.getItems().add(GroupView.convertToView(newValue));
+            GroupView groupView = GroupView.convertToView(newValue);
+            groupView.getCheckBox().selectedProperty().addListener((observableList, oldStatus, newStatus) -> {
+                Competition curCompetition = CompetitionPageController.currentCompetition;
+                attachCompetition(groupView, curCompetition, newStatus);
+                System.out.println("sample");
+            });
+            groupTable.getItems().add(groupView);
             groupTable.refresh();
         });
+    }
+
+    private void attachCompetition(GroupView groupView, Competition competition, Boolean status) {
+        if (competition != null) {
+            if (status){
+                groupView.getCompetitions().add(competition);
+            } else {
+                groupView.getCompetitions().remove(
+                        groupView.getCompetitions().stream()
+                                .filter((el) -> el.getId() == competition.getId())
+                                .findFirst().orElse(null)
+                );
+                groupDAO.update(GroupView.convertToModel(groupView));
+            }
+        } else {
+            groupView.getCheckBox().setSelected(false);
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование");
+            alert.show();
+        }
     }
 
     @Override

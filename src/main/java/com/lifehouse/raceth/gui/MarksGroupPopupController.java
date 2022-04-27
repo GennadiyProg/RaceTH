@@ -109,7 +109,7 @@ public class MarksGroupPopupController implements Initializable {
             group.setName("Group" + i);
             run.setGroup(group);
             run.setLaps(i);
-            run.getCheck().selectedProperty().addListener((observableValue, oldValue, newValue) ->
+            run.getCheckBox().selectedProperty().addListener((observableValue, oldValue, newValue) ->
                 System.out.println("Hi, I'm a test string " + newValue)
             );
             runTable.getItems().add(run);

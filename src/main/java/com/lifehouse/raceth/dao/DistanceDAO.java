@@ -26,6 +26,7 @@ public class DistanceDAO implements DAO<Distance> {
 //    }
 
     public void create(Distance distance) {
+        distance.setId(TmpStorage.distances.size());
         TmpStorage.distances.add(distance);
     }
 

@@ -1,18 +1,20 @@
 package com.lifehouse.raceth.gui.competitionpage.impl;
 
 import com.lifehouse.raceth.dao.DistanceDAO;
+import com.lifehouse.raceth.gui.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.gui.competitionpage.CompetitionPageElementService;
 import com.lifehouse.raceth.gui.competitionpage.popups.DistancePopupController;
-import com.lifehouse.raceth.model.Distance;
+import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.viewmodel.DistanceView;
-import com.lifehouse.raceth.model.viewmodel.GroupView;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.io.IOException;
 
 public class DistanceServiceImpl implements CompetitionPageElementService {
@@ -27,12 +29,37 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
     @Override
     public void create() {
         DistancePopupController controller = createDistancePopup();
-        if(controller == null) return;
+        if (controller == null) return;
         controller.getNewDistance().addListener((observable, oldValue, newValue) -> {
             distanceDAO.create(newValue);
-            distanceTable.getItems().add(DistanceView.convertToView(newValue));
+            DistanceView distanceView = DistanceView.convertToView(newValue);
+            distanceView.getCheckBox().selectedProperty().addListener((observableList, oldStatus, newStatus) -> {
+                Competition curCompetition = CompetitionPageController.currentCompetition;
+                attachCompetition(distanceView, curCompetition, newStatus);
+                System.out.println("ASdas");
+            });
+            distanceTable.getItems().add(distanceView);
             distanceTable.refresh();
         });
+    }
+
+    private void attachCompetition(DistanceView distanceView, Competition competition, Boolean status) {
+        if (competition != null) {
+            if (status) {
+                distanceView.getCompetitions().add(competition);
+            } else {
+                distanceView.getCompetitions().remove(
+                        distanceView.getCompetitions().stream()
+                                .filter((el) -> el.getId() == competition.getId())
+                                .findFirst().orElse(null)
+                );
+                distanceDAO.update(DistanceView.convertToModel(distanceView));
+            }
+        } else {
+            distanceView.getCheckBox().setSelected(false);
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование");
+            alert.show();
+        }
     }
 
     @Override
