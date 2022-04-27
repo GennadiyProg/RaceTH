@@ -64,6 +64,10 @@ public class RunPageController implements Initializable {
         compDayColumn.setCellValueFactory(new PropertyValueFactory<>("competitionDay"));
         startTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+    }
+
+    public void onUpdateSelectedCompetition() {
+        startTable.getItems().clear();
         startTable.getItems().addAll(startDAO.getCompetitionsRuns(CompetitionPageController.currentCompetition.getId()));
     }
 
@@ -97,6 +101,14 @@ public class RunPageController implements Initializable {
 
             RunCreateRunController runCreateRunController = fxmlLoader.getController();
             runCreateRunController.setStartTable(startTable);
+
+
+                /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CompetitionPage.fxml"));
+                Parent root2 = loader.load();
+                CompetitionPageController competitionPageController = loader.getController();
+                competitionPageController.getValue().addListener((observable, oldValue, newValue) -> onUpdateSelectedCompetition());*/
+
+
 
             stage.show();
         } catch (Exception e) {
