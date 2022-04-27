@@ -45,8 +45,10 @@ public class CompetitionDayDAO implements DAO<CompetitionDay> {
         return null;
     }
 
-    public List<CompetitionDay> getAllCompetitionDays() {
-        return TmpStorage.competitionDays;
+    public void deleteByCompetitionId(long competitionId){
+        TmpStorage.competitionDays.stream()
+                .filter(cDay -> cDay.getCompetition().getId() == competitionId)
+                .forEach(cDay -> TmpStorage.competitionDays.remove(cDay));
     }
 
     public void delete(CompetitionDay competitionDay) {
