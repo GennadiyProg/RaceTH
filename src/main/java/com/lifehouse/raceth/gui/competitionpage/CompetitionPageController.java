@@ -45,7 +45,9 @@ public class CompetitionPageController implements Initializable {
     @FXML
     private TableColumn<Competition, String> cLocationColumn;
     @FXML
-    private TableColumn<Competition, Date> cDateColumn;
+    private TableColumn<Competition, Date> cFromDateColumn;
+    @FXML
+    private TableColumn<Competition, Date> cToDateColumn;
     @FXML
     private TableColumn<Competition, String> cMainJudgeColumn;
     @FXML
@@ -107,7 +109,8 @@ public class CompetitionPageController implements Initializable {
         cNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         cOrganizerColumn.setCellValueFactory(new PropertyValueFactory<>("organizer"));
         cLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-        cDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        cFromDateColumn.setCellValueFactory(new PropertyValueFactory<>("fromDate"));
+        cToDateColumn.setCellValueFactory(new PropertyValueFactory<>("toDate"));
         cMainJudgeColumn.setCellValueFactory(new PropertyValueFactory<>("mainJudge"));
         cMainSecretaryColumn.setCellValueFactory(new PropertyValueFactory<>("mainSecretary"));
 

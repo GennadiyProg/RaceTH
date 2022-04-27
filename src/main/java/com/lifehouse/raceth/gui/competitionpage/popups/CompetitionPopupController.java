@@ -21,7 +21,9 @@ import java.util.ResourceBundle;
 public class CompetitionPopupController implements Initializable {
 
     @FXML
-    private DatePicker dateDatePicker;
+    private DatePicker fromDateDatePicker;
+    @FXML
+    private DatePicker toDateDatePicker;
 
     @FXML
     private TextField locationTextField;
@@ -68,22 +70,26 @@ public class CompetitionPopupController implements Initializable {
 
     private Competition buildNewCompetition() {
         RadioButton selectedToggle = (RadioButton) principalAgeCalculation.getSelectedToggle();
-        LocalDate localDate = dateDatePicker.getValue();
+        LocalDate fromLocalDate = fromDateDatePicker.getValue();
+        LocalDate toLocalDate = toDateDatePicker.getValue();
         if (nameTextField.getText().equals("") ||
                 organizerTextField.getText().equals("") ||
                 locationTextField.getText().equals("") ||
-                localDate == null ||
+                fromLocalDate == null ||
+                toLocalDate == null ||
                 mainJudgeTextField.getText().equals("") ||
                 mainSecretaryTextField.getText().equals("") ||
                 selectedToggle == null){
             return null;
         }
 
-        Date date = new Date(java.sql.Date.valueOf(localDate).getTime());
+        Date fromDate = new Date(java.sql.Date.valueOf(fromLocalDate).getTime());
+        Date toDate = new Date(java.sql.Date.valueOf(toLocalDate).getTime());
         return new Competition(nameTextField.getText(),
                 organizerTextField.getText(),
                 locationTextField.getText(),
-                date,
+                fromDate,
+                toDate,
                 mainJudgeTextField.getText(),
                 mainSecretaryTextField.getText(),
                 switch (selectedToggle.getText()){
@@ -106,7 +112,8 @@ public class CompetitionPopupController implements Initializable {
         nameTextField.setText(competition.getName());
         locationTextField.setText(competition.getLocation());
         organizerTextField.setText(competition.getOrganizer());
-        dateDatePicker.setValue(convertToLocalDateViaInstant(competition.getDate()));
+        fromDateDatePicker.setValue(convertToLocalDateViaInstant(competition.getFromDate()));
+        toDateDatePicker.setValue(convertToLocalDateViaInstant(competition.getToDate()));
         mainJudgeTextField.setText(competition.getMainJudge());
         mainSecretaryTextField.setText(competition.getMainSecretary());
         principalAgeCalculation.selectToggle(determineToggle(competition.getCalculationSystemAge()));

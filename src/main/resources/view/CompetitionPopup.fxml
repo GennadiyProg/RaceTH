@@ -64,7 +64,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="dateDatePicker" prefHeight="25.0" prefWidth="82.0" translateX="18.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <DatePicker fx:id="fromDateDatePicker" prefHeight="25.0" prefWidth="82.0" translateX="18.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Главный судья" GridPane.rowIndex="4">
                      <font>
                         <Font size="16.0" />
@@ -77,7 +77,7 @@
                   </Label>
                   <TextField fx:id="mainJudgeTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.rowIndex="5" />
                   <TextField fx:id="mainSecretaryTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <DatePicker fx:id="dateDatePicker1" prefHeight="25.0" prefWidth="80.0" translateX="135.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <DatePicker fx:id="toDateDatePicker" prefHeight="25.0" prefWidth="80.0" translateX="135.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label prefHeight="25.0" prefWidth="17.0" text="C" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font size="16.0" />
