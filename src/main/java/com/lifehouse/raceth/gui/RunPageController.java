@@ -1,5 +1,8 @@
 package com.lifehouse.raceth.gui;
 
+import com.lifehouse.raceth.dao.StartDAO;
+import com.lifehouse.raceth.model.Distance;
+import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Start;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +20,8 @@ import lombok.Data;
 import net.bytebuddy.implementation.bytecode.Throw;
 
 import java.net.URL;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 @Data
@@ -35,25 +40,30 @@ public class RunPageController implements Initializable {
     @FXML
     private TableColumn<Start, String> namestartColumn;
     @FXML
-    private TableColumn<Start, String> categoryColumn;
+    private TableColumn<Start, Group> categoryColumn;
     @FXML
-    private TableColumn<Start, String> distanceColumn;
+    private TableColumn<Start, Distance> distanceColumn;
     @FXML
-    private TableColumn<Start, String> starttimeColumn;
+    private TableColumn<Start, LocalTime> starttimeColumn;
     @FXML
-    private TableColumn<Start, String> countlapsColumn;
+    private TableColumn<Start, Integer> countlapsColumn;
     @FXML
-    private TableColumn<Start, String> compDayColumn;
+    private TableColumn<Start, Date> compDayColumn;
+
+    private StartDAO startDAO;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        namestartColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("name"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("group"));
-        distanceColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("distance"));
-        starttimeColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("startTime"));
-        countlapsColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("laps"));
-        compDayColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("competitionDay"));
+        startDAO = new StartDAO();
+        namestartColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
+        distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
+        starttimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        countlapsColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
+        compDayColumn.setCellValueFactory(new PropertyValueFactory<>("competitionDay"));
         startTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        startTable.getItems().addAll(startDAO.getAllRuns());
     }
 
     @FXML
@@ -106,7 +116,7 @@ public class RunPageController implements Initializable {
 
             RunCreateRunController runCreateRunController = fxmlLoader.getController();
             runCreateRunController.setStartTable(startTable);
-            runCreateRunController.edit(selectedStart);
+            runCreateRunController.startEdit(selectedStart);
 
             stage.show();
         } catch (Exception e) {
@@ -115,25 +125,10 @@ public class RunPageController implements Initializable {
     }
 
     @FXML
-    //todo: РЕАЛИЗОВАТЬ ОКНО ДОБАВЛЕНИЯ УЧАСТНИКА И ДОРАБОТАТЬ ЭТОТ МЕТОД
-    private void AddRow(ActionEvent event) {
-        //Start start = ВызовОкнаДобавленияСпортсмена();
-        //runTable.getItems().add(sportsman);
-    }
-
-    @FXML
-    //todo: РЕАЛИЗОВАТЬ ОКНО РЕДАКТИРОВАНИЯ УЧАСТНИКА
-    private void UpdateRow(ActionEvent event) {
-        Start start = startTable.getSelectionModel().getSelectedItem();
-        //ВызовОкнаРедактирования(start)
+    private void RemoveRows(ActionEvent event) {
+        Start selectedDistance = startTable.getSelectionModel().getSelectedItem();
+        startTable.getItems().remove(selectedDistance);
         startTable.refresh();
     }
-
-    @FXML
-    private void RemoveRows(ActionEvent event) {
-        ObservableList<Start> starts = startTable.getSelectionModel().getSelectedItems();
-        startTable.getItems().removeAll(starts);
-    }
-
 
 }

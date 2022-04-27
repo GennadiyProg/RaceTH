@@ -19,6 +19,7 @@ import lombok.Data;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -47,6 +48,8 @@ public class RunCreateRunController implements Initializable {
     private DistanceDAO distanceDAO;
     private GroupDAO groupDAO;
     private StartDAO startDAO;
+    private DateTimeFormatter formatter;
+
 
     public void initialize(URL var1, ResourceBundle var2) {
         currentStart = null;
@@ -55,14 +58,17 @@ public class RunCreateRunController implements Initializable {
         startDAO = new StartDAO();
         distances.setItems(FXCollections.observableList(new ArrayList<>(distanceDAO.getAllDistances())));
         groups.setItems(FXCollections.observableList(new ArrayList<>(groupDAO.getAllGroups())));
+        formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
     }
 
     @FXML
     void Saving(ActionEvent event) {
         Start newStart = buildNewEntity();
 
-        if (currentStart == null) {
-
+        if (currentStart != null) {
+            updateEntity(newStart);
+            close(event);
+            return;
         }
 
         createEntity(newStart);
@@ -78,17 +84,18 @@ public class RunCreateRunController implements Initializable {
         }
     }
 
-    public void edit(Start start) {
-
+    public void startEdit(Start start) {
+        fillFieldsFromEntity(start);
+        currentStart = start;
     }
 
     private Start buildNewEntity() {
         Start start = new Start();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm:ss");
 
         start.setName(startName.getText());
         start.setDistance(distanceDAO.getDistance(distances.getSelectionModel().getSelectedItem().getId()));
         start.setGroup(groupDAO.GetGroup(groups.getSelectionModel().getSelectedItem().getId()));
+
         start.setStartTime(LocalTime.parse(startTime.getText(), formatter));
         start.setLaps(Integer.parseInt(laps.getText()));
 
@@ -100,6 +107,20 @@ public class RunCreateRunController implements Initializable {
         startDAO.create(start);
         startTable.getItems().add(start);
         startTable.refresh();
+    }
+
+    private void updateEntity(Start start) {
+        startDAO.update(start);
+        currentStart.setFields(start);
+        startTable.refresh();
+    }
+
+    private void fillFieldsFromEntity(Start start) {
+        startName.setText(start.getName());
+        distances.setValue(start.getDistance());
+        groups.setValue(start.getGroup());
+        startTime.setText(start.getStartTime().format(formatter));
+        laps.setText(String.valueOf(start.getLaps()));
     }
 }
 
