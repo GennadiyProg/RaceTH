@@ -29,7 +29,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.Data;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -127,17 +129,7 @@ public class CompetitionPageController implements Initializable {
         gGenderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
 
         ObservableList<GroupView> groups = groupTable.getItems();
-        groups.addAll(getAllGroupViews());
-    }
-
-    private List<GroupView> getAllGroupViews() {
-        List<Group> groups = groupDAO.getAllGroups();
-        List<GroupView> groupViews = new ArrayList<>();
-        for (Group group : groups) {
-            groupViews.add(GroupView.convertToView(group));
-        }
-
-        return  groupViews;
+        groups.addAll(groupDAO.getAllGroupViews());
     }
 
     private void initializeDistanceTable(){

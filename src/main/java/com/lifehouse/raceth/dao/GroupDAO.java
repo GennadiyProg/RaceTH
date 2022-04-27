@@ -1,8 +1,10 @@
 package com.lifehouse.raceth.dao;
 
 import com.lifehouse.raceth.model.Group;
+import com.lifehouse.raceth.model.viewmodel.GroupView;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GroupDAO implements DAO<Group> {
@@ -52,5 +54,15 @@ public class GroupDAO implements DAO<Group> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<GroupView> getAllGroupViews() {
+        List<Group> groups = getAllGroups();
+        List<GroupView> groupViews = new ArrayList<>();
+        for (Group group : groups) {
+            groupViews.add(GroupView.convertToView(group));
+        }
+
+        return  groupViews;
     }
 }
