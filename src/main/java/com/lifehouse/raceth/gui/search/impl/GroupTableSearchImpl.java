@@ -3,6 +3,7 @@ package com.lifehouse.raceth.gui.search.impl;
 import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.gui.search.SearchEngine;
 import com.lifehouse.raceth.model.Group;
+import com.lifehouse.raceth.model.viewmodel.GroupView;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -12,13 +13,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class GroupTableSearchImpl implements SearchEngine {
-    private final TableView<Group> groupTable;
+    private final TableView<GroupView> groupTable;
     private final GroupDAO groupDAO;
     private final TextField groupTf;
 
-    private final List<Group> groups = new ArrayList<>();
+    private final List<GroupView> groups = new ArrayList<>();
 
-    public GroupTableSearchImpl(TableView<Group> groupTable, GroupDAO groupDAO, TextField groupTf) {
+    public GroupTableSearchImpl(TableView<GroupView> groupTable, GroupDAO groupDAO, TextField groupTf) {
         this.groupTable = groupTable;
         this.groupDAO = groupDAO;
         this.groupTf = groupTf;
@@ -29,7 +30,7 @@ public class GroupTableSearchImpl implements SearchEngine {
     public void search() {
         groupTf.focusedProperty().addListener((observable, oldValue, newValue) -> {
                     if (newValue) {
-                        groups.addAll(groupDAO.getAllGroups());
+                        groups.addAll(groupDAO.getAllGroupViews());
                     } else {
                         groups.clear();
                     }

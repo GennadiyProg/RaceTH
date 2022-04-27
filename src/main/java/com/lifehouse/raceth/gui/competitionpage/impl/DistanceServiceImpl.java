@@ -4,6 +4,8 @@ import com.lifehouse.raceth.dao.DistanceDAO;
 import com.lifehouse.raceth.gui.competitionpage.CompetitionPageElementService;
 import com.lifehouse.raceth.gui.competitionpage.popups.DistancePopupController;
 import com.lifehouse.raceth.model.Distance;
+import com.lifehouse.raceth.model.viewmodel.DistanceView;
+import com.lifehouse.raceth.model.viewmodel.GroupView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,9 +17,9 @@ import java.io.IOException;
 
 public class DistanceServiceImpl implements CompetitionPageElementService {
     private final DistanceDAO distanceDAO;
-    private final TableView<Distance> distanceTable;
+    private final TableView<DistanceView> distanceTable;
 
-    public DistanceServiceImpl(TableView<Distance> distanceTable) {
+    public DistanceServiceImpl(TableView<DistanceView> distanceTable) {
         this.distanceDAO = new DistanceDAO();
         this.distanceTable = distanceTable;
     }
@@ -28,14 +30,14 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
         if(controller == null) return;
         controller.getNewDistance().addListener((observable, oldValue, newValue) -> {
             distanceDAO.create(newValue);
-            distanceTable.getItems().add(newValue);
+            distanceTable.getItems().add(DistanceView.convertToView(newValue));
             distanceTable.refresh();
         });
     }
 
     @Override
     public void edit() {
-        Distance distance = distanceTable.getSelectionModel().getSelectedItem();
+        DistanceView distance = distanceTable.getSelectionModel().getSelectedItem();
         if (distance == null){
             return;
         }
@@ -44,19 +46,19 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
         controller.edit(distance);
         controller.getNewDistance().addListener((observable, oldValue, newValue) -> {
             distanceDAO.update(newValue);
-            distanceTable.getSelectionModel().getSelectedItem().setFields(newValue);
+            distanceTable.getSelectionModel().getSelectedItem().setFields(DistanceView.convertToView(newValue));
             distanceTable.refresh();
         });
     }
 
     @Override
     public void delete() {
-        Distance distance = distanceTable.getSelectionModel().getSelectedItem();
-        if (distance == null){
+        DistanceView distanceView = distanceTable.getSelectionModel().getSelectedItem();
+        if (distanceView == null){
             return;
         }
-        distanceTable.getItems().removeAll(distance);
-        distanceDAO.delete(distance);
+        distanceTable.getItems().removeAll(distanceView);
+        distanceDAO.delete(DistanceView.convertToModel(distanceView));
     }
 
     private DistancePopupController createDistancePopup(){
@@ -65,7 +67,6 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
             return null;
         }
         DistancePopupController distancePopupController = fxmlLoader.getController();
-        distancePopupController.setDistanceTable(distanceTable);
         return distancePopupController;
     }
 

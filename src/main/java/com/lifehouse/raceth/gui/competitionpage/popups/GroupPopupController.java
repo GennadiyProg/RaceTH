@@ -1,9 +1,8 @@
 package com.lifehouse.raceth.gui.competitionpage.popups;
 
-import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Gender;
-import com.lifehouse.raceth.model.competition.Competition;
+import com.lifehouse.raceth.model.viewmodel.GroupView;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -33,8 +32,6 @@ public class GroupPopupController implements Initializable {
     private RadioButton genderW;
     @FXML
     private TextField groupName;
-
-    private TableView<Group> groupTable;
 
     public ObjectProperty<Group> newGroup = new SimpleObjectProperty<>();
 
@@ -83,7 +80,7 @@ public class GroupPopupController implements Initializable {
         );
     }
 
-    private void fillFieldsFromEntity(Group group) {
+    private void fillFieldsFromEntity(GroupView group) {
         groupName.setText(group.getName());
         ageFrom.setText(String.valueOf(group.getAgeFrom()));
         ageTo.setText(String.valueOf(group.getAgeTo()));
@@ -98,7 +95,7 @@ public class GroupPopupController implements Initializable {
         return gender == Gender.MALE ? genderM : genderW;
     }
 
-    public void edit(Group group) {
+    public void edit(GroupView group) {
         fillFieldsFromEntity(group);
     }
 }

@@ -15,6 +15,8 @@ import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Gender;
+import com.lifehouse.raceth.model.viewmodel.DistanceView;
+import com.lifehouse.raceth.model.viewmodel.GroupView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -28,7 +30,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.Data;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -52,24 +56,28 @@ public class CompetitionPageController implements Initializable {
     private TableColumn<Competition, String> cMainSecretaryColumn;
 
     @FXML
-    private TableView<Group> groupTable;
+    private TableView<GroupView> groupTable;
     @FXML
-    private TableColumn<Group, String> gNameColumn;
+    private TableColumn<GroupView, Boolean> gCheckboxColumn;
     @FXML
-    private TableColumn<Group, Integer> gAgeFromColumn;
+    private TableColumn<GroupView, String> gNameColumn;
     @FXML
-    private TableColumn<Group, Integer> gAgeToColumn;
+    private TableColumn<GroupView, Integer> gAgeFromColumn;
     @FXML
-    private TableColumn<Group, Gender> gGenderColumn;
+    private TableColumn<GroupView, Integer> gAgeToColumn;
+    @FXML
+    private TableColumn<GroupView, Gender> gGenderColumn;
 
     @FXML
-    private TableView<Distance> distanceTable;
+    private TableView<DistanceView> distanceTable;
     @FXML
-    private TableColumn<Distance, String> dNameColumn;
+    private TableColumn<DistanceView, Boolean> dCheckboxColumn;
     @FXML
-    private TableColumn<Distance, Integer> dLengthColumn;
+    private TableColumn<DistanceView, String> dNameColumn;
     @FXML
-    private TableColumn<Distance, Integer> dHeightColumn;
+    private TableColumn<DistanceView, Integer> dLengthColumn;
+    @FXML
+    private TableColumn<DistanceView, Integer> dHeightColumn;
 
     @FXML
     private TextField searchCompetitionTextField;
@@ -89,6 +97,8 @@ public class CompetitionPageController implements Initializable {
 
     private CompetitionPageElementService competitionPageElementService;
 
+    public static Competition currentCompetition;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         competitionDAO = new CompetitionDAO();
@@ -98,7 +108,6 @@ public class CompetitionPageController implements Initializable {
         initializeCompetitionTable();
         initializeGroupTable();
         initializeDistanceTable();
-
 
         searchEngine();
     }
@@ -116,22 +125,24 @@ public class CompetitionPageController implements Initializable {
     }
 
     private void initializeGroupTable(){
+        gCheckboxColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
         gNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         gAgeFromColumn.setCellValueFactory(new PropertyValueFactory<>("ageFrom"));
         gAgeToColumn.setCellValueFactory(new PropertyValueFactory<>("ageTo"));
         gGenderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
 
-        ObservableList<Group> groups = groupTable.getItems();
-        groups.addAll(groupDAO.getAllGroups());
+        ObservableList<GroupView> groups = groupTable.getItems();
+        groups.addAll(groupDAO.getAllGroupViews());
     }
 
     private void initializeDistanceTable(){
+        dCheckboxColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
         dNameColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         dLengthColumn.setCellValueFactory(new PropertyValueFactory<>("length"));
         dHeightColumn.setCellValueFactory(new PropertyValueFactory<>("height"));
 
-        ObservableList<Distance> distances = distanceTable.getItems();
-        distances.addAll(distanceDAO.getAllDistances());
+        ObservableList<DistanceView> distances = distanceTable.getItems();
+        distances.addAll(distanceDAO.getAllDistanceViews());
     }
 
     private void searchEngine(){
@@ -142,11 +153,11 @@ public class CompetitionPageController implements Initializable {
 
     @FXML
     public void makeCompetitionCurrent(ActionEvent event){
-        Competition competition = competitionTable.getSelectionModel().getSelectedItem();
-        if (competition == null){
+        currentCompetition = competitionTable.getSelectionModel().getSelectedItem();
+        if (currentCompetition == null){
             return;
         }
-        value.setValue(competition.getName());
+        value.setValue(currentCompetition.getName());
     }
 
     @FXML
