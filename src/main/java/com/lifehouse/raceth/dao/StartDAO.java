@@ -39,6 +39,10 @@ public class StartDAO implements DAO<Start> {
         return TmpStorage.runs;
     }
 
+    public List<Start> getCompetitionsRuns(long competitionId) {
+        return TmpStorage.runs.stream().filter(el -> el.getCompetitionDay().getCompetition().getId() == competitionId).toList();
+    }
+
     public void Delete(Start run) {
         TmpStorage.runs.remove(run);
     }

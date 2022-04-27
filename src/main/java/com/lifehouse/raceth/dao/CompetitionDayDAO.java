@@ -23,6 +23,9 @@ public class CompetitionDayDAO implements DAO<CompetitionDay> {
 //
 //    }
 
+    public List<CompetitionDay> getAllByCompetition(long competitionId) {
+        return TmpStorage.competitionDays.stream().filter(el -> el.getCompetition().getId() == competitionId).toList();
+    }
     public void create(CompetitionDay competitionDay) {
         competitionDay.setId(TmpStorage.competitionDays.size());
         TmpStorage.competitionDays.add(competitionDay);
