@@ -21,8 +21,18 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="saveButt" layoutX="41.0" layoutY="363.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" styleClass="btn-success" stylesheets="@css/Buttons.css" text="Сохранить" />
-      <Button fx:id="cancelButt" layoutX="188.0" layoutY="363.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" styleClass="btn-danger" stylesheets="@css/Buttons.css" text="Отменить" />
+      <Button fx:id="saveButt" layoutX="41.0" layoutY="363.0" mnemonicParsing="false" onAction="#Saving" stylesheets="@css/Buttons.css" text="Сохранить">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-common" />
+            <String fx:value="btn-success" />
+         </styleClass></Button>
+      <Button fx:id="cancelButt" layoutX="188.0" layoutY="363.0" mnemonicParsing="false" onAction="#Cancel" stylesheets="@css/Buttons.css" text="Отменить">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-common" />
+            <String fx:value="btn-danger" />
+         </styleClass></Button>
       <Label layoutX="41.0" layoutY="230.0" styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Дистанция">
          <font>
             <Font size="16.0" />
