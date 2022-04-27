@@ -15,6 +15,7 @@ import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Gender;
+import com.lifehouse.raceth.model.viewmodel.DistanceView;
 import com.lifehouse.raceth.model.viewmodel.GroupView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -68,13 +69,15 @@ public class CompetitionPageController implements Initializable {
     private TableColumn<GroupView, Gender> gGenderColumn;
 
     @FXML
-    private TableView<Distance> distanceTable;
+    private TableView<DistanceView> distanceTable;
     @FXML
-    private TableColumn<Distance, String> dNameColumn;
+    private TableColumn<DistanceView, Boolean> dCheckboxColumn;
     @FXML
-    private TableColumn<Distance, Integer> dLengthColumn;
+    private TableColumn<DistanceView, String> dNameColumn;
     @FXML
-    private TableColumn<Distance, Integer> dHeightColumn;
+    private TableColumn<DistanceView, Integer> dLengthColumn;
+    @FXML
+    private TableColumn<DistanceView, Integer> dHeightColumn;
 
     @FXML
     private TextField searchCompetitionTextField;
@@ -133,12 +136,13 @@ public class CompetitionPageController implements Initializable {
     }
 
     private void initializeDistanceTable(){
+        dCheckboxColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
         dNameColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         dLengthColumn.setCellValueFactory(new PropertyValueFactory<>("length"));
         dHeightColumn.setCellValueFactory(new PropertyValueFactory<>("height"));
 
-        ObservableList<Distance> distances = distanceTable.getItems();
-        distances.addAll(distanceDAO.getAllDistances());
+        ObservableList<DistanceView> distances = distanceTable.getItems();
+        distances.addAll(distanceDAO.getAllDistanceViews());
     }
 
     private void searchEngine(){

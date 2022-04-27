@@ -1,6 +1,7 @@
 package com.lifehouse.raceth.gui.competitionpage.popups;
 
 import com.lifehouse.raceth.model.Distance;
+import com.lifehouse.raceth.model.viewmodel.DistanceView;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -66,13 +67,13 @@ public class DistancePopupController {
         );
     }
 
-    private void fillFieldsFromEntity(Distance distance) {
+    private void fillFieldsFromEntity(DistanceView distance) {
         distLocation.setText(distance.getLocation());
         height.setText(String.valueOf(distance.getHeight()));
         length.setText(String.valueOf(distance.getLength()));
     }
 
-    public void edit(Distance distance) {
+    public void edit(DistanceView distance) {
         fillFieldsFromEntity(distance);
     }
 }

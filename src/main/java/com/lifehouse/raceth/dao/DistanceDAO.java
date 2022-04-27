@@ -1,8 +1,12 @@
 package com.lifehouse.raceth.dao;
 
 import com.lifehouse.raceth.model.Distance;
+import com.lifehouse.raceth.model.Group;
+import com.lifehouse.raceth.model.viewmodel.DistanceView;
+import com.lifehouse.raceth.model.viewmodel.GroupView;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DistanceDAO implements DAO<Distance> {
@@ -52,5 +56,15 @@ public class DistanceDAO implements DAO<Distance> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<DistanceView> getAllDistanceViews() {
+        List<Distance> distances = getAllDistances();
+        List<DistanceView> distanceViews = new ArrayList<>();
+        for (Distance distance : distances) {
+            distanceViews.add(DistanceView.convertToView(distance));
+        }
+
+        return distanceViews;
     }
 }

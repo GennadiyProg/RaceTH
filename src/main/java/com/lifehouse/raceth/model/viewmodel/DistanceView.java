@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DistanceView {
-    private CheckBox check = new CheckBox();
+    private CheckBox checkBox = new CheckBox();
     private long id;
     private String location;
     private int length;
@@ -42,5 +42,11 @@ public class DistanceView {
                 distanceView.getHeight(),
                 distanceView.getCompetitions()
         );
+    }
+
+    public void setFields(DistanceView distance) {
+        this.location = distance.getLocation();
+        this.length = distance.getLength();
+        this.height = distance.getHeight();
     }
 }
