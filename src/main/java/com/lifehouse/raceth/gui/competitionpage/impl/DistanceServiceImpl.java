@@ -6,6 +6,7 @@ import com.lifehouse.raceth.gui.competitionpage.CompetitionPageElementService;
 import com.lifehouse.raceth.gui.competitionpage.popups.DistancePopupController;
 import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.viewmodel.DistanceView;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -13,32 +14,32 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.io.IOException;
 
 public class DistanceServiceImpl implements CompetitionPageElementService {
     private final DistanceDAO distanceDAO;
     private final TableView<DistanceView> distanceTable;
+    private final ChangeListener<Boolean> checkboxListener;
+    private DistanceView lastEditedDistance;
 
     public DistanceServiceImpl(TableView<DistanceView> distanceTable) {
         this.distanceDAO = new DistanceDAO();
         this.distanceTable = distanceTable;
+        checkboxListener = ((observableList, oldStatus, newStatus) -> {
+            Competition curCompetition = CompetitionPageController.currentCompetition;
+            attachCompetition(lastEditedDistance, curCompetition, newStatus);
+        });
     }
 
     @Override
     public void create() {
         DistancePopupController controller = createDistancePopup();
-        if (controller == null) return;
+        if(controller == null) return;
         controller.getNewDistance().addListener((observable, oldValue, newValue) -> {
             distanceDAO.create(newValue);
-            DistanceView distanceView = DistanceView.convertToView(newValue);
-            distanceView.getCheckBox().selectedProperty().addListener((observableList, oldStatus, newStatus) -> {
-                Competition curCompetition = CompetitionPageController.currentCompetition;
-                attachCompetition(distanceView, curCompetition, newStatus);
-                System.out.println("ASdas");
-            });
-            distanceTable.getItems().add(distanceView);
+            lastEditedDistance = DistanceView.convertToView(newValue);
+            lastEditedDistance.getCheckBox().selectedProperty().addListener(checkboxListener);
+            distanceTable.getItems().add(lastEditedDistance);
             distanceTable.refresh();
         });
     }
@@ -56,7 +57,9 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
                 distanceDAO.update(DistanceView.convertToModel(distanceView));
             }
         } else {
+            distanceView.getCheckBox().selectedProperty().removeListener(checkboxListener);
             distanceView.getCheckBox().setSelected(false);
+            distanceView.getCheckBox().selectedProperty().addListener(checkboxListener);
             Alert alert = new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование");
             alert.show();
         }

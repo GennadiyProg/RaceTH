@@ -6,6 +6,7 @@ import com.lifehouse.raceth.gui.competitionpage.CompetitionPageElementService;
 import com.lifehouse.raceth.gui.competitionpage.popups.GroupPopupController;
 import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.viewmodel.GroupView;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -18,10 +19,16 @@ import java.io.IOException;
 public class GroupServiceImpl implements CompetitionPageElementService {
     private final GroupDAO groupDAO;
     private final TableView<GroupView> groupTable;
+    private final ChangeListener<Boolean> checkboxListener;
+    private GroupView lastEditedGroup;
 
     public GroupServiceImpl(TableView<GroupView> groupTable) {
         this.groupDAO = new GroupDAO();
         this.groupTable = groupTable;
+        checkboxListener = ((observableList, oldStatus, newStatus) -> {
+            Competition curCompetition = CompetitionPageController.currentCompetition;
+            attachCompetition(lastEditedGroup, curCompetition, newStatus);
+        });
     }
 
     @Override
@@ -30,13 +37,9 @@ public class GroupServiceImpl implements CompetitionPageElementService {
         if (controller == null) return;
         controller.getNewGroup().addListener((observable, oldValue, newValue) -> {
             groupDAO.create(newValue);
-            GroupView groupView = GroupView.convertToView(newValue);
-            groupView.getCheckBox().selectedProperty().addListener((observableList, oldStatus, newStatus) -> {
-                Competition curCompetition = CompetitionPageController.currentCompetition;
-                attachCompetition(groupView, curCompetition, newStatus);
-                System.out.println("sample");
-            });
-            groupTable.getItems().add(groupView);
+            lastEditedGroup = GroupView.convertToView(newValue);
+            lastEditedGroup.getCheckBox().selectedProperty().addListener(checkboxListener);
+            groupTable.getItems().add(lastEditedGroup);
             groupTable.refresh();
         });
     }
@@ -54,7 +57,9 @@ public class GroupServiceImpl implements CompetitionPageElementService {
                 groupDAO.update(GroupView.convertToModel(groupView));
             }
         } else {
+            groupView.getCheckBox().selectedProperty().removeListener(checkboxListener);
             groupView.getCheckBox().setSelected(false);
+            groupView.getCheckBox().selectedProperty().addListener(checkboxListener);
             Alert alert = new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование");
             alert.show();
         }
