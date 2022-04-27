@@ -3,6 +3,13 @@ package com.lifehouse.raceth.gui;
 import com.lifehouse.raceth.model.Checkpoint;
 import com.lifehouse.raceth.model.Start;
 import com.lifehouse.raceth.model.StartTab;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,15 +21,32 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lombok.Data;
 import javafx.scene.control.*;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
+import javafx.geometry.Pos;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import java.util.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static java.lang.Thread.sleep;
 
 @Data
 public class MarksMonitorCompetitionController implements Initializable {
@@ -50,6 +74,122 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     @FXML
     private TableColumn<Start, String> lapColumn;
+/*
+    public class Sample1 extends Application {
+
+        public static void main(String[] args) {
+            launch(args);
+        }
+
+        @Override
+        public void start(Stage primaryStage) {
+            Scene scene = new Scene(new Timer1(), 300, 200);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+    }
+
+    public class Timer1 extends VBox {
+
+        public Timer1() {
+            Text time = new Text();
+            Button startButton = new Button("Start");
+            Button stopButton = new Button("Stop");
+            getChildren().addAll(time, startButton, stopButton);
+            startButton.setOnAction(startEvt -> {
+                Task<Integer> timerFxTask = new Task<>() {
+
+                    {
+                        updateValue(0);
+                    }
+
+                    @Override
+                    protected Integer call() throws Exception {
+                        for (int counter = 0; counter <= 1000; counter++) {
+                            sleep(1000);
+                            updateValue(counter);
+                        }
+                        return 1000;
+                    }
+                };
+                stopButton.setOnAction(stopEvt -> timerFxTask.cancel());
+                time.textProperty().bind(Bindings.createStringBinding(() -> timerFxTask.getValue().toString(),
+                        timerFxTask.valueProperty()));
+                Thread timerThread = new Thread(timerFxTask);
+                timerThread.start();
+            });
+        }
+    }
+
+    public class Sample2 extends Application
+    {
+
+        public static void main(String[] args) {
+            launch(args);
+        }
+
+        @Override
+        public void start(Stage primaryStage) {
+            Scene scene = new Scene(new Timer2(), 300, 200);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+    }
+
+    public class Timer2 extends VBox {
+
+        public Timer2() {
+            Text time = new Text();
+            Button startButton = new Button("Start");
+            Button stopButton = new Button("Stop");
+            getChildren().addAll(time, startButton, stopButton);
+            startButton.setOnAction(startEvt -> {
+                IntegerProperty counter = new SimpleIntegerProperty(0);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1000), new KeyValue(counter, 1000)));
+                stopButton.setOnAction(stopEvt -> timeline.stop());
+                time.textProperty().bind(Bindings.createStringBinding(() -> Integer.toString(counter.get()), counter));
+                timeline.play();
+            });
+        }
+    }*/
+
+/*public class Dispatcher extends Application {
+    GraphicsContext gc ;
+    Timer t;
+    Button btn;
+    int i=1;
+    public static void main(String[] args) {
+        launch(args);
+    }
+    public void start (Stage myStage){
+        myStage.setTitle("Game");
+        FlowPane rootNode = new FlowPane();
+        rootNode.setAlignment(Pos.CENTER);
+        Scene myScene = new Scene(rootNode,1000,900);
+        myStage.setScene(myScene);
+        Canvas myCanvas = new Canvas(900,800);
+        gc = myCanvas.getGraphicsContext2D();
+        final TimerTask animation = new TimerTask() {
+            public void run() {
+                gc.setFill(Color.WHITE);
+                gc.fillRect(0,0,900,800 );
+                i++;
+                gc.setFill(Color.BLACK);
+                gc.fillOval(i ,i+1 ,i ,i+1 );
+            }
+        };
+        t = new Timer();
+        Button btn = new Button("0");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent ae) {
+                t.schedule(animation, 0, 10);
+            }
+        });
+        rootNode. getChildren ().addAll(myCanvas, btn);
+        myStage.show ( ) ;
+    }
+}
+*/
 
     @FXML
     void addingGroup(ActionEvent event) {
