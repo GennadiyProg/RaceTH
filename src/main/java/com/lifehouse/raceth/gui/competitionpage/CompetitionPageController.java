@@ -97,7 +97,7 @@ public class CompetitionPageController implements Initializable {
 
     private CompetitionPageElementService competitionPageElementService;
 
-    private Competition currentCompetition;
+    public static Competition currentCompetition;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
