@@ -1,6 +1,5 @@
 package com.lifehouse.raceth.gui;
 
-import com.lifehouse.raceth.model.Gender;
 import com.lifehouse.raceth.model.Start;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,9 +14,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Data;
+import net.bytebuddy.implementation.bytecode.Throw;
 
 import java.net.URL;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 
 @Data
@@ -29,22 +28,22 @@ public class RunPageController implements Initializable {
 
     //Табличка
     @FXML
-    private TableView<Start> runTable;
+    private TableView<Start> startTable;
 
     //todo: ДОРАБОТАТЬ МОДЕЛЬ УЧАСТНИКА И ПОМЕНЯТЬ МОДЕЛЬ СПОРТСМЕНА НА УЧАСТНИКА
     //Столбцы
     @FXML
-    private TableColumn<Start, String> namestartColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> namestartColumn;
     @FXML
-    private TableColumn<Start, String> categoryColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> categoryColumn;
     @FXML
-    private TableColumn<Start, String> distanceColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> distanceColumn;
     @FXML
-    private TableColumn<Start, String> starttimeColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> starttimeColumn;
     @FXML
-    private TableColumn<Start, String> countlapsColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> countlapsColumn;
     @FXML
-    private TableColumn<Start, String> compDayColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> compDayColumn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,7 +53,7 @@ public class RunPageController implements Initializable {
         starttimeColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("startTime"));
         countlapsColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("laps"));
         compDayColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("competitionDay"));
-        runTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        startTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     @FXML
@@ -76,15 +75,39 @@ public class RunPageController implements Initializable {
         }*/
     }
 
-    //Создание нового забега
     @FXML
     private void AddRun(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RunCreateRunPopup.fxml"));
-            Parent root1 = (Parent)fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
+
+            RunCreateRunController runCreateRunController = fxmlLoader.getController();
+            runCreateRunController.setStartTable(startTable);
+
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void editRun(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RunCreateRunPopup.fxml"));
+            Parent root1 = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
+
+            Start selectedStart = startTable.getSelectionModel().getSelectedItem();
+
+            RunCreateRunController runCreateRunController = fxmlLoader.getController();
+            runCreateRunController.setStartTable(startTable);
+            runCreateRunController.edit(selectedStart);
+
             stage.show();
         } catch (Exception e) {
             System.out.println("Cant load");
@@ -101,15 +124,15 @@ public class RunPageController implements Initializable {
     @FXML
     //todo: РЕАЛИЗОВАТЬ ОКНО РЕДАКТИРОВАНИЯ УЧАСТНИКА
     private void UpdateRow(ActionEvent event) {
-        Start start = runTable.getSelectionModel().getSelectedItem();
+        Start start = startTable.getSelectionModel().getSelectedItem();
         //ВызовОкнаРедактирования(start)
-        runTable.refresh();
+        startTable.refresh();
     }
 
     @FXML
     private void RemoveRows(ActionEvent event) {
-        ObservableList<Start> starts = runTable.getSelectionModel().getSelectedItems();
-        runTable.getItems().removeAll(starts);
+        ObservableList<Start> starts = startTable.getSelectionModel().getSelectedItems();
+        startTable.getItems().removeAll(starts);
     }
 
 
