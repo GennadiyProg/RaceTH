@@ -1,13 +1,15 @@
 package com.lifehouse.raceth.gui;
 
+import com.lifehouse.raceth.dao.CompetitionDayDAO;
 import com.lifehouse.raceth.dao.DistanceDAO;
 import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.StartDAO;
+import com.lifehouse.raceth.gui.competitionpage.CompetitionPageController;
+import com.lifehouse.raceth.model.CompetitionDay;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Start;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,19 +37,23 @@ public class RunCreateRunController implements Initializable {
     private DatePicker date;
 
     @FXML
-    private ChoiceBox<Distance> distances;
+    private ChoiceBox<Distance> distance;
 
     @FXML
-    private ChoiceBox<Group> groups;
+    private ChoiceBox<Group> group;
 
     @FXML
     private TextField startName, laps, startTime;
+
+    @FXML
+    private ChoiceBox<CompetitionDay> competitionDay;
 
     private TableView<Start> startTable;
     private Start currentStart;
     private DistanceDAO distanceDAO;
     private GroupDAO groupDAO;
     private StartDAO startDAO;
+    private CompetitionDayDAO competitionDayDAO;
     private DateTimeFormatter formatter;
 
 
@@ -56,8 +62,12 @@ public class RunCreateRunController implements Initializable {
         distanceDAO = new DistanceDAO();
         groupDAO = new GroupDAO();
         startDAO = new StartDAO();
-        distances.setItems(FXCollections.observableList(new ArrayList<>(distanceDAO.getAllDistances())));
-        groups.setItems(FXCollections.observableList(new ArrayList<>(groupDAO.getAllGroups())));
+        competitionDayDAO = new CompetitionDayDAO();
+        distance.setItems(FXCollections.observableList(new ArrayList<>(distanceDAO.getAllDistances())));
+        group.setItems(FXCollections.observableList(new ArrayList<>(groupDAO.getAllGroups())));
+        competitionDay.setItems(
+                FXCollections.observableList(new ArrayList<>(competitionDayDAO.getAllByCompetition(CompetitionPageController.currentCompetition.getId())))
+        );
         formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
     }
 
@@ -93,11 +103,11 @@ public class RunCreateRunController implements Initializable {
         Start start = new Start();
 
         start.setName(startName.getText());
-        start.setDistance(distanceDAO.getDistance(distances.getSelectionModel().getSelectedItem().getId()));
-        start.setGroup(groupDAO.GetGroup(groups.getSelectionModel().getSelectedItem().getId()));
-
+        start.setDistance(distanceDAO.getDistance(distance.getSelectionModel().getSelectedItem().getId()));
+        start.setGroup(groupDAO.GetGroup(group.getSelectionModel().getSelectedItem().getId()));
         start.setStartTime(LocalTime.parse(startTime.getText(), formatter));
         start.setLaps(Integer.parseInt(laps.getText()));
+        start.setCompetitionDay(competitionDay.getSelectionModel().getSelectedItem());
 
         return start;
     }
@@ -117,8 +127,8 @@ public class RunCreateRunController implements Initializable {
 
     private void fillFieldsFromEntity(Start start) {
         startName.setText(start.getName());
-        distances.setValue(start.getDistance());
-        groups.setValue(start.getGroup());
+        distance.setValue(start.getDistance());
+        group.setValue(start.getGroup());
         startTime.setText(start.getStartTime().format(formatter));
         laps.setText(String.valueOf(start.getLaps()));
     }

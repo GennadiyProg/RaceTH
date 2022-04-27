@@ -1,6 +1,7 @@
 package com.lifehouse.raceth.gui;
 
 import com.lifehouse.raceth.dao.StartDAO;
+import com.lifehouse.raceth.gui.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Start;
@@ -63,7 +64,7 @@ public class RunPageController implements Initializable {
         compDayColumn.setCellValueFactory(new PropertyValueFactory<>("competitionDay"));
         startTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        startTable.getItems().addAll(startDAO.getAllRuns());
+        startTable.getItems().addAll(startDAO.getCompetitionsRuns(CompetitionPageController.currentCompetition.getId()));
     }
 
     @FXML

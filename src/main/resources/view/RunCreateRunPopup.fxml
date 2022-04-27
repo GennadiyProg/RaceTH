@@ -3,7 +3,6 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -43,8 +42,8 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="groups" layoutX="41.0" layoutY="197.0" prefHeight="28.0" prefWidth="234.0" stylesheets="@css/ChoiseBox.css" />
-      <ChoiceBox fx:id="distances" layoutX="41.0" layoutY="258.0" prefHeight="28.0" prefWidth="234.0" stylesheets="@css/ChoiseBox.css" />
+      <ChoiceBox fx:id="group" layoutX="41.0" layoutY="197.0" prefHeight="28.0" prefWidth="219.0" stylesheets="@css/ChoiseBox.css" />
+      <ChoiceBox fx:id="distance" layoutX="41.0" layoutY="258.0" prefHeight="28.0" prefWidth="219.0" stylesheets="@css/ChoiseBox.css" />
       <Label layoutX="304.0" layoutY="168.0" styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Круги">
          <font>
             <Font size="16.0" />
@@ -58,16 +57,11 @@
          </font>
       </Label>
       <TextField fx:id="startName" layoutX="41.0" layoutY="134.0" prefHeight="25.0" prefWidth="219.0" stylesheets="@css/TextField.css" />
-      <DatePicker layoutX="304.0" layoutY="260.0" prefHeight="25.0" prefWidth="219.0" promptText="2022-02-19" stylesheets="@css/DatePicker.css">
-         <styleClass>
-            <String fx:value="left-arrow" />
-            <String fx:value="week-number-cell" />
-         </styleClass>
-      </DatePicker>
       <Label layoutX="304.0" layoutY="230.0" styleClass="label-regular" stylesheets="@css/AppLabel.css" text="День соревнования">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
+      <ChoiceBox fx:id="competitionDay" layoutX="304.0" layoutY="260.0" prefHeight="28.0" prefWidth="219.0" stylesheets="@css/ChoiseBox.css" />
    </children>
 </AnchorPane>
