@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StartView {
-    private CheckBox check = new CheckBox();
+    private CheckBox checkBox = new CheckBox();
     private long id;
     private String name;
     private LocalTime startTime;

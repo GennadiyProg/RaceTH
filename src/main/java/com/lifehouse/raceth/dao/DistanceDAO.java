@@ -25,6 +25,7 @@ public class DistanceDAO implements DAO<Distance> {
 //        session.getTransaction().commit();
 //    }
     public void create(Distance distance) {
+        distance.setId(TmpStorage.distances.size());
         TmpStorage.distances.add(distance);
     }
 
