@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -41,41 +42,41 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label text="Название">
+                  <Label styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Название">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="nameTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
-                  <Label text="Организатор" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                  <TextField fx:id="nameTextField" maxWidth="-Infinity" prefHeight="26.0" stylesheets="@css/TextField.css" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                  <Label styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Организатор" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="organizerTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Место проведения" GridPane.rowIndex="2">
+                  <TextField fx:id="organizerTextField" maxWidth="-Infinity" prefHeight="26.0" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Место проведения" GridPane.rowIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="locationTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.rowIndex="3" />
-                  <Label text="Дата проведения" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="locationTextField" maxWidth="-Infinity" prefHeight="26.0" stylesheets="@css/TextField.css" GridPane.rowIndex="3" />
+                  <Label styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Дата проведения" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label text="Главный судья" GridPane.rowIndex="4">
+                  <Label styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Главный судья" GridPane.rowIndex="4">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label text="Главный секретарь" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Label styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Главный секретарь" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="mainJudgeTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.rowIndex="5" />
-                  <TextField fx:id="mainSecretaryTextField" maxWidth="-Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="mainJudgeTextField" maxWidth="-Infinity" prefHeight="26.0" stylesheets="@css/TextField.css" GridPane.rowIndex="5" />
+                  <TextField fx:id="mainSecretaryTextField" maxWidth="-Infinity" prefHeight="26.0" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="62.400028228759766" minWidth="10.0" prefWidth="30.0" />
@@ -84,12 +85,12 @@
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.4000244140625" minWidth="10.0" prefWidth="108.33333129882811" />
                     </columnConstraints>
                      <children>
-                        <Label prefHeight="25.0" prefWidth="17.0" text="C">
+                        <Label prefHeight="25.0" prefWidth="17.0" styleClass="label-regular" stylesheets="@css/AppLabel.css" text="C">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="26.0" text="по" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                        <Label prefHeight="25.0" prefWidth="26.0" styleClass="label-regular" stylesheets="@css/AppLabel.css" text="по" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -97,13 +98,16 @@
                               <Insets left="3.0" />
                            </padding>
                         </Label>
-                        <DatePicker fx:id="toDateDatePicker" prefHeight="26.0" prefWidth="142.0" GridPane.columnIndex="3" />
-                        <DatePicker fx:id="fromDateDatePicker" prefHeight="26.0" prefWidth="102.0" GridPane.columnIndex="1" />
+                        <DatePicker fx:id="toDateDatePicker" prefHeight="26.0" prefWidth="142.0" stylesheets="@css/DatePicker.css" GridPane.columnIndex="3" />
+                        <DatePicker fx:id="fromDateDatePicker" prefHeight="26.0" prefWidth="102.0" stylesheets="@css/DatePicker.css" GridPane.columnIndex="1" />
                      </children>
+                     <rowConstraints>
+                        <RowConstraints />
+                     </rowConstraints>
                   </GridPane>
                </children>
             </GridPane>
-            <Label prefHeight="38.0" prefWidth="454.0" text="Создать/Изменить соревнование" textFill="#305ec1">
+            <Label styleClass="popup-header" stylesheets="@css/AppLabel.css" text="Создать/Изменить соревнование" textFill="#305ec1">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
@@ -132,22 +136,32 @@
             </GridPane>
             <GridPane GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="239.4000244140625" minWidth="10.0" prefWidth="125.79998779296875" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="367.39996337890625" minWidth="10.0" prefWidth="364.20001220703125" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="createCompetitionButton" mnemonicParsing="false" onAction="#createOrUpdateCompetition" prefHeight="33.0" prefWidth="203.0" style="-fx-background-color: #00C781; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Сохранить" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="createCompetitionButton" mnemonicParsing="false" onAction="#createOrUpdateCompetition" stylesheets="@css/Buttons.css" text="Сохранить" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                        <String fx:value="btn-success" />
+                     </styleClass>
                   </Button>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" prefHeight="33.0" prefWidth="204.0" style="-fx-background-color: #FF4040; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" text="Отмена" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" stylesheets="@css/Buttons.css" text="Отмена" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                        <String fx:value="btn-danger" />
+                     </styleClass>
                   </Button>
                </children>
             </GridPane>
