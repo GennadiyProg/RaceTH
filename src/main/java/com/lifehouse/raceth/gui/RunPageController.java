@@ -1,6 +1,8 @@
 package com.lifehouse.raceth.gui;
 
-import com.lifehouse.raceth.model.Gender;
+import com.lifehouse.raceth.dao.StartDAO;
+import com.lifehouse.raceth.model.Distance;
+import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Start;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,9 +17,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Data;
+import net.bytebuddy.implementation.bytecode.Throw;
 
 import java.net.URL;
-import java.util.Calendar;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 @Data
@@ -29,32 +33,37 @@ public class RunPageController implements Initializable {
 
     //Табличка
     @FXML
-    private TableView<Start> runTable;
+    private TableView<Start> startTable;
 
     //todo: ДОРАБОТАТЬ МОДЕЛЬ УЧАСТНИКА И ПОМЕНЯТЬ МОДЕЛЬ СПОРТСМЕНА НА УЧАСТНИКА
     //Столбцы
     @FXML
-    private TableColumn<Start, String> namestartColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, String> namestartColumn;
     @FXML
-    private TableColumn<Start, String> categoryColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, Group> categoryColumn;
     @FXML
-    private TableColumn<Start, String> distanceColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, Distance> distanceColumn;
     @FXML
-    private TableColumn<Start, String> starttimeColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, LocalTime> starttimeColumn;
     @FXML
-    private TableColumn<Start, String> countlapsColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, Integer> countlapsColumn;
     @FXML
-    private TableColumn<Start, String> compDayColumn; // = new TableColumn<SportsmanDto, String>();
+    private TableColumn<Start, Date> compDayColumn;
+
+    private StartDAO startDAO;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        namestartColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("name"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("group"));
-        distanceColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("distance"));
-        starttimeColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("startTime"));
-        countlapsColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("laps"));
-        compDayColumn.setCellValueFactory(new PropertyValueFactory<Start, String>("competitionDay"));
-        runTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        startDAO = new StartDAO();
+        namestartColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
+        distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
+        starttimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        countlapsColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
+        compDayColumn.setCellValueFactory(new PropertyValueFactory<>("competitionDay"));
+        startTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        startTable.getItems().addAll(startDAO.getAllRuns());
     }
 
     @FXML
@@ -76,15 +85,39 @@ public class RunPageController implements Initializable {
         }*/
     }
 
-    //Создание нового забега
     @FXML
     private void AddRun(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RunCreateRunPopup.fxml"));
-            Parent root1 = (Parent)fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
+
+            RunCreateRunController runCreateRunController = fxmlLoader.getController();
+            runCreateRunController.setStartTable(startTable);
+
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void editRun(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RunCreateRunPopup.fxml"));
+            Parent root1 = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
+
+            Start selectedStart = startTable.getSelectionModel().getSelectedItem();
+
+            RunCreateRunController runCreateRunController = fxmlLoader.getController();
+            runCreateRunController.setStartTable(startTable);
+            runCreateRunController.startEdit(selectedStart);
+
             stage.show();
         } catch (Exception e) {
             System.out.println("Cant load");
@@ -92,25 +125,10 @@ public class RunPageController implements Initializable {
     }
 
     @FXML
-    //todo: РЕАЛИЗОВАТЬ ОКНО ДОБАВЛЕНИЯ УЧАСТНИКА И ДОРАБОТАТЬ ЭТОТ МЕТОД
-    private void AddRow(ActionEvent event) {
-        //Start start = ВызовОкнаДобавленияСпортсмена();
-        //runTable.getItems().add(sportsman);
-    }
-
-    @FXML
-    //todo: РЕАЛИЗОВАТЬ ОКНО РЕДАКТИРОВАНИЯ УЧАСТНИКА
-    private void UpdateRow(ActionEvent event) {
-        Start start = runTable.getSelectionModel().getSelectedItem();
-        //ВызовОкнаРедактирования(start)
-        runTable.refresh();
-    }
-
-    @FXML
     private void RemoveRows(ActionEvent event) {
-        ObservableList<Start> starts = runTable.getSelectionModel().getSelectedItems();
-        runTable.getItems().removeAll(starts);
+        Start selectedDistance = startTable.getSelectionModel().getSelectedItem();
+        startTable.getItems().remove(selectedDistance);
+        startTable.refresh();
     }
-
 
 }

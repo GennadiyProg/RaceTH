@@ -21,8 +21,18 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="saveButt" layoutX="41.0" layoutY="363.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" styleClass="btn-success" stylesheets="@css/Buttons.css" text="Сохранить" />
-      <Button fx:id="cancelButt" layoutX="188.0" layoutY="363.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" styleClass="btn-danger" stylesheets="@css/Buttons.css" text="Отменить" />
+      <Button fx:id="saveButt" layoutX="41.0" layoutY="363.0" mnemonicParsing="false" onAction="#Saving" stylesheets="@css/Buttons.css" text="Сохранить">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-common" />
+            <String fx:value="btn-success" />
+         </styleClass></Button>
+      <Button fx:id="cancelButt" layoutX="188.0" layoutY="363.0" mnemonicParsing="false" onAction="#close" stylesheets="@css/Buttons.css" text="Отменить">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-common" />
+            <String fx:value="btn-danger" />
+         </styleClass></Button>
       <Label layoutX="41.0" layoutY="230.0" styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Дистанция">
          <font>
             <Font size="16.0" />
@@ -33,21 +43,21 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <ChoiceBox layoutX="41.0" layoutY="197.0" prefHeight="28.0" prefWidth="234.0" stylesheets="@css/ChoiseBox.css" />
-      <ChoiceBox layoutX="41.0" layoutY="258.0" prefHeight="28.0" prefWidth="234.0" stylesheets="@css/ChoiseBox.css" />
+      <ChoiceBox fx:id="groups" layoutX="41.0" layoutY="197.0" prefHeight="28.0" prefWidth="234.0" stylesheets="@css/ChoiseBox.css" />
+      <ChoiceBox fx:id="distances" layoutX="41.0" layoutY="258.0" prefHeight="28.0" prefWidth="234.0" stylesheets="@css/ChoiseBox.css" />
       <Label layoutX="304.0" layoutY="168.0" styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Круги">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="304.0" layoutY="134.0" prefHeight="25.0" prefWidth="219.0" promptText="11:30:00" stylesheets="@css/TextField.css" />
-      <TextField layoutX="304.0" layoutY="198.0" prefHeight="25.0" prefWidth="219.0" stylesheets="@css/TextField.css" />
+      <TextField fx:id="startTime" layoutX="304.0" layoutY="134.0" prefHeight="25.0" prefWidth="219.0" promptText="11:30:00" stylesheets="@css/TextField.css" />
+      <TextField fx:id="laps" layoutX="304.0" layoutY="198.0" prefHeight="25.0" prefWidth="219.0" stylesheets="@css/TextField.css" />
       <Label layoutX="41.0" layoutY="106.0" styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Название">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="41.0" layoutY="134.0" prefHeight="25.0" prefWidth="219.0" stylesheets="@css/TextField.css" />
+      <TextField fx:id="startName" layoutX="41.0" layoutY="134.0" prefHeight="25.0" prefWidth="219.0" stylesheets="@css/TextField.css" />
       <DatePicker layoutX="304.0" layoutY="260.0" prefHeight="25.0" prefWidth="219.0" promptText="2022-02-19" stylesheets="@css/DatePicker.css">
          <styleClass>
             <String fx:value="left-arrow" />

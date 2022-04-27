@@ -31,4 +31,12 @@ public class Start {
     private CompetitionDay competitionDay;
     @ManyToOne
     private StartTab tab;
+
+    public void setFields(Start start) {
+        this.name = start.getName();
+        this.startTime = start.getStartTime();
+        this.group = start.getGroup();
+        this.distance = start.getDistance();
+        this.laps = start.getLaps();
+    }
 }
