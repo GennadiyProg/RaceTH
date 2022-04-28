@@ -57,7 +57,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" >
+                        <TextField alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin></TextField>
@@ -71,7 +71,7 @@
                               <String fx:value="btn-danger" />
                            </styleClass>
                         </Button>
-                        <TextField maxWidth="-Infinity" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="00:00:00" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" editable="false">
+                        <TextField editable="false" maxWidth="-Infinity" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="00:00:00" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="48.0" />
                            </font>
@@ -95,7 +95,7 @@
                         <Insets bottom="1.0" />
                      </GridPane.margin>
                   </GridPane>
-                  <TextField alignment="CENTER" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="12" GridPane.columnIndex="2" GridPane.halignment="CENTER" editable="false">
+                  <TextField alignment="CENTER" editable="false" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="12" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                      <font>
                         <Font size="48.0" />
                      </font>
@@ -161,19 +161,19 @@
             </GridPane>
             <TabPane fx:id="tabPane" maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" stylesheets="@css/TabPane.css" tabClosingPolicy="SELECTED_TAB" GridPane.rowIndex="2">
               <tabs>
-                <Tab closable="false" text="Участники">
+                <Tab fx:id="participantTab" closable="false" text="Участники">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView layoutX="-3.0" layoutY="-1.0" prefHeight="318.0" stylesheets="@css/table.css">
+                              <TableView fx:id="participantTable" layoutX="-3.0" layoutY="-1.0" prefHeight="318.0" stylesheets="@css/table.css">
                                  <columns>
-                                    <TableColumn prefWidth="50.0" resizable="false" text="№" />
-                                    <TableColumn prefWidth="100.0" resizable="false" text="Участник" />
-                                    <TableColumn prefWidth="50.0" resizable="false" text="Пол" />
-                                    <TableColumn prefWidth="130.0" resizable="false" text="Чип" />
-                                    <TableColumn prefWidth="130.0" resizable="false" text="Стартовый номер" />
-                                    <TableColumn prefWidth="130.0" resizable="false" text="Дата рождения" />
-                                    <TableColumn prefWidth="120.0" resizable="false" text="Город" />
+                                    <TableColumn fx:id="numberColumn" prefWidth="50.0" resizable="false" text="№" />
+                                    <TableColumn fx:id="nameColumn" prefWidth="100.0" resizable="false" text="Участник" />
+                                    <TableColumn fx:id="genderColumn" prefWidth="50.0" resizable="false" text="Пол" />
+                                    <TableColumn fx:id="chipColumn" prefWidth="130.0" resizable="false" text="Чип" />
+                                    <TableColumn fx:id="startNumberColumn" prefWidth="130.0" resizable="false" text="Стартовый номер" />
+                                    <TableColumn fx:id="birthdateColumn" prefWidth="130.0" resizable="false" text="Дата рождения" />
+                                    <TableColumn fx:id="cityColumn" prefWidth="120.0" resizable="false" text="Город" />
                                     <TableColumn prefWidth="120.0" resizable="false" text="Клуб" />
                                     <TableColumn prefWidth="120.0" resizable="false" text="Разряд" />
                                     <TableColumn prefWidth="120.0" resizable="false" text="Группа" />
