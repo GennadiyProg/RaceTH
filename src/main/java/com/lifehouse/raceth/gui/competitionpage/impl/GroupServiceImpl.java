@@ -15,6 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class GroupServiceImpl implements CompetitionPageElementService {
     private final GroupDAO groupDAO;
@@ -47,7 +48,10 @@ public class GroupServiceImpl implements CompetitionPageElementService {
     private void attachCompetition(GroupView groupView, Competition competition, Boolean status) {
         if (competition != null) {
             if (status){
-                groupView.getCompetitions().add(competition);
+                List<Competition> competitionList = groupView.getCompetitions();
+                if (!competitionList.contains(competition)) {
+                    competitionList.add(competition);
+                }
             } else {
                 groupView.getCompetitions().remove(
                         groupView.getCompetitions().stream()
@@ -60,8 +64,7 @@ public class GroupServiceImpl implements CompetitionPageElementService {
             groupView.getCheckBox().selectedProperty().removeListener(checkboxListener);
             groupView.getCheckBox().setSelected(false);
             groupView.getCheckBox().selectedProperty().addListener(checkboxListener);
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование");
-            alert.show();
+            new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование").show();
         }
     }
 

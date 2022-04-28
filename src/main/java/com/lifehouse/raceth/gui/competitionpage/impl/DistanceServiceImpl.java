@@ -15,6 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class DistanceServiceImpl implements CompetitionPageElementService {
     private final DistanceDAO distanceDAO;
@@ -47,7 +48,10 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
     private void attachCompetition(DistanceView distanceView, Competition competition, Boolean status) {
         if (competition != null) {
             if (status) {
-                distanceView.getCompetitions().add(competition);
+                List<Competition> competitionList = distanceView.getCompetitions();
+                if (!competitionList.contains(competition)) {
+                    distanceView.getCompetitions().add(competition);
+                }
             } else {
                 distanceView.getCompetitions().remove(
                         distanceView.getCompetitions().stream()
