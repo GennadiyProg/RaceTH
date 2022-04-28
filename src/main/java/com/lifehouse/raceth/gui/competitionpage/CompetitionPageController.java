@@ -158,26 +158,36 @@ public class CompetitionPageController implements Initializable {
 
     private void updateGroupTable() {
         var groups = groupTable.getItems();
-
-        for (GroupView group : groups) {
+        for (int i = 0; i < groups.size(); i++) {
+            GroupView group = groups.get(i);
             if (group.getCompetitions().stream().anyMatch((el) -> el.getId() == currentCompetition.getId())) {
+                int index = groupTable.getItems().indexOf(group);
+                groupTable.getItems().remove(index);
+                groupTable.getItems().add(0, group);
                 group.getCheckBox().setSelected(true);
             } else {
                 group.getCheckBox().setSelected(false);
             }
         }
+
+        groupTable.refresh();
     }
 
     private void updateDistanceTable() {
         var distances = distanceTable.getItems();
-
-        for (DistanceView distance : distances) {
+        for (int i = 0; i < distances.size(); i++) {
+            DistanceView distance = distances.get(i);
             if (distance.getCompetitions().stream().anyMatch((el) -> el.getId() == currentCompetition.getId())) {
+                int index = distanceTable.getItems().indexOf(distance);
+                distanceTable.getItems().remove(index);
+                distanceTable.getItems().add(0, distance);
                 distance.getCheckBox().setSelected(true);
             } else {
                 distance.getCheckBox().setSelected(false);
             }
         }
+
+        distanceTable.refresh();
     }
 
     @FXML
