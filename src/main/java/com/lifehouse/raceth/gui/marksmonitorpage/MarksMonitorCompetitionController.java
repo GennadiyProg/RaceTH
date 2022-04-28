@@ -1,4 +1,4 @@
-package com.lifehouse.raceth.gui;
+package com.lifehouse.raceth.gui.marksmonitorpage;
 
 import com.lifehouse.raceth.dao.ParticipantDAO;
 import com.lifehouse.raceth.model.Checkpoint;

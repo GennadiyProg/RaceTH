@@ -1,4 +1,4 @@
-package com.lifehouse.raceth.gui;
+package com.lifehouse.raceth.gui.marksmonitorpage;
 
 import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.model.Group;
