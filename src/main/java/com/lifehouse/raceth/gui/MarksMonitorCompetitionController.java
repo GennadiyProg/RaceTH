@@ -61,7 +61,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     private TextField stopwatch;
 
     @FXML
-    private Button startTime;
+    private Button start, stopTime;
 
 
     @FXML
@@ -195,14 +195,20 @@ public class MarksMonitorCompetitionController implements Initializable {
                 milliseconds_string = String.format("%02d", millisecond);
                 seconds_string = String.format("%02d", seconds);
                 minutes_string = String.format("%02d", minutes);
-                //timeLabel.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
                 stopwatch.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
             }
         });
 
+        public void startTime() {
+            timer.start();
+        };
+        public void stopTime() {
+            timer.stop();
+        };
+
         Stopwatch(){
 
-            timeLabel.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
+            //timeLabel.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
             timeLabel.setBounds(100,100,200,100);
             timeLabel.setFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN,35));
             timeLabel.setOpaque(true);
