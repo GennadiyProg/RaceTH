@@ -1,9 +1,7 @@
 package com.lifehouse.raceth.dao;
 
 import com.lifehouse.raceth.model.Distance;
-import com.lifehouse.raceth.model.Group;
-import com.lifehouse.raceth.model.viewmodel.DistanceView;
-import com.lifehouse.raceth.model.viewmodel.GroupView;
+import com.lifehouse.raceth.model.view.DistanceView;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
 
 import java.util.ArrayList;

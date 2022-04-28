@@ -3,7 +3,7 @@ package com.lifehouse.raceth.gui;
 import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Start;
-import com.lifehouse.raceth.model.viewmodel.StartView;
+import com.lifehouse.raceth.model.view.StartView;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

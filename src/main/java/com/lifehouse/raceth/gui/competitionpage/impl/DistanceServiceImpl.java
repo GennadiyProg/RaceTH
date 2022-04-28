@@ -5,7 +5,7 @@ import com.lifehouse.raceth.gui.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.gui.competitionpage.CompetitionPageElementService;
 import com.lifehouse.raceth.gui.competitionpage.popups.DistancePopupController;
 import com.lifehouse.raceth.model.competition.Competition;
-import com.lifehouse.raceth.model.viewmodel.DistanceView;
+import com.lifehouse.raceth.model.view.DistanceView;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -96,8 +96,7 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
         if (fxmlLoader == null){
             return null;
         }
-        DistancePopupController distancePopupController = fxmlLoader.getController();
-        return distancePopupController;
+        return fxmlLoader.getController();
     }
 
     private FXMLLoader loadResources() {

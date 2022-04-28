@@ -1,4 +1,4 @@
-package com.lifehouse.raceth.model.viewmodel;
+package com.lifehouse.raceth.model.view;
 
 import com.lifehouse.raceth.model.*;
 import javafx.scene.control.CheckBox;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import java.time.LocalTime;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -12,14 +12,11 @@ import com.lifehouse.raceth.gui.search.impl.DistanceTableSearchImpl;
 import com.lifehouse.raceth.gui.search.impl.GroupTableSearchImpl;
 import com.lifehouse.raceth.model.competition.CompetitionPageButton;
 import com.lifehouse.raceth.model.competition.Competition;
-import com.lifehouse.raceth.model.Group;
-import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Gender;
-import com.lifehouse.raceth.model.viewmodel.DistanceView;
-import com.lifehouse.raceth.model.viewmodel.GroupView;
+import com.lifehouse.raceth.model.view.DistanceView;
+import com.lifehouse.raceth.model.view.GroupView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,11 +27,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.Data;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 @Data
 public class CompetitionPageController implements Initializable {

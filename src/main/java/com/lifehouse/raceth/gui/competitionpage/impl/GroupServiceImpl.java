@@ -5,7 +5,7 @@ import com.lifehouse.raceth.gui.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.gui.competitionpage.CompetitionPageElementService;
 import com.lifehouse.raceth.gui.competitionpage.popups.GroupPopupController;
 import com.lifehouse.raceth.model.competition.Competition;
-import com.lifehouse.raceth.model.viewmodel.GroupView;
+import com.lifehouse.raceth.model.view.GroupView;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -96,8 +96,7 @@ public class GroupServiceImpl implements CompetitionPageElementService {
         if (fxmlLoader == null){
             return null;
         }
-        GroupPopupController groupPopupController = fxmlLoader.getController();
-        return groupPopupController;
+        return fxmlLoader.getController();
     }
 
     private FXMLLoader loadResources() {

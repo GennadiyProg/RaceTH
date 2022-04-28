@@ -1,7 +1,7 @@
 package com.lifehouse.raceth.gui.competitionpage.popups;
 
 import com.lifehouse.raceth.model.Distance;
-import com.lifehouse.raceth.model.viewmodel.DistanceView;
+import com.lifehouse.raceth.model.view.DistanceView;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
