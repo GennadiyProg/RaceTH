@@ -19,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -39,8 +41,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.geometry.Pos;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.*;
 
 import java.net.URL;
@@ -74,122 +80,13 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     @FXML
     private TableColumn<Start, String> lapColumn;
-/*
-    public class Sample1 extends Application {
 
-        public static void main(String[] args) {
-            launch(args);
-        }
+    @FXML
+    private TextField stopwatch;
 
-        @Override
-        public void start(Stage primaryStage) {
-            Scene scene = new Scene(new Timer1(), 300, 200);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        }
-    }
+    @FXML
+    private Button startTime;
 
-    public class Timer1 extends VBox {
-
-        public Timer1() {
-            Text time = new Text();
-            Button startButton = new Button("Start");
-            Button stopButton = new Button("Stop");
-            getChildren().addAll(time, startButton, stopButton);
-            startButton.setOnAction(startEvt -> {
-                Task<Integer> timerFxTask = new Task<>() {
-
-                    {
-                        updateValue(0);
-                    }
-
-                    @Override
-                    protected Integer call() throws Exception {
-                        for (int counter = 0; counter <= 1000; counter++) {
-                            sleep(1000);
-                            updateValue(counter);
-                        }
-                        return 1000;
-                    }
-                };
-                stopButton.setOnAction(stopEvt -> timerFxTask.cancel());
-                time.textProperty().bind(Bindings.createStringBinding(() -> timerFxTask.getValue().toString(),
-                        timerFxTask.valueProperty()));
-                Thread timerThread = new Thread(timerFxTask);
-                timerThread.start();
-            });
-        }
-    }
-
-    public class Sample2 extends Application
-    {
-
-        public static void main(String[] args) {
-            launch(args);
-        }
-
-        @Override
-        public void start(Stage primaryStage) {
-            Scene scene = new Scene(new Timer2(), 300, 200);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        }
-    }
-
-    public class Timer2 extends VBox {
-
-        public Timer2() {
-            Text time = new Text();
-            Button startButton = new Button("Start");
-            Button stopButton = new Button("Stop");
-            getChildren().addAll(time, startButton, stopButton);
-            startButton.setOnAction(startEvt -> {
-                IntegerProperty counter = new SimpleIntegerProperty(0);
-                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1000), new KeyValue(counter, 1000)));
-                stopButton.setOnAction(stopEvt -> timeline.stop());
-                time.textProperty().bind(Bindings.createStringBinding(() -> Integer.toString(counter.get()), counter));
-                timeline.play();
-            });
-        }
-    }*/
-
-/*public class Dispatcher extends Application {
-    GraphicsContext gc ;
-    Timer t;
-    Button btn;
-    int i=1;
-    public static void main(String[] args) {
-        launch(args);
-    }
-    public void start (Stage myStage){
-        myStage.setTitle("Game");
-        FlowPane rootNode = new FlowPane();
-        rootNode.setAlignment(Pos.CENTER);
-        Scene myScene = new Scene(rootNode,1000,900);
-        myStage.setScene(myScene);
-        Canvas myCanvas = new Canvas(900,800);
-        gc = myCanvas.getGraphicsContext2D();
-        final TimerTask animation = new TimerTask() {
-            public void run() {
-                gc.setFill(Color.WHITE);
-                gc.fillRect(0,0,900,800 );
-                i++;
-                gc.setFill(Color.BLACK);
-                gc.fillOval(i ,i+1 ,i ,i+1 );
-            }
-        };
-        t = new Timer();
-        Button btn = new Button("0");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent ae) {
-                t.schedule(animation, 0, 10);
-            }
-        });
-        rootNode. getChildren ().addAll(myCanvas, btn);
-        myStage.show ( ) ;
-    }
-}
-*/
 
     @FXML
     void addingGroup(ActionEvent event) {
@@ -295,4 +192,101 @@ public class MarksMonitorCompetitionController implements Initializable {
 
             tabPane.getTabs().add(newtab);
         }
+
+    Stopwatch Stopwatch = new Stopwatch();
+    public class Stopwatch implements ActionListener {
+
+        JFrame frame = new JFrame();
+        JButton startButton = new JButton("START");
+        JButton resetButton = new JButton("RESET");
+        JLabel timeLabel = new JLabel();
+        int elapsedTime = 0; //3600000
+        int millisecond = 0;
+        int seconds = 0;
+        int minutes = 0;
+        boolean started = false;
+        String milliseconds_string = String.format("%02d", millisecond);
+        String seconds_string = String.format("%02d", seconds);
+        String minutes_string = String.format("%02d", minutes);
+
+        javax.swing.Timer timer = new Timer(1, new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                elapsedTime+= 120;
+                minutes = (elapsedTime/3600000) % 60;
+                seconds = (elapsedTime/60000) % 60;
+                millisecond = (elapsedTime/1000) % 100;
+                milliseconds_string = String.format("%02d", millisecond);
+                seconds_string = String.format("%02d", seconds);
+                minutes_string = String.format("%02d", minutes);
+                timeLabel.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
+            }
+        });
+
+        Stopwatch(){
+
+            timeLabel.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
+            timeLabel.setBounds(100,100,200,100);
+            timeLabel.setFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN,35));
+            timeLabel.setOpaque(true);
+            timeLabel.setHorizontalAlignment(JTextField.CENTER);
+
+            startButton.setBounds(100,200,100,50);
+            startButton.setFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN,20));
+            startButton.setFocusable(false);
+            startButton.addActionListener(this);
+
+            resetButton.setBounds(200,200,100,50);
+            resetButton.setFont(new java.awt.Font("Verdana", Font.PLAIN,20));
+            resetButton.setFocusable(false);
+            resetButton.addActionListener(this);
+
+            frame.add(startButton);
+            frame.add(resetButton);
+            frame.add(timeLabel);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(420,420);
+            frame.setLayout(null);
+            frame.setVisible(true);
+        }
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+            if(e.getSource() == startButton){
+                start();
+                if(started == false) {
+                    started = true;
+                    startButton.setText("STOP");
+                    start();
+                }
+                else {
+                    started = false;
+                    startButton.setText("START");
+                    stop();
+                }
+            }
+            if(e.getSource() == resetButton){
+                started = false;
+                startButton.setText("START");
+                reset();
+            }
+        }
+        void start() {
+            timer.start();
+        }
+        void stop() {
+            timer.stop();
+        }
+        void reset() {
+            timer.stop();
+            elapsedTime = 0;
+            millisecond = 0;
+            seconds = 0;
+            minutes = 0;
+
+            milliseconds_string = String.format("%02d", millisecond);
+            seconds_string = String.format("%02d", seconds);
+            minutes_string = String.format("%02d", minutes);
+            timeLabel.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
+        }
+    }
 }
