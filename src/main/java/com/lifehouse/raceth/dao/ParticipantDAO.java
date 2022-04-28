@@ -1,8 +1,10 @@
 package com.lifehouse.raceth.dao;
 
 import com.lifehouse.raceth.model.Participant;
+import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParticipantDAO implements DAO<Participant> {
@@ -24,7 +26,7 @@ public class ParticipantDAO implements DAO<Participant> {
         TmpStorage.participants.add(participant);
     }
 
-    public Participant GetParticipant(long id) {
+    public Participant getParticipant(long id) {
         for (Participant item : TmpStorage.participants) {
             if (item.getId() == id) {
                 return item;
@@ -33,11 +35,16 @@ public class ParticipantDAO implements DAO<Participant> {
         return null;
     }
 
-    public List<Participant> GetAllParticipants() {
+    public List<Participant> getAllParticipants() {
         return TmpStorage.participants;
     }
 
-    public void Delete(Participant participant) {
+    public List<ParticipantCompetitionView> getAllParticipantViews(){
+        List<Participant> participants = getAllParticipants();
+        return  participants.stream().map(ParticipantCompetitionView::convertToView).toList();
+    }
+
+    public void delete(Participant participant) {
         TmpStorage.participants.remove(participant);
     }
 }

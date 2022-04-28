@@ -27,8 +27,6 @@ import java.util.ResourceBundle;
 @Data
 public class RunPageController implements Initializable {
     @FXML
-    private AnchorPane main_pane;
-    @FXML
     private Button addButton;
 
     //Табличка
