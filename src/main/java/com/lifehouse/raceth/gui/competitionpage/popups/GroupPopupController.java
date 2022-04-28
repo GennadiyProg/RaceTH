@@ -2,7 +2,7 @@ package com.lifehouse.raceth.gui.competitionpage.popups;
 
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Gender;
-import com.lifehouse.raceth.model.viewmodel.GroupView;
+import com.lifehouse.raceth.model.view.GroupView;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;

@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Entity
@@ -26,5 +28,11 @@ public class CompetitionDay {
     public CompetitionDay(Date date, Competition competition) {
         this.date = date;
         this.competition = competition;
+    }
+
+    @Override
+    public String toString() {
+        /*LocalDate normalizedDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();*/
+        return competition.getName() + " " + date.getDate() + " число";
     }
 }

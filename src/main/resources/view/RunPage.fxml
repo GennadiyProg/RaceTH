@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RunPageController">
+<AnchorPane prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RunPageController">
    <children>
       <GridPane layoutX="11.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="610.0" prefWidth="1090.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
@@ -75,7 +75,7 @@
                         <String fx:value="btn-danger" />
                      </styleClass>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#UpdateRow" stylesheets="@css/Buttons.css" text="Редактировать" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editRun" stylesheets="@css/Buttons.css" text="Редактировать" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-warning" />
@@ -94,7 +94,7 @@
                   </Button>
                </children>
             </GridPane>
-            <TableView fx:id="runTable" prefHeight="419.0" stylesheets="@css/table.css" GridPane.rowIndex="1">
+            <TableView fx:id="startTable" prefHeight="419.0" stylesheets="@css/table.css" GridPane.rowIndex="1">
                <columns>
                   <TableColumn fx:id="namestartColumn" prefWidth="175.0" reorderable="false" text="Название" />
                   <TableColumn fx:id="categoryColumn" prefWidth="170.0" reorderable="false" text="Категория" />

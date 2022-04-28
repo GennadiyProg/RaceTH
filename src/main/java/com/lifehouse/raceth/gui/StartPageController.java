@@ -1,10 +1,13 @@
 package com.lifehouse.raceth.gui;
 
+import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.gui.competitionpage.CompetitionPageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import lombok.Data;
 
@@ -44,11 +47,14 @@ public class StartPageController implements Initializable {
     @FXML
     private Label activeCompetitionLabel;
 
+    private StartDAO startDAO;
+
     @FXML
     private CompetitionPageController competitionPageController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        startDAO = new StartDAO();
         run_page.managedProperty().bind(run_page.visibleProperty());
 
         activeCompetitionLabel.setText("Неопределено");

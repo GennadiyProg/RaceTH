@@ -34,4 +34,9 @@ public class Distance {
         this.length = distance.getLength();
         this.height = distance.getHeight();
     }
+
+    @Override
+    public String toString() {
+        return location + " " + length;
+    }
 }

@@ -1,4 +1,4 @@
-package com.lifehouse.raceth.model.viewmodel;
+package com.lifehouse.raceth.model.view;
 
 import com.lifehouse.raceth.model.Gender;
 import com.lifehouse.raceth.model.Group;
@@ -12,7 +12,6 @@ import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

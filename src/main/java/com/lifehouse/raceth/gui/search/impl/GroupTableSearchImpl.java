@@ -2,8 +2,7 @@ package com.lifehouse.raceth.gui.search.impl;
 
 import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.gui.search.SearchEngine;
-import com.lifehouse.raceth.model.Group;
-import com.lifehouse.raceth.model.viewmodel.GroupView;
+import com.lifehouse.raceth.model.view.GroupView;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;

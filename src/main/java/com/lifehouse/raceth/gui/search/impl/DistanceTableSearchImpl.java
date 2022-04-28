@@ -2,8 +2,7 @@ package com.lifehouse.raceth.gui.search.impl;
 
 import com.lifehouse.raceth.dao.DistanceDAO;
 import com.lifehouse.raceth.gui.search.SearchEngine;
-import com.lifehouse.raceth.model.Distance;
-import com.lifehouse.raceth.model.viewmodel.DistanceView;
+import com.lifehouse.raceth.model.view.DistanceView;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
