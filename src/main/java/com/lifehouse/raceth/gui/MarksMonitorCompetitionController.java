@@ -2,14 +2,6 @@ package com.lifehouse.raceth.gui;
 
 import com.lifehouse.raceth.model.Checkpoint;
 import com.lifehouse.raceth.model.Start;
-import com.lifehouse.raceth.model.StartTab;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,34 +12,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import lombok.Data;
 import javafx.scene.control.*;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
-import javafx.geometry.Pos;
-import javafx.stage.Stage;
-
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -209,17 +185,18 @@ public class MarksMonitorCompetitionController implements Initializable {
         String seconds_string = String.format("%02d", seconds);
         String minutes_string = String.format("%02d", minutes);
 
-        javax.swing.Timer timer = new Timer(1, new ActionListener() {
+        Timer timer = new Timer(1, new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                elapsedTime+= 120;
+                elapsedTime+= 127;
                 minutes = (elapsedTime/3600000) % 60;
                 seconds = (elapsedTime/60000) % 60;
-                millisecond = (elapsedTime/1000) % 100;
+                millisecond = (elapsedTime/600) % 100;
                 milliseconds_string = String.format("%02d", millisecond);
                 seconds_string = String.format("%02d", seconds);
                 minutes_string = String.format("%02d", minutes);
-                timeLabel.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
+                //timeLabel.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
+                stopwatch.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
             }
         });
 
@@ -241,6 +218,7 @@ public class MarksMonitorCompetitionController implements Initializable {
             resetButton.setFocusable(false);
             resetButton.addActionListener(this);
 
+// отвечает за окно
             frame.add(startButton);
             frame.add(resetButton);
             frame.add(timeLabel);

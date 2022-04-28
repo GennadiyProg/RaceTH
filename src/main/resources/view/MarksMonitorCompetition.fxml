@@ -72,7 +72,7 @@
                               <String fx:value="btn-danger" />
                            </styleClass>
                         </Button>
-                        <TextField maxWidth="-Infinity" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="00:00:00" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" editable="false">
+                        <TextField fx:id="stopwatch" maxWidth="-Infinity" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="00:00:00" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" editable="false">
                            <font>
                               <Font size="48.0" />
                            </font>
