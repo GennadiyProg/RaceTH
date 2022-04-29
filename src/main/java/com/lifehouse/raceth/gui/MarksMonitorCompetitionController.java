@@ -61,7 +61,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     private TextField stopwatch;
 
     @FXML
-    private Button start, stopTime;
+    private Button startTime, stopTime;
 
 
     @FXML
@@ -162,10 +162,8 @@ public class MarksMonitorCompetitionController implements Initializable {
                     tabPane.getSelectionModel().select(tabPane.getTabs().size() - 2);
                 }
             };
-
             // set event handler to the tab
             newtab.setOnSelectionChanged(event);
-
             tabPane.getTabs().add(newtab);
         }
 
@@ -200,6 +198,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         });
 
         public void startTime() {
+            System.out.println("ЭТО ХЕРНЯ РАБОТАЕТ. а кнопка нет");
             timer.start();
         };
         public void stopTime() {
@@ -207,12 +206,6 @@ public class MarksMonitorCompetitionController implements Initializable {
         };
 
         Stopwatch(){
-
-            //timeLabel.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
-            timeLabel.setBounds(100,100,200,100);
-            timeLabel.setFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN,35));
-            timeLabel.setOpaque(true);
-            timeLabel.setHorizontalAlignment(JTextField.CENTER);
 
             startButton.setBounds(100,200,100,50);
             startButton.setFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN,20));

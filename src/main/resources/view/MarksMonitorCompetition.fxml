@@ -78,7 +78,7 @@
                            </font>
                         </TextField>
                         <Label styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Время начала" translateY="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                        <Button fx:id="start" mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Старт" textFill="WHITE" translateX="30.0" translateY="41.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                        <Button fx:id="startTime" mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Старт" textFill="WHITE" translateX="30.0" translateY="41.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
