@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lombok.Data;
 
+import java.net.SocketException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
@@ -134,26 +135,48 @@ public class MarksMonitorCompetitionController implements Initializable {
         printProtocolButton.setOnMouseReleased(printProtocolButtonReleaseHandler);
     }
 
-    //Обновление последнего номера при прохождении(пока по нажатию кнопки)
-    public void updateLastNumber() {
-        Runnable task = () -> lastNumber.setText(RFID.getTag()); //Задача для потока
-        CompletableFuture.runAsync(task); //Запуск future-потока
+
+    public class getTagThread extends Thread {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    lastNumber.setText(RFID.getTag());
+                } catch(SocketException e) {
+
+                }
+
+            }
+        }
     }
 
+    //Обновление последнего номера при прохождении(пока по нажатию кнопки)
+    public void updateLastNumber() {
+//        Runnable task = () -> lastNumber.setText(RFID.getTag()); //Задача для потока
+//        CompletableFuture.runAsync(task); //Запуск future-потока
+
+        getTagThread getThread = new getTagThread();
+        getThread.start();
+    }
+    getTagThread getThread = new getTagThread();
+
     public void startButtonClick() {
-        updateLastNumber(); //Включение потока на считывание данных с рамки
+//        updateLastNumber(); //Включение потока на считывание данных с рамки
+
         //Изменение цвета и текста кнопки при нажатиее
         if(isButtonGreen) { //Если зеленая, поменять на красную
             startButton.setStyle("-fx-background-color: #FF4040;" +
                                  "-fx-background-radius: 15px;" +
                                  "-fx-effect:  dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 20px, 0, 0, 10px)");
             startButton.setText("Стоп");
+            getThread.start();
             isButtonGreen = false;
         } else if (!isButtonGreen) { //Если красная, поменять на зеленую
             startButton.setStyle("-fx-background-color: #00C781;" +
                                  "-fx-background-radius: 15px;" +
                                  "-fx-effect:  dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 20px, 0, 0, 10px)");
             startButton.setText("Старт");
+            getThread.interrupt();
             isButtonGreen = true;
         }
 
