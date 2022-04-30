@@ -8,6 +8,7 @@ import com.lifehouse.raceth.model.Start;
 import com.lifehouse.raceth.model.StartTab;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
+import com.lifehouse.raceth.rfid.RFID;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ import javafx.scene.control.*;
 import javafx.event.Event;
 
 import java.io.IOException;
+import java.net.SocketException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.util.*;
@@ -38,6 +40,11 @@ public class MarksMonitorCompetitionController implements Initializable {
     private  TabPane tabPane;
     @FXML
     private Tab participantTab;
+    @FXML
+    private TextField lastNumber;
+    @FXML
+    private Button startButton;
+
     @FXML
     private TableView<ParticipantCompetitionView> participantCompetitionTable;
     @FXML
@@ -97,6 +104,8 @@ public class MarksMonitorCompetitionController implements Initializable {
     private Set<StartTab> openedTabs;
     private Map<Long, List<Start>> startOnTab;
     private Map<Long, List<ParticipantStartView>> participantOnTab;
+
+    private Boolean isButtonGreen = true;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -198,5 +207,48 @@ public class MarksMonitorCompetitionController implements Initializable {
 
         tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab);
         tabPane.getSelectionModel().select(tabPane.getTabs().size() - 2);
+    }
+
+    public class getTagThread extends Thread {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    lastNumber.setText(RFID.getTag());
+                } catch(SocketException e) {
+
+                }
+
+            }
+        }
+    }
+
+    //Обновление последнего номера при прохождении(пока по нажатию кнопки)
+    public void updateLastNumber() {
+//        Runnable task = () -> lastNumber.setText(RFID.getTag()); //Задача для потока
+//        CompletableFuture.runAsync(task); //Запуск future-потока
+
+        getTagThread getThread = new getTagThread();
+        getThread.start();
+    }
+    getTagThread getThread = new getTagThread();
+
+    public void startButtonClick() {
+//        updateLastNumber(); //Включение потока на считывание данных с рамки
+
+        //Изменение цвета и текста кнопки при нажатиее
+        if(isButtonGreen) {
+            startButton.setText("Стоп");
+            getThread.start();
+            isButtonGreen = false;
+        } else if (!isButtonGreen) {
+            startButton.setText("Старт");
+            getThread.stop();
+//            getThread.interrupt();
+            isButtonGreen = true;
+        }
+
+
+
     }
 }
