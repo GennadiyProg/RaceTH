@@ -66,7 +66,7 @@ public class RunPageController implements Initializable {
 
     public void onUpdateSelectedCompetition() {
         startTable.getItems().clear();
-        startTable.getItems().addAll(startDAO.getCompetitionsRuns(CompetitionPageController.currentCompetition.getId()));
+        startTable.getItems().addAll(startDAO.getStartsByCompetitionId(CompetitionPageController.currentCompetition.getId()));
     }
 
     @FXML

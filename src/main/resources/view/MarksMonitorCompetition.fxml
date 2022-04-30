@@ -165,43 +165,40 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="participantTable" layoutX="-3.0" layoutY="-1.0" prefHeight="318.0" stylesheets="@css/table.css">
+                              <TableView fx:id="participantStartTable" prefHeight="318.0" prefWidth="1064.0" stylesheets="@css/table.css">
                                  <columns>
-                                    <TableColumn fx:id="numberColumn" prefWidth="50.0" resizable="false" text="№" />
-                                    <TableColumn fx:id="nameColumn" prefWidth="100.0" resizable="false" text="Участник" />
-                                    <TableColumn fx:id="genderColumn" prefWidth="50.0" resizable="false" text="Пол" />
-                                    <TableColumn fx:id="chipColumn" prefWidth="130.0" resizable="false" text="Чип" />
-                                    <TableColumn fx:id="startNumberColumn" prefWidth="130.0" resizable="false" text="Стартовый номер" />
-                                    <TableColumn fx:id="birthdateColumn" prefWidth="130.0" resizable="false" text="Дата рождения" />
-                                    <TableColumn fx:id="cityColumn" prefWidth="120.0" resizable="false" text="Город" />
-                                    <TableColumn prefWidth="120.0" resizable="false" text="Клуб" />
-                                    <TableColumn prefWidth="120.0" resizable="false" text="Разряд" />
-                                    <TableColumn prefWidth="120.0" resizable="false" text="Группа" />
+                                    <TableColumn fx:id="psNumberColumn" prefWidth="39.20001173019409" resizable="false" text="№" />
+                                    <TableColumn fx:id="psCurrentTimeColumn" prefWidth="77.59994125366211" resizable="false" text="Время текущее" />
+                                    <TableColumn fx:id="psTimeOnDistanceColumn" prefWidth="104.00000762939453" resizable="false" text="Время на дистанции" />
+                                    <TableColumn fx:id="psChipColumn" prefWidth="91.20002746582031" resizable="false" text="Метка" />
+                                    <TableColumn fx:id="psStartNumberColumn" prefWidth="105.60003662109375" resizable="false" text="Стартовый номер" />
+                                    <TableColumn fx:id="psLastnameColumn" prefWidth="33.5999755859375" resizable="false" text="Фамилия" />
+                                    <TableColumn fx:id="psNameColumn" prefWidth="116.79995727539062" resizable="false" text="Имя" />
+                                    <TableColumn fx:id="psGroupColumn" prefWidth="95.199951171875" resizable="false" text="Группа" />
+                                    <TableColumn prefWidth="101.5999755859375" resizable="false" text="Круг" />
+                                    <TableColumn prefWidth="100.800048828125" resizable="false" text="Место" />
+                                    <TableColumn prefWidth="103.2000732421875" resizable="false" text="Отставание от лидера" />
+                                    <TableColumn prefWidth="92.800048828125" resizable="false" text="Время круга" />
+                                 </columns>
+                              </TableView>
+                              <TableView fx:id="participantCompetitionTable" prefHeight="318.0" prefWidth="1064.0" stylesheets="@css/table.css">
+                                 <columns>
+                                    <TableColumn fx:id="pcNumberColumn" prefWidth="39.20001173019409" resizable="false" text="№" />
+                                    <TableColumn fx:id="pcLastnameColumn" prefWidth="77.59994125366211" resizable="false" text="Фамилия" />
+                                    <TableColumn fx:id="pcNameColumn" prefWidth="104.00000762939453" resizable="false" text="Имя" />
+                                    <TableColumn fx:id="pcPatronymicColumn" prefWidth="91.20002746582031" resizable="false" text="Отчество" />
+                                    <TableColumn fx:id="pcGenderColumn" prefWidth="105.60003662109375" resizable="false" text="Пол" />
+                                    <TableColumn fx:id="pcChipColumn" prefWidth="33.5999755859375" resizable="false" text="Чип" />
+                                    <TableColumn fx:id="pcStartNumberColumn" prefWidth="116.79995727539062" resizable="false" text="Стартовый номер" />
+                                    <TableColumn fx:id="pcBirthdateColumn" prefWidth="95.199951171875" resizable="false" text="Дата рождения" />
+                                    <TableColumn fx:id="pcCityColumn" prefWidth="101.5999755859375" resizable="false" text="Город" />
+                                    <TableColumn prefWidth="100.800048828125" resizable="false" text="Клуб" />
+                                    <TableColumn prefWidth="103.2000732421875" resizable="false" text="Разряд" />
+                                    <TableColumn fx:id="pcGroupColumn" prefWidth="92.800048828125" resizable="false" text="Группа" />
                                  </columns>
                               </TableView>
                            </children>
                         </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Забег 1">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TableView layoutX="-3.0" layoutY="-1.0" prefHeight="318.0" stylesheets="@css/table.css">
-                                 <columns>
-                                    <TableColumn prefWidth="50.0" resizable="false" text="№" />
-                                    <TableColumn prefWidth="100.0" resizable="false" text="Участник" />
-                                    <TableColumn prefWidth="50.0" resizable="false" text="Пол" />
-                                    <TableColumn prefWidth="130.0" resizable="false" text="Чип" />
-                                    <TableColumn prefWidth="130.0" resizable="false" text="Стартовый номер" />
-                                    <TableColumn prefWidth="130.0" resizable="false" text="Дата рождения" />
-                                    <TableColumn prefWidth="120.0" resizable="false" text="Город" />
-                                    <TableColumn prefWidth="120.0" resizable="false" text="Клуб" />
-                                    <TableColumn prefWidth="120.0" resizable="false" text="Разряд" />
-                                    <TableColumn prefWidth="120.0" resizable="false" text="Группа" />
-                                 </columns>
-                              </TableView>
-                           </children></AnchorPane>
                   </content>
                 </Tab>
               </tabs>

@@ -21,6 +21,8 @@ public class Sportsman {
     @NotNull
     private String lastname;
     @NotNull
+    private String patronymic;
+    @NotNull
     private Date birthdate;
     @NotNull
     @Enumerated (value = EnumType.STRING)

@@ -2,6 +2,7 @@ package com.lifehouse.raceth.gui;
 
 import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.gui.competitionpage.CompetitionPageController;
+import com.lifehouse.raceth.model.CompetitionDay;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import lombok.Data;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 @Data
@@ -51,6 +53,12 @@ public class StartPageController implements Initializable {
 
     @FXML
     private CompetitionPageController competitionPageController;
+
+    public static CompetitionDay currentCompetitionDay;
+
+    public StartPageController() {
+        currentCompetitionDay = new CompetitionDay(1, new Date(), null);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

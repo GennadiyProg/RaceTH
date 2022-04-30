@@ -17,7 +17,7 @@ public class StartDAO implements DAO<Start> {
 //    }
 
     public void create(Start run) {
-        TmpStorage.runs.add(run);
+        TmpStorage.starts.add(run);
     }
 
     public void update(Start run) {
@@ -27,7 +27,7 @@ public class StartDAO implements DAO<Start> {
     }
 
     public Start getRun(long id) {
-        for (Start item : TmpStorage.runs) {
+        for (Start item : TmpStorage.starts) {
             if (item.getId() == id) {
                 return item;
             }
@@ -36,14 +36,18 @@ public class StartDAO implements DAO<Start> {
     }
 
     public List<Start> getAllRuns() {
-        return TmpStorage.runs;
+        return TmpStorage.starts;
     }
 
-    public List<Start> getCompetitionsRuns(long competitionId) {
-        return TmpStorage.runs.stream().filter(el -> el.getCompetitionDay().getCompetition().getId() == competitionId).toList();
+    public List<Start> getStartsByCompetitionDayId(long id) {
+        return TmpStorage.starts.stream().filter(el -> el.getCompetitionDay().getId() == id).toList();
     }
 
-    public void Delete(Start run) {
-        TmpStorage.runs.remove(run);
+    public List<Start> getStartsByCompetitionId(long id) {
+        return TmpStorage.starts.stream().filter(el -> el.getCompetitionDay().getCompetition().getId() == id).toList();
+    }
+
+    public void delete(Start run) {
+        TmpStorage.starts.remove(run);
     }
 }

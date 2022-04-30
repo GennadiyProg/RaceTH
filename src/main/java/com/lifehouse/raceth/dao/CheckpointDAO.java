@@ -25,7 +25,7 @@ public class CheckpointDAO implements DAO<Checkpoint> {
         TmpStorage.checkpoints.add(checkpoint);
     }
 
-    public Checkpoint GetCheckpoint(long id) {
+    public Checkpoint getCheckpoint(long id) {
         for (Checkpoint item : TmpStorage.checkpoints) {
             if (item.getId() == id) {
                 return item;
@@ -34,11 +34,11 @@ public class CheckpointDAO implements DAO<Checkpoint> {
         return null;
     }
 
-    public List<Checkpoint> GetAllCheckpoints() {
+    public List<Checkpoint> getAllCheckpoints() {
         return TmpStorage.checkpoints;
     }
 
-    public void Delete(Checkpoint checkpoint) {
+    public void delete(Checkpoint checkpoint) {
         TmpStorage.checkpoints.remove(checkpoint);
     }
 }
