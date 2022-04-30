@@ -62,7 +62,7 @@
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin></TextField>
-                        <Button fx:id="stopTime" mnemonicParsing="false"   stylesheets="@css/Buttons.css" text="Стоп" textFill="WHITE" translateX="-30.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <Button fx:id="stopTimeButton" mnemonicParsing="false"   stylesheets="@css/Buttons.css" text="Стоп" textFill="WHITE" translateX="-30.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -78,7 +78,7 @@
                            </font>
                         </TextField>
                         <Label styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Время начала" translateY="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                        <Button fx:id="startTimeButton" mnemonicParsing="false"  stylesheets="@css/Buttons.css" text="Старт" textFill="WHITE" translateX="30.0" translateY="41.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                        <Button fx:id="startTim" mnemonicParsing="false" onAction="#startTimeButton"  stylesheets="@css/Buttons.css" text="Старт" textFill="WHITE" translateX="30.0" translateY="41.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>

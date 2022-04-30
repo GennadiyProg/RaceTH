@@ -60,8 +60,8 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     private TextField stopwatch;
 
-    @FXML
-    private Button startTimeButton, stopTimeButton;
+   // @FXML
+   // private Button startTimeButton, stopTimeButton;
 
 
     @FXML
@@ -169,6 +169,14 @@ public class MarksMonitorCompetitionController implements Initializable {
 
 
     Stopwatch Stopwatch = new Stopwatch();
+
+    public void startTimeButton(ActionEvent actionEvent) {
+        Stopwatch.start();
+    }
+    public void stopTimeButton() {
+        Stopwatch.stop();
+    };
+
     public class Stopwatch implements ActionListener {
 
         JFrame frame = new JFrame();
@@ -197,15 +205,6 @@ public class MarksMonitorCompetitionController implements Initializable {
                 stopwatch.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
             }
         });
-        @FXML
-        public void startTime() {
-            System.out.println("ЭТО ХЕРНЯ РАБОТАЕТ. а кнопка нет");
-            timer.start();
-        };
-        @FXML
-        public void stopTime() {
-            timer.stop();
-        };
 
         Stopwatch(){
 
@@ -218,7 +217,6 @@ public class MarksMonitorCompetitionController implements Initializable {
             resetButton.setFont(new java.awt.Font("Verdana", Font.PLAIN,20));
             resetButton.setFocusable(false);
             resetButton.addActionListener(this);
-
 // отвечает за окно
             frame.add(startButton);
             frame.add(resetButton);
@@ -268,4 +266,5 @@ public class MarksMonitorCompetitionController implements Initializable {
             timeLabel.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
         }
     }
+
 }
