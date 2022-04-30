@@ -25,6 +25,6 @@ public class Participant {
     private RelayTeam relayTeam;
     private int relayStage;
     @NotNull
-    private int tag;
+    private int startNumber;
 
 }
