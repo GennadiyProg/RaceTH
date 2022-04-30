@@ -137,7 +137,7 @@ public class Main extends Application{
         stage.setResizable(false); //Отключение изменения размеров окна
         AnchorPane pain = loader.load();
         stage.setScene(new Scene(pain));
-        stage.getIcons().add(new Image("/view/images/icons/more.png"));
+        stage.getIcons().add(new Image("/assets/images/icons/more.png"));
         stage.show();
     }
 }

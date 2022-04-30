@@ -19,7 +19,7 @@ public class ClubPageController {
     @FXML
     void NewClub(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/pages/club/ClubsPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/club/ClubsPopup.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -33,7 +33,7 @@ public class ClubPageController {
 
     void EditClub(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/pages/club/ClubsPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/club/ClubsPopup.fxml"));
             Parent root1 = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -47,7 +47,7 @@ public class ClubPageController {
 
     void OpenRegion(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/pages/club/RegionPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/club/RegionPage.fxml"));
             Parent root1 = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));

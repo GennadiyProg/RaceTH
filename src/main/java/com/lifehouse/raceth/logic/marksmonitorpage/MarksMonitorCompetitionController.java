@@ -138,7 +138,7 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     @FXML
     void addingGroup(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/pages/marksmonitor/MarksGroupPopup.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/marksmonitor/MarksGroupPopup.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.initModality(Modality.APPLICATION_MODAL);
