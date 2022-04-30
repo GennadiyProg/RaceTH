@@ -173,8 +173,11 @@ public class MarksMonitorCompetitionController implements Initializable {
     public void startTimeButton(ActionEvent actionEvent) {
         Stopwatch.start();
     }
-    public void stopTimeButton() {
+    public void stopTimeButton(ActionEvent actionEvent) {
         Stopwatch.stop();
+    };
+    public void resetTimeButton(ActionEvent actionEvent) {
+        Stopwatch.reset();
     };
 
     public class Stopwatch implements ActionListener {
@@ -205,7 +208,6 @@ public class MarksMonitorCompetitionController implements Initializable {
                 stopwatch.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
             }
         });
-
         Stopwatch(){
 
             startButton.setBounds(100,200,100,50);
@@ -266,5 +268,4 @@ public class MarksMonitorCompetitionController implements Initializable {
             timeLabel.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
         }
     }
-
 }
