@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.CommandPopupController">
+<AnchorPane prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.relayrunpage.CommandPopupController">
    <children>
       <Label layoutX="44.0" prefHeight="124.0" prefWidth="345.0" text="Создание команды" textFill="#305ec1">
          <font>

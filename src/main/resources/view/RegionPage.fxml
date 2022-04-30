@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RegionPageController">
+<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.clubpage.RegionPageController">
    <children>
       <GridPane layoutX="-14.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="610.0" prefWidth="1090.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>

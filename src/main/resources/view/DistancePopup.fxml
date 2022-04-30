@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="352.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.competitionpage.popups.DistancePopupController">
+<AnchorPane prefHeight="352.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.competitionpage.popups.DistancePopupController">
    <children>
       <Label layoutX="33.0" layoutY="66.0" prefHeight="25.0" prefWidth="164.0" text="Название дистанции">
          <font>

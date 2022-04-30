@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: ECF1FE; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.StartPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: ECF1FE; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.MainPageController">
    <children>
 
       <AnchorPane prefHeight="67.0" prefWidth="1280.0" style="-fx-background-color: linear-gradient(to bottom, #fff, #fafafa); -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);">

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.ClubPopupController">
+<AnchorPane prefHeight="324.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.clubpage.ClubPopupController">
    <children>
       <Label layoutX="33.0" layoutY="66.0" prefHeight="25.0" prefWidth="131.0" styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Название клуба">
          <font>

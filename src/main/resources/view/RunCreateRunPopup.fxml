@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="438.0" prefWidth="576.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RunCreateRunController">
+<AnchorPane prefHeight="438.0" prefWidth="576.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.startpage.CreateStartPopupController">
    <children>
       <Label layoutX="41.0" layoutY="-9.0" prefHeight="124.0" prefWidth="402.0" styleClass="popup-header" stylesheets="@css/AppLabel.css" text="Создание (изменение) старта" textFill="#305ec1">
          <font>

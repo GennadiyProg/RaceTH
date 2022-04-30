@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.RelayRunPageController">
+<AnchorPane fx:id="main_pane" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.relayrunpage.RelayRunPageController">
    <children>
       <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="610.0" prefWidth="1090.0">
          <columnConstraints>
