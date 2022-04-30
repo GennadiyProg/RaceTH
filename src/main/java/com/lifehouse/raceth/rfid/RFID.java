@@ -60,9 +60,8 @@ public class RFID{
 //            e.printStackTrace();
         } finally {
             serverSocket.close();
-            return "Упс";
         }
-
+        return "Упс";
     }
 
 
