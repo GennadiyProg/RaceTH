@@ -20,7 +20,7 @@ public class RegionPageController {
     @FXML
     void NewRegion(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RegionsPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/pages/club/RegionsPopup.fxml"));
             Parent root2 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root2));
@@ -33,7 +33,7 @@ public class RegionPageController {
     @FXML
     void EditRegion(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RegionsPopup.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/pages/club/RegionsPopup.fxml"));
             Parent root3 = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root3));

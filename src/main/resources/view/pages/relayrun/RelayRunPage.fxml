@@ -34,7 +34,7 @@
          <children>
 
 
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#NewRelay" prefHeight="36.0" prefWidth="305.0" stylesheets="@css/Buttons.css" text="Cоздать эстафету" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#NewRelay" prefHeight="36.0" prefWidth="305.0" stylesheets="@../../css/Buttons.css" text="Cоздать эстафету" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
 
 
 
@@ -49,7 +49,7 @@
             </Button>
             <Pane prefHeight="429.0" prefWidth="343.0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <children>
-                  <TableView fx:id="relayTeamTable" layoutX="14.0" maxHeight="-Infinity" prefHeight="370.0" prefWidth="288.0" stylesheets="@css/table.css">
+                  <TableView fx:id="relayTeamTable" layoutX="14.0" maxHeight="-Infinity" prefHeight="370.0" prefWidth="288.0" stylesheets="@../../css/table.css">
                     <columns>
                       <TableColumn fx:id="relayTeamIdColumn" prefWidth="32.0" resizable="false" text="№" />
                       <TableColumn fx:id="relayTeamNameColumn" prefWidth="248.0" text="Название" />
@@ -59,7 +59,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <TableView layoutX="1.0" prefHeight="370.0" stylesheets="@css/table.css">
+                  <TableView layoutX="1.0" prefHeight="370.0" stylesheets="@../../css/table.css">
                      <columns>
                         <TableColumn prefWidth="100.0" resizable="false" text="Фамилия" />
                         <TableColumn prefWidth="150.0" text="Дата рождения" />
@@ -80,8 +80,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="316.0" promptText="Поиск" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
-                  <Label prefHeight="26.0" prefWidth="166.0" styleClass="label-bold" stylesheets="@css/AppLabel.css" text="Текущая эстафета:" textFill="#555555" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="316.0" promptText="Поиск" stylesheets="@../../css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                  <Label prefHeight="26.0" prefWidth="166.0" styleClass="label-bold" stylesheets="@../../css/AppLabel.css" text="Текущая эстафета:" textFill="#555555" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Agency FB Bold" size="14.0" />
                      </font>
@@ -103,11 +103,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="newCommand" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#addRelayTeam" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="newCommand" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#addRelayTeam" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/plus.png" />
+                              <Image url="@../../images/icons/plus.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -116,11 +116,11 @@
                         <String fx:value="btn-primary" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="editButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editRelayTeam" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                  <Button fx:id="editButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editRelayTeam" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/edit.png" />
+                              <Image url="@../../images/icons/edit.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -130,12 +130,12 @@
                      </styleClass>
                   </Button>
 
-                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#removeRelayTeam" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#removeRelayTeam" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
 
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/minus.png" />
+                              <Image url="@../../images/icons/minus.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -158,11 +158,11 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="newPeople" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#newPeople" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="newPeople" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#newPeople" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/plus.png" />
+                              <Image url="@../../images/icons/plus.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -171,11 +171,11 @@
                         <String fx:value="btn-primary" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="editPeople" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editPeople" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                  <Button fx:id="editPeople" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editPeople" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/edit.png" />
+                              <Image url="@../../images/icons/edit.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -185,12 +185,12 @@
                      </styleClass>
                   </Button>
 
-                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#DeletePeople" prefHeight="32.0" prefWidth="114.0" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#DeletePeople" prefHeight="32.0" prefWidth="114.0" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
 
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons/minus.png" />
+                              <Image url="@../../images/icons/minus.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -199,7 +199,7 @@
                         <String fx:value="btn-danger" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="loadBase" mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
+                  <Button fx:id="loadBase" mnemonicParsing="false" stylesheets="@../../css/Buttons.css" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -209,7 +209,7 @@
                         <String fx:value="btn" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Присвоить чип" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                  <Button mnemonicParsing="false" stylesheets="@../../css/Buttons.css" text="Присвоить чип" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -230,7 +230,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label styleClass="label-bold" stylesheets="@css/AppLabel.css" text="Команды" textFill="#555555" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                  <Label styleClass="label-bold" stylesheets="@../../css/AppLabel.css" text="Команды" textFill="#555555" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -249,7 +249,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label styleClass="label-bold" stylesheets="@css/AppLabel.css" text="Участники команды" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                  <Label styleClass="label-bold" stylesheets="@../../css/AppLabel.css" text="Участники команды" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

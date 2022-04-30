@@ -92,7 +92,7 @@ public class CompetitionServiceImpl implements CompetitionPageElementService {
     }
 
     private FXMLLoader loadResources() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/CompetitionPopup.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/pages/competition/CompetitionPopup.fxml"));
         Stage stage = new Stage();
         try {
             stage.setScene(new Scene(fxmlLoader.load()));

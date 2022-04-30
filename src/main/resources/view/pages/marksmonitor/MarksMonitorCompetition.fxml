@@ -39,7 +39,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView fx:id="checkpointTable" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="434.0" stylesheets="@css/table.css" GridPane.columnIndex="1">
+                  <TableView fx:id="checkpointTable" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="434.0" stylesheets="@../../css/table.css" GridPane.columnIndex="1">
                      <columns>
                         <TableColumn fx:id="groupColumn" prefWidth="125.0" text="Группа" />
                         <TableColumn fx:id="startTimeColumn" prefWidth="172.80006408691406" text="Стартовое время" />
@@ -57,11 +57,11 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <TextField alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00" stylesheets="@../../css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin></TextField>
-                        <Button fx:id="stopTime" mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Стоп" textFill="WHITE" translateX="-30.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <Button fx:id="stopTime" mnemonicParsing="false" stylesheets="@../../css/Buttons.css" text="Стоп" textFill="WHITE" translateX="-30.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -71,13 +71,13 @@
                               <String fx:value="btn-danger" />
                            </styleClass>
                         </Button>
-                        <TextField editable="false" maxWidth="-Infinity" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="00:00:00" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <TextField editable="false" maxWidth="-Infinity" prefHeight="110.0" stylesheets="@../../css/TextFieldLarge.css" text="00:00:00" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="48.0" />
                            </font>
                         </TextField>
-                        <Label styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Время начала" translateY="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                        <Button fx:id="startButton" mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Старт" textFill="WHITE" translateX="30.0" translateY="41.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                        <Label styleClass="label-regular" stylesheets="@../../css/AppLabel.css" text="Время начала" translateY="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <Button fx:id="startButton" mnemonicParsing="false" stylesheets="@../../css/Buttons.css" text="Старт" textFill="WHITE" translateX="30.0" translateY="41.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -95,12 +95,12 @@
                         <Insets bottom="1.0" />
                      </GridPane.margin>
                   </GridPane>
-                  <TextField fx:id="lastNumber" alignment="CENTER" editable="false" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" stylesheets="@css/TextFieldLarge.css" text="12" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <TextField fx:id="lastNumber" alignment="CENTER" editable="false" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" stylesheets="@../../css/TextFieldLarge.css" text="12" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                      <font>
                         <Font size="48.0" />
                      </font>
                   </TextField>
-                  <Label styleClass="label-regular" stylesheets="@css/AppLabel.css" text="Прошедший участник" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+                  <Label styleClass="label-regular" stylesheets="@../../css/AppLabel.css" text="Прошедший участник" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
                </children>
                <padding>
                   <Insets bottom="10.0" />
@@ -118,7 +118,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Добавить вручную" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                  <Button mnemonicParsing="false" stylesheets="@../../css/Buttons.css" text="Добавить вручную" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -128,7 +128,7 @@
                         <String fx:value="btn-warning" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Добавить из базы" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                  <Button mnemonicParsing="false" stylesheets="@../../css/Buttons.css" text="Добавить из базы" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -138,7 +138,7 @@
                         <String fx:value="btn-warning" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" stylesheets="@css/Buttons.css" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.halignment="LEFT">
+                  <Button mnemonicParsing="false" stylesheets="@../../css/Buttons.css" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -147,7 +147,7 @@
                         <String fx:value="btn-common" />
                         <String fx:value="btn-primary" />
                      </styleClass></Button>
-                  <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="231.0" stylesheets="@css/Buttons.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="LEFT">
+                  <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="231.0" stylesheets="@../../css/Buttons.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -159,13 +159,13 @@
                   </Button>
                </children>
             </GridPane>
-            <TabPane fx:id="tabPane" maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" stylesheets="@css/TabPane.css" tabClosingPolicy="SELECTED_TAB" GridPane.rowIndex="2">
+            <TabPane fx:id="tabPane" maxWidth="-Infinity" prefHeight="346.0" prefWidth="1066.0" stylesheets="@../../css/TabPane.css" tabClosingPolicy="SELECTED_TAB" GridPane.rowIndex="2">
               <tabs>
                 <Tab fx:id="participantTab" closable="false" text="Участники">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="participantStartTable" prefHeight="318.0" prefWidth="1064.0" stylesheets="@css/table.css">
+                              <TableView fx:id="participantStartTable" prefHeight="318.0" prefWidth="1064.0" stylesheets="@../../css/table.css">
                                  <columns>
                                     <TableColumn fx:id="psNumberColumn" prefWidth="39.20001173019409" resizable="false" text="№" />
                                     <TableColumn fx:id="psCurrentTimeColumn" prefWidth="77.59994125366211" resizable="false" text="Время текущее" />
@@ -181,7 +181,7 @@
                                     <TableColumn prefWidth="92.800048828125" resizable="false" text="Время круга" />
                                  </columns>
                               </TableView>
-                              <TableView fx:id="participantCompetitionTable" prefHeight="318.0" prefWidth="1064.0" stylesheets="@css/table.css">
+                              <TableView fx:id="participantCompetitionTable" prefHeight="318.0" prefWidth="1064.0" stylesheets="@../../css/table.css">
                                  <columns>
                                     <TableColumn fx:id="pcNumberColumn" prefWidth="39.20001173019409" resizable="false" text="№" />
                                     <TableColumn fx:id="pcLastnameColumn" prefWidth="77.59994125366211" resizable="false" text="Фамилия" />
@@ -205,7 +205,7 @@
             </TabPane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.valignment="TOP">
                <children>
-                  <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" layoutX="410.0" layoutY="-8.0" mnemonicParsing="false" onAction="#addingGroup" stylesheets="@css/Buttons.css" text="Редактировать группы" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS">
+                  <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" layoutX="410.0" layoutY="-8.0" mnemonicParsing="false" onAction="#addingGroup" stylesheets="@../../css/Buttons.css" text="Редактировать группы" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS">
                      <font>
                         <Font size="14.0" />
                      </font>

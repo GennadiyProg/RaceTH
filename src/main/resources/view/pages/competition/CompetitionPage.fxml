@@ -35,7 +35,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView fx:id="distanceTable" editable="true" prefHeight="274.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css" GridPane.columnIndex="1">
+                  <TableView fx:id="distanceTable" editable="true" prefHeight="274.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@../../css/table.css" GridPane.columnIndex="1">
                      <columns>
                         <TableColumn fx:id="dCheckboxColumn" prefWidth="116.80005192756653" resizable="false" text="Выбор" />
                         <TableColumn fx:id="dNameColumn" prefWidth="159.99998474121094" resizable="false" text="Название дистанции" />
@@ -57,11 +57,11 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="distanceButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                        <Button fx:id="distanceButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                            <graphic>
                               <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/icons/edit.png" />
+                                    <Image url="@../../images/icons/edit.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -70,11 +70,11 @@
                               <String fx:value="btn-warning" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="distanceButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.valignment="BOTTOM">
+                        <Button fx:id="distanceButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.valignment="BOTTOM">
                            <graphic>
                               <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/icons/plus.png" />
+                                    <Image url="@../../images/icons/plus.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -83,11 +83,11 @@
                               <String fx:value="btn-primary" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="distanceButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
+                        <Button fx:id="distanceButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
                            <graphic>
                               <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/icons/minus.png" />
+                                    <Image url="@../../images/icons/minus.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -96,7 +96,7 @@
                               <String fx:value="btn-image" />
                            </styleClass>
                         </Button>
-                        <TextField fx:id="searchDistanceTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="108.0" promptText="поиск" stylesheets="@css/TextField.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                        <TextField fx:id="searchDistanceTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="108.0" promptText="поиск" stylesheets="@../../css/TextField.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" />
@@ -104,7 +104,7 @@
                   </GridPane>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="groupTable" prefHeight="274.0" prefWidth="525.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css">
+                        <TableView fx:id="groupTable" prefHeight="274.0" prefWidth="525.0" style="-fx-border-radius: 12; -fx-background-color: #FAFAFA; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@../../css/table.css">
                            <columns>
                               <TableColumn fx:id="gCheckboxColumn" prefWidth="94.39999103546143" resizable="false" text="Выбор" />
                               <TableColumn fx:id="gNameColumn" prefWidth="126.39999389648438" resizable="false" text="Название" />
@@ -127,11 +127,11 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Button fx:id="groupButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="26.0" prefWidth="26.0" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="groupButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="26.0" prefWidth="26.0" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@images/icons/plus.png" />
+                                          <Image url="@../../images/icons/plus.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -140,11 +140,11 @@
                                     <String fx:value="btn-primary" />
                                  </styleClass>
                               </Button>
-                              <Button fx:id="groupButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="26.0" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                              <Button fx:id="groupButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="26.0" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@images/icons/edit.png" />
+                                          <Image url="@../../images/icons/edit.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -153,11 +153,11 @@
                                     <String fx:value="btn-warning" />
                                  </styleClass>
                               </Button>
-                              <Button fx:id="groupButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                              <Button fx:id="groupButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
                                  <graphic>
                                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@images/icons/minus.png" />
+                                          <Image url="@../../images/icons/minus.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -166,7 +166,7 @@
                                     <String fx:value="btn-image" />
                                  </styleClass>
                               </Button>
-                              <TextField fx:id="searchGroupTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="108.0" promptText="поиск" stylesheets="@css/TextField.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                              <TextField fx:id="searchGroupTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="108.0" promptText="поиск" stylesheets="@../../css/TextField.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" />
@@ -180,7 +180,7 @@
                </GridPane.margin>
             </GridPane>
             <Pane prefHeight="200.0" prefWidth="200.0">
-               <TableView fx:id="competitionTable" layoutX="1.0" prefHeight="306.0" prefWidth="1070.0" stylesheets="@css/table.css">
+               <TableView fx:id="competitionTable" layoutX="1.0" prefHeight="306.0" prefWidth="1070.0" stylesheets="@../../css/table.css">
                   <columns>
                      <TableColumn fx:id="cNameColumn" prefWidth="178.0" text="Название" />
                      <TableColumn fx:id="cOrganizerColumn" prefWidth="178.0" text="Организатор" />
@@ -202,19 +202,19 @@
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                     <TextField fx:id="searchCompetitionTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="195.0" promptText="поиск" stylesheets="@css/TextField.css" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
-                     <Button mnemonicParsing="false" onAction="#makeCompetitionCurrent" stylesheets="@css/Buttons.css" text="Сделать текущим" GridPane.halignment="LEFT">
+                     <TextField fx:id="searchCompetitionTextField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="195.0" promptText="поиск" stylesheets="@../../css/TextField.css" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
+                     <Button mnemonicParsing="false" onAction="#makeCompetitionCurrent" stylesheets="@../../css/Buttons.css" text="Сделать текущим" GridPane.halignment="LEFT">
                         <styleClass>
                            <String fx:value="btn-small" />
                            <String fx:value="btn" />
                            <String fx:value="btn-success" />
                         </styleClass>
                      </Button>
-                     <Button fx:id="competitionButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
+                     <Button fx:id="competitionButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#delete" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3">
                         <graphic>
                            <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                               <image>
-                                 <Image url="@images/icons/minus.png" />
+                                 <Image url="@../../images/icons/minus.png" />
                               </image>
                            </ImageView>
                         </graphic>
@@ -223,10 +223,10 @@
                            <String fx:value="btn-image" />
                         </styleClass>
                      </Button>
-                     <Button fx:id="competitionButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+                     <Button fx:id="competitionButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#edit" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
                         <graphic>
                            <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                              <Image url="@images/icons/edit.png" />
+                              <Image url="@../../images/icons/edit.png" />
                            </ImageView>
                         </graphic>
                         <styleClass>
@@ -234,11 +234,11 @@
                            <String fx:value="btn-warning" />
                         </styleClass>
                      </Button>
-                     <Button fx:id="competitionButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#create" stylesheets="@css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                     <Button fx:id="competitionButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#create" stylesheets="@../../css/Buttons.css" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
                         <graphic>
                            <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                               <image>
-                                 <Image url="@images/icons/plus.png" />
+                                 <Image url="@../../images/icons/plus.png" />
                               </image>
                            </ImageView>
                         </graphic>

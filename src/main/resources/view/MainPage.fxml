@@ -118,11 +118,11 @@
       </AnchorPane>
       <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="191.0" layoutY="110.0" minWidth="-Infinity" prefHeight="610.0" prefWidth="1090.0">
          <children>
-            <fx:include fx:id="competitionPage" maxHeight="-Infinity" maxWidth="-Infinity" source="CompetitionPage.fxml" />
-            <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="ClubPage.fxml" />
-            <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RunPage.fxml" />
-            <fx:include fx:id="relay_run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="RelayRunPage.fxml" />
-            <fx:include fx:id="marks_monitor_page" maxHeight="-Infinity" maxWidth="-Infinity" source="MarksMonitorCompetition.fxml" />
+            <fx:include fx:id="competitionPage" maxHeight="-Infinity" maxWidth="-Infinity" source="pages/competition/CompetitionPage.fxml" />
+            <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="pages/club/ClubPage.fxml" />
+            <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="pages/start/StartPage.fxml" />
+            <fx:include fx:id="relay_run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="pages/relayrun/RelayRunPage.fxml" />
+            <fx:include fx:id="marks_monitor_page" maxHeight="-Infinity" maxWidth="-Infinity" source="pages/marksmonitor/MarksMonitorCompetition.fxml" />
          </children>
       </AnchorPane>
    </children>

@@ -1,20 +1,13 @@
 package com.lifehouse.raceth;
 
-import com.lifehouse.raceth.dao.*;
-import com.lifehouse.raceth.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 import java.io.IOException;
-import org.hibernate.Session;
-
-import java.util.Calendar;
 
 
 public class Main extends Application{
@@ -137,7 +130,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StartPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainPage.fxml"));
 
 //        Image imageOk = new Image(getClass().getResourceAsStream("123.jpg"));
 

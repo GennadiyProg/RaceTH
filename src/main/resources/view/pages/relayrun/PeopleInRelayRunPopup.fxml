@@ -22,8 +22,8 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <Button fx:id="saveButt" layoutX="41.0" layoutY="493.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/AgreeButton.css" text="Сохранить" />
-      <Button fx:id="cancelButt" layoutX="196.0" layoutY="493.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" stylesheets="@css/DisagreeButton.css" text="Отменить" />
+      <Button fx:id="saveButt" layoutX="41.0" layoutY="493.0" mnemonicParsing="false" onAction="#Saving" prefHeight="37.0" prefWidth="131.0" stylesheets="@../../css/AgreeButton.css" text="Сохранить" />
+      <Button fx:id="cancelButt" layoutX="196.0" layoutY="493.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="37.0" prefWidth="131.0" stylesheets="@../../css/DisagreeButton.css" text="Отменить" />
       <GridPane layoutX="42.0" layoutY="56.0" prefHeight="301.0" prefWidth="523.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="229.0" />
@@ -109,7 +109,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Button fx:id="saveButt1" mnemonicParsing="false" onAction="#Saving" prefHeight="16.0" prefWidth="227.0" stylesheets="@css/AgreeButton.css" text="Зачитать чип" GridPane.rowIndex="10" />
+            <Button fx:id="saveButt1" mnemonicParsing="false" onAction="#Saving" prefHeight="16.0" prefWidth="227.0" stylesheets="@../../css/AgreeButton.css" text="Зачитать чип" GridPane.rowIndex="10" />
          </children>
       </GridPane>
       <TableView layoutX="43.0" layoutY="362.0" prefHeight="116.0" prefWidth="516.0">
