@@ -103,7 +103,7 @@ public class GroupServiceImpl implements CompetitionPageElementService {
     }
 
     private FXMLLoader loadResources() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/pages/competition/GroupPopup.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/competition/GroupPopup.fxml"));
         Stage stage = new Stage();
         try {
             stage.setScene(new Scene(fxmlLoader.load()));

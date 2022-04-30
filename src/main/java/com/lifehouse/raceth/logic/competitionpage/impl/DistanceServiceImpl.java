@@ -104,7 +104,7 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
     }
 
     private FXMLLoader loadResources() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/pages/competition/DistancePopup.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/competition/DistancePopup.fxml"));
         Stage stage = new Stage();
         try {
             stage.setScene(new Scene(fxmlLoader.load()));

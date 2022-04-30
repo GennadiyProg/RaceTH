@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: ECF1FE; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@css/table.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.MainPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: ECF1FE; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);" stylesheets="@../assets/css/table.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.MainPageController">
    <children>
 
       <AnchorPane prefHeight="67.0" prefWidth="1280.0" style="-fx-background-color: linear-gradient(to bottom, #fff, #fafafa); -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 0, 2);">
@@ -41,66 +41,66 @@
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/icons/more.png" />
+                        <Image url="@../assets/images/icons/more.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Label>
-            <Label layoutX="794.0" layoutY="24.0" styleClass="label-bold" stylesheets="@css/AppLabel.css" text="Текущее соревнование:">
+            <Label layoutX="794.0" layoutY="24.0" styleClass="label-bold" stylesheets="@../assets/css/AppLabel.css" text="Текущее соревнование:">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label fx:id="activeCompetitionLabel" layoutX="998.0" layoutY="25.0" prefHeight="20.0" prefWidth="258.0" styleClass="label-Medium-italic" stylesheets="@css/AppLabel.css" text="Label" />
+            <Label fx:id="activeCompetitionLabel" layoutX="998.0" layoutY="25.0" prefHeight="20.0" prefWidth="258.0" styleClass="label-Medium-italic" stylesheets="@../assets/css/AppLabel.css" text="Label" />
          </children>
       </AnchorPane>
 
       <AnchorPane layoutY="110.0" minWidth="-Infinity" prefHeight="610.0" prefWidth="190.0" style="-fx-background-color: #FAFAFA;">
          <children>
-            <ToggleButton fx:id="sorevButt" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleButtonAction" stylesheets="@css/table.css" text="Соревнование" wrapText="true">
+            <ToggleButton fx:id="sorevButt" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleButtonAction" stylesheets="@../assets/css/table.css" text="Соревнование" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@images/icons/home2.png" />
+                     <Image url="@../assets/images/icons/home2.png" />
                   </ImageView>
                </graphic>
                <toggleGroup>
                   <ToggleGroup fx:id="ButtGroup" />
                </toggleGroup></ToggleButton>
-            <ToggleButton fx:id="zabegButt" alignment="CENTER_LEFT" layoutY="66.0" mnemonicParsing="false" onAction="#handleButtonAction2" stylesheets="@css/table.css" text="Старты" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="zabegButt" alignment="CENTER_LEFT" layoutY="66.0" mnemonicParsing="false" onAction="#handleButtonAction2" stylesheets="@../assets/css/table.css" text="Старты" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/icons/running.png" />
+                        <Image url="@../assets/images/icons/running.png" />
                      </image>
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="relayButt" alignment="CENTER_LEFT" layoutY="132.0" mnemonicParsing="false" onAction="#handleButtonAction3" stylesheets="@css/table.css" text="Эстафеты" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="relayButt" alignment="CENTER_LEFT" layoutY="132.0" mnemonicParsing="false" onAction="#handleButtonAction3" stylesheets="@../assets/css/table.css" text="Эстафеты" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/icons/relay.png" />
+                        <Image url="@../assets/images/icons/relay.png" />
                      </image>
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="checkButt" alignment="CENTER_LEFT" layoutY="264.0" mnemonicParsing="false" onAction="#handleButtonAction7" stylesheets="@css/table.css" text="Монитор отметок" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="checkButt" alignment="CENTER_LEFT" layoutY="264.0" mnemonicParsing="false" onAction="#handleButtonAction7" stylesheets="@../assets/css/table.css" text="Монитор отметок" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/icons/cctv-camera.png" />
+                        <Image url="@../assets/images/icons/cctv-camera.png" />
                      </image>
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="clubsButt" alignment="CENTER_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#handleButtonAction6" stylesheets="@css/table.css" text="Клубы" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="clubsButt" alignment="CENTER_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#handleButtonAction6" stylesheets="@../assets/css/table.css" text="Клубы" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/icons/leader.png" />
+                        <Image url="@../assets/images/icons/leader.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -118,11 +118,11 @@
       </AnchorPane>
       <AnchorPane id="firstAnch" fx:id="firstAnch" layoutX="191.0" layoutY="110.0" minWidth="-Infinity" prefHeight="610.0" prefWidth="1090.0">
          <children>
-            <fx:include fx:id="competitionPage" maxHeight="-Infinity" maxWidth="-Infinity" source="pages/competition/CompetitionPage.fxml" />
-            <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="pages/club/ClubPage.fxml" />
-            <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="pages/start/StartPage.fxml" />
-            <fx:include fx:id="relay_run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="pages/relayrun/RelayRunPage.fxml" />
-            <fx:include fx:id="marks_monitor_page" maxHeight="-Infinity" maxWidth="-Infinity" source="pages/marksmonitor/MarksMonitorCompetition.fxml" />
+            <fx:include fx:id="competitionPage" maxHeight="-Infinity" maxWidth="-Infinity" source="competition/CompetitionPage.fxml" />
+            <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="club/ClubPage.fxml" />
+            <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="start/StartPage.fxml" />
+            <fx:include fx:id="relay_run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="relayrun/RelayRunPage.fxml" />
+            <fx:include fx:id="marks_monitor_page" maxHeight="-Infinity" maxWidth="-Infinity" source="marksmonitor/MarksMonitorCompetition.fxml" />
          </children>
       </AnchorPane>
    </children>
