@@ -2,6 +2,7 @@ package com.lifehouse.raceth.gui;
 
 import com.lifehouse.raceth.model.Checkpoint;
 import com.lifehouse.raceth.model.Start;
+import com.sun.media.jfxmedia.AudioClip;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -22,19 +23,12 @@ import lombok.Data;
 import javafx.scene.control.*;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javax.swing.*;
-import javax.swing.Timer;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.TimerTask;
-
-import static java.lang.Thread.sleep;
 
 @Data
 public class MarksMonitorCompetitionController<timer> implements Initializable {
@@ -66,12 +60,8 @@ public class MarksMonitorCompetitionController<timer> implements Initializable {
     @FXML
     private TextField stopwatch;
 
-   // @FXML
-   // private Button startTimeButton, stopTimeButton;
-
-
     @FXML
-    void addingGroup(ActionEvent event) {
+    void addingGroup(javafx.event.ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MarksGroupPopup.fxml"));
             Parent root1 = fxmlLoader.load();
@@ -84,23 +74,24 @@ public class MarksMonitorCompetitionController<timer> implements Initializable {
             System.out.println("Cant load");
         }
     }
+// Таймер
+    Timeline timeline = new Timeline(
+            new KeyFrame(
+                    Duration.millis(1000),
+                    ae -> {
+                        Date dateNow = new Date();
+                        SimpleDateFormat formatForDateNow = new SimpleDateFormat("hh:mm:ss");
+                        System.out.println(formatForDateNow.format(dateNow));
+                        stopwatch.setText(formatForDateNow.format(dateNow));
+                    }
+            )
+    );
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Timeline timeline = new Timeline(
-                new KeyFrame(
-                        Duration.millis(1000),
-                        ae -> {
-                            Date dateNow = new Date();
-                            SimpleDateFormat formatForDateNow = new SimpleDateFormat("hh:mm:ss");
-                            System.out.println(formatForDateNow.format(dateNow));
-                            stopwatch.setText(formatForDateNow.format(dateNow));
-                        }
-                )
-        );
+
         timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
 
             groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
             startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
@@ -187,34 +178,19 @@ public class MarksMonitorCompetitionController<timer> implements Initializable {
             newtab.setOnSelectionChanged(event);
             tabPane.getTabs().add(newtab);
         }
-     // Заготовки для нового таймера
-//    Timer timer = new Timer();
-//    TimerTask timerTask = new TimerTask() {
-//        @Override
-//        public void run() {
-//            stopwatch.setText("1");
-//        }
-//    };
-
-
-
-
-
-//    Stopwatch Stopwatch = new Stopwatch();
-//
-    public void startTimeButton(ActionEvent actionEvent) {
-//        Stopwatch.start();
+// Методы для кнопок
+    public void startTimeButton(javafx.event.ActionEvent actionEvent) {
+        timeline.play();
     }
-    public void stopTimeButton(ActionEvent actionEvent) {
-//        Stopwatch.stop();
+    public void stopTimeButton(javafx.event.ActionEvent actionEvent) {
+        timeline.stop();
     };
-    public void resetTimeButton(ActionEvent actionEvent) {
-//        Stopwatch.reset();
-    };
+    public void resetTimeButton(javafx.event.ActionEvent actionEvent) {
 //
+    };
+
+    // Пока просто существуют, в дальнейшем - уберется
 //    public class Stopwatch implements ActionListener {
-//
-//        JFrame frame = new JFrame();
 //        int elapsedTime = 0; //3600000
 //        int millisecond = 0;
 //        int seconds = 0;
@@ -223,7 +199,6 @@ public class MarksMonitorCompetitionController<timer> implements Initializable {
 //        String milliseconds_string = String.format("%02d", millisecond);
 //        String seconds_string = String.format("%02d", seconds);
 //        String minutes_string = String.format("%02d", minutes);
-//
 //        Timer timer = new Timer(1, new ActionListener() {
 //            @Override
 //            public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -235,36 +210,4 @@ public class MarksMonitorCompetitionController<timer> implements Initializable {
 //                seconds_string = String.format("%02d", seconds);
 //                minutes_string = String.format("%02d", minutes);
 //                stopwatch.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
-//            }
-//        });
-//        Stopwatch(){
-//        // отвечает за доп. окно - нужно убрать
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            frame.setSize(420,420);
-//            frame.setLayout(null);
-//            frame.setVisible(true);
-//        }
-//        @Override
-//        public void actionPerformed(java.awt.event.ActionEvent e) {
-//
-//        }
-//        void start() {
-//            timer.start();
-//        }
-//        void stop() {
-//            timer.stop();
-//        }
-//        void reset() {
-//            timer.stop();
-//            elapsedTime = 0;
-//            millisecond = 0;
-//            seconds = 0;
-//            minutes = 0;
-//
-//            milliseconds_string = String.format("%02d", millisecond);
-//            seconds_string = String.format("%02d", seconds);
-//            minutes_string = String.format("%02d", minutes);
-//            stopwatch.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
-//        }
-//    }
 }
