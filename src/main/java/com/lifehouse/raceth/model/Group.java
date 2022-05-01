@@ -13,6 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "\"Group\"")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +21,7 @@ public class Group {
     private String name; // Название группы
     private int ageFrom;
     private int ageTo;
+    @Enumerated(value = EnumType.STRING)
     private Gender gender; // Пол
     @ManyToMany(mappedBy = "groups")
     private List<Competition> competitions = new ArrayList<>();
