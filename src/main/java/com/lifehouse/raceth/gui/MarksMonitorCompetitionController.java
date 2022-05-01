@@ -5,6 +5,7 @@ import com.lifehouse.raceth.model.Start;
 import com.sun.media.jfxmedia.AudioClip;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,12 +27,15 @@ import javafx.event.EventHandler;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.TimerTask;
 
+
+
 @Data
-public class MarksMonitorCompetitionController<timer> implements Initializable {
+public class MarksMonitorCompetitionController<timer, date> implements Initializable {
 
     @FXML
     private Button addGroup;
@@ -58,7 +62,7 @@ public class MarksMonitorCompetitionController<timer> implements Initializable {
     private TableColumn<Start, String> lapColumn;
 
     @FXML
-    private TextField stopwatch;
+    private TextField stopwatch, timeStarted;
 
     @FXML
     void addingGroup(javafx.event.ActionEvent actionEvent) {
@@ -74,24 +78,32 @@ public class MarksMonitorCompetitionController<timer> implements Initializable {
             System.out.println("Cant load");
         }
     }
-// Таймер
+
+    // Таймер
+    int timing = 0;
+    String hours, minutes, seconds;
     Timeline timeline = new Timeline(
             new KeyFrame(
                     Duration.millis(1000),
                     ae -> {
-                        Date dateNow = new Date();
-                        SimpleDateFormat formatForDateNow = new SimpleDateFormat("hh:mm:ss");
-                        System.out.println(formatForDateNow.format(dateNow));
-                        stopwatch.setText(formatForDateNow.format(dateNow));
+                        //Date dateNow = new Date(); - Если нужно текущее время
+                        //SimpleDateFormat formatForDateNow = new SimpleDateFormat("hh:mm:ss");
+                        //System.out.println(formatForDateNow.format(dateNow));
+                        timing += 1;
+                        hours   = String.format("%02d",(timing/3600) % 24);
+                        minutes = String.format("%02d",(timing/60) % 60);
+                        seconds = String.format("%02d",timing % 60);
+                        stopwatch.setText(hours + ":" + minutes + ":" + seconds);
                     }
             )
     );
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
         timeline.setCycleCount(Timeline.INDEFINITE);
+        if (timeStarted == stopwatch) {
+            timeline.play();
+        };
 
             groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
             startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
@@ -186,28 +198,7 @@ public class MarksMonitorCompetitionController<timer> implements Initializable {
         timeline.stop();
     };
     public void resetTimeButton(javafx.event.ActionEvent actionEvent) {
-//
+        stopwatch.setText("00:00:00");
+        timing = 0;
     };
-
-    // Пока просто существуют, в дальнейшем - уберется
-//    public class Stopwatch implements ActionListener {
-//        int elapsedTime = 0; //3600000
-//        int millisecond = 0;
-//        int seconds = 0;
-//        int minutes = 0;
-//        boolean started = false;
-//        String milliseconds_string = String.format("%02d", millisecond);
-//        String seconds_string = String.format("%02d", seconds);
-//        String minutes_string = String.format("%02d", minutes);
-//        Timer timer = new Timer(1, new ActionListener() {
-//            @Override
-//            public void actionPerformed(java.awt.event.ActionEvent e) {
-//                elapsedTime+= 127;
-//                minutes = (elapsedTime/3600000) % 60;
-//                seconds = (elapsedTime/60000) % 60;
-//                millisecond = (elapsedTime/600) % 100;
-//                milliseconds_string = String.format("%02d", millisecond);
-//                seconds_string = String.format("%02d", seconds);
-//                minutes_string = String.format("%02d", minutes);
-//                stopwatch.setText(minutes_string + ":" + seconds_string + ":" + milliseconds_string);
 }

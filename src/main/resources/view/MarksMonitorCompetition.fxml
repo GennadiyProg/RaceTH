@@ -57,7 +57,7 @@
                       <RowConstraints maxHeight="35.0" minHeight="5.0" prefHeight="29.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <TextField fx:id="timeStarted" alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00" stylesheets="@css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin></TextField>
