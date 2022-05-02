@@ -81,29 +81,29 @@ public class MarksMonitorCompetitionController<timer, date> implements Initializ
 
     // Таймер
     int timing = 0;
-    String hours, minutes, seconds;
+    String hours, minutes, seconds, milliseconds;
     Timeline timeline = new Timeline(
             new KeyFrame(
-                    Duration.millis(1000),
+                    Duration.millis(10),
                     ae -> {
-                        //Date dateNow = new Date(); - Если нужно текущее время
-                        //SimpleDateFormat formatForDateNow = new SimpleDateFormat("hh:mm:ss");
-                        //System.out.println(formatForDateNow.format(dateNow));
                         timing += 1;
-                        hours   = String.format("%02d",(timing/3600) % 24);
-                        minutes = String.format("%02d",(timing/60) % 60);
-                        seconds = String.format("%02d",timing % 60);
-                        stopwatch.setText(hours + ":" + minutes + ":" + seconds);
+                        hours   = String.format("%02d",(timing/360000) % 24);
+                        minutes = String.format("%02d",(timing/6000) % 60);
+                        seconds = String.format("%02d",(timing/100) % 60);
+                        milliseconds = String.format("%02d",timing % 100);
+                        stopwatch.setText(hours + ":" + minutes + ":" + seconds + ":" + milliseconds);
                     }
             )
     );
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        if (timeStarted == stopwatch) {
+        /*Date dateNow = new Date(); -- Для будущего запуска по времени
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("hh:mm:ss");
+        System.out.println(formatForDateNow.format(dateNow));
+        if (dateNow.equals(timeStarted)) {
             timeline.play();
-        };
+        };*/
+        timeline.setCycleCount(Timeline.INDEFINITE);
 
             groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
             startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
@@ -198,7 +198,7 @@ public class MarksMonitorCompetitionController<timer, date> implements Initializ
         timeline.stop();
     };
     public void resetTimeButton(javafx.event.ActionEvent actionEvent) {
-        stopwatch.setText("00:00:00");
+        stopwatch.setText("00:00:00:00");
         timing = 0;
     };
 }
