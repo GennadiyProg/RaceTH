@@ -79,6 +79,8 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
         if (controller == null) return;
         controller.edit(distance);
         controller.getNewDistance().addListener((observable, oldValue, newValue) -> {
+            newValue.setId(distance.getId());
+            newValue.setCompetitions(distance.getCompetitions());
             distanceDAO.update(newValue);
             distanceTable.getSelectionModel().getSelectedItem().setFields(DistanceView.convertToView(newValue));
             distanceTable.refresh();

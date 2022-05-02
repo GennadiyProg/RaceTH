@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.dao;
 
+import com.lifehouse.raceth.HibernateUtil;
 import com.lifehouse.raceth.model.Checkpoint;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
 import org.hibernate.Session;
@@ -7,22 +8,17 @@ import org.hibernate.Session;
 import java.util.List;
 
 public class CheckpointDAO implements DAO<Checkpoint> {
-//    private final Session session;
-//
-//    public CheckpointDAO(final Session session) {
-//        this.session = session;
-//    }
+    private final Session session;
 
-//    public void create(Checkpoint checkpoint) {
-//        session.beginTransaction();
-//
-//        session.save(checkpoint);
-//
-//        session.getTransaction().commit();
-//    }
+    public CheckpointDAO() {
+        this.session = HibernateUtil.getSession();
+    }
 
     public void create(Checkpoint checkpoint) {
-        TmpStorage.checkpoints.add(checkpoint);
+//        TmpStorage.checkpoints.add(checkpoint);
+        session.getTransaction().begin();
+        session.save(checkpoint);
+        session.getTransaction().commit();
     }
 
     public Checkpoint getCheckpoint(long id) {
