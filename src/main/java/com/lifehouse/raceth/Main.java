@@ -33,7 +33,6 @@ public class Main extends Application{
     public static void main(String[] args) {
         Session session = HibernateUtil.getSession();
 
-
         // Determine all DAO controllers
 //        DAO<Competition> competitionDAO = new CompetitionDAO(session);
 //        DAO<Run> runDAO = new RunDAO(session);
