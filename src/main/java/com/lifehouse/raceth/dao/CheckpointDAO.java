@@ -15,10 +15,13 @@ public class CheckpointDAO implements DAO<Checkpoint> {
     }
 
     public void create(Checkpoint checkpoint) {
-//        TmpStorage.checkpoints.add(checkpoint);
         session.getTransaction().begin();
         session.save(checkpoint);
         session.getTransaction().commit();
+    }
+
+    public Checkpoint getCheckpointByParticipant(long id){
+        return TmpStorage.checkpoints.stream().filter(ch -> ch.getParticipant().getId() == id).findFirst().orElse(null);
     }
 
     public Checkpoint getCheckpoint(long id) {
