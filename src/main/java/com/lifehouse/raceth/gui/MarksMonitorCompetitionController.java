@@ -90,7 +90,6 @@ public class MarksMonitorCompetitionController<timer, date> implements Initializ
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DateTimeFormatter formatForDateNow = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
         localTime = LocalTime.of(0, 0, 0, 0);
-        System.out.println(localTime); // prints: 00:27:10.000000190
         timeline = new Timeline(
                 new KeyFrame(
                         Duration.millis(10),
