@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public class Main extends Application{
 
     public static void main(String[] args) {
         launch(args);
-        HibernateUtil.closeSessionFactory();
+//        HibernateUtil.closeSessionFactory();
     }
 
     @Override

@@ -10,11 +10,14 @@ import com.lifehouse.raceth.logic.search.SearchEngine;
 import com.lifehouse.raceth.logic.search.impl.CompetitionTableSearchImpl;
 import com.lifehouse.raceth.logic.search.impl.DistanceTableSearchImpl;
 import com.lifehouse.raceth.logic.search.impl.GroupTableSearchImpl;
+import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.competition.CompetitionPageButton;
 import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.Gender;
 import com.lifehouse.raceth.model.view.DistanceView;
 import com.lifehouse.raceth.model.view.GroupView;
+import com.lifehouse.raceth.repository.DistanceRepository;
+import com.lifehouse.raceth.service.DistanceService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
@@ -25,9 +28,13 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Data
@@ -91,6 +98,8 @@ public class CompetitionPageController implements Initializable {
 
     private CompetitionPageElementService competitionPageElementService;
 
+    private DistanceService distanceService;
+
     public static Competition currentCompetition;
 
     @Override
@@ -98,7 +107,6 @@ public class CompetitionPageController implements Initializable {
         competitionDAO = new CompetitionDAO();
         groupDAO = new GroupDAO();
         distanceDAO = new DistanceDAO();
-
         initializeCompetitionTable();
         initializeGroupTable();
         initializeDistanceTable();
@@ -136,7 +144,17 @@ public class CompetitionPageController implements Initializable {
         dHeightColumn.setCellValueFactory(new PropertyValueFactory<>("height"));
 
         ObservableList<DistanceView> distances = distanceTable.getItems();
-        distances.addAll(distanceDAO.getAllDistanceViews());
+
+
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+        appContext.scan("com.lifehouse.raceth");
+        appContext.refresh();
+        distanceService = (DistanceService) appContext.getBean("distanceService");
+        distances.addAll(distanceService.findAll());
+        appContext.close();
+
+
+//        distances.addAll(distanceDAO.getAllDistanceViews());
     }
 
     private void searchEngine(){
