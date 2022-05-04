@@ -27,6 +27,8 @@ import javafx.event.EventHandler;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -82,27 +84,22 @@ public class MarksMonitorCompetitionController<timer, date> implements Initializ
     // Таймер
     int timing = 0;
     String hours, minutes, seconds, milliseconds;
-    Timeline timeline = new Timeline(
-            new KeyFrame(
-                    Duration.millis(10),
-                    ae -> {
-                        timing += 1;
-                        hours   = String.format("%02d",(timing/360000) % 24);
-                        minutes = String.format("%02d",(timing/6000) % 60);
-                        seconds = String.format("%02d",(timing/100) % 60);
-                        milliseconds = String.format("%02d",timing % 100);
-                        stopwatch.setText(hours + ":" + minutes + ":" + seconds + ":" + milliseconds);
-                    }
-            )
-    );
+    Timeline timeline;
+    private LocalTime localTime;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*Date dateNow = new Date(); -- Для будущего запуска по времени
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("hh:mm:ss");
-        System.out.println(formatForDateNow.format(dateNow));
-        if (dateNow.equals(timeStarted)) {
-            timeline.play();
-        };*/
+        DateTimeFormatter formatForDateNow = DateTimeFormatter.ofPattern("HH:mm:ss:n");
+        localTime = LocalTime.of(0, 0, 0, 0);
+        timeline = new Timeline(
+                new KeyFrame(
+                        Duration.millis(10),
+                        ae -> {
+                            localTime = localTime.plusNanos(10000000);
+                            System.out.println(localTime.format(formatForDateNow));
+//                            stopwatch.setText(localTime.format(formatForDateNow));
+                        }
+                )
+        );
         timeline.setCycleCount(Timeline.INDEFINITE);
 
             groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
