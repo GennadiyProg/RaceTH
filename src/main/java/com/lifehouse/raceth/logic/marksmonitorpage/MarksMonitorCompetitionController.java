@@ -209,46 +209,53 @@ public class MarksMonitorCompetitionController implements Initializable {
         tabPane.getSelectionModel().select(tabPane.getTabs().size() - 2);
     }
 
-    public class getTagThread extends Thread {
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    lastNumber.setText(RFID.getTag());
-                } catch(SocketException e) {
+//    public class getTagThread extends Thread {
+//        @Override
+//        public void run() {
+//            while (true) {
+//                try {
+//                    lastNumber.setText(RFID.getTag());
+//                } catch(SocketException e) {
+//
+//                }
+//
+//            }
+//        }
+//    }
 
-                }
+    Runnable task = () -> {
+        try {
+            System.out.println(321);
+            lastNumber.setText(RFID.getTag());
+            System.out.println(123);
+        } catch (SocketException e) {
 
-            }
-        }
-    }
+        }};
 
     //Обновление последнего номера при прохождении(пока по нажатию кнопки)
     public void updateLastNumber() {
-//        Runnable task = () -> lastNumber.setText(RFID.getTag()); //Задача для потока
+
+        Thread thread = new Thread(task,"Поток для меток");
+        thread.start();
 //        CompletableFuture.runAsync(task); //Запуск future-потока
 
-        getTagThread getThread = new getTagThread();
-        getThread.start();
+//        getTagThread getThread = new getTagThread();
+//        getThread.start();
     }
-    getTagThread getThread = new getTagThread();
+//    getTagThread getThread = new getTagThread();
 
-    public void startButtonClick() {
-//        updateLastNumber(); //Включение потока на считывание данных с рамки
-
-        //Изменение цвета и текста кнопки при нажатиее
-        if(isButtonGreen) {
-            startButton.setText("Стоп");
-            getThread.start();
-            isButtonGreen = false;
-        } else if (!isButtonGreen) {
-            startButton.setText("Старт");
-            getThread.stop();
-//            getThread.interrupt();
-            isButtonGreen = true;
-        }
-
-
-
-    }
+//    public void startButtonClick() {
+////        updateLastNumber(); //Включение потока на считывание данных с рамки
+//
+//        //Изменение цвета и текста кнопки при нажатиее
+//        if(isButtonGreen) {
+//            startButton.setText("Стоп");
+//            getThread.start();
+//            isButtonGreen = false;
+//        } else if (!isButtonGreen) {
+//            startButton.setText("Старт");
+//            getThread.stop();
+//            isButtonGreen = true;
+//        }
+//    }
 }

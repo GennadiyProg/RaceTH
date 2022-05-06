@@ -21,23 +21,25 @@ import java.net.SocketException;
 
 public class RFID{
 
-
-
     public static String getTag() throws SocketException {
-
+        System.out.println(25);
         final int SERVICE_PORT=50001;
+        System.out.println(27);
         // Создайте новый экземпляр DatagramSocket, чтобы получать ответы от клиента
         DatagramSocket serverSocket = new DatagramSocket(SERVICE_PORT);
-
+        System.out.println(30);
         try{
 //            final int SERVICE_PORT=50001;
 //            // Создайте новый экземпляр DatagramSocket, чтобы получать ответы от клиента
 //            DatagramSocket serverSocket = new DatagramSocket(SERVICE_PORT);
             /* Буфер для хранения получаемых данных,он временно хранит данные в случае задержек связи */
+            System.out.println(36);
             byte[] receivingDataBuffer = new byte[1024];
+            System.out.println(38);
 
             /* Создайте экземпляр UDP-пакета для хранения получаемых данных с использованием буфера для полученных данных */
             DatagramPacket inputPacket = new DatagramPacket(receivingDataBuffer, receivingDataBuffer.length);
+            System.out.println(42);
             System.out.println("Waiting for a client to connect...");
 
             // Получите данные от клиента и сохраните их в inputPacket
@@ -60,8 +62,9 @@ public class RFID{
 //            e.printStackTrace();
         } finally {
             serverSocket.close();
+            return "Упс";
         }
-        return "Упс";
+
     }
 
 
