@@ -47,36 +47,27 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00" stylesheets="@../../assets/css/TextField.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets />
-                           </GridPane.margin></TextField>
-                        <Button fx:id="stopTime" mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Стоп" textFill="WHITE" translateX="-30.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="btn" />
-                              <String fx:value="btn-small" />
-                              <String fx:value="btn-danger" />
-                           </styleClass>
-                        </Button>
                         <TextField editable="false" maxWidth="-Infinity" prefHeight="110.0" stylesheets="@../../assets/css/TextFieldLarge.css" text="00:00:00" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="48.0" />
                            </font>
                         </TextField>
-                        <Label styleClass="label-regular" stylesheets="@../../assets/css/AppLabel.css" text="Время начала" translateY="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                        <Button fx:id="startButton" mnemonicParsing="false" onAction="#updateLastNumber" stylesheets="@../../assets/css/Buttons.css" text="Старт" textFill="WHITE" translateX="30.0" translateY="41.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="btn" />
-                              <String fx:value="btn-small" />
-                              <String fx:value="btn-success" />
-                           </styleClass>
-                        </Button>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <Button fx:id="startButton" layoutX="29.0" layoutY="65.0" maxHeight="42.0" maxWidth="112.0" minHeight="42.0" minWidth="112.0" mnemonicParsing="false" onAction="#startButtonClick" prefHeight="42.0" prefWidth="112.0" stylesheets="@../../assets/css/Buttons.css" text="Старт" textFill="WHITE">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="btn-small" />
+                                    <String fx:value="btn-success" />
+                                 </styleClass>
+                              </Button>
+                              <TextField alignment="CENTER" layoutX="29.0" layoutY="27.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00" stylesheets="@../../assets/css/TextField.css" />
+                              <Label layoutX="40.0" prefWidth="90.0" styleClass="label-regular" stylesheets="@../../assets/css/AppLabel.css" text="Время начала" />
+                           </children>
+                        </Pane>
                      </children>
                      <padding>
                         <Insets right="10.0" />
@@ -85,7 +76,7 @@
                         <Insets bottom="1.0" />
                      </GridPane.margin>
                   </GridPane>
-                  <TextField fx:id="lastNumber" alignment="CENTER" editable="false" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" stylesheets="@../../assets/css/TextFieldLarge.css" text="12" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <TextField fx:id="lastNumber" alignment="CENTER" editable="false" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" promptText="№" stylesheets="@../../assets/css/TextFieldLarge.css" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                      <font>
                         <Font size="48.0" />
                      </font>

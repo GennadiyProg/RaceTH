@@ -26,6 +26,7 @@ import javafx.scene.control.*;
 import javafx.event.Event;
 
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.net.URL;
 import java.time.LocalTime;
@@ -41,7 +42,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     private Tab participantTab;
     @FXML
-    private TextField lastNumber;
+    public TextField lastNumber;
     @FXML
     private Button startButton;
 
@@ -209,53 +210,26 @@ public class MarksMonitorCompetitionController implements Initializable {
         tabPane.getSelectionModel().select(tabPane.getTabs().size() - 2);
     }
 
-//    public class getTagThread extends Thread {
-//        @Override
-//        public void run() {
-//            while (true) {
-//                try {
-//                    lastNumber.setText(RFID.getTag());
-//                } catch(SocketException e) {
-//
-//                }
-//
-//            }
-//        }
-//    }
+    DatagramSocket serverSocket;
 
-    Runnable task = () -> {
-        try {
-            System.out.println(321);
-            lastNumber.setText(RFID.getTag());
-            System.out.println(123);
-        } catch (SocketException e) {
+    RFID thread = new RFID("Potok dlya metok",serverSocket,lastNumber,this);
 
-        }};
+    public void startButtonClick() {
+        //Изменение цвета и текста кнопки при нажатиее
+        if(isButtonGreen) {
+            startButton.setText("Стоп");
+            startButton.getStyleClass().set(3,"btn-danger");
 
-    //Обновление последнего номера при прохождении(пока по нажатию кнопки)
-    public void updateLastNumber() {
+            thread.threadResume();
 
-        Thread thread = new Thread(task,"Поток для меток");
-        thread.start();
-//        CompletableFuture.runAsync(task); //Запуск future-потока
+            isButtonGreen = false;
+        } else if (!isButtonGreen) {
+            startButton.setText("Старт");
+            startButton.getStyleClass().set(3,"btn-success");
 
-//        getTagThread getThread = new getTagThread();
-//        getThread.start();
+            thread.threadSuspend();
+
+            isButtonGreen = true;
+        }
     }
-//    getTagThread getThread = new getTagThread();
-
-//    public void startButtonClick() {
-////        updateLastNumber(); //Включение потока на считывание данных с рамки
-//
-//        //Изменение цвета и текста кнопки при нажатиее
-//        if(isButtonGreen) {
-//            startButton.setText("Стоп");
-//            getThread.start();
-//            isButtonGreen = false;
-//        } else if (!isButtonGreen) {
-//            startButton.setText("Старт");
-//            getThread.stop();
-//            isButtonGreen = true;
-//        }
-//    }
 }
