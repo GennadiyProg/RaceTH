@@ -95,8 +95,7 @@ public class MarksMonitorCompetitionController<timer, date> implements Initializ
                         Duration.millis(10),
                         ae -> {
                             localTime = localTime.plusNanos(10000000);
-                            System.out.println(localTime.format(formatForDateNow));
-//                            stopwatch.setText(localTime.format(formatForDateNow));
+                            stopwatch.setText(localTime.format(formatForDateNow));
                         }
                 )
         );
@@ -197,5 +196,6 @@ public class MarksMonitorCompetitionController<timer, date> implements Initializ
     public void resetTimeButton(javafx.event.ActionEvent actionEvent) {
         stopwatch.setText("00:00:00:00");
         timing = 0;
+        localTime = LocalTime.of(0, 0, 0, 0);
     };
 }
