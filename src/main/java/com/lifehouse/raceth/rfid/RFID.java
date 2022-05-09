@@ -24,17 +24,17 @@ import java.net.SocketException;
 
 public class RFID implements Runnable{
 
-    String threadName;
-    Thread getTagThread;
-    boolean suspendFlag;
-    DatagramSocket serverSocket;
-    TextField lastNumber;
-    MarksMonitorCompetitionController guiController;
+    private String threadName;
+    private Thread getTagThread;
+    private boolean suspendFlag;
+    private DatagramSocket serverSocket;
+    private MarksMonitorCompetitionController guiController;
+    public static final int SERVICE_PORT=50006;
+    public static boolean threadFlag = true;
 
-    public RFID(String threadName,DatagramSocket serverSocket, TextField lastNumber, MarksMonitorCompetitionController controller) {
+    public RFID(String threadName,DatagramSocket serverSocket, MarksMonitorCompetitionController controller) {
         this.threadName = threadName;
         this.serverSocket = serverSocket;
-        this.lastNumber = lastNumber;
         this.getTagThread = new Thread(this,threadName);
         this.suspendFlag = true;
         guiController = controller;
@@ -43,31 +43,30 @@ public class RFID implements Runnable{
 
     public void run() {
         try {
-            while (true) {
+            while (threadFlag) {
                 synchronized (this) {
-                    while (suspendFlag) {
+                    if (suspendFlag) {
                         wait();
                     }
                 }
                 getTag(this.serverSocket);
             }
         } catch (Exception e) {
-            System.out.println(threadName + " prervan;");
             e.printStackTrace();
         }
-        System.out.println("Vipolnenie " + threadName + " zaversheno;");
     }
 
     public void threadSuspend() {
         this.suspendFlag = true;
     }
-     public synchronized void threadResume() {
+
+    public synchronized void threadResume() {
         this.suspendFlag = false;
         notify();
     }
 
     public void getTag(DatagramSocket serverSocket) throws SocketException {
-        final int SERVICE_PORT=50003;
+
         serverSocket = new DatagramSocket(SERVICE_PORT);
 
         try{

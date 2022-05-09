@@ -107,6 +107,8 @@ public class MarksMonitorCompetitionController implements Initializable {
     private Map<Long, List<ParticipantStartView>> participantOnTab;
 
     private Boolean isButtonGreen = true;
+    private DatagramSocket serverSocket;
+    private RFID thread;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -210,15 +212,14 @@ public class MarksMonitorCompetitionController implements Initializable {
         tabPane.getSelectionModel().select(tabPane.getTabs().size() - 2);
     }
 
-    DatagramSocket serverSocket;
-
-    RFID thread = new RFID("Potok dlya metok",serverSocket,lastNumber,this);
-
     public void startButtonClick() {
         //Изменение цвета и текста кнопки при нажатиее
         if(isButtonGreen) {
             startButton.setText("Стоп");
             startButton.getStyleClass().set(3,"btn-danger");
+            if (thread == null) {
+                 thread = new RFID("Potok dlya metok",serverSocket,this);
+            }
 
             thread.threadResume();
 
