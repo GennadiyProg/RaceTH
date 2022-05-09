@@ -26,6 +26,7 @@ import javafx.scene.control.*;
 import javafx.event.Event;
 
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.net.URL;
 import java.time.LocalTime;
@@ -41,7 +42,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     private Tab participantTab;
     @FXML
-    private TextField lastNumber;
+    public TextField lastNumber;
     @FXML
     private Button startButton;
 
@@ -106,6 +107,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     private Map<Long, List<ParticipantStartView>> participantOnTab;
 
     private Boolean isButtonGreen = true;
+    private RFID thread;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -209,46 +211,25 @@ public class MarksMonitorCompetitionController implements Initializable {
         tabPane.getSelectionModel().select(tabPane.getTabs().size() - 2);
     }
 
-    public class getTagThread extends Thread {
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    lastNumber.setText(RFID.getTag());
-                } catch(SocketException e) {
-
-                }
-
-            }
-        }
-    }
-
-    //Обновление последнего номера при прохождении(пока по нажатию кнопки)
-    public void updateLastNumber() {
-//        Runnable task = () -> lastNumber.setText(RFID.getTag()); //Задача для потока
-//        CompletableFuture.runAsync(task); //Запуск future-потока
-
-        getTagThread getThread = new getTagThread();
-        getThread.start();
-    }
-    getTagThread getThread = new getTagThread();
-
     public void startButtonClick() {
-//        updateLastNumber(); //Включение потока на считывание данных с рамки
-
         //Изменение цвета и текста кнопки при нажатиее
         if(isButtonGreen) {
             startButton.setText("Стоп");
-            getThread.start();
+            startButton.getStyleClass().set(3,"btn-danger");
+            if (thread == null) {
+                 thread = new RFID("Potok dlya metok",this);
+            }
+
+            thread.threadResume();
+
             isButtonGreen = false;
         } else if (!isButtonGreen) {
             startButton.setText("Старт");
-            getThread.stop();
-//            getThread.interrupt();
+            startButton.getStyleClass().set(3,"btn-success");
+
+            thread.threadSuspend();
+
             isButtonGreen = true;
         }
-
-
-
     }
 }

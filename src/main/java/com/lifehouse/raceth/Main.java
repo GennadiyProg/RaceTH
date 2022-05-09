@@ -1,13 +1,17 @@
 package com.lifehouse.raceth;
 
+import com.lifehouse.raceth.rfid.RFID;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import org.hibernate.engine.spi.ExecuteUpdateResultCheckStyle;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 public class Main extends Application{
@@ -123,9 +127,34 @@ public class Main extends Application{
 //        sportsmanDAO.create(sportsman1);
 
         launch(args);
+        closeSocket();
 
 //        session.close();
 //        HibernateUtil.closeSessionFactory();
+    }
+
+    private static void closeSocket() {
+        try {
+            Process process = Runtime.getRuntime().exec("netstat -ano");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+
+            while((line = reader.readLine()) != null) {
+                if (line.contains(Integer.toString(RFID.SERVICE_PORT))) {
+                    break;
+                }
+            }
+            RFID.threadFlag = false;
+            if (line != "" && line != null) {
+                String[] array = line.split(" ");
+                Runtime.getRuntime().exec("taskkill /PID " + array[array.length-1] + " /F" );
+            }
+            if (RFID.getTagThread != null) {
+                RFID.getTagThread.stop();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
