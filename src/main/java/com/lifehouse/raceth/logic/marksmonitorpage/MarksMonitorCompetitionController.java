@@ -107,7 +107,6 @@ public class MarksMonitorCompetitionController implements Initializable {
     private Map<Long, List<ParticipantStartView>> participantOnTab;
 
     private Boolean isButtonGreen = true;
-    private DatagramSocket serverSocket;
     private RFID thread;
 
     @Override
@@ -218,7 +217,7 @@ public class MarksMonitorCompetitionController implements Initializable {
             startButton.setText("Стоп");
             startButton.getStyleClass().set(3,"btn-danger");
             if (thread == null) {
-                 thread = new RFID("Potok dlya metok",serverSocket,this);
+                 thread = new RFID("Potok dlya metok",this);
             }
 
             thread.threadResume();

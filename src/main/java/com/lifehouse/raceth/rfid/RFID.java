@@ -25,16 +25,15 @@ import java.net.SocketException;
 public class RFID implements Runnable{
 
     private String threadName;
-    private Thread getTagThread;
+    public static Thread getTagThread;
     private boolean suspendFlag;
-    private DatagramSocket serverSocket;
+    public DatagramSocket serverSocket;
     private MarksMonitorCompetitionController guiController;
-    public static final int SERVICE_PORT=50006;
+    public static final int SERVICE_PORT=50007;
     public static boolean threadFlag = true;
 
-    public RFID(String threadName,DatagramSocket serverSocket, MarksMonitorCompetitionController controller) {
+    public RFID(String threadName, MarksMonitorCompetitionController controller) {
         this.threadName = threadName;
-        this.serverSocket = serverSocket;
         this.getTagThread = new Thread(this,threadName);
         this.suspendFlag = true;
         guiController = controller;
@@ -53,6 +52,8 @@ public class RFID implements Runnable{
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            getTagThread.stop();
         }
     }
 
@@ -92,7 +93,6 @@ public class RFID implements Runnable{
 
         } catch (IOException e){
             System.out.println("ups in rfid");
-//            return "UPS";
         } finally {
             serverSocket.close();
         }

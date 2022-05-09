@@ -144,14 +144,15 @@ public class Main extends Application{
                     break;
                 }
             }
-            String[] array = line.split(" ");
-            Runtime.getRuntime().exec("taskkill /PID " + array[array.length-1] + " /F" );
-        } catch (IOException e) {
-            e.printStackTrace();
+            RFID.threadFlag = false;
+            if (line != "" && line != null) {
+                String[] array = line.split(" ");
+                Runtime.getRuntime().exec("taskkill /PID " + array[array.length-1] + " /F" );
+            }
+            RFID.getTagThread.stop();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        RFID.threadFlag = false;
     }
 
     @Override
