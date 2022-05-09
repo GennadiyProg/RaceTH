@@ -149,7 +149,9 @@ public class Main extends Application{
                 String[] array = line.split(" ");
                 Runtime.getRuntime().exec("taskkill /PID " + array[array.length-1] + " /F" );
             }
-            RFID.getTagThread.stop();
+            if (RFID.getTagThread != null) {
+                RFID.getTagThread.stop();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
