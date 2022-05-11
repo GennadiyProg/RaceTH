@@ -63,7 +63,7 @@
                </font>
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-<!--                     <Image url="@../assets/images/icons/home2.png" />-->
+<!--                     <Image url="@../assets/images/icons/home.png" />-->
                   </ImageView>
                </graphic>
                <toggleGroup>

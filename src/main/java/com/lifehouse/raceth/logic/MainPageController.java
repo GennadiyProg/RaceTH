@@ -86,4 +86,5 @@ public class MainPageController implements Initializable {
     @FXML
     private void handleButtonAction7(ActionEvent event) { marks_monitor_page.toFront();}
 
+    
 }
