@@ -52,23 +52,20 @@
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.20001220703125" minWidth="10.0" prefWidth="163.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="116.0" minHeight="97.0" prefHeight="97.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="21.0" minHeight="7.0" prefHeight="7.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="116.0" minHeight="89.0" prefHeight="94.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <TextField fx:id="stopwatch" editable="false" maxWidth="-Infinity" prefHeight="97.0" prefWidth="259.0" stylesheets="@../../assets/css/TextFieldLarge.css" text="00:00:00:00" translateX="5.0" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-                        <TextField editable="false" maxWidth="-Infinity" prefHeight="110.0" stylesheets="@../../assets/css/TextFieldLarge.css" text="00:00:00" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="36.0" />
                            </font>
                         </TextField>
-                        </TextField>
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <children>
-                              <TextField fx:id="timeStarted" alignment="CENTER" layoutX="26.0" layoutY="1.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00:00" stylesheets="@../../assets/css/TextField.css" />
-                              <Button fx:id="startButton" layoutX="26.0" layoutY="41.0" maxHeight="42.0" maxWidth="112.0" minHeight="42.0" minWidth="112.0" mnemonicParsing="false" onAction="#startButtonClick" prefHeight="42.0" prefWidth="112.0" stylesheets="@../../assets/css/Buttons.css" text="Старт" textFill="WHITE">
+                              <Button fx:id="startButton" layoutX="26.0" layoutY="49.0" maxHeight="42.0" maxWidth="112.0" minHeight="26.0" minWidth="112.0" mnemonicParsing="false" onAction="#startButtonClick" prefHeight="26.0" prefWidth="112.0" stylesheets="@../../assets/css/Buttons.css" text="Старт" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -78,9 +75,19 @@
                                     <String fx:value="btn-success" />
                                  </styleClass>
                               </Button>
+                              <Button fx:id="timeStart" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="15.0" mnemonicParsing="false" onAction="#timeStartButton" prefHeight="28.0" prefWidth="134.0" stylesheets="@../../assets/css/Buttons.css" text="Задать время" textFill="WHITE">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="btn-small" />
+                                    <String fx:value="btn-warning" />
+                                 </styleClass>
+                              </Button>
                            </children>
                         </Pane>
-                        <Button fx:id="resetTim" alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#resetTimeButton" prefHeight="21.0" prefWidth="71.0" stylesheets="@../../assets/css/Buttons.css" text="00.00.00" textFill="WHITE" translateX="43.0" translateY="2.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Button fx:id="resetTim" alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#resetTimeButton" prefHeight="28.0" prefWidth="134.0" stylesheets="@../../assets/css/Buttons.css" text="Очистить табло" textFill="WHITE" translateX="16.0" translateY="2.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -90,11 +97,6 @@
                               <String fx:value="btn-primary" />
                            </styleClass>
                         </Button>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="169.0" styleClass="label-regular" stylesheets="@../../assets/css/AppLabel.css" text="Время начала" textAlignment="CENTER" GridPane.columnIndex="1">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
                      </children>
                      <padding>
                         <Insets right="10.0" />
@@ -223,6 +225,12 @@
                         <String fx:value="btn-common" />
                      </styleClass>
                   </Button>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="8.0" prefHeight="20.0" prefWidth="169.0" styleClass="label-regular" stylesheets="@../../assets/css/AppLabel.css" text="Время начала:" textAlignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="timeStarted" alignment="CENTER" layoutX="239.0" layoutY="5.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00:00" stylesheets="@../../assets/css/TextField.css" />
                </children>
             </Pane>
          </children>

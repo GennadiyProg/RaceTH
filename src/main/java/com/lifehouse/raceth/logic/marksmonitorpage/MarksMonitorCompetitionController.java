@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -265,5 +266,10 @@ public class MarksMonitorCompetitionController implements Initializable {
         stopwatch.setText("00:00:00:00");
         timing = 0;
         localTime = LocalTime.of(0, 0, 0, 0);
+    };
+    public void timeStartButton(javafx.event.ActionEvent actionEvent) {
+        timeStarted.setText("В разработке");
+        LocalTime LocalDateTime = null;
+        System.out.println(LocalDateTime.now());
     };
 }
