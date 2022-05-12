@@ -9,6 +9,8 @@ import com.lifehouse.raceth.model.StartTab;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.rfid.RFID;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lombok.Data;
 import javafx.scene.control.*;
 import javafx.event.Event;
@@ -30,6 +33,7 @@ import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.net.URL;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Data
@@ -109,8 +113,30 @@ public class MarksMonitorCompetitionController implements Initializable {
     private Boolean isButtonGreen = true;
     private RFID thread;
 
+
+    @FXML
+    private TextField stopwatch, timeStarted;
+
+    int timing = 0;
+    String hours, minutes, seconds, milliseconds;
+    Timeline timeline;
+    private LocalTime localTime;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        DateTimeFormatter formatForDateNow = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
+        localTime = LocalTime.of(0, 0, 0, 0);
+        timeline = new Timeline(
+                new KeyFrame(
+                        Duration.millis(10),
+                        ae -> {
+                            localTime = localTime.plusNanos(10000000);
+                            stopwatch.setText(localTime.format(formatForDateNow));
+                        }
+                )
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
         participantDAO = new ParticipantDAO();
         checkpointDAO = new CheckpointDAO();
         startDAO = new StartDAO();
@@ -232,4 +258,16 @@ public class MarksMonitorCompetitionController implements Initializable {
             isButtonGreen = true;
         }
     }
+
+    public void startTimeButton(javafx.event.ActionEvent actionEvent) {
+        timeline.play();
+    }
+    public void stopTimeButton(javafx.event.ActionEvent actionEvent) {
+        timeline.stop();
+    };
+    public void resetTimeButton(javafx.event.ActionEvent actionEvent) {
+        stopwatch.setText("00:00:00:00");
+        timing = 0;
+        localTime = LocalTime.of(0, 0, 0, 0);
+    };
 }

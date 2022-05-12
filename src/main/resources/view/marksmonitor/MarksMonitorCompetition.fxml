@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.gui.MarksMonitorCompetitionController">
+<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController">
    <children>
       <GridPane alignment="TOP_CENTER" layoutX="13.0" layoutY="2.0" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="2.0">
         <columnConstraints>
@@ -67,6 +67,7 @@
                               <Font size="36.0" />
                            </font>
                         </TextField>
+                        </TextField>
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
                               <Button fx:id="startButton" layoutX="29.0" layoutY="65.0" maxHeight="42.0" maxWidth="112.0" minHeight="42.0" minWidth="112.0" mnemonicParsing="false" onAction="#startButtonClick" prefHeight="42.0" prefWidth="112.0" stylesheets="@../../assets/css/Buttons.css" text="Старт" textFill="WHITE">
@@ -117,6 +118,7 @@
                      <font>
                         <Font size="48.0" />
                      </font>
+                  </TextField>
                   </TextField>
                   <Label styleClass="label-regular" stylesheets="@../../assets/css/AppLabel.css" text="Прошедший участник" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
                </children>
