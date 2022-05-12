@@ -101,6 +101,8 @@ public class MarksMonitorCompetitionController implements Initializable {
     private TableColumn<Start, String> startTimeColumn;
     @FXML
     private TableColumn<Start, String> lapColumn;
+    @FXML
+    private TextField stopwatch, timeStarted;
 
     private ParticipantDAO participantDAO;
     private CheckpointDAO checkpointDAO;
@@ -113,29 +115,14 @@ public class MarksMonitorCompetitionController implements Initializable {
     private Boolean isButtonGreen = true;
     private RFID thread;
 
-
-    @FXML
-    private TextField stopwatch, timeStarted;
-
-    int timing = 0;
-    String hours, minutes, seconds, milliseconds;
-    Timeline timeline;
     private LocalTime localTime;
+    private int timing = 0;
+    private String hours, minutes, seconds, milliseconds;
+    private Timeline timeline;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DateTimeFormatter formatForDateNow = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
-        localTime = LocalTime.of(0, 0, 0, 0);
-        timeline = new Timeline(
-                new KeyFrame(
-                        Duration.millis(10),
-                        ae -> {
-                            localTime = localTime.plusNanos(10000000);
-                            stopwatch.setText(localTime.format(formatForDateNow));
-                        }
-                )
-        );
-        timeline.setCycleCount(Timeline.INDEFINITE);
 
         participantDAO = new ParticipantDAO();
         checkpointDAO = new CheckpointDAO();
@@ -144,6 +131,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         initializeCheckpointTable();
         initializeParticipantTable();
         initializeStartTab();
+        initializeTimeline();
 
         Tab newtab = new Tab("+");
         newtab.setOnSelectionChanged(event -> createNewTab(event));
@@ -160,7 +148,6 @@ public class MarksMonitorCompetitionController implements Initializable {
                 startOnTab.put(id, List.of(start));
             }
         });
-
         initializeTabs();
     }
 
@@ -171,6 +158,21 @@ public class MarksMonitorCompetitionController implements Initializable {
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
+    }
+
+    public void initializeTimeline(){
+        DateTimeFormatter formatForDateNow = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
+        localTime = LocalTime.of(0, 0, 0, 0);
+        timeline = new Timeline(
+                new KeyFrame(
+                        Duration.millis(10),
+                        ae -> {
+                            localTime = localTime.plusNanos(10000000);
+                            stopwatch.setText(localTime.format(formatForDateNow));
+                        }
+                )
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
     }
 
     public void initializeCheckpointTable(){
@@ -238,33 +240,27 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
     public void startButtonClick() {
-        //Изменение цвета и текста кнопки при нажатиее
+        //Изменение цвета и текста кнопки при нажатии
         if(isButtonGreen) {
             startButton.setText("Стоп");
+            timeline.play();
             startButton.getStyleClass().set(3,"btn-danger");
-            if (thread == null) {
+            // Для будущего использования потоков
+            /*if (thread == null) {
                  thread = new RFID("Potok dlya metok",this);
             }
-
-            thread.threadResume();
+            thread.threadResume();*/
 
             isButtonGreen = false;
         } else if (!isButtonGreen) {
             startButton.setText("Старт");
             startButton.getStyleClass().set(3,"btn-success");
-
-            thread.threadSuspend();
-
+            timeline.stop();
+           // thread.threadSuspend();
             isButtonGreen = true;
         }
     }
 
-    public void startTimeButton(javafx.event.ActionEvent actionEvent) {
-        timeline.play();
-    }
-    public void stopTimeButton(javafx.event.ActionEvent actionEvent) {
-        timeline.stop();
-    };
     public void resetTimeButton(javafx.event.ActionEvent actionEvent) {
         stopwatch.setText("00:00:00:00");
         timing = 0;
