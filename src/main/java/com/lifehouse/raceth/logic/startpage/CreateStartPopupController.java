@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.logic.startpage;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.CompetitionDayDAO;
 import com.lifehouse.raceth.dao.DistanceDAO;
 import com.lifehouse.raceth.dao.GroupDAO;
@@ -59,10 +60,10 @@ public class CreateStartPopupController implements Initializable {
 
     public void initialize(URL var1, ResourceBundle var2) {
         currentStart = null;
-        distanceDAO = new DistanceDAO();
-        groupDAO = new GroupDAO();
+        distanceDAO = (DistanceDAO) Main.appContext.getBean("distanceDAO");
+        groupDAO = (GroupDAO) Main.appContext.getBean("groupDAO");
         startDAO = new StartDAO();
-        competitionDayDAO = new CompetitionDayDAO();
+        competitionDayDAO = (CompetitionDayDAO) Main.appContext.getBean("competitionDayDAO");
         distance.setItems(FXCollections.observableList(new ArrayList<>(distanceDAO.getAllDistances())));
         group.setItems(FXCollections.observableList(new ArrayList<>(groupDAO.getAllGroups())));
         competitionDay.setItems(
@@ -104,7 +105,7 @@ public class CreateStartPopupController implements Initializable {
 
         start.setName(startName.getText());
         start.setDistance(distanceDAO.getDistance(distance.getSelectionModel().getSelectedItem().getId()));
-        start.setGroup(groupDAO.GetGroup(group.getSelectionModel().getSelectedItem().getId()));
+        start.setGroup(groupDAO.getGroup(group.getSelectionModel().getSelectedItem().getId()));
         start.setStartTime(LocalTime.parse(startTime.getText(), formatter));
         start.setLaps(Integer.parseInt(laps.getText()));
         start.setCompetitionDay(competitionDay.getSelectionModel().getSelectedItem());

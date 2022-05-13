@@ -4,6 +4,8 @@ import com.lifehouse.raceth.model.competition.Competition;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class Distance {
     private int length;
     private int height; // Набор высоты
     @ManyToMany(mappedBy = "distances")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Competition> competitions = new ArrayList<>();
 
     public Distance(String location, int length, int height) {

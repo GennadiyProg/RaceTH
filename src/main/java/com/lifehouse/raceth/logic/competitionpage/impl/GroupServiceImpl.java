@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.logic.competitionpage.impl;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageElementService;
@@ -24,7 +25,7 @@ public class GroupServiceImpl implements CompetitionPageElementService {
     private GroupView lastEditedGroup;
 
     public GroupServiceImpl(TableView<GroupView> groupTable) {
-        this.groupDAO = new GroupDAO();
+        this.groupDAO = (GroupDAO) Main.appContext.getBean("groupDAO");
         this.groupTable = groupTable;
         checkboxListener = ((observableList, oldStatus, newStatus) -> {
             Competition curCompetition = CompetitionPageController.currentCompetition;
@@ -78,6 +79,8 @@ public class GroupServiceImpl implements CompetitionPageElementService {
         if (controller == null) return;
         controller.edit(groupView);
         controller.getNewGroup().addListener((observable, oldValue, newValue) -> {
+            newValue.setId(groupView.getId());
+            newValue.setCompetitions(groupView.getCompetitions());
             groupDAO.update(newValue);
             groupTable.getSelectionModel().getSelectedItem().setFields(GroupView.convertToView(newValue));
             groupTable.refresh();

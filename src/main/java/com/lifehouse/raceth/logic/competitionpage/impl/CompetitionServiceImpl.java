@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.logic.competitionpage.impl;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.CompetitionDAO;
 import com.lifehouse.raceth.dao.CompetitionDayDAO;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageElementService;
@@ -22,8 +23,8 @@ public class CompetitionServiceImpl implements CompetitionPageElementService {
     private final TableView<Competition> competitionTable;
 
     public CompetitionServiceImpl(TableView<Competition> competitionTable) {
-        this.competitionDAO = new CompetitionDAO();
-        this.competitionDayDAO = new CompetitionDayDAO();
+        this.competitionDAO = (CompetitionDAO) Main.appContext.getBean("competitionDAO");
+        this.competitionDayDAO = (CompetitionDayDAO) Main.appContext.getBean("competitionDayDAO");
         this.competitionTable = competitionTable;
     }
 
@@ -50,6 +51,7 @@ public class CompetitionServiceImpl implements CompetitionPageElementService {
 
         controller.edit(competition);
         controller.getNewCompetition().addListener((observable, oldValue, newValue) -> {
+            newValue.setId(competition.getId());
             competitionDAO.update(newValue);
             competitionDayDAO.deleteByCompetitionId(newValue.getId());
             createCompetitionDays(newValue);

@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.logic.competitionpage;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.CompetitionDAO;
 import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.DistanceDAO;
@@ -17,7 +18,6 @@ import com.lifehouse.raceth.model.Gender;
 import com.lifehouse.raceth.model.view.DistanceView;
 import com.lifehouse.raceth.model.view.GroupView;
 import com.lifehouse.raceth.repository.DistanceRepository;
-import com.lifehouse.raceth.service.DistanceService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
@@ -31,16 +31,16 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.stereotype.Service;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 @Data
 public class CompetitionPageController implements Initializable {
-
-
     @FXML
     private TableView<Competition> competitionTable;
     @FXML
@@ -97,16 +97,13 @@ public class CompetitionPageController implements Initializable {
     private DistanceDAO distanceDAO;
 
     private CompetitionPageElementService competitionPageElementService;
-
-    private DistanceService distanceService;
-
     public static Competition currentCompetition;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        competitionDAO = new CompetitionDAO();
-        groupDAO = new GroupDAO();
-        distanceDAO = new DistanceDAO();
+        competitionDAO = (CompetitionDAO) Main.appContext.getBean("competitionDAO");
+        groupDAO = (GroupDAO) Main.appContext.getBean("groupDAO");
+        distanceDAO = (DistanceDAO) Main.appContext.getBean("distanceDAO");
         initializeCompetitionTable();
         initializeGroupTable();
         initializeDistanceTable();
@@ -144,17 +141,7 @@ public class CompetitionPageController implements Initializable {
         dHeightColumn.setCellValueFactory(new PropertyValueFactory<>("height"));
 
         ObservableList<DistanceView> distances = distanceTable.getItems();
-
-
-        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
-        appContext.scan("com.lifehouse.raceth");
-        appContext.refresh();
-        distanceService = (DistanceService) appContext.getBean("distanceService");
-        distances.addAll(distanceService.findAll());
-        appContext.close();
-
-
-//        distances.addAll(distanceDAO.getAllDistanceViews());
+        distances.addAll(distanceDAO.getAllDistanceViews());
     }
 
     private void searchEngine(){
@@ -175,12 +162,10 @@ public class CompetitionPageController implements Initializable {
     }
 
     private void updateGroupTable() {
-        var groups = groupTable.getItems();
-        for (int i = 0; i < groups.size(); i++) {
-            GroupView group = groups.get(i);
-            if (group.getCompetitions().stream().anyMatch((el) -> el.getId() == currentCompetition.getId())) {
-                int index = groupTable.getItems().indexOf(group);
-                groupTable.getItems().remove(index);
+        ObservableList<GroupView> groups = groupTable.getItems();
+        for (GroupView group : groups) {
+            if (group.getCompetitions().contains(currentCompetition)) {
+                groupTable.getItems().remove(group);
                 groupTable.getItems().add(0, group);
                 group.getCheckBox().setSelected(true);
             } else {
@@ -192,12 +177,10 @@ public class CompetitionPageController implements Initializable {
     }
 
     private void updateDistanceTable() {
-        var distances = distanceTable.getItems();
-        for (int i = 0; i < distances.size(); i++) {
-            DistanceView distance = distances.get(i);
+        ObservableList<DistanceView> distances = distanceTable.getItems();
+        for (DistanceView distance : distances) {
             if (distance.getCompetitions().stream().anyMatch((el) -> el.getId() == currentCompetition.getId())) {
-                int index = distanceTable.getItems().indexOf(distance);
-                distanceTable.getItems().remove(index);
+                distanceTable.getItems().remove(distance);
                 distanceTable.getItems().add(0, distance);
                 distance.getCheckBox().setSelected(true);
             } else {

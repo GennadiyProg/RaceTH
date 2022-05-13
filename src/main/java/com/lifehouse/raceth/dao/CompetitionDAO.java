@@ -1,54 +1,38 @@
 package com.lifehouse.raceth.dao;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.competition.Competition;
+import com.lifehouse.raceth.repository.CompetitionRepository;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class CompetitionDAO implements DAO<Competition> {
-//    private final Session session;
-//
-//    public CompetitionDAO(@NotNull final Session session) {
-//        this.session = session;
-//    }
+    private final CompetitionRepository competitionRepository;
 
-//    public void Create(@NotNull final Competition competition) {
-//
-//        session.beginTransaction();
-//
-//        session.save(competition);
-//
-//        session.getTransaction().commit();
-//
-//    }
+    public CompetitionDAO() {
+        this.competitionRepository = (CompetitionRepository) Main.appContext.getBean("competitionRepository");
+    }
 
     public void create(Competition competition) {
-        competition.setId(TmpStorage.competitions.size());
-        TmpStorage.competitions.add(competition);
+        competitionRepository.save(competition);
     }
 
     public void update(Competition competition) {
-        TmpStorage.competitions.set(TmpStorage.competitions.indexOf(
-                TmpStorage.competitions.stream().filter(
-                        g -> g.getId() == competition.getId()
-                ).findFirst().orElse(null)
-        ), competition);
+        competitionRepository.update(competition.getId(), competition);
     }
 
     public Competition getCompetition(long id) {
-        for (Competition item : TmpStorage.competitions) {
-            if (item.getId() == id) {
-                return item;
-            }
-        }
-        return null;
+        return competitionRepository.findById(id).orElse(null);
     }
 
     public List<Competition> getAllCompetitions() {
-        return TmpStorage.competitions;
+        return competitionRepository.findAll();
     }
 
     public void delete(Competition competition) {
-        TmpStorage.competitions.remove(competition);
+        competitionRepository.delete(competition);
     }
 }

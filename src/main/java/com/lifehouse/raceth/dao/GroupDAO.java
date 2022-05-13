@@ -1,68 +1,43 @@
 package com.lifehouse.raceth.dao;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.view.GroupView;
+import com.lifehouse.raceth.repository.GroupRepository;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class GroupDAO implements DAO<Group> {
-//    private final Session session;
-//
-//    public CompetitionGroupDAO(final Session session) {
-//        this.session = session;
-//    }
+    private final GroupRepository groupRepository;
 
-//    public void Create(CompetitionGroup group) {
-//
-//        session.beginTransaction();
-//
-//        session.save(group);
-//
-//        session.getTransaction().commit();
-//    }
+    public GroupDAO() {
+        this.groupRepository = (GroupRepository) Main.appContext.getBean("groupRepository");
+    }
 
     public void create(Group group) {
-        group.setId(TmpStorage.groups.size());
-        TmpStorage.groups.add(group);
+        groupRepository.save(group);
     }
-    public Group GetGroup(long id) {
-        for (Group item : TmpStorage.groups) {
-            if (item.getId() == id) {
-                return item;
-            }
-        }
-        return null;
+    public Group getGroup(long id) {
+        return groupRepository.findById(id).orElse(null);
     }
 
     public List<Group> getAllGroups() {
-        return TmpStorage.groups;
+        return groupRepository.findAll();
     }
 
     public void delete(Group group) {
-        TmpStorage.groups.remove(group);
+        groupRepository.delete(group);
     }
 
     public void update(Group group) {
-        try {
-            TmpStorage.groups.set(TmpStorage.groups.indexOf(
-                    TmpStorage.groups.stream().filter(
-                            g -> g.getId() == group.getId()
-                    ).findFirst().orElse(null)
-            ), group);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        groupRepository.update(group.getId(), group);
     }
 
     public List<GroupView> getAllGroupViews() {
-        List<Group> groups = getAllGroups();
-        List<GroupView> groupViews = new ArrayList<>();
-        for (Group group : groups) {
-            groupViews.add(GroupView.convertToView(group));
-        }
-
-        return  groupViews;
+        return  groupRepository.findAll().stream().map(GroupView::convertToView).toList();
     }
 }

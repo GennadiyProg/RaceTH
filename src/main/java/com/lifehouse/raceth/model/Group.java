@@ -4,6 +4,8 @@ import com.lifehouse.raceth.model.competition.Competition;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class Group {
     @Enumerated(value = EnumType.STRING)
     private Gender gender; // Пол
     @ManyToMany(mappedBy = "groups")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Competition> competitions = new ArrayList<>();
 
     public Group(String name, int ageFrom, int ageTo, Gender gender) {

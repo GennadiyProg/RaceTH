@@ -1,60 +1,44 @@
 package com.lifehouse.raceth.dao;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.CompetitionDay;
 import com.lifehouse.raceth.model.competition.Competition;
+import com.lifehouse.raceth.repository.CompetitionDayRepository;
+import com.lifehouse.raceth.repository.CompetitionRepository;
 import com.lifehouse.raceth.tmpstorage.TmpStorage;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class CompetitionDayDAO implements DAO<CompetitionDay> {
-    //    private final Session session;
-//
-//    public CompetitionDayDAO(@NotNull final Session session) {
-//        this.session = session;
-//    }
+    private final CompetitionDayRepository competitionDayRepository;
 
-//    public void Create(@NotNull final CompetitionDay competitionDay) {
-//
-//        session.beginTransaction();
-//
-//        session.save(competitionDay);
-//
-//        session.getTransaction().commit();
-//
-//    }
+    public CompetitionDayDAO() {
+        this.competitionDayRepository = (CompetitionDayRepository) Main.appContext.getBean("competitionDayRepository");
+    }
+
+    public void create(CompetitionDay competitionDay) {
+        competitionDayRepository.save(competitionDay);
+    }
 
     public List<CompetitionDay> getAllByCompetition(long competitionId) {
-        return TmpStorage.competitionDays.stream().filter(el -> el.getCompetition().getId() == competitionId).toList();
-    }
-    public void create(CompetitionDay competitionDay) {
-        competitionDay.setId(TmpStorage.competitionDays.size());
-        TmpStorage.competitionDays.add(competitionDay);
+        return competitionDayRepository.findAllByCompetitionId(competitionId);
     }
 
     public void update(CompetitionDay competitionDay) {
-        TmpStorage.competitionDays.set(TmpStorage.competitionDays.indexOf(
-                TmpStorage.competitionDays.stream().filter(
-                        g -> g.getId() == competitionDay.getId()
-                ).findFirst().orElse(null)
-        ), competitionDay);
+        competitionDayRepository.update(competitionDay.getId(), competitionDay);
     }
 
     public CompetitionDay getCompetitionDay(long id) {
-        for (CompetitionDay item : TmpStorage.competitionDays) {
-            if (item.getId() == id) {
-                return item;
-            }
-        }
-        return null;
+        return competitionDayRepository.findById(id).orElse(null);
     }
 
     public void deleteByCompetitionId(long competitionId){
-        TmpStorage.competitionDays.stream()
-                .filter(cDay -> cDay.getCompetition().getId() == competitionId)
-                .forEach(cDay -> TmpStorage.competitionDays.remove(cDay));
+        competitionDayRepository.deleteByCompetitionId(competitionId);
     }
 
     public void delete(CompetitionDay competitionDay) {
-        TmpStorage.competitionDays.remove(competitionDay);
+        competitionDayRepository.delete(competitionDay);
     }
 }
