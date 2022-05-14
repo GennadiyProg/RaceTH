@@ -2,8 +2,6 @@ Welkom to nash project RaceTH!!!
 
 ## Первые действия при установке
 Воспользуйтесь Intellij IDEA [Intellij IDEA](https://www.jetbrains.com/ru-ru/idea/download/#section=windows) для работы с проектом. <br><br>
-Для базы данных мы используем [PostgreSQL 14](https://www.postgresql.org/download/windows/) <br>
-<span>`!!!При установке Postgresql пароль для root желательно выбрать "postgres"`</span>
 
 При первом запуске и открытии .java файла среда
 предложит вам выбрать версию JDK для работы с проектом как на скриншоте ниже. 

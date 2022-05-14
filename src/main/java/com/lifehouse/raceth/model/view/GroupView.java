@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 public class GroupView {
     private CheckBox checkBox = new CheckBox();
-    private long id; //ID
-    private String name; // Название группы
+    private long id;
+    private String name;
     private int ageFrom;
     private int ageTo;
-    private Gender gender; // Пол
+    private Gender gender;
     private List<Competition> competitions = new ArrayList<>();
 
     public static GroupView convertToView(Group group) {

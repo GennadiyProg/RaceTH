@@ -1,44 +1,37 @@
 package com.lifehouse.raceth.dao;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.Checkpoint;
-import com.lifehouse.raceth.tmpstorage.TmpStorage;
-import org.hibernate.Session;
+import com.lifehouse.raceth.repository.CheckpointRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class CheckpointDAO implements DAO<Checkpoint> {
-//    private final Session session;
-//
-//    public CheckpointDAO(final Session session) {
-//        this.session = session;
-//    }
+@Component
+public class CheckpointDAO {
+    private final CheckpointRepository checkpointRepository;
 
-//    public void create(Checkpoint checkpoint) {
-//        session.beginTransaction();
-//
-//        session.save(checkpoint);
-//
-//        session.getTransaction().commit();
-//    }
+    public CheckpointDAO() {
+        this.checkpointRepository = (CheckpointRepository) Main.appContext.getBean("checkpointRepository");
+    }
 
     public void create(Checkpoint checkpoint) {
-        TmpStorage.checkpoints.add(checkpoint);
+        checkpointRepository.save(checkpoint);
+    }
+
+    public Checkpoint getCheckpointByParticipant(long id){
+        return checkpointRepository.findByParticipantId(id);
     }
 
     public Checkpoint getCheckpoint(long id) {
-        for (Checkpoint item : TmpStorage.checkpoints) {
-            if (item.getId() == id) {
-                return item;
-            }
-        }
-        return null;
+        return checkpointRepository.findById(id).orElse(null);
     }
 
     public List<Checkpoint> getAllCheckpoints() {
-        return TmpStorage.checkpoints;
+        return checkpointRepository.findAll();
     }
 
     public void delete(Checkpoint checkpoint) {
-        TmpStorage.checkpoints.remove(checkpoint);
+        checkpointRepository.delete(checkpoint);
     }
 }

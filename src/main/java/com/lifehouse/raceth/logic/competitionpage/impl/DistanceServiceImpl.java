@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.logic.competitionpage.impl;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.DistanceDAO;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageElementService;
@@ -24,7 +25,7 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
     private DistanceView lastEditedDistance;
 
     public DistanceServiceImpl(TableView<DistanceView> distanceTable) {
-        this.distanceDAO = new DistanceDAO();
+        this.distanceDAO = (DistanceDAO) Main.appContext.getBean("distanceDAO");
         this.distanceTable = distanceTable;
         checkboxListener = ((observableList, oldStatus, newStatus) -> {
             Competition curCompetition = CompetitionPageController.currentCompetition;
@@ -64,8 +65,7 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
             distanceView.getCheckBox().selectedProperty().removeListener(checkboxListener);
             distanceView.getCheckBox().setSelected(false);
             distanceView.getCheckBox().selectedProperty().addListener(checkboxListener);
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование");
-            alert.show();
+            new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование").show();
         }
     }
 
@@ -79,6 +79,8 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
         if (controller == null) return;
         controller.edit(distance);
         controller.getNewDistance().addListener((observable, oldValue, newValue) -> {
+            newValue.setId(distance.getId());
+            newValue.setCompetitions(distance.getCompetitions());
             distanceDAO.update(newValue);
             distanceTable.getSelectionModel().getSelectedItem().setFields(DistanceView.convertToView(newValue));
             distanceTable.refresh();

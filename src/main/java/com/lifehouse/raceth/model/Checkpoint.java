@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -17,6 +18,6 @@ public class Checkpoint {
     private long id; //ID
     @ManyToOne
     private Participant participant; //Участник по ID
-    private Date crossingTime;
+    private LocalTime crossingTime;
     //Todo: Здесь должно быть поле с номером круга, наверное
 }

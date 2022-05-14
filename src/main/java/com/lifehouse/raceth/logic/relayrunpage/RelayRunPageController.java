@@ -1,5 +1,7 @@
 package com.lifehouse.raceth.logic.relayrunpage;
 
+import com.lifehouse.raceth.Main;
+import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.RelayTeamDAO;
 import com.lifehouse.raceth.model.RelayTeam;
 import javafx.event.ActionEvent;
@@ -33,7 +35,7 @@ public class RelayRunPageController implements Initializable {
     @FXML
     private TableColumn<RelayTeam, String> relayTeamNameColumn;
 
-    private RelayTeamDAO relayTeamDAO = new RelayTeamDAO();
+    private RelayTeamDAO relayTeamDAO = (RelayTeamDAO) Main.appContext.getBean("relayTeamDAO");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.model;
 
+
 import com.lifehouse.raceth.model.competition.Competition;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -7,8 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 
 @Entity

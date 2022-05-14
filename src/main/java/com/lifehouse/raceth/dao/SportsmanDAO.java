@@ -1,40 +1,34 @@
 package com.lifehouse.raceth.dao;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.Sportsman;
-import com.lifehouse.raceth.tmpstorage.TmpStorage;
+import com.lifehouse.raceth.repository.SportsmanRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class SportsmanDAO implements DAO<Sportsman> {
+@Component
+public class SportsmanDAO {
+    private final SportsmanRepository sportsmanRepository;
 
-
-//    public void Create(Sportsman sportsman) {
-//        session.beginTransaction();
-//
-//        session.save(sportsman);
-//
-//        session.getTransaction().commit();
-//    }
+    public SportsmanDAO() {
+        this.sportsmanRepository = (SportsmanRepository) Main.appContext.getBean("sportsmanRepository");
+    }
 
     public void create(Sportsman sportsman) {
-        TmpStorage.sportsmen.add(sportsman);
+        sportsmanRepository.save(sportsman);
     }
 
-    public Sportsman GetSportsman(long id) {
-        for (Sportsman item : TmpStorage.sportsmen) {
-            if (item.getId() == id) {
-                return item;
-            }
-        }
-        return null;
+    public Sportsman getSportsman(long id) {
+        return sportsmanRepository.findById(id).orElse(null);
     }
 
-    public List<Sportsman> GetAllSportsmen() {
-        return TmpStorage.sportsmen;
+    public List<Sportsman> getAllSportsmen() {
+        return sportsmanRepository.findAll();
     }
 
 
-    public void Delete(Sportsman sportsman) {
-        TmpStorage.sportsmen.remove(sportsman);
+    public void delete(Sportsman sportsman) {
+        sportsmanRepository.delete(sportsman);
     }
 }

@@ -1,5 +1,7 @@
 package com.lifehouse.raceth.logic.marksmonitorpage;
 
+import com.lifehouse.raceth.Main;
+import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Start;
@@ -66,7 +68,7 @@ public class MarksGroupPopupController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        startDAO = new StartDAO();
+        startDAO = (StartDAO) Main.appContext.getBean("startDAO");
         initTable();
         initListeners();
         addValues();

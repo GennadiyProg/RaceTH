@@ -1,68 +1,61 @@
 package com.lifehouse.raceth.dao;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.view.DistanceView;
-import com.lifehouse.raceth.tmpstorage.TmpStorage;
+import com.lifehouse.raceth.repository.DistanceRepository;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class DistanceDAO implements DAO<Distance> {
-//    private final Session session;
-//
-//    public DistanceDAO(final Session session) {
-//        this.session = session;
-//    }
+@Component
+public class DistanceDAO {
+    private final DistanceRepository distanceRepository;
 
-//    public void Create(Distance distance) {
-//
-//        session.beginTransaction();
-//
-//        session.save(distance);
-//
-//        session.getTransaction().commit();
-//    }
+    public DistanceDAO() {
+        this.distanceRepository = (DistanceRepository) Main.appContext.getBean("distanceRepository");
+    }
+
     public void create(Distance distance) {
-        distance.setId(TmpStorage.distances.size());
-        TmpStorage.distances.add(distance);
+//        session.beginTransaction();
+//        session.save(distance);
+//        session.getTransaction().commit();
+        distanceRepository.save(distance);
     }
 
     public Distance getDistance(long id) {
-        for (Distance item : TmpStorage.distances) {
-            if (item.getId() == id) {
-                return item;
-            }
-        }
-        return null;
+//        session.beginTransaction();
+//        Distance distance = session.get(Distance.class, id);
+//        session.getTransaction().commit();
+//        return distance;
+        return distanceRepository.findById(id).orElse(null);
     }
 
     public List<Distance> getAllDistances() {
-        return TmpStorage.distances;
+//        session.beginTransaction();
+//        List<Distance> distances = session.createQuery("FROM Distance", Distance.class).list();
+//        session.getTransaction().commit();
+//        return distances;
+        return distanceRepository.findAll();
     }
 
     public void delete(Distance distance) {
-        TmpStorage.distances.remove(distance);
+//        session.beginTransaction();
+//        Query selectQuery = session.createQuery("DELETE Distance WHERE id = :id");
+//        selectQuery.setParameter("id", distance.getId());
+//        selectQuery.executeUpdate();
+//        session.getTransaction().commit();
+        distanceRepository.delete(distance);
     }
 
     public void update(Distance distance) {
-        try {
-            TmpStorage.distances.set(TmpStorage.distances.indexOf(
-                    TmpStorage.distances.stream().filter(
-                            g -> g.getId() == distance.getId()
-                    ).findFirst().orElse(null)
-            ), distance);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        session.beginTransaction();
+//        session.merge(distance);
+//        session.getTransaction().commit();
+        distanceRepository.update(distance.getId(), distance);
     }
 
     public List<DistanceView> getAllDistanceViews() {
-        List<Distance> distances = getAllDistances();
-        List<DistanceView> distanceViews = new ArrayList<>();
-        for (Distance distance : distances) {
-            distanceViews.add(DistanceView.convertToView(distance));
-        }
-
-        return distanceViews;
+        return distanceRepository.findAll().stream().map(DistanceView::convertToView).toList();
     }
 }

@@ -30,14 +30,14 @@ public class Competition {
     private PrincipalAgeCalculation calculationSystemAge; //Принцип расчета возраста участника
 
     @ManyToMany
-    @JoinTable(name = "competition_distance",
-            joinColumns = @JoinColumn(name = "competition_id"),
-            inverseJoinColumns = @JoinColumn(name = "distance_id"))
+//    @JoinTable(name = "competition_distance",
+//            joinColumns = @JoinColumn(name = "competition_id"),
+//            inverseJoinColumns = @JoinColumn(name = "distance_id"))
     private List<Distance> distances = new ArrayList<>(); // Дистанции, объявленные в этом соревновании
     @ManyToMany
-    @JoinTable(name = "competition_group",
-            joinColumns = @JoinColumn(name = "competition_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id"))
+//    @JoinTable(name = "competition_group",
+//            joinColumns = @JoinColumn(name = "competition_id"),
+//            inverseJoinColumns = @JoinColumn(name = "group_id"))
     private List<Group> groups = new ArrayList<>(); // Группы (категории), объявленные в этом соревновании
 
     public Competition(String name,
