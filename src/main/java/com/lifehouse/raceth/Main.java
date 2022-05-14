@@ -1,6 +1,5 @@
 package com.lifehouse.raceth;
 
-import com.lifehouse.raceth.repository.DistanceRepository;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
