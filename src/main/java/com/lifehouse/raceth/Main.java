@@ -20,7 +20,6 @@ public class Main extends Application{
         appContext.refresh();
         launch(args);
         appContext.close();
-//        HibernateUtil.closeSessionFactory();
     }
 
     @Override
