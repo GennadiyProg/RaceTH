@@ -1,57 +1,44 @@
 package com.lifehouse.raceth.dao;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.Participant;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
-import com.lifehouse.raceth.tmpstorage.TmpStorage;
+import com.lifehouse.raceth.repository.ParticipantRepository;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ParticipantDAO implements DAO<Participant> {
-//    private final Session session;
-//
-//    public ParticipantDAO(final Session session) {
-//        this.session = session;
-//    }
+@Component
+public class ParticipantDAO {
+    private final ParticipantRepository participantRepository;
 
-//    public void Create(Participant participant) {
-//        session.beginTransaction();
-//
-//        session.save(participant);
-//
-//        session.getTransaction().commit();
-//    }
+    public ParticipantDAO() {
+        this.participantRepository = (ParticipantRepository) Main.appContext.getBean("participantRepository");
+    }
 
     public void create(Participant participant) {
-        TmpStorage.participants.add(participant);
+        participantRepository.save(participant);
     }
 
     public Participant getParticipant(long id) {
-        for (Participant item : TmpStorage.participants) {
-            if (item.getId() == id) {
-                return item;
-            }
-        }
-        return null;
+        return participantRepository.findById(id).orElse(null);
     }
 
     public List<Participant> getAllParticipants() {
-        return TmpStorage.participants;
+        return participantRepository.findAll();
     }
 
     public List<ParticipantCompetitionView> getAllParticipantViews(){
-        List<Participant> participants = getAllParticipants();
-        return  participants.stream().map(ParticipantCompetitionView::convertToView).toList();
+        return  participantRepository.findAll().stream().map(ParticipantCompetitionView::convertToView).toList();
     }
 
     public List<ParticipantStartView> getAllParticipantViewsByStarts(List<Long> startsId){
-        return  TmpStorage.participants.stream()
-                .filter(participant -> startsId.contains(participant.getStart().getId()))
+        return  participantRepository.findAllByStartsId(startsId).stream()
                 .map(ParticipantStartView::convertToView).toList();
     }
 
     public void delete(Participant participant) {
-        TmpStorage.participants.remove(participant);
+        participantRepository.delete(participant);
     }
 }

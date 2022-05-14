@@ -2,16 +2,13 @@ package com.lifehouse.raceth.dao;
 
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.CompetitionDay;
-import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.repository.CompetitionDayRepository;
-import com.lifehouse.raceth.repository.CompetitionRepository;
-import com.lifehouse.raceth.tmpstorage.TmpStorage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class CompetitionDayDAO implements DAO<CompetitionDay> {
+public class CompetitionDayDAO {
     private final CompetitionDayRepository competitionDayRepository;
 
     public CompetitionDayDAO() {

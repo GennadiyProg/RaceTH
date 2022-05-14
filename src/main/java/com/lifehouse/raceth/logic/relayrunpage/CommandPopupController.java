@@ -1,5 +1,7 @@
 package com.lifehouse.raceth.logic.relayrunpage;
 
+import com.lifehouse.raceth.Main;
+import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.RelayTeamDAO;
 import com.lifehouse.raceth.model.RelayTeam;
 import javafx.event.ActionEvent;
@@ -27,7 +29,7 @@ public class CommandPopupController {
 
     private TableView<RelayTeam> relayTeamTable;
     private RelayTeam selectedRelayTeam = null;
-    private RelayTeamDAO relayTeamDAO = new RelayTeamDAO();
+    private RelayTeamDAO relayTeamDAO = (RelayTeamDAO) Main.appContext.getBean("relayTeamDAO");
 
     @FXML
     void Saving(ActionEvent event) {

@@ -2,26 +2,14 @@ package com.lifehouse.raceth.dao;
 
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.Distance;
-import com.lifehouse.raceth.model.Participant;
 import com.lifehouse.raceth.model.view.DistanceView;
-import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.repository.DistanceRepository;
-import com.lifehouse.raceth.tmpstorage.TmpStorage;
-import lombok.NoArgsConstructor;
-import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class DistanceDAO implements DAO<Distance> {
+public class DistanceDAO {
     private final DistanceRepository distanceRepository;
 
     public DistanceDAO() {

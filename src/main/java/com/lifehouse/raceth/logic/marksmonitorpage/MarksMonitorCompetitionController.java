@@ -1,9 +1,7 @@
 package com.lifehouse.raceth.logic.marksmonitorpage;
 
-import com.lifehouse.raceth.dao.CheckpointDAO;
-import com.lifehouse.raceth.dao.ParticipantDAO;
-import com.lifehouse.raceth.dao.StartDAO;
-import com.lifehouse.raceth.dao.StartTabDAO;
+import com.lifehouse.raceth.Main;
+import com.lifehouse.raceth.dao.*;
 import com.lifehouse.raceth.logic.MainPageController;
 import com.lifehouse.raceth.model.Start;
 import com.lifehouse.raceth.model.StartTab;
@@ -110,10 +108,10 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        participantDAO = new ParticipantDAO();
-        checkpointDAO = new CheckpointDAO();
-        startDAO = new StartDAO();
-        startTabDAO = new StartTabDAO();
+        participantDAO = (ParticipantDAO) Main.appContext.getBean("participantDAO");
+        checkpointDAO = (CheckpointDAO) Main.appContext.getBean("checkpointDAO");
+        startDAO = (StartDAO) Main.appContext.getBean("startDAO");
+        startTabDAO = (StartTabDAO) Main.appContext.getBean("startTabDAO");
 
         initializeStartTable();
         initializeParticipantTable();

@@ -3,13 +3,12 @@ package com.lifehouse.raceth.dao;
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.repository.CompetitionRepository;
-import com.lifehouse.raceth.tmpstorage.TmpStorage;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class CompetitionDAO implements DAO<Competition> {
+public class CompetitionDAO {
     private final CompetitionRepository competitionRepository;
 
     public CompetitionDAO() {

@@ -1,5 +1,7 @@
 package com.lifehouse.raceth.logic;
 
+import com.lifehouse.raceth.Main;
+import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.model.CompetitionDay;
@@ -60,7 +62,7 @@ public class MainPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        startDAO = new StartDAO();
+        startDAO = (StartDAO) Main.appContext.getBean("startDAO");
         run_page.managedProperty().bind(run_page.visibleProperty());
 
         activeCompetitionLabel.setText("Неопределено");

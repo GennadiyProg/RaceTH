@@ -4,14 +4,12 @@ import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.view.GroupView;
 import com.lifehouse.raceth.repository.GroupRepository;
-import com.lifehouse.raceth.tmpstorage.TmpStorage;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class GroupDAO implements DAO<Group> {
+public class GroupDAO {
     private final GroupRepository groupRepository;
 
     public GroupDAO() {

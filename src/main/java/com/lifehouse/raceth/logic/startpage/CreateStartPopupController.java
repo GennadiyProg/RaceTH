@@ -62,7 +62,7 @@ public class CreateStartPopupController implements Initializable {
         currentStart = null;
         distanceDAO = (DistanceDAO) Main.appContext.getBean("distanceDAO");
         groupDAO = (GroupDAO) Main.appContext.getBean("groupDAO");
-        startDAO = new StartDAO();
+        startDAO = (StartDAO) Main.appContext.getBean("startDAO");
         competitionDayDAO = (CompetitionDayDAO) Main.appContext.getBean("competitionDayDAO");
         distance.setItems(FXCollections.observableList(new ArrayList<>(distanceDAO.getAllDistances())));
         group.setItems(FXCollections.observableList(new ArrayList<>(groupDAO.getAllGroups())));

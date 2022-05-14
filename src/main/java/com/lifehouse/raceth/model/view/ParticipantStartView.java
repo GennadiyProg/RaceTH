@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.model.view;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.CheckpointDAO;
 import com.lifehouse.raceth.model.Gender;
 import com.lifehouse.raceth.model.Participant;
@@ -23,7 +24,7 @@ public class ParticipantStartView {
     private String group;
 
     public static ParticipantStartView convertToView(Participant participant){
-        CheckpointDAO checkpointDAO = new CheckpointDAO();
+        CheckpointDAO checkpointDAO = (CheckpointDAO) Main.appContext.getBean("checkpointDAO");
         return new ParticipantStartView(
                 participant.getId(),
                 checkpointDAO.getCheckpointByParticipant(participant.getId()).getCrossingTime(),

@@ -1,53 +1,45 @@
 package com.lifehouse.raceth.dao;
 
+import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.Start;
-import com.lifehouse.raceth.tmpstorage.TmpStorage;
+import com.lifehouse.raceth.repository.StartRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
+public class StartDAO {
+    private final StartRepository startRepository;
 
-public class StartDAO implements DAO<Start> {
-
-//    public void Create(@NotNull final Run run) {
-//        session.beginTransaction();
-//
-//        session.save(run);
-//
-//        session.getTransaction().commit();
-//    }
-
-    public void create(Start run) {
-        TmpStorage.starts.add(run);
+    public StartDAO() {
+        this.startRepository = (StartRepository) Main.appContext.getBean("startRepository");
     }
 
-    public void update(Start run) {
-        Start chRun = getRun(run.getId());
-        chRun.setStartTime(run.getStartTime());
-        chRun.setLaps(run.getLaps());
+    public void create(Start start) {
+        startRepository.save(start);
     }
 
-    public Start getRun(long id) {
-        for (Start item : TmpStorage.starts) {
-            if (item.getId() == id) {
-                return item;
-            }
-        }
-        return null;
+    public void update(Start start) {
+        startRepository.update(start.getId(), start);
+    }
+
+    public Start getStart(long id) {
+        return startRepository.findById(id).orElse(null);
     }
 
     public List<Start> getAllRuns() {
-        return TmpStorage.starts;
+        return startRepository.findAll();
     }
 
     public List<Start> getStartsByCompetitionDayId(long id) {
-        return TmpStorage.starts.stream().filter(el -> el.getCompetitionDay().getId() == id).toList();
+        return startRepository.findAllByCompetitionDayId(id);
     }
 
     public List<Start> getStartsByCompetitionId(long id) {
-        return TmpStorage.starts.stream().filter(el -> el.getCompetitionDay().getCompetition().getId() == id).toList();
+        return startRepository.findAllByCompetitionId(id);
     }
 
-    public void delete(Start run) {
-        TmpStorage.starts.remove(run);
+    public void delete(Start start) {
+        startRepository.delete(start);
     }
 }
