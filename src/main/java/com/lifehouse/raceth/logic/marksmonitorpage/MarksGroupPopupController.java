@@ -97,30 +97,7 @@ public class MarksGroupPopupController implements Initializable {
         for (Start run : startDAO.getAllRuns()) {
             tableList.add(StartView.convertToView(run));
         }
-
-        //
-        // TODO: ВРЕМЕННЫЙ КОД ДЛЯ ТЕСТОВЫХ ДАННЫХ
-        //
-        int i = 0;
-        while (i < 5) {
-            i++;
-            StartView run = new StartView();
-            run.setId(i);
-            run.setStartTime(LocalTime.now());
-            Group group = new Group();
-            group.setName("Group" + i);
-            run.setGroup(group);
-            run.setLaps(i);
-            run.getCheckBox().selectedProperty().addListener((observableValue, oldValue, newValue) ->
-                System.out.println("Hi, I'm a test string " + newValue)
-            );
-            runTable.getItems().add(run);
-            startDAO.create(StartView.convertToModel(run));
-        }
         runTable.refresh();
-        //
-        //
-        //
     }
 
     @FXML

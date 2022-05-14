@@ -272,17 +272,17 @@ public class MarksMonitorCompetitionController implements Initializable {
             timeline.play();
             startButton.getStyleClass().set(3,"btn-danger");
             // Для будущего использования потоков
-            /*if (thread == null) {
-                 thread = new RFID("Potok dlya metok",this);
-            }
-            thread.threadResume();*/
+//            if (thread == null) {
+//                 thread = new RFID("Potok dlya metok",this);
+//            }
+//            thread.threadResume();
 
             isButtonGreen = false;
         } else if (!isButtonGreen) {
             startButton.setText("Старт");
             startButton.getStyleClass().set(3,"btn-success");
             timeline.stop();
-           // thread.threadSuspend();
+//            thread.threadSuspend();
             isButtonGreen = true;
         }
     }
@@ -294,7 +294,6 @@ public class MarksMonitorCompetitionController implements Initializable {
     };
     public void timeStartButton(javafx.event.ActionEvent actionEvent) {
         timeStarted.setText("В разработке");
-        LocalTime LocalDateTime = null;
-        System.out.println(LocalDateTime.now());
+        System.out.println(LocalTime.now());
     };
 }

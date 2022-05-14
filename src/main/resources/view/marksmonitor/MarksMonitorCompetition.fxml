@@ -119,26 +119,16 @@
             <GridPane prefWidth="1058.0" GridPane.rowIndex="3">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.1999969482422" minWidth="10.0" prefWidth="175.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.00001525878906" minWidth="10.0" prefWidth="175.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.60001220703128" minWidth="10.0" prefWidth="175.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.7999328613281" minWidth="10.0" prefWidth="249.800048828125" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.00001525878906" minWidth="10.0" prefWidth="185.40001220703124" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.5999633789062" minWidth="10.0" prefWidth="246.99998779296868" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.7999328613281" minWidth="10.0" prefWidth="164.60001220703123" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Добавить вручную" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn-common" />
-                        <String fx:value="btn-warning" />
-                     </styleClass>
-                  </Button>
-                  <Button mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Добавить из базы" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                  <Button mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Добавить участника" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -157,7 +147,7 @@
                         <String fx:value="btn-common" />
                         <String fx:value="btn-primary" />
                      </styleClass></Button>
-                  <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="231.0" stylesheets="@../../assets/css/Buttons.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="LEFT">
+                  <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="231.0" stylesheets="@../../assets/css/Buttons.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>
