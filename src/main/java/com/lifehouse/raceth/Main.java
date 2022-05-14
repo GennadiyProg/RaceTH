@@ -1,5 +1,6 @@
 package com.lifehouse.raceth;
 
+import com.lifehouse.raceth.rfid.RFID;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
@@ -8,7 +9,9 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 public class Main extends Application{
@@ -21,9 +24,6 @@ public class Main extends Application{
         launch(args);
         appContext.close();
         closeSocket();
-
-//        session.close();
-//        HibernateUtil.closeSessionFactory();
     }
 
     private static void closeSocket() {

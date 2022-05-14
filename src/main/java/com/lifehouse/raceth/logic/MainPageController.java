@@ -1,7 +1,6 @@
 package com.lifehouse.raceth.logic;
 
 import com.lifehouse.raceth.Main;
-import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.model.CompetitionDay;

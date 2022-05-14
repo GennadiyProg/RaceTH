@@ -46,7 +46,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     private Tab participantTab;
     @FXML
-    private TextField lastNumber;
+    public TextField lastNumber;
     @FXML
     private Button startButton;
 
