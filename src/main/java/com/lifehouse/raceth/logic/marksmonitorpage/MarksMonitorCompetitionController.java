@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.logic.marksmonitorpage;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import com.lifehouse.raceth.Main;
@@ -30,13 +31,9 @@ import javafx.scene.control.*;
 import javafx.event.Event;
 
 import java.io.IOException;
-import java.net.DatagramSocket;
-import java.net.SocketException;
 import java.net.URL;
-import java.time.Instant;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.*;
 
 @Data
@@ -181,33 +178,79 @@ public class MarksMonitorCompetitionController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
     }
 
-    private static class MyTimeTask extends TimerTask
+    class MyTimeTask extends TimerTask
     {
         public void run()
         {
-            System.out.println("Работает!");
+            System.out.println("12345!");
+            startButtonClick();
         }
     }
 
-    public void timeStartButton(javafx.event.ActionEvent actionEvent) {
+    public void timeStartButton(javafx.event.ActionEvent actionEvent) throws ParseException {
         stopwatch.setText(timeStarted.getText());
         timeStarted.setText("В разработке");
         System.out.println(LocalTime.now());
         DateTimeFormatter formatForDateNow1 = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss:SS");
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("hh:mm:ss:SS");
-        System.out.println("Ходит1");
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss:SS");
+        System.out.println("--1--");
         Date date1 = new Date();
        //formatForDateNow1.format(date1);
-        System.out.println("Ходит1.5" + formatForDateNow.format(date1));
-        //date1 = formatForDateNow.format(timeStarted.getText());// !!!
+        System.out.println("--1.5--" + formatForDateNow.format(date1));
+
+        String vvod = timeStarted.getText();
+        //LocalTime and LocalData - не то
+        System.out.println("--11--");
+        LocalDate datePart = LocalDate.parse("2013-01-02");
+        System.out.println("--12--");
+        LocalTime timePart = LocalTime.parse("04:05:06");
+        System.out.println("--13--");
+        LocalDateTime dt = LocalDateTime.of(datePart, timePart);
+        System.out.println("---14-");
+        System.out.println(dt);
+        System.out.println("--15--");
+        // Попытка скрепить дату и время воедино
+        /*String date2 = formatForDateNow.format(dt);
+        date1 = formatForDateNow.parse(date2);
+        System.out.println(date1);*/
+// Эксперименты с string-data
+        //Date date = formatForDateNow.parse(vvod);
+       // date = formatForDateNow.format(vvod);// !!!
 //        LocalTime time = LocalTime.of(8,43,00,00);
 //        Date date = (Date) formatForDateNow1.parse(" 08:29:00:00");
-        System.out.println("Ходит2");
+        System.out.println("--2--");
         Timer timer = new Timer();
-        System.out.println("Ходит3");
         timer.schedule(new MyTimeTask(), date1);
+        System.out.println(date1);
     };
 
+    public void startButtonClick() {
+        //Изменение цвета и текста кнопки при нажатии
+        if(isButtonGreen) {
+            startButton.setText("Стоп");
+            timeline.play();
+            startButton.getStyleClass().set(3,"btn-danger");
+            // Для будущего использования потоков
+//            if (thread == null) {
+//                 thread = new RFID("Potok dlya metok",this);
+//            }
+//            thread.threadResume();
+
+            isButtonGreen = false;
+        } else if (!isButtonGreen) {
+            startButton.setText("Старт");
+            startButton.getStyleClass().set(3,"btn-success");
+            timeline.stop();
+//            thread.threadSuspend();
+            isButtonGreen = true;
+        }
+    }
+
+    public void resetTimeButton(javafx.event.ActionEvent actionEvent) {
+        stopwatch.setText("00:00:00:00");
+        timing = 0;
+        localTime = LocalTime.of(0, 0, 0, 0);
+    };
 
     public void initializeStartTable(){
         groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
@@ -297,31 +340,5 @@ public class MarksMonitorCompetitionController implements Initializable {
         tab.setOnSelectionChanged(this::switchingTab);
     }
 
-    public void startButtonClick() {
-        //Изменение цвета и текста кнопки при нажатии
-        if(isButtonGreen) {
-            startButton.setText("Стоп");
-            timeline.play();
-            startButton.getStyleClass().set(3,"btn-danger");
-            // Для будущего использования потоков
-//            if (thread == null) {
-//                 thread = new RFID("Potok dlya metok",this);
-//            }
-//            thread.threadResume();
 
-            isButtonGreen = false;
-        } else if (!isButtonGreen) {
-            startButton.setText("Старт");
-            startButton.getStyleClass().set(3,"btn-success");
-            timeline.stop();
-//            thread.threadSuspend();
-            isButtonGreen = true;
-        }
-    }
-
-    public void resetTimeButton(javafx.event.ActionEvent actionEvent) {
-        stopwatch.setText("00:00:00:00");
-        timing = 0;
-        localTime = LocalTime.of(0, 0, 0, 0);
-    };
 }
