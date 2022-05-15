@@ -1,8 +1,12 @@
 package com.lifehouse.raceth.model.view;
 
+import com.lifehouse.raceth.dao.GroupDAO;
+import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.model.Gender;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.competition.Competition;
+import javafx.beans.value.ChangeListener;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,9 +27,58 @@ public class GroupView {
     private Gender gender;
     private List<Competition> competitions = new ArrayList<>();
 
+    private ChangeListener<Boolean> checkboxListener = ((observableList, oldStatus, newStatus) ->
+            attachCompetition(newStatus)
+    );
+
+    public GroupView(long id, String name, int ageFrom, int ageTo, Gender gender, List<Competition> competitions) {
+        checkBox.selectedProperty().addListener(checkboxListener);
+        this.id = id;
+        this.name = name;
+        this.ageFrom = ageFrom;
+        this.ageTo = ageTo;
+        this.gender = gender;
+        this.competitions = competitions;
+    }
+
+    private void attachCompetition(Boolean status) {
+        GroupDAO groupDAO = new GroupDAO();
+        Competition curCompetition = CompetitionPageController.currentCompetition;
+        if (curCompetition == null) {
+            callAlert();
+            return;
+        }
+
+        if (status) {
+            attachCompetitionUtil(curCompetition, groupDAO);
+        } else {
+            detachCompetitionUtil(curCompetition, groupDAO);
+        }
+    }
+
+    private void attachCompetitionUtil(Competition curCompetition, GroupDAO groupDAO) {
+        boolean relationExists = this.competitions.stream().anyMatch((el) -> el.getId() == curCompetition.getId());
+        if (!relationExists) {
+            groupDAO.addCompetition(GroupView.convertToModel(this), curCompetition);
+        }
+    }
+
+    private void detachCompetitionUtil(Competition curCompetition, GroupDAO groupDAO) {
+        boolean relationExists = this.competitions.stream().anyMatch((el) -> el.getId() == curCompetition.getId());
+        if (relationExists) {
+            groupDAO.removeCompetition(GroupView.convertToModel(this), curCompetition);
+        }
+    }
+
+    private void callAlert() {
+        checkBox.selectedProperty().removeListener(checkboxListener);
+        checkBox.setSelected(false);
+        checkBox.selectedProperty().addListener(checkboxListener);
+        new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование").show();
+    }
+
     public static GroupView convertToView(Group group) {
         return new GroupView(
-                new CheckBox(),
                 group.getId(),
                 group.getName(),
                 group.getAgeFrom(),

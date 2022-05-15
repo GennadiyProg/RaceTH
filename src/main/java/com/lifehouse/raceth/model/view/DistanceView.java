@@ -1,13 +1,16 @@
 package com.lifehouse.raceth.model.view;
 
+import com.lifehouse.raceth.dao.DistanceDAO;
+import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.competition.Competition;
+import javafx.beans.value.ChangeListener;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +25,57 @@ public class DistanceView {
     private int height; // Набор высоты
     private List<Competition> competitions = new ArrayList<>();
 
+    private ChangeListener<Boolean> checkboxListener = ((observableList, oldStatus, newStatus) ->
+        attachCompetition(newStatus)
+    );
+
+    public DistanceView(long id, String location, int length, int height, List<Competition> competitions) {
+        checkBox.selectedProperty().addListener(checkboxListener);
+        this.id = id;
+        this.location = location;
+        this.length = length;
+        this.height = height;
+        this.competitions = competitions;
+    }
+
+    private void attachCompetition(Boolean status) {
+        DistanceDAO distanceDAO = new DistanceDAO();
+        Competition curCompetition = CompetitionPageController.currentCompetition;
+        if (curCompetition == null) {
+            callAlert();
+            return;
+        }
+
+        if (status) {
+            attachCompetitionUtil(curCompetition, distanceDAO);
+        } else {
+            detachCompetitionUtil(curCompetition, distanceDAO);
+        }
+    }
+
+    private void attachCompetitionUtil(Competition curCompetition, DistanceDAO distanceDAO) {
+        boolean relationExists = this.competitions.stream().anyMatch((el) -> el.getId() == curCompetition.getId());
+        if (!relationExists) {
+            distanceDAO.addCompetition(DistanceView.convertToModel(this), curCompetition);
+        }
+    }
+
+    private void detachCompetitionUtil(Competition curCompetition, DistanceDAO distanceDAO) {
+        boolean relationExists = this.competitions.stream().anyMatch((el) -> el.getId() == curCompetition.getId());
+        if (relationExists) {
+            distanceDAO.removeCompetition(DistanceView.convertToModel(this), curCompetition);
+        }
+    }
+
+    private void callAlert() {
+        checkBox.selectedProperty().removeListener(checkboxListener);
+        checkBox.setSelected(false);
+        checkBox.selectedProperty().addListener(checkboxListener);
+        new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование").show();
+    }
+
     public static DistanceView convertToView(Distance distance) {
         return new DistanceView(
-                new CheckBox(),
                 distance.getId(),
                 distance.getLocation(),
                 distance.getLength(),
