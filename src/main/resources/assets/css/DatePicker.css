@@ -42,3 +42,12 @@
     -fx-background-color: #305ec1b3, white;
     -fx-background-insets: 0, 1;
 }
+
+.date-picker:disabled, .date-picker:disabled > * {
+	-fx-opacity: 1.0 ;
+	-fx-background-color: #305ec1b3, white;
+
+	-fx-primary-color: #8390ac;
+	-fx-secondary-color: #8694ad;
+	-fx-light-grey-color: #d4d4d4;
+  }

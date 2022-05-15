@@ -54,10 +54,57 @@ public class CompetitionPopupController implements Initializable {
     public ObjectProperty<Competition> newCompetition = new SimpleObjectProperty<>();
 
 
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         yearEndRadioButton.setToggleGroup(principalAgeCalculation);
         currentTimeRadioButton.setToggleGroup(principalAgeCalculation);
+
+        toDateDatePicker.setDisable(true);
+        fromDateDatePicker.setDayCellFactory(param -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (toDateDatePicker.getValue() == null){
+                    setDisable(empty || date.compareTo(LocalDate.now()) < 0 );
+                    toDateDatePicker.setDisable(false);
+                }
+                else {
+                    setDisable(empty || date.compareTo(LocalDate.now()) < 0 );
+                    if (fromDateDatePicker.getValue() != null && toDateDatePicker.getValue().isBefore(fromDateDatePicker.getValue())){
+                        toDateDatePicker.setValue(fromDateDatePicker.getValue());
+                    }
+
+                //else {
+                //    setDisable(empty || date.compareTo(LocalDate.now()) < 0 );
+                //    if (fromDateDatePicker.getValue() != null){
+                //        if (toDateDatePicker.getValue().isBefore(fromDateDatePicker.getValue())) {
+                //            toDateDatePicker.setValue(fromDateDatePicker.getValue());
+                //        }
+                //    }
+                }
+
+            }
+        });
+
+        toDateDatePicker.setDayCellFactory(param -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (fromDateDatePicker.getValue() != null) {
+                    if (date.isBefore(fromDateDatePicker.getValue())) {
+                        setDisable(true);
+                    }
+                }
+                else {
+                    setDisable(empty || date.compareTo(LocalDate.now()) < 0 );
+                }
+            }
+        });
+        toDateDatePicker.setEditable(false);
+        fromDateDatePicker.setEditable(false);
     }
 
     @FXML
