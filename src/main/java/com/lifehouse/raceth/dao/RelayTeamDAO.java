@@ -32,6 +32,6 @@ public class RelayTeamDAO {
     }
 
     public void update(RelayTeam relayTeam) {
-        relayTeamRepository.update(relayTeam.getId(), relayTeam);
+        relayTeamRepository.save(relayTeam);
     }
 }

@@ -24,7 +24,7 @@ public class CompetitionDayDAO {
     }
 
     public void update(CompetitionDay competitionDay) {
-        competitionDayRepository.update(competitionDay.getId(), competitionDay);
+        competitionDayRepository.save(competitionDay);
     }
 
     public CompetitionDay getCompetitionDay(long id) {
