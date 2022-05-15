@@ -1,5 +1,7 @@
 package com.lifehouse.raceth.logic.marksmonitorpage;
 
+import java.text.SimpleDateFormat;
+import java.time.*;
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.*;
 import com.lifehouse.raceth.logic.MainPageController;
@@ -34,6 +36,7 @@ import java.net.URL;
 import java.time.Instant;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.*;
 
 @Data
@@ -162,8 +165,9 @@ public class MarksMonitorCompetitionController implements Initializable {
         stage.show();
     }
 
+    DateTimeFormatter formatForDateNow = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
     public void initializeTimeline(){
-        DateTimeFormatter formatForDateNow = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
+
         localTime = LocalTime.of(0, 0, 0, 0);
         timeline = new Timeline(
                 new KeyFrame(
@@ -176,6 +180,34 @@ public class MarksMonitorCompetitionController implements Initializable {
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
     }
+
+    private static class MyTimeTask extends TimerTask
+    {
+        public void run()
+        {
+            System.out.println("Работает!");
+        }
+    }
+
+    public void timeStartButton(javafx.event.ActionEvent actionEvent) {
+        stopwatch.setText(timeStarted.getText());
+        timeStarted.setText("В разработке");
+        System.out.println(LocalTime.now());
+        DateTimeFormatter formatForDateNow1 = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss:SS");
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("hh:mm:ss:SS");
+        System.out.println("Ходит1");
+        Date date1 = new Date();
+       //formatForDateNow1.format(date1);
+        System.out.println("Ходит1.5" + formatForDateNow.format(date1));
+        //date1 = formatForDateNow.format(timeStarted.getText());// !!!
+//        LocalTime time = LocalTime.of(8,43,00,00);
+//        Date date = (Date) formatForDateNow1.parse(" 08:29:00:00");
+        System.out.println("Ходит2");
+        Timer timer = new Timer();
+        System.out.println("Ходит3");
+        timer.schedule(new MyTimeTask(), date1);
+    };
+
 
     public void initializeStartTable(){
         groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
@@ -291,9 +323,5 @@ public class MarksMonitorCompetitionController implements Initializable {
         stopwatch.setText("00:00:00:00");
         timing = 0;
         localTime = LocalTime.of(0, 0, 0, 0);
-    };
-    public void timeStartButton(javafx.event.ActionEvent actionEvent) {
-        timeStarted.setText("В разработке");
-        System.out.println(LocalTime.now());
     };
 }
