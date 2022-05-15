@@ -20,7 +20,7 @@ public class StartDAO {
     }
 
     public void update(Start start) {
-        startRepository.update(start.getId(), start);
+        startRepository.save(start);
     }
 
     public Start getStart(long id) {

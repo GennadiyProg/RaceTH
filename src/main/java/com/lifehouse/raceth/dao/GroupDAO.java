@@ -32,7 +32,7 @@ public class GroupDAO {
     }
 
     public void update(Group group) {
-        groupRepository.update(group.getId(), group);
+        groupRepository.save(group);
     }
 
     public List<GroupView> getAllGroupViews() {

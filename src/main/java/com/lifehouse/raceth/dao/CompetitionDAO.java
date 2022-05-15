@@ -20,7 +20,7 @@ public class CompetitionDAO {
     }
 
     public void update(Competition competition) {
-        competitionRepository.update(competition.getId(), competition);
+        competitionRepository.save(competition);
     }
 
     public Competition getCompetition(long id) {
