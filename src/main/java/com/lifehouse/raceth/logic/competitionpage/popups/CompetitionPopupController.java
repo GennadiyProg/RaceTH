@@ -76,14 +76,6 @@ public class CompetitionPopupController implements Initializable {
                     if (fromDateDatePicker.getValue() != null && toDateDatePicker.getValue().isBefore(fromDateDatePicker.getValue())){
                         toDateDatePicker.setValue(fromDateDatePicker.getValue());
                     }
-
-                //else {
-                //    setDisable(empty || date.compareTo(LocalDate.now()) < 0 );
-                //    if (fromDateDatePicker.getValue() != null){
-                //        if (toDateDatePicker.getValue().isBefore(fromDateDatePicker.getValue())) {
-                //            toDateDatePicker.setValue(fromDateDatePicker.getValue());
-                //        }
-                //    }
                 }
 
             }
