@@ -2,6 +2,7 @@ package com.lifehouse.raceth.dao;
 
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.Distance;
+import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.view.DistanceView;
 import com.lifehouse.raceth.repository.DistanceRepository;
 import org.springframework.stereotype.Component;
@@ -38,5 +39,24 @@ public class DistanceDAO {
 
     public List<DistanceView> getAllDistanceViews() {
         return distanceRepository.findAll().stream().map(DistanceView::convertToView).toList();
+    }
+
+    public void addCompetition(Distance distance, Competition competition) {
+        distance.getCompetitions().add(competition);
+        var distanceRecord = getDistance(distance.getId());
+        distanceRecord.getCompetitions().add(competition);
+        distanceRepository.saveAndFlush(distanceRecord);
+    }
+
+    public void removeCompetition(Distance distance, Competition competition) {
+        var competitions = distance.getCompetitions();
+        competitions.remove(
+                competitions.stream()
+                        .filter((el) -> el.getId() == competition.getId())
+                        .findFirst().orElse(null)
+        );
+
+        distanceRepository.deleteCompetitionRelation(distance.getId(), competition.getId());
+        distanceRepository.saveAndFlush(distance);
     }
 }

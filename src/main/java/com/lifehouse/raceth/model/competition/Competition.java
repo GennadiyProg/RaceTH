@@ -5,6 +5,8 @@ import com.lifehouse.raceth.model.Group;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -29,12 +31,14 @@ public class Competition {
     private String mainSecretary; //Главный секретарь
     private PrincipalAgeCalculation calculationSystemAge; //Принцип расчета возраста участника
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "competitions")
+    @LazyCollection(LazyCollectionOption.FALSE)
 //    @JoinTable(name = "competition_distance",
 //            joinColumns = @JoinColumn(name = "competition_id"),
 //            inverseJoinColumns = @JoinColumn(name = "distance_id"))
     private List<Distance> distances = new ArrayList<>(); // Дистанции, объявленные в этом соревновании
-    @ManyToMany
+    @ManyToMany(mappedBy = "competitions")
+    @LazyCollection(LazyCollectionOption.FALSE)
 //    @JoinTable(name = "competition_group",
 //            joinColumns = @JoinColumn(name = "competition_id"),
 //            inverseJoinColumns = @JoinColumn(name = "group_id"))

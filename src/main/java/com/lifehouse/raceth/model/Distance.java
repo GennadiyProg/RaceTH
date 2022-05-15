@@ -21,9 +21,12 @@ public class Distance {
     private long id;
     private String location;
     private int length;
-    private int height; // Набор высоты
-    @ManyToMany(mappedBy = "distances")
+    private int height;
+    @ManyToMany()
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "competition_distance",
+            joinColumns = @JoinColumn(name = "distance_id"),
+            inverseJoinColumns = @JoinColumn(name = "competition_id"))
     private List<Competition> competitions = new ArrayList<>();
 
     public Distance(String location, int length, int height) {
