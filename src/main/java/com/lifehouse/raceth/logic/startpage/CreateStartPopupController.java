@@ -66,10 +66,8 @@ public class CreateStartPopupController implements Initializable {
         competitionDayDAO = (CompetitionDayDAO) Main.appContext.getBean("competitionDayDAO");
         distance.setItems(FXCollections.observableList(new ArrayList<>(distanceDAO.getAllDistances())));
         group.setItems(FXCollections.observableList(new ArrayList<>(groupDAO.getAllGroups())));
-        competitionDay.setItems(
-                FXCollections.observableList(new ArrayList<>(competitionDayDAO.getAllByCompetition(CompetitionPageController.currentCompetition.getId())))
-        );
-
+        competitionDay.setItems(FXCollections.observableList(new ArrayList<>(competitionDayDAO.getAllByCompetition(CompetitionPageController.currentCompetition.getId()))));
+        formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
     }
 
     @FXML
@@ -102,19 +100,35 @@ public class CreateStartPopupController implements Initializable {
 
     private Start buildNewEntity() {
         Start start = new Start();
-        startTime.getText();
+
         start.setName(startName.getText());
         start.setDistance(distanceDAO.getDistance(distance.getSelectionModel().getSelectedItem().getId()));
         start.setGroup(groupDAO.getGroup(group.getSelectionModel().getSelectedItem().getId()));
-        LocalTime localTime = LocalTime.parse(startTime.getText(), formatter);
-
-            formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
-        localTime.plusSeconds(10);
-        localTime.format(formatter);
-        localTime.plusSeconds(50);
-        start.setStartTime(localTime);
         start.setLaps(Integer.parseInt(laps.getText()));
         start.setCompetitionDay(competitionDay.getSelectionModel().getSelectedItem());
+
+
+        //start.setStartTime(LocalTime.parse(startTime.getText(), formatter));
+        if (startTime.getText().length() == 8) {
+            String g = startTime.getText();
+            System.out.println(g);
+            LocalTime localTime = LocalTime.parse(g, formatter);
+            start.setStartTime(localTime);
+        }
+        else if (startTime.getText().length() == 5) {
+            String s = startTime.getText() + ":01";
+            System.out.println(s);
+            LocalTime localTime = LocalTime.parse(s,formatter);
+            //LocalTime localTime = LocalTime.parse(s, formatter);
+            start.setStartTime(localTime);
+        }
+        //String s = startTime.getText() + ":00";
+        //formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
+        //LocalTime localTime = LocalTime.parse(startTime.getText() + ":00", formatter);
+
+        //localTime.format(formatter);
+        //localTime.format(formatter);
+        //start.setStartTime(localTime);
 
         return start;
     }
