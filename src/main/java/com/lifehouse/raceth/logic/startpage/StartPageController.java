@@ -19,6 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Data;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.util.Date;
@@ -60,7 +61,21 @@ public class StartPageController implements Initializable {
         countlapsColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
         compDayColumn.setCellValueFactory(new PropertyValueFactory<>("competitionDay"));
         startTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        onMounted();
+    }
 
+    public void onMounted() {
+        // хук, вызываемый при переходе на вкладку
+        loadData();
+    }
+
+    private void loadData() {
+        startTable.getItems().clear();
+
+        if (CompetitionPageController.currentCompetition == null) {
+            return;
+        }
+        startTable.getItems().addAll(startDAO.getStartsByCompetitionId(CompetitionPageController.currentCompetition.getId()));
     }
 
     public void onUpdateSelectedCompetition() {
@@ -98,14 +113,6 @@ public class StartPageController implements Initializable {
 
             CreateStartPopupController createStartPopupController = fxmlLoader.getController();
             createStartPopupController.setStartTable(startTable);
-
-
-                /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CompetitionPage.fxml"));
-                Parent root2 = loader.load();
-                CompetitionPageController competitionPageController = loader.getController();
-                competitionPageController.getValue().addListener((observable, oldValue, newValue) -> onUpdateSelectedCompetition());*/
-
-
 
             stage.show();
         } catch (Exception e) {
