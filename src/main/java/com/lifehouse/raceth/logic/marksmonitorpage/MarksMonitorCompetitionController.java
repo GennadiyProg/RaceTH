@@ -142,6 +142,11 @@ public class MarksMonitorCompetitionController implements Initializable {
         newtab.setOnSelectionChanged(this::createNewTab);
         tabPane.getTabs().add(newtab);
         initializeTabs();
+        participantCompetitionTable.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) {
+                participantCompetitionTable.getSelectionModel().clearSelection();
+            }
+        });
     }
 
     @FXML

@@ -136,7 +136,7 @@
                         </Button>
                      </children>
                   </GridPane>
-                  <TableView prefHeight="116.0" prefWidth="516.0" GridPane.columnIndex="1">
+                  <TableView fx:id="sportsmenTableView" prefHeight="116.0" prefWidth="516.0" GridPane.columnIndex="1">
                     <columns>
                       <TableColumn fx:id="surnameColumn" prefWidth="118.0" text="Фамилия" />
                       <TableColumn fx:id="nameColumn" prefWidth="117.60003662109375" text="Имя" />
