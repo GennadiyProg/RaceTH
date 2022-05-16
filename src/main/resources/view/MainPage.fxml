@@ -63,7 +63,7 @@
                </font>
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../assets/images/icons/home2.png" />
+<!--                     <Image url="@../assets/images/icons/home.png" />-->
                   </ImageView>
                </graphic>
                <toggleGroup>
@@ -73,7 +73,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../assets/images/icons/running.png" />
+<!--                        <Image url="@../assets/images/icons/running.png" />-->
                      </image>
                   </ImageView>
                </graphic>
@@ -82,7 +82,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../assets/images/icons/relay.png" />
+<!--                        <Image url="@../assets/images/icons/relay.png" />-->
                      </image>
                   </ImageView>
                </graphic>
@@ -91,7 +91,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../assets/images/icons/cctv-camera.png" />
+<!--                        <Image url="@../assets/images/icons/cctv-camera.png" />-->
                      </image>
                   </ImageView>
                </graphic>
@@ -100,7 +100,7 @@
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../assets/images/icons/leader.png" />
+<!--                        <Image url="@../assets/images/icons/leader.png" />-->
                      </image>
                   </ImageView>
                </graphic>
