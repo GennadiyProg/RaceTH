@@ -69,7 +69,7 @@ public class CreateStartPopupController implements Initializable {
         competitionDay.setItems(
                 FXCollections.observableList(new ArrayList<>(competitionDayDAO.getAllByCompetition(CompetitionPageController.currentCompetition.getId())))
         );
-        formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
+
     }
 
     @FXML
@@ -102,11 +102,17 @@ public class CreateStartPopupController implements Initializable {
 
     private Start buildNewEntity() {
         Start start = new Start();
-
+        startTime.getText();
         start.setName(startName.getText());
         start.setDistance(distanceDAO.getDistance(distance.getSelectionModel().getSelectedItem().getId()));
         start.setGroup(groupDAO.getGroup(group.getSelectionModel().getSelectedItem().getId()));
-        start.setStartTime(LocalTime.parse(startTime.getText(), formatter));
+        LocalTime localTime = LocalTime.parse(startTime.getText(), formatter);
+
+            formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
+        localTime.plusSeconds(10);
+        localTime.format(formatter);
+        localTime.plusSeconds(50);
+        start.setStartTime(localTime);
         start.setLaps(Integer.parseInt(laps.getText()));
         start.setCompetitionDay(competitionDay.getSelectionModel().getSelectedItem());
 
