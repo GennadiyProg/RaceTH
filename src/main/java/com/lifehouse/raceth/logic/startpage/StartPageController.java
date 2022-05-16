@@ -75,6 +75,14 @@ public class StartPageController implements Initializable {
 
     @FXML
     private void AddRun(ActionEvent event) {
+        if (CompetitionPageController.currentCompetition == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Пожалуйста выберите текущее соревнование во вкладке 'Соревнования'");
+            alert.showAndWait();
+            return;
+        }
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/start/CreateStartPopup.fxml"));
             Parent root1 = fxmlLoader.load();
