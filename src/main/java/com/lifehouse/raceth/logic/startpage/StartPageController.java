@@ -27,7 +27,10 @@ import java.util.ResourceBundle;
 @Data
 public class StartPageController implements Initializable {
     @FXML
-    private Button addButton;
+    private Button addButton; // -
+
+    @FXML
+    private Button editButton;
 
     //Табличка
     @FXML
@@ -48,12 +51,13 @@ public class StartPageController implements Initializable {
     @FXML
     private TableColumn<Start, Date> compDayColumn;
 
+    private boolean hasSelectedStarts;
+
     private StartDAO startDAO;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         startDAO = (StartDAO) Main.appContext.getBean("startDAO");
-
         defineStartsTable();
         loadStarts();
     }
