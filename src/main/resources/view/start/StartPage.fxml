@@ -94,7 +94,7 @@
                   </Button>
                </children>
             </GridPane>
-            <TableView fx:id="startTable" prefHeight="419.0" stylesheets="@../../assets/css/table.css" GridPane.rowIndex="1">
+            <TableView fx:id="startTable" editable="true" prefHeight="419.0" stylesheets="@../../assets/css/table.css" GridPane.rowIndex="1">
                <columns>
                   <TableColumn fx:id="namestartColumn" prefWidth="175.0" reorderable="false" text="Название" />
                   <TableColumn fx:id="categoryColumn" prefWidth="170.0" reorderable="false" text="Категория" />

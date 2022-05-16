@@ -133,7 +133,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         initializeStartTab();
         initializeTimeline();
 
-        fillingStartList();
+        // fillingStartList(); могуть быть null'ы
 
         Tab newtab = new Tab("+");
         newtab.setOnSelectionChanged(this::createNewTab);
@@ -142,12 +142,17 @@ public class MarksMonitorCompetitionController implements Initializable {
         List<Start> starts = startDAO.getStartsByCompetitionDayId(MainPageController.currentCompetitionDay.getId());
         openedTabs = new HashSet<>();
         starts.forEach(start -> {
-            openedTabs.add(start.getTab());
-            long id = start.getTab().getId();
-            if (startOnTab.containsKey(id)) {
-                startOnTab.get(id).add(start);
-            } else {
-                startOnTab.put(id, List.of(start));
+            if (start.getTab() == null) {
+                // Дописать проверку на null
+            }
+            else {
+                openedTabs.add(start.getTab());
+                long id = start.getTab().getId();
+                if (startOnTab.containsKey(id)) {
+                    startOnTab.get(id).add(start);
+                } else {
+                    startOnTab.put(id, List.of(start));
+                }
             }
         });
         initializeTabs();
