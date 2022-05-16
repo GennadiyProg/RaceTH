@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="464.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.marksmonitorpage.CreateOrEditParticipantPopupController">
+   <children>
+      <GridPane layoutX="-1.0" layoutY="3.0" prefHeight="556.0" prefWidth="890.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="225.60000610351562" minHeight="9.600006103515625" prefHeight="42.2" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="478.2" minHeight="10.0" prefHeight="401.4" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="55.0" prefWidth="369.0" text="Создание/Изменение участника" textFill="#305ec1" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+            </Label>
+            <GridPane GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <GridPane prefHeight="301.0" prefWidth="523.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="229.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="10.0" prefWidth="77.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="217.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="35.60001220703125" minHeight="10.0" prefHeight="30.799995803833006" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="50.00000419616699" minHeight="10.0" prefHeight="35.99998321533204" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="54.400000000000006" minHeight="10.0" prefHeight="36.79998626708985" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="56.00001373291016" minHeight="10.0" prefHeight="42.40000610351562" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="54.20001831054688" minHeight="10.0" prefHeight="33.600012207031256" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="63.59998168945313" minHeight="10.0" prefHeight="44.800012207031244" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="51.19998779296873" minHeight="10.0" prefHeight="36.79997558593749" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="49.60000000000002" minHeight="10.0" prefHeight="44.39998779296877" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="41.79997558593749" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="41.00002441406252" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Фамилия">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="surnameTextField" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="160.0" GridPane.rowIndex="1" />
+                        <Label text="Имя" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="nameTextField" maxWidth="-Infinity" prefHeight="31.0" prefWidth="160.0" GridPane.rowIndex="3" />
+                        <Label text="Отчество" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="patronymicTextField" maxWidth="-Infinity" prefHeight="31.0" prefWidth="160.0" GridPane.rowIndex="5" />
+                        <Label text="Пол" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Чип" GridPane.rowIndex="6">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="chipTextField" maxWidth="-Infinity" prefHeight="31.0" prefWidth="160.0" translateY="2.0" GridPane.rowIndex="7" />
+                        <Label text="Дата рождения" GridPane.columnIndex="2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="birthdateDatePicker" editable="false" maxWidth="-Infinity" prefHeight="31.0" prefWidth="160.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label text="Город" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="cityTextField" maxWidth="-Infinity" prefHeight="31.0" prefWidth="160.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <TextField fx:id="startNumberTextField" maxWidth="-Infinity" prefHeight="31.0" prefWidth="160.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                        <Label text="Стартовый номер" translateY="5.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="130.0" stylesheets="@../../assets/css/AgreeButton.css" text="Считать чип" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                        <GridPane GridPane.columnIndex="2" GridPane.rowIndex="5">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <RadioButton fx:id="femaleGenderRadioButton" mnemonicParsing="false" text="М" toggleGroup="$genderToggleGroup">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="genderToggleGroup" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="maleGenderRadioButton" mnemonicParsing="false" text="Ж" toggleGroup="$genderToggleGroup" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Button fx:id="saveButt" mnemonicParsing="false" onAction="#saving" prefHeight="37.0" prefWidth="131.0" stylesheets="@../../assets/css/AgreeButton.css" text="Сохранить" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+                           <GridPane.margin>
+                              <Insets right="30.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="cancelButt" mnemonicParsing="false" onAction="#cancel" prefHeight="37.0" prefWidth="131.0" stylesheets="@../../assets/css/DisagreeButton.css" text="Отменить" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+                           <GridPane.margin>
+                              <Insets left="30.0" />
+                           </GridPane.margin>
+                        </Button>
+                     </children>
+                  </GridPane>
+                  <TableView prefHeight="116.0" prefWidth="516.0" GridPane.columnIndex="1">
+                    <columns>
+                      <TableColumn fx:id="surnameColumn" prefWidth="118.0" text="Фамилия" />
+                      <TableColumn fx:id="nameColumn" prefWidth="117.60003662109375" text="Имя" />
+                        <TableColumn fx:id="patronymicColumn" prefWidth="87.19999694824219" text="Отчество" />
+                        <TableColumn fx:id="cityColumn" prefWidth="111.9998779296875" text="Город" />
+                    </columns>
+                  </TableView>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</AnchorPane>

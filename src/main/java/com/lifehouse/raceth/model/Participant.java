@@ -27,4 +27,9 @@ public class Participant {
     @NotNull
     private int startNumber;
 
+    public Participant(String chip, Sportsman sportsman, int startNumber) {
+        this.chip = chip;
+        this.sportsman = sportsman;
+        this.startNumber = startNumber;
+    }
 }
