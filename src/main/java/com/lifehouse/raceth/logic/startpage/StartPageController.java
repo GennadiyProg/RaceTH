@@ -1,12 +1,12 @@
 package com.lifehouse.raceth.logic.startpage;
 
 import com.lifehouse.raceth.Main;
-import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Start;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +19,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Data;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.util.Date;
@@ -54,52 +53,24 @@ public class StartPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         startDAO = (StartDAO) Main.appContext.getBean("startDAO");
-        namestartColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
-        distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
-        starttimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        countlapsColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
-        compDayColumn.setCellValueFactory(new PropertyValueFactory<>("competitionDay"));
-        startTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        onMounted();
+
+        defineStartsTable();
+        loadStarts();
     }
 
-    public void onMounted() {
-        // хук, вызываемый при переходе на вкладку
-        loadData();
+    public void onMounted() { // хук, вызываемый при переходе на вкладку
+        loadStarts();
     }
 
-    private void loadData() {
+    private void loadStarts() {
         startTable.getItems().clear();
 
         if (CompetitionPageController.currentCompetition == null) {
             return;
         }
-        startTable.getItems().addAll(startDAO.getStartsByCompetitionId(CompetitionPageController.currentCompetition.getId()));
-    }
 
-    public void onUpdateSelectedCompetition() {
-        startTable.getItems().clear();
-        startTable.getItems().addAll(startDAO.getStartsByCompetitionId(CompetitionPageController.currentCompetition.getId()));
-    }
-
-    @FXML
-    //todo: РЕАЛИЗОВАТЬ ЧТЕНИЕ С РЕАЛЬНЫХ ФАЙЛОВ (ЗДЕСЬ ФАЙЛЫ ГЕНЕРИРУЮТСЯ В ЦИКЛЕ)
-    private void AddExternalData(ActionEvent event) {
-        /*ObservableList<Sportsman> sportsmans = runTable.getItems();
-        for (Integer i = 0; i < 15; i++)
-        {
-            Sportsman man = new Sportsman(
-                    i,
-                    "SampleSportsman" + i,
-                    "SampleLastname" + i,
-                    new java.sql.Date(Calendar.getInstance().getTime().getTime()),
-                    Gender.MALE,
-                    "RU"
-                    );
-
-            sportsmans.add(man);
-        }*/
+        ObservableList<Start> starts = startTable.getItems();
+        starts.addAll(startDAO.getStartsByCompetitionId(CompetitionPageController.currentCompetition.getId()));
     }
 
     @FXML
@@ -148,4 +119,13 @@ public class StartPageController implements Initializable {
         startTable.refresh();
     }
 
+    private void defineStartsTable() {
+        namestartColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
+        distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
+        starttimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        countlapsColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
+        compDayColumn.setCellValueFactory(new PropertyValueFactory<>("competitionDay"));
+        startTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
 }

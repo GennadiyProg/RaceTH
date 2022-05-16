@@ -120,7 +120,6 @@
          <children>
             <fx:include fx:id="competitionPage" maxHeight="-Infinity" maxWidth="-Infinity" source="competition/CompetitionPage.fxml" />
             <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="club/ClubPage.fxml" />
-            <fx:include fx:id="run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="start/StartPage.fxml" />
             <fx:include fx:id="relay_run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="relayrun/RelayRunPage.fxml" />
             <fx:include fx:id="marks_monitor_page" maxHeight="-Infinity" maxWidth="-Infinity" source="marksmonitor/MarksMonitorCompetition.fxml" />
          </children>

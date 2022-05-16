@@ -114,7 +114,7 @@ public class CreateStartPopupController implements Initializable {
     }
 
     private void createEntity(Start start) {
-        start.setId(startTable.getItems().size());
+        // start.setId(startTable.getItems().size());
         startDAO.create(start);
         startTable.getItems().add(start);
         startTable.refresh();
