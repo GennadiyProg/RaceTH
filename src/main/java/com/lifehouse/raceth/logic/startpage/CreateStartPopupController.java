@@ -114,13 +114,14 @@ public class CreateStartPopupController implements Initializable {
             System.out.println(g);
             LocalTime localTime = LocalTime.parse(g, formatter);
             start.setStartTime(localTime);
+            System.out.println(start.getStartTime().format(formatter));
         }
         else if (startTime.getText().length() == 5) {
-            String s = startTime.getText() + ":01";
+            String s = startTime.getText() + ":00";
             System.out.println(s);
             LocalTime localTime = LocalTime.parse(s,formatter);
-            //LocalTime localTime = LocalTime.parse(s, formatter);
             start.setStartTime(localTime);
+            System.out.println(start.getStartTime().format(formatter));
         }
         //String s = startTime.getText() + ":00";
         //formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
