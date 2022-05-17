@@ -45,8 +45,6 @@
             <artifactId>spring-data-jpa</artifactId>
             <version>2.6.4</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -87,6 +85,12 @@
             <artifactId>javafx-media</artifactId>
             <version>19-ea+3</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
