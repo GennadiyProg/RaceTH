@@ -2,6 +2,7 @@ package com.lifehouse.raceth.logic.startpage;
 
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.StartDAO;
+import com.lifehouse.raceth.logic.MainPageController;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Group;
@@ -69,17 +70,17 @@ public class StartPageController implements Initializable {
     private void loadStarts() {
         startTable.getItems().clear();
 
-        if (CompetitionPageController.currentCompetition == null) {
+        if (MainPageController.currentCompetition == null) {
             return;
         }
 
         ObservableList<Start> starts = startTable.getItems();
-        starts.addAll(startDAO.getStartsByCompetitionId(CompetitionPageController.currentCompetition.getId()));
+        starts.addAll(startDAO.getStartsByCompetitionId(MainPageController.currentCompetition.getId()));
     }
 
     @FXML
     private void AddRun(ActionEvent event) {
-        if (CompetitionPageController.currentCompetition == null) {
+        if (MainPageController.currentCompetition == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
 
             alert.setTitle("Ошибка");
