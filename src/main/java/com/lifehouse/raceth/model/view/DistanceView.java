@@ -1,6 +1,7 @@
 package com.lifehouse.raceth.model.view;
 
 import com.lifehouse.raceth.dao.DistanceDAO;
+import com.lifehouse.raceth.logic.MainPageController;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.competition.Competition;
@@ -40,7 +41,7 @@ public class DistanceView {
 
     private void attachCompetition(Boolean status) {
         DistanceDAO distanceDAO = new DistanceDAO();
-        Competition curCompetition = CompetitionPageController.currentCompetition;
+        Competition curCompetition = MainPageController.currentCompetition;
         if (curCompetition == null) {
             callAlert();
             return;

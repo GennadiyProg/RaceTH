@@ -1,6 +1,7 @@
 package com.lifehouse.raceth.model.view;
 
 import com.lifehouse.raceth.dao.GroupDAO;
+import com.lifehouse.raceth.logic.MainPageController;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.model.Gender;
 import com.lifehouse.raceth.model.Group;
@@ -43,7 +44,7 @@ public class GroupView {
 
     private void attachCompetition(Boolean status) {
         GroupDAO groupDAO = new GroupDAO();
-        Competition curCompetition = CompetitionPageController.currentCompetition;
+        Competition curCompetition = MainPageController.currentCompetition;
         if (curCompetition == null) {
             callAlert();
             return;
