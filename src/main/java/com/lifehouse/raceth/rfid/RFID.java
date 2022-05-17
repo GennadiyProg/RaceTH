@@ -89,7 +89,7 @@ public class RFID implements Runnable{
             int delZeros = Integer.parseInt(receivedData);
             receivedData = Integer.toString(delZeros);
 
-            guiController.lastNumber.setText(receivedData);
+            guiController.addNewStroka(receivedData);
 
         } catch (IOException e){
             System.out.println("ups in rfid");

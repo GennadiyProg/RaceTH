@@ -3,6 +3,7 @@ package com.lifehouse.raceth.logic.marksmonitorpage;
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.*;
 import com.lifehouse.raceth.logic.MainPageController;
+import com.lifehouse.raceth.model.Gender;
 import com.lifehouse.raceth.model.Participant;
 import com.lifehouse.raceth.model.Start;
 import com.lifehouse.raceth.model.StartTab;
@@ -30,6 +31,7 @@ import javafx.event.Event;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -308,21 +310,54 @@ public class MarksMonitorCompetitionController implements Initializable {
             startButton.setText("Стоп");
             timeline.play();
             startButton.getStyleClass().set(3,"btn-danger");
+
             // Для будущего использования потоков
-//            if (thread == null) {
-//                 thread = new RFID("Potok dlya metok",this);
-//            }
-//            thread.threadResume();
+            if (thread == null) {
+                 thread = new RFID("Potok dlya metok",this);
+            }
+            thread.threadResume();
 
             isButtonGreen = false;
         } else if (!isButtonGreen) {
             startButton.setText("Старт");
             startButton.getStyleClass().set(3,"btn-success");
             timeline.stop();
-//            thread.threadSuspend();
+            thread.threadSuspend();
             isButtonGreen = true;
         }
     }
+
+    private ParticipantCompetitionView buildNewEntity(Participant participant) {
+        ParticipantCompetitionView participantCompetitionView = new ParticipantCompetitionView();
+
+
+        participantCompetitionView.setName(participant.getSportsman().getName());
+        participantCompetitionView.setLastname(participant.getSportsman().getLastname());
+        participantCompetitionView.setPatronymic(participant.getSportsman().getPatronymic());
+        participantCompetitionView.setGender(participant.getSportsman().getGender());
+        participantCompetitionView.setChip(participant.getChip());
+        participantCompetitionView.setStartNumber(participant.getStartNumber());
+        participantCompetitionView.setBirthdate(participant.getSportsman().getBirthdate());
+        participantCompetitionView.setRegion(participant.getSportsman().getRegion());
+        participantCompetitionView.setGroup("нет группы у участника");
+
+        return participantCompetitionView;
+    }
+
+    private void createEntity(ParticipantCompetitionView participantCompetitionView) {
+        participantCompetitionTable.getItems().add(participantCompetitionView);
+        participantCompetitionTable.refresh();
+    }
+
+    public void addNewStroka(String tag) {
+        lastNumber.setText(tag);
+
+//        Participant participant = participantDAO.getParticipant(Long.parseLong(tag));
+        Participant participant = participantDAO.getParticipant(1);
+        ParticipantCompetitionView newPartitionCompetition = buildNewEntity(participant);
+        createEntity(newPartitionCompetition);
+    }
+
 
     public void resetTimeButton(ActionEvent actionEvent) {
         stopwatch.setText("00:00:00:00");
