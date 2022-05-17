@@ -5,6 +5,7 @@ import com.lifehouse.raceth.dao.CompetitionDayDAO;
 import com.lifehouse.raceth.dao.DistanceDAO;
 import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.StartDAO;
+import com.lifehouse.raceth.logic.MainPageController;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.model.CompetitionDay;
 import com.lifehouse.raceth.model.Distance;
@@ -66,7 +67,7 @@ public class CreateStartPopupController implements Initializable {
         competitionDayDAO = (CompetitionDayDAO) Main.appContext.getBean("competitionDayDAO");
         distance.setItems(FXCollections.observableList(new ArrayList<>(distanceDAO.getAllDistances())));
         group.setItems(FXCollections.observableList(new ArrayList<>(groupDAO.getAllGroups())));
-        competitionDay.setItems(FXCollections.observableList(new ArrayList<>(competitionDayDAO.getAllByCompetition(CompetitionPageController.currentCompetition.getId()))));
+        competitionDay.setItems(FXCollections.observableList(new ArrayList<>(competitionDayDAO.getAllByCompetition(MainPageController.currentCompetition.getId()))));
         formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
     }
 

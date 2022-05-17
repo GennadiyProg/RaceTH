@@ -5,6 +5,7 @@ import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.logic.startpage.StartPageController;
 import com.lifehouse.raceth.model.CompetitionDay;
+import com.lifehouse.raceth.model.competition.Competition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,6 +62,7 @@ public class MainPageController implements Initializable {
     @FXML
     private CompetitionPageController competitionPageController;
 
+    public static Competition currentCompetition;
     public static CompetitionDay currentCompetitionDay;
 
     public MainPageController() {
