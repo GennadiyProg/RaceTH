@@ -2,35 +2,25 @@ package com.lifehouse.raceth.logic.competitionpage.impl;
 
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.DistanceDAO;
-import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageElementService;
 import com.lifehouse.raceth.logic.competitionpage.popups.DistancePopupController;
-import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.view.DistanceView;
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class DistanceServiceImpl implements CompetitionPageElementService {
     private final DistanceDAO distanceDAO;
     private final TableView<DistanceView> distanceTable;
-    private final ChangeListener<Boolean> checkboxListener;
     private DistanceView lastEditedDistance;
 
     public DistanceServiceImpl(TableView<DistanceView> distanceTable) {
         this.distanceDAO = (DistanceDAO) Main.appContext.getBean("distanceDAO");
         this.distanceTable = distanceTable;
-        checkboxListener = ((observableList, oldStatus, newStatus) -> {
-            Competition curCompetition = CompetitionPageController.currentCompetition;
-            attachCompetition(lastEditedDistance, curCompetition, newStatus);
-        });
     }
 
     @Override
@@ -40,33 +30,9 @@ public class DistanceServiceImpl implements CompetitionPageElementService {
         controller.getNewDistance().addListener((observable, oldValue, newValue) -> {
             distanceDAO.create(newValue);
             lastEditedDistance = DistanceView.convertToView(newValue);
-            lastEditedDistance.getCheckBox().selectedProperty().addListener(checkboxListener);
             distanceTable.getItems().add(lastEditedDistance);
             distanceTable.refresh();
         });
-    }
-
-    private void attachCompetition(DistanceView distanceView, Competition competition, Boolean status) {
-        if (competition != null) {
-            if (status) {
-                List<Competition> competitionList = distanceView.getCompetitions();
-                if (!competitionList.contains(competition)) {
-                    distanceView.getCompetitions().add(competition);
-                }
-            } else {
-                distanceView.getCompetitions().remove(
-                        distanceView.getCompetitions().stream()
-                                .filter((el) -> el.getId() == competition.getId())
-                                .findFirst().orElse(null)
-                );
-                distanceDAO.update(DistanceView.convertToModel(distanceView));
-            }
-        } else {
-            distanceView.getCheckBox().selectedProperty().removeListener(checkboxListener);
-            distanceView.getCheckBox().setSelected(false);
-            distanceView.getCheckBox().selectedProperty().addListener(checkboxListener);
-            new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование").show();
-        }
     }
 
     @Override

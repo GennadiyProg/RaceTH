@@ -136,7 +136,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         initializeStartTab();
         initializeTimeline();
 
-        fillingStartList();
+        // fillingStartList(); могуть быть null'ы
 
         Tab newtab = new Tab("+");
         newtab.setOnSelectionChanged(this::createNewTab);

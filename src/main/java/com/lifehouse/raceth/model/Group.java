@@ -19,14 +19,17 @@ import java.util.List;
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id; //ID
-    private String name; // Название группы
+    private long id;
+    private String name;
     private int ageFrom;
     private int ageTo;
     @Enumerated(value = EnumType.STRING)
-    private Gender gender; // Пол
-    @ManyToMany(mappedBy = "groups")
+    private Gender gender;
+    @ManyToMany()
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "competition_group",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "competition_id"))
     private List<Competition> competitions = new ArrayList<>();
 
     public Group(String name, int ageFrom, int ageTo, Gender gender) {

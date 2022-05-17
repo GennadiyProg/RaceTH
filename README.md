@@ -15,8 +15,8 @@ Welkom to nash project RaceTH!!!
 В открывшемся меню нажмите на плюсик и в списке выберите Maven. <br>
 ![](./rdmscrs/setup_sdk7.png?raw=true) <br>
 
-В поле Command Line начните набирать javafx и из полученного списка выберите javafx:run. 
+В поле Command Line прописываем compile exec:java -f pom.xml. 
 Нажмите Apply и закройте окно. Теперь вы можете запускать проект в Intellij IDEA<br>
-![](./rdmscrs/setup_sdk8.png?raw=true) <br>
+![](./rdmscrs/setup_sdk9.png?raw=true) <br>
 
 На этом пока всё. В дальнейшем, вероятно, доработаем инструкцию.<br>
