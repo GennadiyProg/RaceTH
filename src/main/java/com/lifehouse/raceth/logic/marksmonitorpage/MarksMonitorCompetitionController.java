@@ -3,6 +3,7 @@ package com.lifehouse.raceth.logic.marksmonitorpage;
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.*;
 import com.lifehouse.raceth.logic.MainPageController;
+import com.lifehouse.raceth.model.Participant;
 import com.lifehouse.raceth.model.Start;
 import com.lifehouse.raceth.model.StartTab;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
@@ -108,6 +109,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     private CheckpointDAO checkpointDAO;
     private StartDAO startDAO;
     private StartTabDAO startTabDAO;
+    private SportsmanDAO sportsmanDAO;
 
     private Set<StartTab> openedTabs;
     private Map<Long, List<Start>> startOnTab;
@@ -127,6 +129,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         checkpointDAO = (CheckpointDAO) Main.appContext.getBean("checkpointDAO");
         startDAO = (StartDAO) Main.appContext.getBean("startDAO");
         startTabDAO = (StartTabDAO) Main.appContext.getBean("startTabDAO");
+        sportsmanDAO = (SportsmanDAO) Main.appContext.getBean("sportsmanDAO");
 
         initializeStartTable();
         initializeParticipantTable();
@@ -138,33 +141,65 @@ public class MarksMonitorCompetitionController implements Initializable {
         Tab newtab = new Tab("+");
         newtab.setOnSelectionChanged(this::createNewTab);
         tabPane.getTabs().add(newtab);
-
-        List<Start> starts = startDAO.getStartsByCompetitionDayId(MainPageController.currentCompetitionDay.getId());
-        openedTabs = new HashSet<>();
-        starts.forEach(start -> {
-            if (start.getTab() == null) {
-                // Дописать проверку на null
-            }
-            else {
-                openedTabs.add(start.getTab());
-                long id = start.getTab().getId();
-                if (startOnTab.containsKey(id)) {
-                    startOnTab.get(id).add(start);
-                } else {
-                    startOnTab.put(id, List.of(start));
-                }
+        initializeTabs();
+        participantCompetitionTable.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) {
+                participantCompetitionTable.getSelectionModel().clearSelection();
             }
         });
-        initializeTabs();
     }
 
     @FXML
-    void addingGroup(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/marksmonitor/MarksGroupPopup.fxml"));
+    void addingGroup(ActionEvent event) {
+        openPopup("/view/marksmonitor/MarksGroupPopup.fxml");
+    }
+
+    @FXML
+    public void createOrEditParticipant(ActionEvent actionEvent) {
+        FXMLLoader fxmlLoader = openPopup("/view/marksmonitor/CreateOrEditParticipantPopup.fxml");
+        if (fxmlLoader == null){
+            return;
+        }
+        CreateOrEditParticipantPopupController controller = fxmlLoader.getController();
+        boolean isSelected = !participantCompetitionTable.getSelectionModel().isEmpty();
+        if (isSelected) {
+            controller.fillFieldsFromEntity(participantCompetitionTable.getSelectionModel().getSelectedItem());
+        }
+
+        controller.getNewParticipant().addListener((observable, oldValue, newValue) -> {
+            if (isSelected){
+                Participant storedParticipant = participantDAO.getParticipant(
+                        participantCompetitionTable.getSelectionModel().getSelectedItem().getId());
+                newValue.setStart(storedParticipant.getStart());
+                newValue.getSportsman().setId(storedParticipant.getSportsman().getId());
+                newValue.setId(storedParticipant.getId());
+            }
+            sportsmanDAO.create(newValue.getSportsman());
+            ParticipantCompetitionView newParticipant = ParticipantCompetitionView.convertToView(participantDAO.update(newValue));
+            if(!isSelected){
+                participantCompetitionTable.getItems().add(newParticipant);
+                participantCompetitionTable.refresh();
+            } else {
+                participantCompetitionTable.getItems().stream()
+                        .filter(part -> part.getId() == newParticipant.getId())
+                        .forEach(part -> part.setFields(newParticipant));
+                participantCompetitionTable.refresh();
+            }
+        });
+    }
+
+    private FXMLLoader openPopup(String source) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(source));
         Stage stage = new Stage();
-        stage.setScene(new Scene(fxmlLoader.load()));
+        try {
+            stage.setScene(new Scene(fxmlLoader.load()));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
+        return fxmlLoader;
     }
 
     public void initializeTimeline(){
@@ -195,7 +230,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         pcPatronymicColumn.setCellValueFactory(new PropertyValueFactory<>("patronymic"));
         pcGenderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
         pcChipColumn.setCellValueFactory(new PropertyValueFactory<>("chip"));
-        pcStartNumberColumn.setCellValueFactory(new PropertyValueFactory<>("tag"));
+        pcStartNumberColumn.setCellValueFactory(new PropertyValueFactory<>("startNumber"));
         pcBirthdateColumn.setCellValueFactory(new PropertyValueFactory<>("birthdate"));
         pcCityColumn.setCellValueFactory(new PropertyValueFactory<>("region"));
         pcGroupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
@@ -292,12 +327,12 @@ public class MarksMonitorCompetitionController implements Initializable {
         }
     }
 
-    public void resetTimeButton(javafx.event.ActionEvent actionEvent) {
+    public void resetTimeButton(ActionEvent actionEvent) {
         stopwatch.setText("00:00:00:00");
         timing = 0;
         localTime = LocalTime.of(0, 0, 0, 0);
     };
-    public void timeStartButton(javafx.event.ActionEvent actionEvent) {
+    public void timeStartButton(ActionEvent actionEvent) {
         timeStarted.setText("В разработке");
         System.out.println(LocalTime.now());
     };

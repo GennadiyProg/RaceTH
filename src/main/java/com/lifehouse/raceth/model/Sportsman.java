@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Data
@@ -23,11 +24,19 @@ public class Sportsman {
     @NotNull
     private String patronymic;
     @NotNull
-    private Date birthdate;
+    private LocalDate birthdate;
     @NotNull
     @Enumerated (value = EnumType.STRING)
     private Gender gender;
     @NotNull
     private String region;
-    // МБ разряд
+
+    public Sportsman(String name, String lastname, String patronymic, LocalDate birthdate, Gender gender, String region) {
+        this.name = name;
+        this.lastname = lastname;
+        this.patronymic = patronymic;
+        this.birthdate = birthdate;
+        this.gender = gender;
+        this.region = region;
+    }
 }

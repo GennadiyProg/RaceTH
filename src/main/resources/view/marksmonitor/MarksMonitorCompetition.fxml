@@ -138,7 +138,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Добавить участника" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                  <Button mnemonicParsing="false" onAction="#createOrEditParticipant" stylesheets="@../../assets/css/Buttons.css" text="Добавить участника" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>

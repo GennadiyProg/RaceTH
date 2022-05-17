@@ -17,8 +17,8 @@ public class ParticipantDAO {
         this.participantRepository = (ParticipantRepository) Main.appContext.getBean("participantRepository");
     }
 
-    public void create(Participant participant) {
-        participantRepository.save(participant);
+    public Participant update(Participant participant) {
+        return participantRepository.save(participant);
     }
 
     public Participant getParticipant(long id) {
