@@ -8,6 +8,7 @@ import com.lifehouse.raceth.model.Start;
 import com.lifehouse.raceth.model.StartTab;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
+import com.lifehouse.raceth.model.dto.TabDto;
 import com.lifehouse.raceth.rfid.RFID;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -40,7 +41,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     private Button addGroup;
     @FXML
-    private  TabPane tabPane;
+    private TabPane tabPane;
     @FXML
     private Tab participantTab;
     @FXML
@@ -108,8 +109,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     private StartTabDAO startTabDAO;
     private SportsmanDAO sportsmanDAO;
 
-    private Set<StartTab> openedTabs;
-    private Map<Long, List<Start>> startOnTab;
+    private List<TabDto> openedTabs;
 
     private Boolean isButtonGreen = true;
     private RFID thread;
@@ -119,7 +119,6 @@ public class MarksMonitorCompetitionController implements Initializable {
     private String hours, minutes, seconds, milliseconds;
     private Timeline timeline;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         participantDAO = (ParticipantDAO) Main.appContext.getBean("participantDAO");
@@ -127,36 +126,42 @@ public class MarksMonitorCompetitionController implements Initializable {
         startDAO = (StartDAO) Main.appContext.getBean("startDAO");
         startTabDAO = (StartTabDAO) Main.appContext.getBean("startTabDAO");
         sportsmanDAO = (SportsmanDAO) Main.appContext.getBean("sportsmanDAO");
+        openedTabs = new ArrayList<>();
 
-        initializeStartTable();
-        initializeParticipantTable();
-        initializeStartTab();
-        initializeTimeline();
-
-         fillingStartList();
-
-        Tab newtab = new Tab("+");
-        newtab.setOnSelectionChanged(this::createNewTab);
-        tabPane.getTabs().add(newtab);
-        initializeTabs();
-        participantCompetitionTable.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal) {
-                participantCompetitionTable.getSelectionModel().clearSelection();
-            }
-        });
+        initStartTable();
+        initParticipantTable();
+        initStartTab();
+        initTimeline();
+        initTabs();
+        initTabAddButton();
     }
 
     @FXML
-    void addingGroup(ActionEvent event) {
-        openPopup("/view/marksmonitor/MarksGroupPopup.fxml");
+    private void attachStart(ActionEvent event) {
+        var currentTab = tabPane.getSelectionModel().getSelectedItem();
+        if (currentTab.equals(participantTab)) {
+            alertWrongTab();
+            return;
+        }
+
+        var popup = openPopup("/view/marksmonitor/MarksGroupPopup.fxml");
+        MarksGroupPopupController popupController = popup.getController();
+        popupController.setCurrentTab(currentTab);
+    }
+
+    private void alertWrongTab() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Невозможно привязать старты, так как выбрана таблица \"Участники\"");
+        alert.show();
     }
 
     @FXML
     public void createOrEditParticipant(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = openPopup("/view/marksmonitor/CreateOrEditParticipantPopup.fxml");
-        if (fxmlLoader == null){
+        if (fxmlLoader == null) {
             return;
         }
+
         CreateOrEditParticipantPopupController controller = fxmlLoader.getController();
         boolean isSelected = !participantCompetitionTable.getSelectionModel().isEmpty();
         if (isSelected) {
@@ -164,7 +169,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         }
 
         controller.getNewParticipant().addListener((observable, oldValue, newValue) -> {
-            if (isSelected){
+            if (isSelected) {
                 Participant storedParticipant = participantDAO.getParticipant(
                         participantCompetitionTable.getSelectionModel().getSelectedItem().getId());
                 newValue.setStart(storedParticipant.getStart());
@@ -173,7 +178,7 @@ public class MarksMonitorCompetitionController implements Initializable {
             }
             sportsmanDAO.create(newValue.getSportsman());
             ParticipantCompetitionView newParticipant = ParticipantCompetitionView.convertToView(participantDAO.update(newValue));
-            if(!isSelected){
+            if (!isSelected) {
                 participantCompetitionTable.getItems().add(newParticipant);
                 participantCompetitionTable.refresh();
             } else {
@@ -199,7 +204,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         return fxmlLoader;
     }
 
-    public void initializeTimeline(){
+    public void initTimeline() {
         DateTimeFormatter formatForDateNow = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
         localTime = LocalTime.of(0, 0, 0, 0);
         timeline = new Timeline(
@@ -214,13 +219,13 @@ public class MarksMonitorCompetitionController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
     }
 
-    public void initializeStartTable(){
+    public void initStartTable() {
         groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
         lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
     }
 
-    public void initializeParticipantTable(){
+    public void initParticipantTable() {
         pcNumberColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         pcNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         pcLastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
@@ -233,10 +238,11 @@ public class MarksMonitorCompetitionController implements Initializable {
         pcGroupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
 
         ObservableList<ParticipantCompetitionView> participantViews = participantCompetitionTable.getItems();
+        //TODO: Добавить метод для получения участников текущего соревнования
         participantViews.addAll(participantDAO.getAllParticipantViews());
     }
 
-    public void initializeStartTab(){
+    public void initStartTab() {
         psNumberColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         psCurrentTimeColumn.setCellValueFactory(new PropertyValueFactory<>("currentTime"));
         psTimeOnDistanceColumn.setCellValueFactory(new PropertyValueFactory<>("timeOnDistance"));
@@ -247,67 +253,79 @@ public class MarksMonitorCompetitionController implements Initializable {
         psGroupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
     }
 
-    private void fillingStartList(){
+    private void initTabs() {
         List<Start> starts = startDAO.getStartsByCompetitionDayId(MainPageController.currentCompetitionDay.getId());
-        openedTabs = new HashSet<>();
-        startOnTab = new HashMap<>();
         starts.forEach(start -> {
-            openedTabs.add(start.getTab());
-            long id = start.getTab().getId();
-            if (startOnTab.containsKey(id)) {
-                startOnTab.get(id).add(start);
-            } else {
-                startOnTab.put(id, List.of(start));
+            if (start.getTab() == null) return;
+
+            // Проверяем существует ли вкладка с данным ID
+            TabDto tab = findTab(start.getTab());
+            if (tab == null) {
+                tab = new TabDto(start.getTab());
+                openedTabs.add(tab);
+                tab.getReferenceTab().setText(start.getName());
+                createTableOnTab(tab.getReferenceTab());
+                tabPane.getTabs().add(tab.getReferenceTab());
+            }
+            tab.getStarts().add(start);
+        });
+    }
+
+    private void initTabAddButton() {
+        Tab newTab = new Tab("+");
+        newTab.setOnSelectionChanged(this::createNewTab);
+        tabPane.getTabs().add(newTab);
+        participantCompetitionTable.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) {
+                participantCompetitionTable.getSelectionModel().clearSelection();
             }
         });
     }
 
-    public void initializeTabs(){
-        for(StartTab startTab : openedTabs){
-            Tab tab = new Tab(startTab.getName());
-            createTableOnTab(tab, startTab.getId());
-            tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab);
-        }
+    private TabDto findTab(StartTab tab) {
+        return openedTabs.stream().filter(el -> el.getTabInfo().getId() == tab.getId()).findFirst().orElse(null);
     }
 
-    private void createNewTab(Event event){
-        StartTab startTab = new StartTab();
-        openedTabs.add(startTabDAO.create(startTab));
-        startOnTab.put(startTab.getId(), List.of());
+    private void createNewTab(Event event) {
+        StartTab startTab = startTabDAO.create(new StartTab());
+        TabDto tab = new TabDto(startTab);
+        tab.getReferenceTab().setText(startTab.getName());
+        openedTabs.add(tab);
 
-        Tab tab = new Tab(startTab.getName());
-        createTableOnTab(tab, startTab.getId());
+        createTableOnTab(tab.getReferenceTab());
 
-        tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab);
+        tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab.getReferenceTab());
         tabPane.getSelectionModel().select(tabPane.getTabs().size() - 2);
     }
 
-    private void switchingTab(Event event){
+    private void updateStartsTable(Event event) {
         Tab tab = (Tab) event.getSource();
-        if (tab.isSelected()){
-            String nameTab = tab.getText();
-            long id = openedTabs.stream().filter(startTab -> startTab.getName().equals(nameTab)).findFirst().orElse(null).getId();
+        if (tab.isSelected()) {
+            TabDto tabDto = openedTabs.stream().filter(el -> el.getReferenceTab().equals(tab)).findFirst().orElse(null);
+            if (tabDto == null) return;
             startTable.getItems().clear();
-            startTable.getItems().addAll(startOnTab.get(id));
+            startTable.getItems().addAll(tabDto.getStarts());
         }
     }
 
-    private void createTableOnTab(Tab tab, long id){
+    private void createTableOnTab(Tab tab) {
         TableView<ParticipantStartView> table = new TableView<>();
         table.getColumns().setAll(participantStartTable.getColumns());
-        List<Long> startsIdOnTab = new ArrayList<>();
-        startOnTab.get(id).forEach(start -> startsIdOnTab.add(start.getId()));
-        table.getItems().addAll(participantDAO.getAllParticipantViewsByStarts(startsIdOnTab));
         tab.setContent(table);
-        tab.setOnSelectionChanged(this::switchingTab);
+//        tab.setOnSelectionChanged(this::switchingTab);
+
+        List<Long> startsIdOnTab = new ArrayList<>();
+        table.getItems().addAll(participantDAO.getAllParticipantViewsByStarts(startsIdOnTab));
+
+        tab.setOnSelectionChanged(this::updateStartsTable);
     }
 
     public void startButtonClick() {
         //Изменение цвета и текста кнопки при нажатии
-        if(isButtonGreen) {
+        if (isButtonGreen) {
             startButton.setText("Стоп");
             timeline.play();
-            startButton.getStyleClass().set(3,"btn-danger");
+            startButton.getStyleClass().set(3, "btn-danger");
             // Для будущего использования потоков
 //            if (thread == null) {
 //                 thread = new RFID("Potok dlya metok",this);
@@ -317,7 +335,7 @@ public class MarksMonitorCompetitionController implements Initializable {
             isButtonGreen = false;
         } else if (!isButtonGreen) {
             startButton.setText("Старт");
-            startButton.getStyleClass().set(3,"btn-success");
+            startButton.getStyleClass().set(3, "btn-success");
             timeline.stop();
 //            thread.threadSuspend();
             isButtonGreen = true;
@@ -328,9 +346,10 @@ public class MarksMonitorCompetitionController implements Initializable {
         stopwatch.setText("00:00:00:00");
         timing = 0;
         localTime = LocalTime.of(0, 0, 0, 0);
-    };
+    }
+
     public void timeStartButton(ActionEvent actionEvent) {
         timeStarted.setText("В разработке");
         System.out.println(LocalTime.now());
-    };
+    }
 }
