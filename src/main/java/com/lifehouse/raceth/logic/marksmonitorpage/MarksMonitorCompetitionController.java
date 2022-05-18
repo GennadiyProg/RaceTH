@@ -221,7 +221,7 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     public void initStartTable() {
         groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
-        startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+        startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
     }
 
@@ -263,7 +263,7 @@ public class MarksMonitorCompetitionController implements Initializable {
             if (tab == null) {
                 tab = new TabDto(start.getTab());
                 openedTabs.add(tab);
-                tab.getReferenceTab().setText(start.getName());
+                tab.getReferenceTab().setText(tab.getTabInfo().getName());
                 createTableOnTab(tab.getReferenceTab());
                 tabPane.getTabs().add(tab.getReferenceTab());
             }
