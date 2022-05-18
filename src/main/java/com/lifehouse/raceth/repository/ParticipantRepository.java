@@ -15,4 +15,6 @@ import java.util.List;
 public interface ParticipantRepository extends JpaRepository<Participant, Long> {
     @Query(value = "SELECT p FROM Participant p WHERE p.start.id IN :id")
     List<Participant> findAllByStartsId(@Param("id") List<Long> id);
+
+    Participant findByChip(String chip);
 }

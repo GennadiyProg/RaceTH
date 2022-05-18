@@ -38,6 +38,10 @@ public class ParticipantDAO {
                 .map(ParticipantStartView::convertToView).toList();
     }
 
+    public Participant getParticipiantByChip(String chip) {
+        return participantRepository.findByChip(chip);
+    }
+
     public void delete(Participant participant) {
         participantRepository.delete(participant);
     }

@@ -21,11 +21,12 @@ public class Participant {
     @ManyToOne
     private Start start;
     @ManyToOne
-    @NotNull
     private RelayTeam relayTeam;
     private int relayStage;
-    @NotNull
     private int startNumber;
+
+    @ManyToOne
+    private Group group;
 
     public Participant(String chip, Sportsman sportsman, int startNumber) {
         this.chip = chip;
