@@ -3,6 +3,7 @@ package com.lifehouse.raceth.logic.marksmonitorpage;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
+import java.lang.*;
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.*;
 import com.lifehouse.raceth.logic.MainPageController;
@@ -11,6 +12,7 @@ import com.lifehouse.raceth.model.StartTab;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.rfid.RFID;
+import com.sun.xml.bind.DatatypeConverterImpl;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
@@ -119,6 +121,8 @@ public class MarksMonitorCompetitionController implements Initializable {
     private int timing = 0;
     private String hours, minutes, seconds, milliseconds;
     private Timeline timeline;
+    private DatatypeConverterImpl DateUtils;
+    Timer timer = new Timer();
 
 
     @Override
@@ -183,45 +187,34 @@ public class MarksMonitorCompetitionController implements Initializable {
         public void run()
         {
             System.out.println("12345!");
+            timer.cancel();
             startButtonClick();
+            System.out.println("54321!");
         }
     }
 
     public void timeStartButton(javafx.event.ActionEvent actionEvent) throws ParseException {
-        stopwatch.setText(timeStarted.getText());
-        timeStarted.setText("В разработке");
+        stopwatch.setText(timeStarted.getText());//Показ на табло заданного времени
         System.out.println(LocalTime.now());
         DateTimeFormatter formatForDateNow1 = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss:SS");
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss:SS");
+        SimpleDateFormat days2 = new SimpleDateFormat("yyyy-MM-dd");
         System.out.println("--1--");
-        Date date1 = new Date();
-       //formatForDateNow1.format(date1);
-        System.out.println("--1.5--" + formatForDateNow.format(date1));
-
+        Date date2 = new Date();
         String vvod = timeStarted.getText();
-        //LocalTime and LocalData - не то
-        System.out.println("--11--");
-        LocalDate datePart = LocalDate.parse("2013-01-02");
-        System.out.println("--12--");
-        LocalTime timePart = LocalTime.parse("04:05:06");
-        System.out.println("--13--");
-        LocalDateTime dt = LocalDateTime.of(datePart, timePart);
-        System.out.println("---14-");
-        System.out.println(dt);
-        System.out.println("--15--");
-        // Попытка скрепить дату и время воедино
-        /*String date2 = formatForDateNow.format(dt);
-        date1 = formatForDateNow.parse(date2);
-        System.out.println(date1);*/
-// Эксперименты с string-data
-        //Date date = formatForDateNow.parse(vvod);
-       // date = formatForDateNow.format(vvod);// !!!
+        System.out.println("--2--" + vvod);
+        System.out.println("--2/2--" + date2);
+        System.out.println("--3/2--" + days2.format(date2));
+        Date date4 = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").parse(days2.format(date2) + "-" + vvod);
+        System.out.println("--3--");
+        System.out.println(date4);
+        timer.schedule(new MyTimeTask(), date4);
+        //String date3 = formatForDateNow.format(vvod);// !!!
 //        LocalTime time = LocalTime.of(8,43,00,00);
-//        Date date = (Date) formatForDateNow1.parse(" 08:29:00:00");
-        System.out.println("--2--");
-        Timer timer = new Timer();
-        timer.schedule(new MyTimeTask(), date1);
-        System.out.println(date1);
+        //Date date3 = (Date) formatForDateNow.parse(" 10:19:00:00");
+     //vvv   Date date3 = DateUtils.parseDate("18-May-2022", String[] {"dd-MM-yyyy HH:mm:ss", "dd-MM-yyyy"});
+        // Рабочий на всякий:Date date4 = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").parse("2022-05-18-23:48:20");
+
     };
 
     public void startButtonClick() {
@@ -235,7 +228,6 @@ public class MarksMonitorCompetitionController implements Initializable {
 //                 thread = new RFID("Potok dlya metok",this);
 //            }
 //            thread.threadResume();
-
             isButtonGreen = false;
         } else if (!isButtonGreen) {
             startButton.setText("Старт");
