@@ -3,10 +3,7 @@ package com.lifehouse.raceth.logic.marksmonitorpage;
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.*;
 import com.lifehouse.raceth.logic.MainPageController;
-import com.lifehouse.raceth.model.Gender;
-import com.lifehouse.raceth.model.Participant;
-import com.lifehouse.raceth.model.Start;
-import com.lifehouse.raceth.model.StartTab;
+import com.lifehouse.raceth.model.*;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.rfid.RFID;
@@ -28,6 +25,7 @@ import javafx.util.Duration;
 import lombok.Data;
 import javafx.scene.control.*;
 import javafx.event.Event;
+import net.bytebuddy.asm.Advice;
 
 import java.io.IOException;
 import java.net.URL;
@@ -327,7 +325,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         }
     }
 
-    private ParticipantCompetitionView buildNewEntity(Participant participant) {
+    private ParticipantCompetitionView buildNewEntityPC(Participant participant) {
         ParticipantCompetitionView participantCompetitionView = new ParticipantCompetitionView();
 
 
@@ -344,19 +342,53 @@ public class MarksMonitorCompetitionController implements Initializable {
         return participantCompetitionView;
     }
 
-    private void createEntity(ParticipantCompetitionView participantCompetitionView) {
+    private void createEntityPC(ParticipantCompetitionView participantCompetitionView) {
         participantCompetitionTable.getItems().add(participantCompetitionView);
         participantCompetitionTable.refresh();
     }
 
-    public void addNewStroka(String tag) {
+    private LocalTime calculateTimeOnDistance(LocalTime startTime) {
+        LocalTime now = LocalTime.now();
+        now = now.minusHours(startTime.getHour());
+        now = now.minusMinutes(startTime.getMinute());
+        now = now.minusSeconds(startTime.getSecond());
+        return now;
+    }
+
+    private ParticipantStartView buildNewEntityPS(Participant participant,int lap) {
+        ParticipantStartView participantStartView = new ParticipantStartView();
+
+        participantStartView.setId(participant.getId());
+        participantStartView.setCurrentTime(LocalTime.now());
+        participantStartView.setTimeOnDistance(calculateTimeOnDistance(participant.getStart().getStartTime()));
+        participantStartView.setChip(participant.getChip());
+        participantStartView.setStartNumber(participant.getStartNumber());
+        participantStartView.setLastname(participant.getSportsman().getLastname());
+        participantStartView.setName(participant.getSportsman().getName());
+        participantStartView.setGroup(participant.getGroup().getName());
+        participantStartView.setLap(lap);
+        participantStartView.setPlace(checkpointDAO.getParticipiantPlace(participant,lap));
+//        participantStartView.setBehindTheLeader();
+//        participantStartView.setLapTime();
+
+        return participantStartView;
+    }
 
 
-//        Participant participant = participantDAO.getParticipant(Long.parseLong(tag));
-        Participant participant = participantDAO.getParticipiantByChip(tag);
+
+    public void addNewCheakpoint(String chip) {
+
+        Participant participant = participantDAO.getParticipiantByChip(chip);
         lastNumber.setText(Integer.toString(participant.getStartNumber()));
-        ParticipantCompetitionView newPartitionCompetition = buildNewEntity(participant);
-        createEntity(newPartitionCompetition);
+        int lap = checkpointDAO.getCountCheakpointByParticipiant(participant)+1;
+        checkpointDAO.create(new Checkpoint(participant,LocalTime.now(),lap));
+
+//        ParticipantStartView newParticipiantStart = buildNewEntityPS(participant);
+
+
+        //Создает новую запись в табе "Участники"
+//        ParticipantCompetitionView newPartitionCompetition = buildNewEntityPC(participant);
+//        createEntityPC(newPartitionCompetition);
     }
 
 

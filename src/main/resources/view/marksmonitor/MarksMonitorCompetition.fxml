@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController">
+<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController">
    <children>
       <GridPane alignment="TOP_CENTER" layoutX="13.0" layoutY="2.0" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="2.0">
         <columnConstraints>
@@ -185,10 +185,10 @@
                                     <TableColumn fx:id="psLastnameColumn" prefWidth="33.5999755859375" resizable="false" text="Фамилия" />
                                     <TableColumn fx:id="psNameColumn" prefWidth="116.79995727539062" resizable="false" text="Имя" />
                                     <TableColumn fx:id="psGroupColumn" prefWidth="95.199951171875" resizable="false" text="Группа" />
-                                    <TableColumn prefWidth="101.5999755859375" resizable="false" text="Круг" />
-                                    <TableColumn prefWidth="100.800048828125" resizable="false" text="Место" />
-                                    <TableColumn prefWidth="103.2000732421875" resizable="false" text="Отставание от лидера" />
-                                    <TableColumn prefWidth="92.800048828125" resizable="false" text="Время круга" />
+                                    <TableColumn fx:id="psLapColumn" prefWidth="101.5999755859375" resizable="false" text="Круг" />
+                                    <TableColumn fx:id="psPlaceColumn" prefWidth="100.800048828125" resizable="false" text="Место" />
+                                    <TableColumn fx:id="psBehindTheLeaderColumn" prefWidth="103.2000732421875" resizable="false" text="Отставание от лидера" />
+                                    <TableColumn fx:id="psLapTimeColumn" prefWidth="92.800048828125" resizable="false" text="Время круга" />
                                  </columns>
                               </TableView>
                               <TableView fx:id="participantCompetitionTable" prefHeight="318.0" prefWidth="1064.0" stylesheets="@../../assets/css/table.css">
