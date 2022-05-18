@@ -339,7 +339,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         participantCompetitionView.setStartNumber(participant.getStartNumber());
         participantCompetitionView.setBirthdate(participant.getSportsman().getBirthdate());
         participantCompetitionView.setRegion(participant.getSportsman().getRegion());
-        participantCompetitionView.setGroup("нет группы у участника");
+        participantCompetitionView.setGroup(participant.getGroup().getName());
 
         return participantCompetitionView;
     }
@@ -350,10 +350,11 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
     public void addNewStroka(String tag) {
-        lastNumber.setText(tag);
+
 
 //        Participant participant = participantDAO.getParticipant(Long.parseLong(tag));
-        Participant participant = participantDAO.getParticipant(1);
+        Participant participant = participantDAO.getParticipiantByChip(tag);
+        lastNumber.setText(Integer.toString(participant.getStartNumber()));
         ParticipantCompetitionView newPartitionCompetition = buildNewEntity(participant);
         createEntity(newPartitionCompetition);
     }

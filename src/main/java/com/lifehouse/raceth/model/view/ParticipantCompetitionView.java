@@ -36,7 +36,7 @@ public class ParticipantCompetitionView {
                 participant.getSportsman().getBirthdate(),
                 participant.getSportsman().getRegion(),
 //                participant.getStart().getGroup().getName()
-                "hello"
+                participant.getGroup().getName()
         );
     }
 

@@ -1,6 +1,7 @@
 package com.lifehouse.raceth.model;
 
 import com.sun.istack.NotNull;
+import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Participant {
     @ManyToOne
     private Start start;
     @ManyToOne
+    @Nullable
     private RelayTeam relayTeam;
     private int relayStage;
     private int startNumber;
