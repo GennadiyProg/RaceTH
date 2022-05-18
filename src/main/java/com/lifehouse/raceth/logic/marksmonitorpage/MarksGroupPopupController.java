@@ -35,36 +35,32 @@ public class MarksGroupPopupController implements Initializable {
 
     @FXML
     private Button addInTable;
-
     @FXML
     private TextField lapTextField;
-
     @FXML
     private TextField timeTextField;
-
     @FXML
     private TableView<StartView> runTable;
-
     private ObservableList<StartView> tableList;
 
     @FXML
     private TableColumn<StartView, Boolean> selectionCheckboxColumn;
-
     @FXML
     private TableColumn<StartView, String> numberColumn;
-
     @FXML
     private TableColumn<StartView, String> groupColumn;
-
     @FXML
     private TableColumn<StartView, String> startTimeColumn;
-
     @FXML
     private TableColumn<StartView, String> lapColumn;
 
+    private Tab currentTab;
     private StartDAO startDAO;
-
     private long chosenId;
+
+    public void setCurrentTab(Tab tab) {
+        this.currentTab = tab;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

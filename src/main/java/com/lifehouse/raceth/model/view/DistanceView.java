@@ -72,7 +72,7 @@ public class DistanceView {
         checkBox.selectedProperty().removeListener(checkboxListener);
         checkBox.setSelected(false);
         checkBox.selectedProperty().addListener(checkboxListener);
-        new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование").show();
+        new Alert(Alert.AlertType.ERROR, "Не указано текущее соревнование").show();
     }
 
     public static DistanceView convertToView(Distance distance) {

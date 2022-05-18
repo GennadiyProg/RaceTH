@@ -215,7 +215,7 @@
             </TabPane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.valignment="TOP">
                <children>
-                  <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" layoutX="435.0" layoutY="4.0" mnemonicParsing="false" onAction="#addingGroup" stylesheets="@../../assets/css/Buttons.css" text="Редактировать группы" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS">
+                  <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" layoutX="435.0" layoutY="4.0" mnemonicParsing="false" onAction="#attachStart" stylesheets="@../../assets/css/Buttons.css" text="Редактировать старты" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS">
                      <font>
                         <Font size="14.0" />
                      </font>
