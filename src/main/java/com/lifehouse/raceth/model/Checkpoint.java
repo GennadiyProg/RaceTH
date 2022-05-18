@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalTime;
 
 @Entity
@@ -20,7 +19,8 @@ public class Checkpoint {
     private Participant participant; //Участник по ID
     private LocalTime crossingTime;
     private int lap;
-    public Checkpoint(Participant participant,LocalTime crossingTime,int lap) {
+
+    public Checkpoint(Participant participant, LocalTime crossingTime, int lap) {
         this.participant = participant;
         this.crossingTime = crossingTime;
         this.lap = lap;

@@ -26,11 +26,9 @@ import javafx.util.Duration;
 import lombok.Data;
 import javafx.scene.control.*;
 import javafx.event.Event;
-import net.bytebuddy.asm.Advice;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -134,6 +132,8 @@ public class MarksMonitorCompetitionController implements Initializable {
         initTimeline();
         initTabs();
         initTabAddButton();
+
+        addNewCheakpoint("qwertyuiops");
     }
 
     @FXML
@@ -325,11 +325,11 @@ public class MarksMonitorCompetitionController implements Initializable {
         if (isButtonGreen) {
             startButton.setText("Стоп");
             timeline.play();
-            startButton.getStyleClass().set(3,"btn-danger");
+            startButton.getStyleClass().set(3, "btn-danger");
 
             // Для будущего использования потоков
             if (thread == null) {
-                 thread = new RFID("Potok dlya metok",this);
+                thread = new RFID("Potok dlya metok", this);
             }
             thread.threadResume();
 
@@ -345,7 +345,6 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     private ParticipantCompetitionView buildNewEntityPC(Participant participant) {
         ParticipantCompetitionView participantCompetitionView = new ParticipantCompetitionView();
-
 
         participantCompetitionView.setName(participant.getSportsman().getName());
         participantCompetitionView.setLastname(participant.getSportsman().getLastname());
@@ -373,7 +372,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         return now;
     }
 
-    private ParticipantStartView buildNewEntityPS(Participant participant,int lap) {
+    private ParticipantStartView buildNewEntityPS(Participant participant, int lap) {
         ParticipantStartView participantStartView = new ParticipantStartView();
 
         participantStartView.setId(participant.getId());
@@ -385,7 +384,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         participantStartView.setName(participant.getSportsman().getName());
         participantStartView.setGroup(participant.getGroup().getName());
         participantStartView.setLap(lap);
-        participantStartView.setPlace(checkpointDAO.getParticipiantPlace(participant,lap));
+        participantStartView.setPlace(checkpointDAO.getParticipiantPlace(participant, lap));
 //        participantStartView.setBehindTheLeader();
 //        participantStartView.setLapTime();
 
@@ -393,13 +392,22 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
 
-
     public void addNewCheakpoint(String chip) {
 
-        Participant participant = participantDAO.getParticipiantByChip(chip);
-        lastNumber.setText(Integer.toString(participant.getStartNumber()));
-        int lap = checkpointDAO.getCountCheakpointByParticipiant(participant)+1;
-        checkpointDAO.create(new Checkpoint(participant,LocalTime.now(),lap));
+        Participant participant = participantDAO.getParticipantByChip(chip);
+
+        //Поиск искомой вкладки
+        for (TabDto tab : openedTabs) {
+            if (tab.getStarts().stream().anyMatch(start -> start.getId() == participant.getStart().getId())) {
+                //Получение ссылки на таблицу внутри вкладки
+                var table = (TableView) tab.getReferenceTab().getContent();
+                break;
+            }
+        }
+
+//        lastNumber.setText(Integer.toString(participant.getStartNumber()));
+//        int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
+//        checkpointDAO.create(new Checkpoint(participant, LocalTime.now(), lap));
 
 //        ParticipantStartView newParticipiantStart = buildNewEntityPS(participant);
 

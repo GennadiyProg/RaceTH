@@ -38,7 +38,7 @@ public class ParticipantDAO {
                 .map(ParticipantStartView::convertToView).toList();
     }
 
-    public Participant getParticipiantByChip(String chip) {
+    public Participant getParticipantByChip(String chip) {
         return participantRepository.findByChip(chip);
     }
 
