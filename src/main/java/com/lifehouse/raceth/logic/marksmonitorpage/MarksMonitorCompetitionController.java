@@ -3,9 +3,7 @@ package com.lifehouse.raceth.logic.marksmonitorpage;
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.*;
 import com.lifehouse.raceth.logic.MainPageController;
-import com.lifehouse.raceth.model.Participant;
-import com.lifehouse.raceth.model.Start;
-import com.lifehouse.raceth.model.StartTab;
+import com.lifehouse.raceth.model.*;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.model.dto.TabDto;
@@ -91,6 +89,14 @@ public class MarksMonitorCompetitionController implements Initializable {
     private TableColumn<ParticipantStartView, String> psNameColumn;
     @FXML
     private TableColumn<ParticipantStartView, String> psGroupColumn;
+    @FXML
+    private TableColumn<ParticipantStartView, Integer> psLapColumn;
+    @FXML
+    private TableColumn<ParticipantStartView, Integer> psPlaceColumn;
+    @FXML
+    private TableColumn<ParticipantStartView, LocalTime> psBehindTheLeaderColumn;
+    @FXML
+    private TableColumn<ParticipantStartView, LocalTime> psLapTimeColumn;
 
     @FXML
     private TableView<Start> startTable;
@@ -259,9 +265,13 @@ public class MarksMonitorCompetitionController implements Initializable {
         psTimeOnDistanceColumn.setCellValueFactory(new PropertyValueFactory<>("timeOnDistance"));
         psChipColumn.setCellValueFactory(new PropertyValueFactory<>("chip"));
         psStartNumberColumn.setCellValueFactory(new PropertyValueFactory<>("startNumber"));
-        psLastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        psLastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         psNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         psGroupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
+        psLapColumn.setCellValueFactory(new PropertyValueFactory<>("lap"));
+        psPlaceColumn.setCellValueFactory(new PropertyValueFactory<>("place"));
+        psBehindTheLeaderColumn.setCellValueFactory(new PropertyValueFactory<>("behindTheLeader"));
+        psLapTimeColumn.setCellValueFactory(new PropertyValueFactory<>("lapTime"));
     }
 
     private void initTabs() {
@@ -345,21 +355,112 @@ public class MarksMonitorCompetitionController implements Initializable {
             startButton.setText("Стоп");
             timeline.play();
             startButton.getStyleClass().set(3, "btn-danger");
+
             // Для будущего использования потоков
-//            if (thread == null) {
-//                 thread = new RFID("Potok dlya metok",this);
-//            }
-//            thread.threadResume();
+            if (thread == null) {
+                thread = new RFID("Potok dlya metok", this);
+            }
+            thread.threadResume();
 
             isButtonGreen = false;
         } else if (!isButtonGreen) {
             startButton.setText("Старт");
             startButton.getStyleClass().set(3, "btn-success");
             timeline.stop();
-//            thread.threadSuspend();
+            thread.threadSuspend();
             isButtonGreen = true;
         }
     }
+
+    private void buildNewEntityPC(Participant participant) {
+        ParticipantCompetitionView participantCompetitionView = new ParticipantCompetitionView();
+
+        participantCompetitionView.setName(participant.getSportsman().getName());
+        participantCompetitionView.setLastname(participant.getSportsman().getLastname());
+        participantCompetitionView.setPatronymic(participant.getSportsman().getPatronymic());
+        participantCompetitionView.setGender(participant.getSportsman().getGender());
+        participantCompetitionView.setChip(participant.getChip());
+        participantCompetitionView.setStartNumber(participant.getStartNumber());
+        participantCompetitionView.setBirthdate(participant.getSportsman().getBirthdate());
+        participantCompetitionView.setRegion(participant.getSportsman().getRegion());
+        participantCompetitionView.setGroup(participant.getGroup().getName());
+
+        participantCompetitionTable.getItems().add(participantCompetitionView);
+        participantCompetitionTable.refresh();
+
+    }
+
+    private void createEntityPC(ParticipantCompetitionView participantCompetitionView) {
+
+    }
+
+    private LocalTime calculateTimeOnDistance(LocalTime startTime) {
+        LocalTime now = LocalTime.now();
+        now = now.minusHours(startTime.getHour());
+        now = now.minusMinutes(startTime.getMinute());
+        now = now.minusSeconds(startTime.getSecond());
+        return now;
+    }
+
+    private void buildNewEntityPS(Participant participant, int lap,TableView tab) {
+        ParticipantStartView participantStartView = new ParticipantStartView(
+                participant.getId(),
+                LocalTime.now(),
+                calculateTimeOnDistance(participant.getStart().getStartTime()),
+                participant.getChip(),
+                participant.getStartNumber(),
+                participant.getSportsman().getLastname(),
+                participant.getSportsman().getName(),
+                participant.getGroup().getName(),
+                lap,
+                checkpointDAO.getParticipiantPlace(participant, lap)
+        );
+
+
+
+//        participantStartView.setId(participant.getId());
+//        participantStartView.setCurrentTime(LocalTime.now());
+//        participantStartView.setTimeOnDistance(calculateTimeOnDistance(participant.getStart().getStartTime()));
+//        participantStartView.setChip(participant.getChip());
+//        participantStartView.setStartNumber(participant.getStartNumber());
+//        participantStartView.setLastname(participant.getSportsman().getLastname());
+//        participantStartView.setName(participant.getSportsman().getName());
+//        participantStartView.setGroup(participant.getGroup().getName());
+//        participantStartView.setLap(lap);
+//        participantStartView.setPlace(checkpointDAO.getParticipiantPlace(participant, lap));
+//        participantStartView.setBehindTheLeader();
+//        participantStartView.setLapTime();
+
+        tab.getItems().add(participantStartView);
+    }
+
+
+    public void addNewCheakpoint(String chip) {
+
+        Participant participant = participantDAO.getParticipantByChip(chip);
+
+        //Поиск искомой вкладки
+        TableView table = null;
+        for (TabDto tab : openedTabs) {
+            if (tab.getStarts().stream().anyMatch(start -> start.getId() == participant.getStart().getId())) {
+                //Получение ссылки на таблицу внутри вкладки
+                table = (TableView) tab.getReferenceTab().getContent();
+                break;
+            }
+        }
+
+        lastNumber.setText(Integer.toString(participant.getStartNumber()));
+        int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
+        checkpointDAO.create(new Checkpoint(participant, LocalTime.now(), lap));
+
+        buildNewEntityPS(participant,lap,table);
+
+
+        //Создает новую запись в табе "Участники"
+//        ParticipantCompetitionView newPartitionCompetition = buildNewEntityPC(participant);
+//        createEntityPC(newPartitionCompetition);
+    }
+
 
     public void resetTimeButton(ActionEvent actionEvent) {
         stopwatch.setText("00:00:00:00");
