@@ -43,7 +43,7 @@
          </font>
       </Label>
       <TextField fx:id="lapTextField" layoutX="180.0" layoutY="393.0" prefHeight="31.0" prefWidth="185.0" stylesheets="@../../assets/css/TextField.css" />
-      <Button fx:id="addInTable" layoutX="393.0" layoutY="441.0" mnemonicParsing="false" onAction="#updateTable" stylesheets="@../../assets/css/Buttons.css" text="Применить">
+      <Button fx:id="addInTable" layoutX="393.0" layoutY="441.0" mnemonicParsing="false" onAction="#updateRecord" stylesheets="@../../assets/css/Buttons.css" text="Применить">
          <font>
             <Font size="14.0" />
          </font>
