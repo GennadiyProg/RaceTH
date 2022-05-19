@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -21,6 +24,8 @@ import org.apache.poi.EncryptedDocumentException;
 
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
+import static java.time.LocalDateTime.now;
 
 public class ExcelRead{
     private  final  String  FILE     = "src/main/java/com/lifehouse/raceth/readingfiles/example.xlsx";
@@ -90,9 +95,9 @@ public class ExcelRead{
 
     private void printCell(XSSFRow row, XSSFCell cell)
     {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDate date = LocalDate.now();
         DataFormatter formatter = new DataFormatter();
-        System.out.print(" : ");
-
         String text = formatter.formatCellValue(cell);
         System.out.print(text + " / ");
 
@@ -102,8 +107,10 @@ public class ExcelRead{
                 System.out.println(cell.getRichStringCellValue().getString());
                 break;
             case NUMERIC:
-                if (DateUtil.isCellDateFormatted(cell))
-                    System.out.println(cell.getDateCellValue());
+                if (DateUtil.isCellDateFormatted(cell)){
+                    localDateTime = cell.getLocalDateTimeCellValue();
+                    date = localDateTime.toLocalDate();
+                    System.out.println(date);}
                 else
                     System.out.println(cell.getNumericCellValue());
                 break;
@@ -124,7 +131,7 @@ public class ExcelRead{
     private void readCells()
     {
         // Определение граничных строк обработки
-        int rowStart = Math.min(  0, sheet.getFirstRowNum());
+        int rowStart = Math.min(  1, sheet.getFirstRowNum());
         int rowEnd   = Math.max(100, sheet.getLastRowNum ());
 
         for (int rw = rowStart; rw < rowEnd; rw++) {
