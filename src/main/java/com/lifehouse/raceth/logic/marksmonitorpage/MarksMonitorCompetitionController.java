@@ -43,7 +43,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     private Button addGroup;
     @FXML
-    private  TabPane tabPane;
+    private TabPane tabPane;
     @FXML
     private Tab participantTab;
     @FXML
@@ -121,6 +121,8 @@ public class MarksMonitorCompetitionController implements Initializable {
     private String hours, minutes, seconds, milliseconds;
     private Timeline timeline;
 
+    ExcelRead excelRead = new ExcelRead(this);
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -145,8 +147,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         starts.forEach(start -> {
             if (start.getTab() == null) {
                 // Дописать проверку на null
-            }
-            else {
+            } else {
                 openedTabs.add(start.getTab());
                 long id = start.getTab().getId();
                 if (startOnTab.containsKey(id)) {
@@ -168,7 +169,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         stage.show();
     }
 
-    public void initializeTimeline(){
+    public void initializeTimeline() {
         DateTimeFormatter formatForDateNow = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
         localTime = LocalTime.of(0, 0, 0, 0);
         timeline = new Timeline(
@@ -183,13 +184,13 @@ public class MarksMonitorCompetitionController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
     }
 
-    public void initializeStartTable(){
+    public void initializeStartTable() {
         groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
         lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
     }
 
-    public void initializeParticipantTable(){
+    public void initializeParticipantTable() {
         pcNumberColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         pcNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         pcLastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
@@ -205,7 +206,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         participantViews.addAll(participantDAO.getAllParticipantViews());
     }
 
-    public void initializeStartTab(){
+    public void initializeStartTab() {
         psNumberColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         psCurrentTimeColumn.setCellValueFactory(new PropertyValueFactory<>("currentTime"));
         psTimeOnDistanceColumn.setCellValueFactory(new PropertyValueFactory<>("timeOnDistance"));
@@ -216,7 +217,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         psGroupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
     }
 
-    private void fillingStartList(){
+    private void fillingStartList() {
         List<Start> starts = startDAO.getStartsByCompetitionDayId(MainPageController.currentCompetitionDay.getId());
         openedTabs = new HashSet<>();
         startOnTab = new HashMap<>();
@@ -231,15 +232,15 @@ public class MarksMonitorCompetitionController implements Initializable {
         });
     }
 
-    public void initializeTabs(){
-        for(StartTab startTab : openedTabs){
+    public void initializeTabs() {
+        for (StartTab startTab : openedTabs) {
             Tab tab = new Tab(startTab.getName());
             createTableOnTab(tab, startTab.getId());
             tabPane.getTabs().add(tabPane.getTabs().size() - 1, tab);
         }
     }
 
-    private void createNewTab(Event event){
+    private void createNewTab(Event event) {
         StartTab startTab = new StartTab();
         openedTabs.add(startTabDAO.create(startTab));
         startOnTab.put(startTab.getId(), List.of());
@@ -251,9 +252,9 @@ public class MarksMonitorCompetitionController implements Initializable {
         tabPane.getSelectionModel().select(tabPane.getTabs().size() - 2);
     }
 
-    private void switchingTab(Event event){
+    private void switchingTab(Event event) {
         Tab tab = (Tab) event.getSource();
-        if (tab.isSelected()){
+        if (tab.isSelected()) {
             String nameTab = tab.getText();
             long id = openedTabs.stream().filter(startTab -> startTab.getName().equals(nameTab)).findFirst().orElse(null).getId();
             startTable.getItems().clear();
@@ -261,7 +262,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         }
     }
 
-    private void createTableOnTab(Tab tab, long id){
+    private void createTableOnTab(Tab tab, long id) {
         TableView<ParticipantStartView> table = new TableView<>();
         table.getColumns().setAll(participantStartTable.getColumns());
         List<Long> startsIdOnTab = new ArrayList<>();
@@ -273,10 +274,10 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     public void startButtonClick() {
         //Изменение цвета и текста кнопки при нажатии
-        if(isButtonGreen) {
+        if (isButtonGreen) {
             startButton.setText("Стоп");
             timeline.play();
-            startButton.getStyleClass().set(3,"btn-danger");
+            startButton.getStyleClass().set(3, "btn-danger");
             // Для будущего использования потоков
 //            if (thread == null) {
 //                 thread = new RFID("Potok dlya metok",this);
@@ -286,7 +287,7 @@ public class MarksMonitorCompetitionController implements Initializable {
             isButtonGreen = false;
         } else if (!isButtonGreen) {
             startButton.setText("Старт");
-            startButton.getStyleClass().set(3,"btn-success");
+            startButton.getStyleClass().set(3, "btn-success");
             timeline.stop();
 //            thread.threadSuspend();
             isButtonGreen = true;
@@ -297,13 +298,20 @@ public class MarksMonitorCompetitionController implements Initializable {
         stopwatch.setText("00:00:00:00");
         timing = 0;
         localTime = LocalTime.of(0, 0, 0, 0);
-    };
+    }
+
+    ;
+
     public void timeStartButton(javafx.event.ActionEvent actionEvent) {
         timeStarted.setText("В разработке");
         System.out.println(LocalTime.now());
-    };
-    public void addFileExcel(){
-        System.out.println("bebebebe");
-        new ExcelRead();
-    };
+    }
+
+    ;
+
+    public void addFileExcel() {
+        excelRead.readExcel();
+    }
+
+    ;
 }

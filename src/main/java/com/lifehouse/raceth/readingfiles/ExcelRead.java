@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 
 
+import com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -24,12 +25,17 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 public class ExcelRead{
     private  final  String  FILE     = "src/main/java/com/lifehouse/raceth/readingfiles/example.xlsx";
     private  final  boolean directly = false;
-
+    private MarksMonitorCompetitionController fileController;
     private  XSSFWorkbook   book;
     private XSSFSheet sheet;
 
-    public ExcelRead()
+    public ExcelRead(MarksMonitorCompetitionController controller)
     {
+        fileController = controller;
+
+    }
+
+    public void readExcel() {
         if (directly)
             openBookDirectly(FILE);
         else
@@ -52,11 +58,7 @@ public class ExcelRead{
         } else
             System.out.println ("Error reading Excel");
     }
-    public static void main(String[] args)
-    {
-        new ExcelRead();
-        System.exit(0);
-    }
+
     private void openBook(final String path)
     {
         try {
@@ -89,9 +91,6 @@ public class ExcelRead{
     private void printCell(XSSFRow row, XSSFCell cell)
     {
         DataFormatter formatter = new DataFormatter();
-        CellReference cellRef = new CellReference(row.getRowNum(),
-                cell.getColumnIndex());
-        System.out.print(cellRef.formatAsString());
         System.out.print(" : ");
 
         String text = formatter.formatCellValue(cell);
@@ -100,8 +99,7 @@ public class ExcelRead{
         // Вывод значения в консоль
         switch (cell.getCellType()) {
             case STRING:
-                System.out.println(cell.getRichStringCellValue()
-                        .getString());
+                System.out.println(cell.getRichStringCellValue().getString());
                 break;
             case NUMERIC:
                 if (DateUtil.isCellDateFormatted(cell))
