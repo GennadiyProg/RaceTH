@@ -138,15 +138,26 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     @FXML
     private void attachStart(ActionEvent event) {
-        var currentTab = tabPane.getSelectionModel().getSelectedItem();
+        Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
+        // Поиск нужного Dto экземпляра в
+        TabDto currentTabDto = openedTabs
+                                    .stream()
+                                    .filter(tabDto -> tabDto.getReferenceTab()
+                                    .equals(currentTab))
+                                    .findFirst().orElse(null);
         if (currentTab.equals(participantTab)) {
             alertWrongTab();
             return;
         }
 
         var popup = openPopup("/view/marksmonitor/MarksGroupPopup.fxml");
+        if (popup == null) {
+            System.out.println("Class: MarksMonitorCompetitionController\nMethod: attachStart\n Error opening popup,");
+            return;
+        }
         MarksGroupPopupController popupController = popup.getController();
-        popupController.setCurrentTab(currentTab);
+        popupController.assignCurrentTab(currentTabDto);
+        popupController.marksMonitorCompetitionController = this;
     }
 
     private void alertWrongTab() {
@@ -254,9 +265,12 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
     private void initTabs() {
+        openedTabs.clear();
+
         List<Start> starts = startDAO.getStartsByCompetitionDayId(MainPageController.currentCompetitionDay.getId());
         starts.forEach(start -> {
             if (start.getTab() == null) return;
+            if (start.getCompetitionDay().getId() != MainPageController.currentCompetitionDay.getId()) return;
 
             // Проверяем существует ли вкладка с данным ID
             TabDto tab = findTab(start.getTab());
@@ -299,12 +313,17 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
     private void updateStartsTable(Event event) {
-        Tab tab = (Tab) event.getSource();
+        updateStartsTable((Tab) event.getSource());
+    }
+
+    public void updateStartsTable(Tab tab) {
+//        Tab tab = (Tab) event.getSource();
         if (tab.isSelected()) {
             TabDto tabDto = openedTabs.stream().filter(el -> el.getReferenceTab().equals(tab)).findFirst().orElse(null);
             if (tabDto == null) return;
             startTable.getItems().clear();
             startTable.getItems().addAll(tabDto.getStarts());
+            startTable.refresh();
         }
     }
 
