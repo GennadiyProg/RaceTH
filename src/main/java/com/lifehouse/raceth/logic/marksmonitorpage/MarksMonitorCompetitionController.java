@@ -186,35 +186,24 @@ public class MarksMonitorCompetitionController implements Initializable {
     {
         public void run()
         {
-            System.out.println("12345!");
+            if(isButtonGreen) {
+                //startButton.setText("Стоп"); - выдаёт ошибки, но работает
+                timeline.play();
+                startButton.getStyleClass().set(3, "btn-danger");
+                isButtonGreen = false;
+            }
             timer.cancel();
-            startButtonClick();
-            System.out.println("54321!");
         }
     }
 
     public void timeStartButton(javafx.event.ActionEvent actionEvent) throws ParseException {
         stopwatch.setText(timeStarted.getText());//Показ на табло заданного времени
-        System.out.println(LocalTime.now());
-        DateTimeFormatter formatForDateNow1 = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss:SS");
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss:SS");
-        SimpleDateFormat days2 = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println("--1--");
+        SimpleDateFormat formatForDateNowdays2 = new SimpleDateFormat("yyyy-MM-dd");
         Date date2 = new Date();
         String vvod = timeStarted.getText();
-        System.out.println("--2--" + vvod);
-        System.out.println("--2/2--" + date2);
-        System.out.println("--3/2--" + days2.format(date2));
-        Date date4 = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").parse(days2.format(date2) + "-" + vvod);
-        System.out.println("--3--");
+        Date date4 = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").parse(formatForDateNowdays2.format(date2) + "-" + vvod);
         System.out.println(date4);
         timer.schedule(new MyTimeTask(), date4);
-        //String date3 = formatForDateNow.format(vvod);// !!!
-//        LocalTime time = LocalTime.of(8,43,00,00);
-        //Date date3 = (Date) formatForDateNow.parse(" 10:19:00:00");
-     //vvv   Date date3 = DateUtils.parseDate("18-May-2022", String[] {"dd-MM-yyyy HH:mm:ss", "dd-MM-yyyy"});
-        // Рабочий на всякий:Date date4 = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").parse("2022-05-18-23:48:20");
-
     };
 
     public void startButtonClick() {
