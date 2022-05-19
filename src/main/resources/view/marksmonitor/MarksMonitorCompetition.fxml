@@ -148,7 +148,7 @@
                         <String fx:value="btn-warning" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.halignment="LEFT">
+                  <Button mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Загрузить из файла" onAction="#addFileExcel" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>

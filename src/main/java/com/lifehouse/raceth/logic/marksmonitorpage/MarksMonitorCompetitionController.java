@@ -7,6 +7,7 @@ import com.lifehouse.raceth.model.Start;
 import com.lifehouse.raceth.model.StartTab;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
+import com.lifehouse.raceth.readingfiles.ExcelRead;
 import com.lifehouse.raceth.rfid.RFID;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -300,5 +301,9 @@ public class MarksMonitorCompetitionController implements Initializable {
     public void timeStartButton(javafx.event.ActionEvent actionEvent) {
         timeStarted.setText("В разработке");
         System.out.println(LocalTime.now());
+    };
+    public void addFileExcel(){
+        System.out.println("bebebebe");
+        new ExcelRead();
     };
 }

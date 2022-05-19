@@ -22,7 +22,7 @@ import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 public class ExcelRead{
-    private  final  String  FILE     = "example.xlsx";
+    private  final  String  FILE     = "src/main/java/com/lifehouse/raceth/readingfiles/example.xlsx";
     private  final  boolean directly = false;
 
     private  XSSFWorkbook   book;
@@ -35,13 +35,13 @@ public class ExcelRead{
         else
             openBook(FILE);
         if (book != null) {
-            System.out.println ("Книга Excel открыта");
+            System.out.println ("Excel Book open");
             sheet = book.getSheet("Лист1");
             if (sheet != null) {
-                System.out.println ("Страница открыта");
+                System.out.println ("Page open");
                 readCells();
             } else {
-                System.out.println ("Страница не найдена");
+                System.out.println ("Non found page");
             }
             try {
                 if (!directly)
@@ -50,9 +50,9 @@ public class ExcelRead{
                 e.printStackTrace();
             }
         } else
-            System.out.println ("Ошибка чтения файла Excel");
+            System.out.println ("Error reading Excel");
     }
-    public static void readFile(String[] args)
+    public static void main(String[] args)
     {
         new ExcelRead();
         System.exit(0);
