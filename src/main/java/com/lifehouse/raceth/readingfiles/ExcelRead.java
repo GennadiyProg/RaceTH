@@ -1,31 +1,27 @@
 package com.lifehouse.raceth.readingfiles;
 
+import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.Iterator;
+import java.util.List;
 
 import com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-
-import org.apache.poi.ss.util.CellReference;
 
 import org.apache.poi.EncryptedDocumentException;
 
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-import static java.time.LocalDateTime.now;
 
 public class ExcelRead{
     private  final  String  FILE     = "src/main/java/com/lifehouse/raceth/readingfiles/example.xlsx";
@@ -93,26 +89,26 @@ public class ExcelRead{
         }
     }
 
-    private void printCell(XSSFRow row, XSSFCell cell)
+    private String printCell(Row row, Cell cell)
     {
-        LocalDateTime localDateTime = LocalDateTime.now();
         LocalDate date = LocalDate.now();
+        String forlist=null;
+        Double forlistnumber = null;
         DataFormatter formatter = new DataFormatter();
-        String text = formatter.formatCellValue(cell);
-        System.out.print(text + " / ");
 
         // Вывод значения в консоль
         switch (cell.getCellType()) {
             case STRING:
-                System.out.println(cell.getRichStringCellValue().getString());
+                forlist = cell.getRichStringCellValue().getString();
                 break;
             case NUMERIC:
                 if (DateUtil.isCellDateFormatted(cell)){
-                    localDateTime = cell.getLocalDateTimeCellValue();
-                    date = localDateTime.toLocalDate();
-                    System.out.println(date);}
-                else
-                    System.out.println(cell.getNumericCellValue());
+                    date = cell.getLocalDateTimeCellValue().toLocalDate();
+                    forlist = date.toString();
+                }
+                else{
+                    forlistnumber = cell.getNumericCellValue();
+                    forlist = forlistnumber.toString();}
                 break;
             case BOOLEAN:
                 System.out.println(cell.getBooleanCellValue());
@@ -126,31 +122,30 @@ public class ExcelRead{
             default:
                 System.out.println();
         }
+        return forlist;
     }
 
     private void readCells()
     {
-        // Определение граничных строк обработки
-        int rowStart = Math.min(  1, sheet.getFirstRowNum());
-        int rowEnd   = Math.max(100, sheet.getLastRowNum ());
-
-        for (int rw = rowStart; rw < rowEnd; rw++) {
-            XSSFRow row = sheet.getRow(rw);
-            if (row == null) {
-                // System.out.println("row '" + rw + "' is not created");
-                continue;
+        String forlist;
+        List<String> list = new ArrayList<>();
+        list.add(0, "Начало");
+        Iterator<Row> it = sheet.iterator();
+        while (it.hasNext()) {
+            Row row = it.next();
+            list.clear();
+            Iterator<Cell> cells = row.iterator();
+            while (cells.hasNext()) {
+                Cell cell = cells.next();
+                forlist = printCell(row, cell);
+                list.add(forlist);
             }
-            short minCol = row.getFirstCellNum();
-            short maxCol = row.getLastCellNum();
-            for(short col = minCol; col < maxCol; col++) {
-                // @SuppressWarnings("deprecation")
-                // XSSFCell cell = rw.getCell(col, XSSFRow.RETURN_BLANK_AS_NULL);
-                XSSFCell cell = row.getCell(col);
-                if (cell == null) {
-                    // System.out.println("cell '" + col + "' is not created");
-                    continue;
-                }
-                printCell(row, cell);
+            String element0 =(String) list.get(0);
+            if (element0 == null){
+                break;
+            }
+            else{
+                System.out.println(list);
             }
         }
     }
