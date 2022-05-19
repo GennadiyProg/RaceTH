@@ -37,6 +37,29 @@ public class ParticipantStartView {
         this.group = group;
     }
 
+    public ParticipantStartView(
+            long id,
+            LocalTime currentTime,
+            LocalTime timeOnDistance,
+            String chip,
+            int startNumber,
+            String lastname,
+            String name,
+            String group,
+            int lap,
+            int place) {
+        this.id = id;
+        this.currentTime = currentTime;
+        this.timeOnDistance = timeOnDistance;
+        this.chip = chip;
+        this.startNumber = startNumber;
+        this.lastname = lastname;
+        this.name = name;
+        this.group = group;
+        this.lap = lap;
+        this.place = place;
+    }
+
     public static ParticipantStartView convertToView(Participant participant){
         CheckpointDAO checkpointDAO = (CheckpointDAO) Main.appContext.getBean("checkpointDAO");
         return new ParticipantStartView(
