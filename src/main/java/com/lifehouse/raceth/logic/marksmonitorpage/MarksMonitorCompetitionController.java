@@ -171,11 +171,10 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     public void initializeTimeline(int dif){
         if (dif!=0){
-            localTime = LocalTime.of((dif/360000)%60, (dif/60000)%60, (dif/1000)%60, dif);
+            localTime = LocalTime.of((dif/3600000)%60, (dif/60000)%60, (dif/1000)%60, dif*100);
         } else{
             localTime = LocalTime.of(0, 0, 0, 0);
         };
-        System.out.println(localTime+"---------------");
         dif = 0;
         timeline = new Timeline(
                 new KeyFrame(
@@ -194,7 +193,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         public void run()
         {
             if(isButtonGreen) {
-                //startButton.setText("Стоп"); - не пишет "стоп" и выдаёт ошибки, но работает
+                //startButton.setText("Стоп");
                 timeline.play();
                 startButton.getStyleClass().set(3, "btn-danger");
                 isButtonGreen = false;
@@ -206,19 +205,13 @@ public class MarksMonitorCompetitionController implements Initializable {
     public void timeStartButton(javafx.event.ActionEvent actionEvent) throws ParseException {
         stopwatch.setText(timeStarted.getText());//Показ на табло заданного времени
         SimpleDateFormat formatForDateNowdays2 = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat formatForDateNowMin = new SimpleDateFormat("HH-mm-ss-SS");
         Date date1 = new Date();
         String vvod = timeStarted.getText();
         Date date2 = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").parse(formatForDateNowdays2.format(date1) + "-" + vvod);
-        System.out.println(date2);
         if (date2.before(date1)){
             int dif = (int) (date1.getTime() - date2.getTime());
-            System.out.println(dif + "msssssssssssssssssssssss");
-
-            //initializeTimeline(dif); - выдаёт ошибку при передаче кол-в мс в timeline
-            System.out.println("11111111111");
+            initializeTimeline(dif);
             startButtonClick();
-            System.out.println("q2222222222222");
         } else {
             timer.schedule(new MyTimeTask(), date2);
         };
