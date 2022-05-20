@@ -1,12 +1,13 @@
 package com.lifehouse.raceth.logic.startpage;
 
 import com.lifehouse.raceth.Main;
-import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.StartDAO;
+import com.lifehouse.raceth.logic.MainPageController;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Start;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +28,10 @@ import java.util.ResourceBundle;
 @Data
 public class StartPageController implements Initializable {
     @FXML
-    private Button addButton;
+    private Button addButton; // -
+
+    @FXML
+    private Button editButton;
 
     //Табличка
     @FXML
@@ -48,47 +52,42 @@ public class StartPageController implements Initializable {
     @FXML
     private TableColumn<Start, Date> compDayColumn;
 
+    private boolean hasSelectedStarts;
+
     private StartDAO startDAO;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         startDAO = (StartDAO) Main.appContext.getBean("startDAO");
-        namestartColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
-        distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
-        starttimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        countlapsColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
-        compDayColumn.setCellValueFactory(new PropertyValueFactory<>("competitionDay"));
-        startTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
+        defineStartsTable();
+        loadStarts();
     }
 
-    public void onUpdateSelectedCompetition() {
+    public void onMounted() { // хук, вызываемый при переходе на вкладку
+        loadStarts();
+    }
+
+    private void loadStarts() {
         startTable.getItems().clear();
-        startTable.getItems().addAll(startDAO.getStartsByCompetitionId(CompetitionPageController.currentCompetition.getId()));
-    }
 
-    @FXML
-    //todo: РЕАЛИЗОВАТЬ ЧТЕНИЕ С РЕАЛЬНЫХ ФАЙЛОВ (ЗДЕСЬ ФАЙЛЫ ГЕНЕРИРУЮТСЯ В ЦИКЛЕ)
-    private void AddExternalData(ActionEvent event) {
-        /*ObservableList<Sportsman> sportsmans = runTable.getItems();
-        for (Integer i = 0; i < 15; i++)
-        {
-            Sportsman man = new Sportsman(
-                    i,
-                    "SampleSportsman" + i,
-                    "SampleLastname" + i,
-                    new java.sql.Date(Calendar.getInstance().getTime().getTime()),
-                    Gender.MALE,
-                    "RU"
-                    );
+        if (MainPageController.currentCompetition == null) {
+            return;
+        }
 
-            sportsmans.add(man);
-        }*/
+        ObservableList<Start> starts = startTable.getItems();
+        starts.addAll(startDAO.getStartsByCompetitionId(MainPageController.currentCompetition.getId()));
     }
 
     @FXML
     private void AddRun(ActionEvent event) {
+        if (MainPageController.currentCompetition == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Пожалуйста выберите текущее соревнование во вкладке 'Соревнования'");
+            alert.showAndWait();
+            return;
+        }
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/start/CreateStartPopup.fxml"));
             Parent root1 = fxmlLoader.load();
@@ -98,14 +97,6 @@ public class StartPageController implements Initializable {
 
             CreateStartPopupController createStartPopupController = fxmlLoader.getController();
             createStartPopupController.setStartTable(startTable);
-
-
-                /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CompetitionPage.fxml"));
-                Parent root2 = loader.load();
-                CompetitionPageController competitionPageController = loader.getController();
-                competitionPageController.getValue().addListener((observable, oldValue, newValue) -> onUpdateSelectedCompetition());*/
-
-
 
             stage.show();
         } catch (Exception e) {
@@ -141,4 +132,13 @@ public class StartPageController implements Initializable {
         startTable.refresh();
     }
 
+    private void defineStartsTable() {
+        namestartColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
+        distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
+        starttimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        countlapsColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
+        compDayColumn.setCellValueFactory(new PropertyValueFactory<>("competitionDay"));
+        startTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
 }

@@ -16,12 +16,49 @@ import java.time.LocalTime;
 public class ParticipantStartView {
     private long id;
     private LocalTime currentTime;
+    private LocalTime timeOnDistance;
     private String chip;
     private int startNumber;
     private String lastname;
     private String name;
-    private Gender gender;
     private String group;
+    private int lap;
+    private int place;
+    private LocalTime behindTheLeader;
+    private LocalTime lapTime;
+
+    public ParticipantStartView(long id,LocalTime currentTime,String chip,int startNumber,String lastname,String name,String group) {
+        this.id = id;
+        this.currentTime = currentTime;
+        this.chip = chip;
+        this.startNumber = startNumber;
+        this.lastname = lastname;
+        this.name = name;
+        this.group = group;
+    }
+
+    public ParticipantStartView(
+            long id,
+            LocalTime currentTime,
+            LocalTime timeOnDistance,
+            String chip,
+            int startNumber,
+            String lastname,
+            String name,
+            String group,
+            int lap,
+            int place) {
+        this.id = id;
+        this.currentTime = currentTime;
+        this.timeOnDistance = timeOnDistance;
+        this.chip = chip;
+        this.startNumber = startNumber;
+        this.lastname = lastname;
+        this.name = name;
+        this.group = group;
+        this.lap = lap;
+        this.place = place;
+    }
 
     public static ParticipantStartView convertToView(Participant participant){
         CheckpointDAO checkpointDAO = (CheckpointDAO) Main.appContext.getBean("checkpointDAO");
@@ -32,7 +69,6 @@ public class ParticipantStartView {
                 participant.getStartNumber(),
                 participant.getSportsman().getLastname(),
                 participant.getSportsman().getName(),
-                participant.getSportsman().getGender(),
                 participant.getStart().getGroup().getName()
         );
     }

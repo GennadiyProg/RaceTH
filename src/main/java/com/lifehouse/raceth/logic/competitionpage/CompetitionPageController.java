@@ -4,6 +4,7 @@ import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.CompetitionDAO;
 import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.DistanceDAO;
+import com.lifehouse.raceth.logic.MainPageController;
 import com.lifehouse.raceth.logic.competitionpage.impl.DistanceServiceImpl;
 import com.lifehouse.raceth.logic.competitionpage.impl.GroupServiceImpl;
 import com.lifehouse.raceth.logic.competitionpage.impl.CompetitionServiceImpl;
@@ -97,7 +98,6 @@ public class CompetitionPageController implements Initializable {
     private DistanceDAO distanceDAO;
 
     private CompetitionPageElementService competitionPageElementService;
-    public static Competition currentCompetition;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -152,20 +152,22 @@ public class CompetitionPageController implements Initializable {
 
     @FXML
     public void makeCompetitionCurrent(ActionEvent event){
-        currentCompetition = competitionTable.getSelectionModel().getSelectedItem();
-        if (currentCompetition == null){
+        MainPageController.currentCompetition = competitionTable.getSelectionModel().getSelectedItem();
+        if (MainPageController.currentCompetition == null){
             return;
         }
-        value.setValue(currentCompetition.getName());
+        value.setValue(MainPageController.currentCompetition.getName());
         updateGroupTable();
         updateDistanceTable();
     }
 
     private void updateGroupTable() {
-        ObservableList<GroupView> groups = groupTable.getItems();
-        for (GroupView group : groups) {
-            if (group.getCompetitions().contains(currentCompetition)) {
-                groupTable.getItems().remove(group);
+        var groups = groupTable.getItems();
+        for (int i = 0; i < groups.size(); i++) {
+            GroupView group = groups.get(i);
+            if (group.getCompetitions().stream().anyMatch((el) -> el.getId() == MainPageController.currentCompetition.getId())) {
+                int index = groupTable.getItems().indexOf(group);
+                groupTable.getItems().remove(index);
                 groupTable.getItems().add(0, group);
                 group.getCheckBox().setSelected(true);
             } else {
@@ -177,10 +179,12 @@ public class CompetitionPageController implements Initializable {
     }
 
     private void updateDistanceTable() {
-        ObservableList<DistanceView> distances = distanceTable.getItems();
-        for (DistanceView distance : distances) {
-            if (distance.getCompetitions().stream().anyMatch((el) -> el.getId() == currentCompetition.getId())) {
-                distanceTable.getItems().remove(distance);
+        var distances = distanceTable.getItems();
+        for (int i = 0; i < distances.size(); i++) {
+            DistanceView distance = distances.get(i);
+            if (distance.getCompetitions().stream().anyMatch((el) -> el.getId() == MainPageController.currentCompetition.getId())) {
+                int index = distanceTable.getItems().indexOf(distance);
+                distanceTable.getItems().remove(index);
                 distanceTable.getItems().add(0, distance);
                 distance.getCheckBox().setSelected(true);
             } else {

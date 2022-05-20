@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController">
+<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController">
    <children>
       <GridPane alignment="TOP_CENTER" layoutX="13.0" layoutY="2.0" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="2.0">
         <columnConstraints>
@@ -31,7 +31,7 @@
          <children>
             <GridPane prefHeight="178.0" prefWidth="1069.0" GridPane.rowIndex="1">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="466.39996948242185" minWidth="230.0" prefWidth="443.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="466.39996948242185" minWidth="230.0" prefWidth="443.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="771.3999938964844" minWidth="10.0" prefWidth="390.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="771.3999938964844" minWidth="10.0" prefWidth="242.79999999999995" />
               </columnConstraints>
@@ -49,45 +49,42 @@
                   <GridPane alignment="CENTER">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="268.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.20001220703125" minWidth="10.0" prefWidth="163.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.20001220703125" minWidth="10.0" prefWidth="165.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="21.0" minHeight="7.0" prefHeight="7.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="116.0" minHeight="89.0" prefHeight="94.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField fx:id="stopwatch" editable="false" maxWidth="-Infinity" prefHeight="97.0" prefWidth="259.0" stylesheets="@../../assets/css/TextFieldLarge.css" text="00:00:00:00" translateX="5.0" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                        <TextField fx:id="stopwatch" alignment="CENTER" editable="false" maxWidth="-Infinity" prefHeight="95.0" prefWidth="260.0" stylesheets="@../../assets/css/TextFieldLarge.css" text="00:00:00:00" translateX="5.0" GridPane.rowIndex="1">
                            <font>
                               <Font size="36.0" />
                            </font>
                         </TextField>
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <children>
-                              <Button fx:id="startButton" layoutX="26.0" layoutY="49.0" maxHeight="42.0" maxWidth="112.0" minHeight="26.0" minWidth="112.0" mnemonicParsing="false" onAction="#startButtonClick" prefHeight="26.0" prefWidth="112.0" stylesheets="@../../assets/css/Buttons.css" text="Старт" textFill="WHITE">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <styleClass>
-                                    <String fx:value="btn" />
-                                    <String fx:value="btn-small" />
-                                    <String fx:value="btn-success" />
-                                 </styleClass>
-                              </Button>
-                              <Button fx:id="timeStart" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="15.0" mnemonicParsing="false" onAction="#timeStartButton" prefHeight="28.0" prefWidth="134.0" stylesheets="@../../assets/css/Buttons.css" text="Задать время" textFill="WHITE">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <styleClass>
-                                    <String fx:value="btn" />
-                                    <String fx:value="btn-small" />
-                                    <String fx:value="btn-warning" />
-                                 </styleClass>
-                              </Button>
-                           </children>
-                        </Pane>
-                        <Button fx:id="resetTim" alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#resetTimeButton" prefHeight="28.0" prefWidth="134.0" stylesheets="@../../assets/css/Buttons.css" text="Очистить табло" textFill="WHITE" translateX="16.0" translateY="2.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Button fx:id="startButton" mnemonicParsing="false" onAction="#startButtonClick" prefWidth="134.0" stylesheets="@../../assets/css/Buttons.css" text="Старт" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-small" />
+                              <String fx:value="btn-success" />
+                           </styleClass>
+                           <GridPane.margin>
+                              <Insets top="3.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="timeStart" alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#timeStartButton" prefWidth="134.0" stylesheets="@../../assets/css/Buttons.css" text="Задать время" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-small" />
+                              <String fx:value="btn-warning" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="resetTim" mnemonicParsing="false" onAction="#resetTimeButton" prefWidth="134.0" stylesheets="@../../assets/css/Buttons.css" text="Очистить табло" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -96,24 +93,37 @@
                               <String fx:value="btn-small" />
                               <String fx:value="btn-primary" />
                            </styleClass>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
                         </Button>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" styleClass="label-regular" stylesheets="@../../assets/css/AppLabel.css" text="Время начала:" textAlignment="CENTER">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="timeStarted" alignment="CENTER" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00:00" stylesheets="@../../assets/css/TextField.css" GridPane.halignment="CENTER">
+                           <GridPane.margin>
+                              <Insets left="60.0" />
+                           </GridPane.margin>
+                        </TextField>
                      </children>
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
                      <GridPane.margin>
-                        <Insets bottom="1.0" />
+                        <Insets />
                      </GridPane.margin>
                   </GridPane>
-                  <TextField fx:id="lastNumber" alignment="CENTER" editable="false" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" prefWidth="138.0" promptText="№12" stylesheets="@../../assets/css/TextFieldLarge.css" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <TextField fx:id="lastNumber" alignment="CENTER" editable="false" maxWidth="150.0" minWidth="100.0" prefHeight="110.0" prefWidth="138.0" promptText="№12" stylesheets="@../../assets/css/TextFieldLarge.css" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                      <font>
                         <Font size="48.0" />
                      </font>
                   </TextField>
-                  <Label styleClass="label-regular" stylesheets="@../../assets/css/AppLabel.css" text="Прошедший участник" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+                  <Label styleClass="label-regular" stylesheets="@../../assets/css/AppLabel.css" text="Прошедший участник" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
                </children>
                <padding>
-                  <Insets bottom="10.0" />
+                  <Insets bottom="10.0" right="10.0" />
                </padding>
             </GridPane>
             <GridPane prefWidth="1058.0" GridPane.rowIndex="3">
@@ -128,7 +138,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Добавить участника" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                  <Button mnemonicParsing="false" onAction="#createOrEditParticipant" stylesheets="@../../assets/css/Buttons.css" text="Добавить участника" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -147,7 +157,7 @@
                         <String fx:value="btn-common" />
                         <String fx:value="btn-primary" />
                      </styleClass></Button>
-                  <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="231.0" stylesheets="@../../assets/css/Buttons.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                  <Button mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -167,18 +177,18 @@
                            <children>
                               <TableView fx:id="participantStartTable" prefHeight="318.0" prefWidth="1064.0" stylesheets="@../../assets/css/table.css">
                                  <columns>
-                                    <TableColumn fx:id="psNumberColumn" prefWidth="39.20001173019409" resizable="false" text="№" />
-                                    <TableColumn fx:id="psCurrentTimeColumn" prefWidth="77.59994125366211" resizable="false" text="Время текущее" />
-                                    <TableColumn fx:id="psTimeOnDistanceColumn" prefWidth="104.00000762939453" resizable="false" text="Время на дистанции" />
-                                    <TableColumn fx:id="psChipColumn" prefWidth="91.20002746582031" resizable="false" text="Метка" />
-                                    <TableColumn fx:id="psStartNumberColumn" prefWidth="105.60003662109375" resizable="false" text="Стартовый номер" />
-                                    <TableColumn fx:id="psLastnameColumn" prefWidth="33.5999755859375" resizable="false" text="Фамилия" />
-                                    <TableColumn fx:id="psNameColumn" prefWidth="116.79995727539062" resizable="false" text="Имя" />
-                                    <TableColumn fx:id="psGroupColumn" prefWidth="95.199951171875" resizable="false" text="Группа" />
-                                    <TableColumn prefWidth="101.5999755859375" resizable="false" text="Круг" />
-                                    <TableColumn prefWidth="100.800048828125" resizable="false" text="Место" />
-                                    <TableColumn prefWidth="103.2000732421875" resizable="false" text="Отставание от лидера" />
-                                    <TableColumn prefWidth="92.800048828125" resizable="false" text="Время круга" />
+                                    <TableColumn fx:id="psNumberColumn" maxWidth="25.0" minWidth="25.0" prefWidth="25.0" resizable="false" text="№" />
+                                    <TableColumn fx:id="psCurrentTimeColumn" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Время текущее" />
+                                    <TableColumn fx:id="psTimeOnDistanceColumn" minWidth="130.0" prefWidth="130.0" resizable="false" text="Время на дистанции" />
+                                    <TableColumn fx:id="psChipColumn" minWidth="70.0" prefWidth="70.0" resizable="false" text="Метка" />
+                                    <TableColumn fx:id="psStartNumberColumn" minWidth="110.0" prefWidth="110.0" resizable="false" text="Стартовый номер" />
+                                    <TableColumn fx:id="psLastnameColumn" prefWidth="100.0" resizable="false" text="Фамилия" />
+                                    <TableColumn fx:id="psNameColumn" prefWidth="85.0" resizable="false" text="Имя" />
+                                    <TableColumn fx:id="psGroupColumn" resizable="false" text="Группа" />
+                                    <TableColumn fx:id="psLapColumn" prefWidth="50.0" resizable="false" text="Круг" />
+                                    <TableColumn fx:id="psPlaceColumn" prefWidth="50.0" resizable="false" text="Место" />
+                                    <TableColumn fx:id="psBehindTheLeaderColumn" prefWidth="150.0" resizable="false" text="Отставание от лидера" />
+                                    <TableColumn fx:id="psLapTimeColumn" prefWidth="110.0" resizable="false" text="Время круга" />
                                  </columns>
                               </TableView>
                               <TableView fx:id="participantCompetitionTable" prefHeight="318.0" prefWidth="1064.0" stylesheets="@../../assets/css/table.css">
@@ -205,22 +215,16 @@
             </TabPane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.valignment="TOP">
                <children>
-                  <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" layoutX="447.0" layoutY="-4.0" mnemonicParsing="false" onAction="#addingGroup" stylesheets="@../../assets/css/Buttons.css" text="Редактировать группы" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS">
+                  <Button fx:id="addGroup" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="1.0" layoutX="435.0" layoutY="4.0" mnemonicParsing="false" onAction="#attachStart" stylesheets="@../../assets/css/Buttons.css" text="Привязать старты" textAlignment="CENTER" textFill="WHITE" textOverrun="LEADING_ELLIPSIS">
                      <font>
                         <Font size="14.0" />
                      </font>
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-primary" />
-                        <String fx:value="btn-common" />
+                        <String fx:value="btn-small" />
                      </styleClass>
                   </Button>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="8.0" prefHeight="20.0" prefWidth="169.0" styleClass="label-regular" stylesheets="@../../assets/css/AppLabel.css" text="Время начала:" textAlignment="CENTER">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="timeStarted" alignment="CENTER" layoutX="239.0" layoutY="5.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="112.0" promptText="12:00:00:00" stylesheets="@../../assets/css/TextField.css" />
                </children>
             </Pane>
          </children>

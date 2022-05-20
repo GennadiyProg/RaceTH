@@ -12,6 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface DistanceRepository extends JpaRepository<Distance, Long> {
     @Modifying
-    @Query("UPDATE Distance d SET d = :dist WHERE d.id = :id")
-    void update(@Param("id") long id, @Param("dist") Distance distance);
+    @Query(value = "DELETE FROM competition_distance AS c WHERE c.distance_id = :distance_id AND c.competition_id = :competition_id", nativeQuery = true)
+    void deleteCompetitionRelation(@Param("distance_id") long distance_id, @Param("competition_id") long competition_id);
 }

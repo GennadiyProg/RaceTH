@@ -2,35 +2,25 @@ package com.lifehouse.raceth.logic.competitionpage.impl;
 
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.GroupDAO;
-import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageElementService;
 import com.lifehouse.raceth.logic.competitionpage.popups.GroupPopupController;
-import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.view.GroupView;
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class GroupServiceImpl implements CompetitionPageElementService {
     private final GroupDAO groupDAO;
     private final TableView<GroupView> groupTable;
-    private final ChangeListener<Boolean> checkboxListener;
     private GroupView lastEditedGroup;
 
     public GroupServiceImpl(TableView<GroupView> groupTable) {
         this.groupDAO = (GroupDAO) Main.appContext.getBean("groupDAO");
         this.groupTable = groupTable;
-        checkboxListener = ((observableList, oldStatus, newStatus) -> {
-            Competition curCompetition = CompetitionPageController.currentCompetition;
-            attachCompetition(lastEditedGroup, curCompetition, newStatus);
-        });
     }
 
     @Override
@@ -40,33 +30,9 @@ public class GroupServiceImpl implements CompetitionPageElementService {
         controller.getNewGroup().addListener((observable, oldValue, newValue) -> {
             groupDAO.create(newValue);
             lastEditedGroup = GroupView.convertToView(newValue);
-            lastEditedGroup.getCheckBox().selectedProperty().addListener(checkboxListener);
             groupTable.getItems().add(lastEditedGroup);
             groupTable.refresh();
         });
-    }
-
-    private void attachCompetition(GroupView groupView, Competition competition, Boolean status) {
-        if (competition != null) {
-            if (status){
-                List<Competition> competitionList = groupView.getCompetitions();
-                if (!competitionList.contains(competition)) {
-                    competitionList.add(competition);
-                }
-            } else {
-                groupView.getCompetitions().remove(
-                        groupView.getCompetitions().stream()
-                                .filter((el) -> el.getId() == competition.getId())
-                                .findFirst().orElse(null)
-                );
-                groupDAO.update(GroupView.convertToModel(groupView));
-            }
-        } else {
-            groupView.getCheckBox().selectedProperty().removeListener(checkboxListener);
-            groupView.getCheckBox().setSelected(false);
-            groupView.getCheckBox().selectedProperty().addListener(checkboxListener);
-            new Alert(Alert.AlertType.WARNING, "Не указано текущее соревнование").show();
-        }
     }
 
     @Override

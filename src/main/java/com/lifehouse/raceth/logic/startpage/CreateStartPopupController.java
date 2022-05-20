@@ -5,6 +5,7 @@ import com.lifehouse.raceth.dao.CompetitionDayDAO;
 import com.lifehouse.raceth.dao.DistanceDAO;
 import com.lifehouse.raceth.dao.GroupDAO;
 import com.lifehouse.raceth.dao.StartDAO;
+import com.lifehouse.raceth.logic.MainPageController;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
 import com.lifehouse.raceth.model.CompetitionDay;
 import com.lifehouse.raceth.model.Distance;
@@ -66,9 +67,7 @@ public class CreateStartPopupController implements Initializable {
         competitionDayDAO = (CompetitionDayDAO) Main.appContext.getBean("competitionDayDAO");
         distance.setItems(FXCollections.observableList(new ArrayList<>(distanceDAO.getAllDistances())));
         group.setItems(FXCollections.observableList(new ArrayList<>(groupDAO.getAllGroups())));
-        competitionDay.setItems(
-                FXCollections.observableList(new ArrayList<>(competitionDayDAO.getAllByCompetition(CompetitionPageController.currentCompetition.getId())))
-        );
+        competitionDay.setItems(FXCollections.observableList(new ArrayList<>(competitionDayDAO.getAllByCompetition(MainPageController.currentCompetition.getId()))));
         formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
     }
 
@@ -106,15 +105,34 @@ public class CreateStartPopupController implements Initializable {
         start.setName(startName.getText());
         start.setDistance(distanceDAO.getDistance(distance.getSelectionModel().getSelectedItem().getId()));
         start.setGroup(groupDAO.getGroup(group.getSelectionModel().getSelectedItem().getId()));
-        start.setStartTime(LocalTime.parse(startTime.getText(), formatter));
         start.setLaps(Integer.parseInt(laps.getText()));
         start.setCompetitionDay(competitionDay.getSelectionModel().getSelectedItem());
+
+
+        //start.setStartTime(LocalTime.parse(startTime.getText(), formatter));
+        if (startTime.getText().length() == 8) {
+            String g = startTime.getText();
+            LocalTime localTime = LocalTime.parse(g, formatter);
+            start.setStartTime(localTime);
+        }
+        else if (startTime.getText().length() == 5) {
+            String s = startTime.getText() + ":00";
+            LocalTime localTime = LocalTime.parse(s,formatter);
+            start.setStartTime(localTime);
+        }
+        //String s = startTime.getText() + ":00";
+        //formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
+        //LocalTime localTime = LocalTime.parse(startTime.getText() + ":00", formatter);
+
+        //localTime.format(formatter);
+        //localTime.format(formatter);
+        //start.setStartTime(localTime);
 
         return start;
     }
 
     private void createEntity(Start start) {
-        start.setId(startTable.getItems().size());
+        // start.setId(startTable.getItems().size());
         startDAO.create(start);
         startTable.getItems().add(start);
         startTable.refresh();

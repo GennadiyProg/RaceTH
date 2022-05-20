@@ -1,3 +1,54 @@
+/*Иконка вкладки Соревнования*/
+#sorevButt{
+    -fx-background-image: url("../images/icons/home.png");
+    -fx-background-size: 32 32;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left 10px top 15px;
+}
+#sorevButt:selected{
+    -fx-background-image: url("../images/icons/home_blue.png");
+}
+/*Иконка вкладки Старты*/
+#zabegButt{
+    -fx-background-image: url("../images/icons/running.png");
+    -fx-background-size: 32 32;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left 10px top 15px;
+}
+#zabegButt:selected{
+    -fx-background-image: url("../images/icons/running_blue.png");
+}
+/*Иконка вкладки Эстафеты*/
+#relayButt{
+    -fx-background-image: url("../images/icons/relay.png");
+    -fx-background-size: 32 32;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left 10px top 15px;
+}
+#relayButt:selected{
+    -fx-background-image: url("../images/icons/relay_blue.png");
+}
+/*Иконки для вкладки Клубы*/
+#clubsButt{
+    -fx-background-image: url("../images/icons/leader.png");
+    -fx-background-size: 32 32;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left 10px top 15px;
+}
+#clubsButt:selected{
+    -fx-background-image: url("../images/icons/leader_blue.png");
+}
+/*Иконки для вкладки Мониторинг*/
+#checkButt{
+    -fx-background-image: url("../images/icons/cctv-camera.png");
+    -fx-background-size: 32 32;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left 10px top 15px;
+}
+#checkButt:selected{
+    -fx-background-image: url("../images/icons/cctv-camera-blue.png");
+}
+
 @font-face {
     src: url('../../assets/fonts/Roboto-Regular.ttf');
 }

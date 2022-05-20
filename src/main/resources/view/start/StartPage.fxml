@@ -75,7 +75,7 @@
                         <String fx:value="btn-danger" />
                      </styleClass>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editRun" stylesheets="@../../assets/css/Buttons.css" text="Редактировать" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="editButton" alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#editRun" stylesheets="@../../assets/css/Buttons.css" text="Редактировать" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-warning" />
@@ -94,7 +94,7 @@
                   </Button>
                </children>
             </GridPane>
-            <TableView fx:id="startTable" prefHeight="419.0" stylesheets="@../../assets/css/table.css" GridPane.rowIndex="1">
+            <TableView fx:id="startTable" editable="true" prefHeight="419.0" stylesheets="@../../assets/css/table.css" GridPane.rowIndex="1">
                <columns>
                   <TableColumn fx:id="namestartColumn" prefWidth="175.0" reorderable="false" text="Название" />
                   <TableColumn fx:id="categoryColumn" prefWidth="170.0" reorderable="false" text="Категория" />

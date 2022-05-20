@@ -1,6 +1,5 @@
 package com.lifehouse.raceth.repository;
 
-import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Group;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,6 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface GroupRepository extends JpaRepository<Group, Long> {
     @Modifying
-    @Query("UPDATE Group g SET g = :group WHERE g.id = :id")
-    void update(@Param("id") long id, @Param("group") Group group);
+    @Query(value = "DELETE FROM competition_group AS c WHERE c.group_id = :group_id AND c.competition_id = :competition_id", nativeQuery = true)
+    void deleteCompetitionRelation(@Param("group_id") long group_id, @Param("competition_id") long competition_id);
 }

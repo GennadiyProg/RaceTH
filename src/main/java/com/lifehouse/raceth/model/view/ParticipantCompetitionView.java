@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 
 @Data
@@ -20,7 +20,7 @@ public class ParticipantCompetitionView {
     private Gender gender;
     private String chip;
     private int startNumber;
-    private Date birthdate;
+    private LocalDate birthdate;
     private String region;
     private String group;
 
@@ -35,7 +35,20 @@ public class ParticipantCompetitionView {
                 participant.getStartNumber(),
                 participant.getSportsman().getBirthdate(),
                 participant.getSportsman().getRegion(),
-                participant.getStart().getGroup().getName()
+//                participant.getStart().getGroup().getName()
+                participant.getGroup().getName()
         );
+    }
+
+    public void setFields(ParticipantCompetitionView participant){
+        this.name = participant.getName();
+        this.lastname = participant.getLastname();
+        this.patronymic = participant.getPatronymic();
+        this.gender = participant.getGender();
+        this.chip = participant.getChip();
+        this.startNumber = participant.getStartNumber();
+        this.birthdate = participant.getBirthdate();
+        this.region = participant.getRegion();
+        this.group = participant.getGroup();
     }
 }
