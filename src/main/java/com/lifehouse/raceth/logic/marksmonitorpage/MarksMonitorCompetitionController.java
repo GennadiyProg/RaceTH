@@ -1,8 +1,5 @@
 package com.lifehouse.raceth.logic.marksmonitorpage;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.*;
 import java.lang.*;
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.*;
@@ -12,7 +9,6 @@ import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.model.dto.TabDto;
 import com.lifehouse.raceth.rfid.RFID;
-import com.sun.xml.bind.DatatypeConverterImpl;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
@@ -36,11 +32,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Data
 public class MarksMonitorCompetitionController implements Initializable {
-
     @FXML
     private Button addGroup;
     @FXML
@@ -50,7 +46,9 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     public TextField lastNumber;
     @FXML
-    private Button startButton;
+    private Button startTimerButton;
+    @FXML
+    private Button startReadingButton;
 
     @FXML
     private TableView<ParticipantCompetitionView> participantCompetitionTable;
@@ -122,15 +120,12 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     private List<TabDto> openedTabs;
 
-    private Boolean isButtonGreen = true;
+    private Boolean isRunningTimer = true;
+    private Boolean isRunningReader = true;
     private RFID thread;
 
-    private LocalTime localTime;
-    private int timing = 0;
-    private String hours, minutes, seconds, milliseconds;
+    private LocalTime timeOnTimer;
     private Timeline timeline;
-    private DatatypeConverterImpl DateUtils;
-    Timer timer = new Timer();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -144,9 +139,14 @@ public class MarksMonitorCompetitionController implements Initializable {
         initStartTable();
         initParticipantTable();
         initStartTab();
-        initTimeline(0);
+        initTimeline();
         initTabs();
         initTabAddButton();
+
+
+//        Test test = new Test();
+//        test.setStopwatch(stopwatch);
+//        test.changeText("hello");
     }
     @FXML
     private void attachStart(ActionEvent event) {
@@ -227,82 +227,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         return fxmlLoader;
     }
 
-    public void initTimeline(int dif) {
-        if (dif!=0){
-            localTime = LocalTime.of((dif/3600000)%60, (dif/60000)%60, (dif/1000)%60, dif*100);
-        } else{
-            localTime = LocalTime.of(0, 0, 0, 0);
-        };
-        dif = 0;
-        timeline = new Timeline(
-                new KeyFrame(
-                        Duration.millis(10),
-                        ae -> {
-                            localTime = localTime.plusNanos(10000000);
-                            stopwatch.setText(localTime.format(formatForDateNow));
-                        }
-                )
-        );
-        timeline.setCycleCount(Timeline.INDEFINITE);
-    }
-
-    class MyTimeTask extends TimerTask
-    {
-        public void run()
-        {
-            if(isButtonGreen) {
-                //startButton.setText("Стоп");
-                timeline.play();
-                startButton.getStyleClass().set(3, "btn-danger");
-                isButtonGreen = false;
-            }
-            timer.cancel();
-        }
-    }
-
-    public void timeStartButton(javafx.event.ActionEvent actionEvent) throws ParseException {
-        stopwatch.setText(timeStarted.getText());//Показ на табло заданного времени
-        SimpleDateFormat formatForDateNowdays2 = new SimpleDateFormat("yyyy-MM-dd");
-        Date date1 = new Date();
-        String vvod = timeStarted.getText();
-        Date date2 = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").parse(formatForDateNowdays2.format(date1) + "-" + vvod);
-        if (date2.before(date1)){
-            int dif = (int) (date1.getTime() - date2.getTime());
-            initializeTimeline(dif);
-            startButtonClick();
-        } else {
-            timer.schedule(new MyTimeTask(), date2);
-        };
-    };
-
-    public void startButtonClick() {
-        //Изменение цвета и текста кнопки при нажатии
-        if(isButtonGreen) {
-            startButton.setText("Стоп");
-            timeline.play();
-            startButton.getStyleClass().set(3,"btn-danger");
-            // Для будущего использования потоков
-//            if (thread == null) {
-//                 thread = new RFID("Potok dlya metok",this);
-//            }
-//            thread.threadResume();
-            isButtonGreen = false;
-        } else if (!isButtonGreen) {
-            startButton.setText("Старт");
-            startButton.getStyleClass().set(3,"btn-success");
-            timeline.stop();
-//            thread.threadSuspend();
-            isButtonGreen = true;
-        }
-    }
-
-    public void resetTimeButton(javafx.event.ActionEvent actionEvent) {
-        stopwatch.setText("00:00:00:00");
-        timing = 0;
-        localTime = LocalTime.of(0, 0, 0, 0);
-    };
-
-    public void initializeStartTable(){
+    public void initStartTable(){
         groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
@@ -415,28 +340,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         tab.setOnSelectionChanged(this::updateStartsTable);
     }
 
-    public void startButtonClick() {
-        //Изменение цвета и текста кнопки при нажатии
-        if (isButtonGreen) {
-            startButton.setText("Стоп");
-            timeline.play();
-            startButton.getStyleClass().set(3, "btn-danger");
 
-            // Для будущего использования потоков
-            if (thread == null) {
-                thread = new RFID("Potok dlya metok", this);
-            }
-            thread.threadResume();
-
-            isButtonGreen = false;
-        } else if (!isButtonGreen) {
-            startButton.setText("Старт");
-            startButton.getStyleClass().set(3, "btn-success");
-            timeline.stop();
-            thread.threadSuspend();
-            isButtonGreen = true;
-        }
-    }
 
     private void buildNewEntityPC(Participant participant) {
         ParticipantCompetitionView participantCompetitionView = new ParticipantCompetitionView();
@@ -449,7 +353,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         participantCompetitionView.setStartNumber(participant.getStartNumber());
         participantCompetitionView.setBirthdate(participant.getSportsman().getBirthdate());
         participantCompetitionView.setRegion(participant.getSportsman().getRegion());
-        participantCompetitionView.setGroup(participant.getGroup().getName());
+        participantCompetitionView.setGroup(participant.getStart().getGroup().getName());
 
         participantCompetitionTable.getItems().add(participantCompetitionView);
         participantCompetitionTable.refresh();
@@ -468,7 +372,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         return now;
     }
 
-    private void buildNewEntityPS(Participant participant, int lap,TableView tab) {
+    private void buildNewEntityPS(Participant participant, int lap,TableView<ParticipantStartView> tab) {
         ParticipantStartView participantStartView = new ParticipantStartView(
                 participant.getId(),
                 LocalTime.now(),
@@ -477,7 +381,7 @@ public class MarksMonitorCompetitionController implements Initializable {
                 participant.getStartNumber(),
                 participant.getSportsman().getLastname(),
                 participant.getSportsman().getName(),
-                participant.getGroup().getName(),
+                participant.getStart().getGroup().getName(),
                 lap,
                 checkpointDAO.getParticipiantPlace(participant, lap)
         );
@@ -500,17 +404,16 @@ public class MarksMonitorCompetitionController implements Initializable {
         tab.getItems().add(participantStartView);
     }
 
-
     public void addNewCheakpoint(String chip) {
 
         Participant participant = participantDAO.getParticipantByChip(chip);
 
         //Поиск искомой вкладки
-        TableView table = null;
+        TableView<ParticipantStartView> table = null;
         for (TabDto tab : openedTabs) {
             if (tab.getStarts().stream().anyMatch(start -> start.getId() == participant.getStart().getId())) {
                 //Получение ссылки на таблицу внутри вкладки
-                table = (TableView) tab.getReferenceTab().getContent();
+                table = (TableView<ParticipantStartView>) tab.getReferenceTab().getContent();
                 break;
             }
         }
@@ -528,14 +431,78 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
 
-    public void resetTimeButton(ActionEvent actionEvent) {
-        stopwatch.setText("00:00:00:00");
-        timing = 0;
-        localTime = LocalTime.of(0, 0, 0, 0);
+
+    public void initTimeline() {
+        timeOnTimer = LocalTime.MIN;
+        DateTimeFormatter formatForDateNow = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
+        timeline = new Timeline(
+                new KeyFrame(
+                        Duration.millis(10),
+                        ae -> {
+                            timeOnTimer = timeOnTimer.plusNanos(10000000);
+                            stopwatch.setText(timeOnTimer.format(formatForDateNow));
+                        }
+                )
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
     }
 
-    public void timeStartButton(ActionEvent actionEvent) {
-        timeStarted.setText("В разработке");
-        System.out.println(LocalTime.now());
+    @FXML
+    public void timeStartButton() {
+        if (timeStarted.getText().equals("")) return;
+        LocalTime currentTime = LocalTime.now();
+        LocalTime readTime = LocalTime.parse(timeStarted.getText());
+        if (readTime.isBefore(currentTime)){
+            timeOnTimer = LocalTime.ofNanoOfDay(readTime.until(currentTime, ChronoUnit.NANOS));
+            startButtonClick();
+        } else {
+            stopwatch.setText(timeStarted.getText());
+            new Timeline(
+                    new KeyFrame(Duration.millis(currentTime.until(readTime, ChronoUnit.MILLIS)), ae -> startButtonClick()
+                )
+            ).play();
+        }
+    }
+
+    @FXML
+    public void resetTimeButton() {
+        stopwatch.setText("00:00:00:00");
+        timeOnTimer = LocalTime.MIN;
+    }
+
+    @FXML
+    public void startButtonClick() {
+        if (isRunningTimer) {
+            timeline.play();
+            startTimerButton.setText("Стоп");
+            startTimerButton.getStyleClass().set(3, "btn-danger");
+            isRunningTimer = false;
+        } else {
+            timeline.stop();
+            startTimerButton.setText("Старт");
+            startTimerButton.getStyleClass().set(3, "btn-success");
+            isRunningTimer = true;
+        }
+    }
+
+    @FXML
+    public void changeReadingStatus(){
+        if(isRunningReader){
+            startReadingButton.setText("Остановить считывание");
+            startReadingButton.getStyleClass().set(3, "btn-danger");
+
+            // Для будущего использования потоков
+            if (thread == null) {
+                thread = new RFID("Potok dlya metok", this);
+            }
+            thread.threadResume();
+
+            isRunningReader = false;
+        } else {
+            startReadingButton.setText("Начать считывание");
+            startReadingButton.getStyleClass().set(3, "btn-success");
+            thread.threadSuspend();
+            isRunningReader = true;
+        }
     }
 }
