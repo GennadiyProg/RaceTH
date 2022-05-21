@@ -9,7 +9,6 @@ import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.model.dto.TabDto;
 import com.lifehouse.raceth.rfid.RFID;
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +22,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import lombok.Data;
 import javafx.scene.control.*;
 import javafx.event.Event;
@@ -31,8 +29,6 @@ import javafx.event.Event;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Data
@@ -124,8 +120,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     private Boolean isRunningReader = true;
     private RFID thread;
 
-    private LocalTime timeOnTimer;
-    private Timeline timeline;
+    TimerHandler timerHandler;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -139,14 +134,11 @@ public class MarksMonitorCompetitionController implements Initializable {
         initStartTable();
         initParticipantTable();
         initStartTab();
-        initTimeline();
         initTabs();
         initTabAddButton();
 
 
-//        Test test = new Test();
-//        test.setStopwatch(stopwatch);
-//        test.changeText("hello");
+        timerHandler = new TimerHandler(stopwatch, timeStarted, startTimerButton);
     }
     @FXML
     private void attachStart(ActionEvent event) {
@@ -430,59 +422,19 @@ public class MarksMonitorCompetitionController implements Initializable {
 //        createEntityPC(newPartitionCompetition);
     }
 
-
-
-    public void initTimeline() {
-        timeOnTimer = LocalTime.MIN;
-        DateTimeFormatter formatForDateNow = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
-        timeline = new Timeline(
-                new KeyFrame(
-                        Duration.millis(10),
-                        ae -> {
-                            timeOnTimer = timeOnTimer.plusNanos(10000000);
-                            stopwatch.setText(timeOnTimer.format(formatForDateNow));
-                        }
-                )
-        );
-        timeline.setCycleCount(Timeline.INDEFINITE);
+    @FXML
+    public void startWithTimerTimer() {
+        timerHandler.schedule();
     }
 
     @FXML
-    public void timeStartButton() {
-        if (timeStarted.getText().equals("")) return;
-        LocalTime currentTime = LocalTime.now();
-        LocalTime readTime = LocalTime.parse(timeStarted.getText());
-        if (readTime.isBefore(currentTime)){
-            timeOnTimer = LocalTime.ofNanoOfDay(readTime.until(currentTime, ChronoUnit.NANOS));
-            startButtonClick();
-        } else {
-            stopwatch.setText(timeStarted.getText());
-            new Timeline(
-                    new KeyFrame(Duration.millis(currentTime.until(readTime, ChronoUnit.MILLIS)), ae -> startButtonClick()
-                )
-            ).play();
-        }
+    public void resetTimer() {
+        timerHandler.reset();
     }
 
     @FXML
-    public void resetTimeButton() {
-        stopwatch.setText("00:00:00:00");
-        timeOnTimer = LocalTime.MIN;
-    }
-
-    @FXML
-    public void startButtonClick() {
-        if (isRunningTimer) {
-            timeline.play();
-            startTimerButton.setText("Стоп");
-            startTimerButton.getStyleClass().set(3, "btn-danger");
-            isRunningTimer = false;
-        } else {
-            timeline.stop();
-            startTimerButton.setText("Старт");
-            startTimerButton.getStyleClass().set(3, "btn-success");
-            isRunningTimer = true;
-        }
+    public void startTimer() {
+        timerHandler.startOrStop();
     }
 
     @FXML

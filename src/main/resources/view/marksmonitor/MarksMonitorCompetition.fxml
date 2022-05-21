@@ -91,7 +91,7 @@
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#timeStartButton" prefWidth="143.0" stylesheets="@../../assets/css/Buttons.css" text="Задать время" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                              <Button alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startWithTimerTimer" prefWidth="143.0" stylesheets="@../../assets/css/Buttons.css" text="Задать время" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -101,7 +101,7 @@
                                     <String fx:value="btn-warning" />
                                  </styleClass>
                               </Button>
-                              <Button fx:id="startTimerButton" mnemonicParsing="false" onAction="#startButtonClick" prefWidth="143.0" stylesheets="@../../assets/css/Buttons.css" text="Старт" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                              <Button fx:id="startTimerButton" mnemonicParsing="false" onAction="#startTimer" prefWidth="143.0" stylesheets="@../../assets/css/Buttons.css" text="Старт" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -114,7 +114,7 @@
                                     <Insets />
                                  </GridPane.margin>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#resetTimeButton" prefWidth="143.0" stylesheets="@../../assets/css/Buttons.css" text="Очистить табло" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                              <Button mnemonicParsing="false" onAction="#resetTimer" prefWidth="143.0" stylesheets="@../../assets/css/Buttons.css" text="Очистить табло" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
