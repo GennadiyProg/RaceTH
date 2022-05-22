@@ -115,8 +115,6 @@ public class MarksMonitorCompetitionController implements Initializable {
     private SportsmanDAO sportsmanDAO;
 
     private List<TabDto> openedTabs;
-
-    private Boolean isRunningTimer = true;
     private Boolean isRunningReader = true;
     private RFID thread;
 
@@ -154,7 +152,7 @@ public class MarksMonitorCompetitionController implements Initializable {
             return;
         }
 
-        var popup = openPopup("/view/marksmonitor/MarksGroupPopup.fxml");
+        FXMLLoader popup = openPopup("/view/marksmonitor/MarksGroupPopup.fxml");
         if (popup == null) {
             System.out.println("Class: MarksMonitorCompetitionController\nMethod: attachStart\n Error opening popup,");
             return;
@@ -333,69 +331,6 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
 
-
-    private void buildNewEntityPC(Participant participant) {
-        ParticipantCompetitionView participantCompetitionView = new ParticipantCompetitionView();
-
-        participantCompetitionView.setName(participant.getSportsman().getName());
-        participantCompetitionView.setLastname(participant.getSportsman().getLastname());
-        participantCompetitionView.setPatronymic(participant.getSportsman().getPatronymic());
-        participantCompetitionView.setGender(participant.getSportsman().getGender());
-        participantCompetitionView.setChip(participant.getChip());
-        participantCompetitionView.setStartNumber(participant.getStartNumber());
-        participantCompetitionView.setBirthdate(participant.getSportsman().getBirthdate());
-        participantCompetitionView.setRegion(participant.getSportsman().getRegion());
-        participantCompetitionView.setGroup(participant.getStart().getGroup().getName());
-
-        participantCompetitionTable.getItems().add(participantCompetitionView);
-        participantCompetitionTable.refresh();
-
-    }
-
-    private void createEntityPC(ParticipantCompetitionView participantCompetitionView) {
-
-    }
-
-    private LocalTime calculateTimeOnDistance(LocalTime startTime) {
-        LocalTime now = LocalTime.now();
-        now = now.minusHours(startTime.getHour());
-        now = now.minusMinutes(startTime.getMinute());
-        now = now.minusSeconds(startTime.getSecond());
-        return now;
-    }
-
-    private void buildNewEntityPS(Participant participant, int lap,TableView<ParticipantStartView> tab) {
-        ParticipantStartView participantStartView = new ParticipantStartView(
-                participant.getId(),
-                LocalTime.now(),
-                calculateTimeOnDistance(participant.getStart().getStartTime()),
-                participant.getChip(),
-                participant.getStartNumber(),
-                participant.getSportsman().getLastname(),
-                participant.getSportsman().getName(),
-                participant.getStart().getGroup().getName(),
-                lap,
-                checkpointDAO.getParticipiantPlace(participant, lap)
-        );
-
-
-
-//        participantStartView.setId(participant.getId());
-//        participantStartView.setCurrentTime(LocalTime.now());
-//        participantStartView.setTimeOnDistance(calculateTimeOnDistance(participant.getStart().getStartTime()));
-//        participantStartView.setChip(participant.getChip());
-//        participantStartView.setStartNumber(participant.getStartNumber());
-//        participantStartView.setLastname(participant.getSportsman().getLastname());
-//        participantStartView.setName(participant.getSportsman().getName());
-//        participantStartView.setGroup(participant.getGroup().getName());
-//        participantStartView.setLap(lap);
-//        participantStartView.setPlace(checkpointDAO.getParticipiantPlace(participant, lap));
-//        participantStartView.setBehindTheLeader();
-//        participantStartView.setLapTime();
-
-        tab.getItems().add(participantStartView);
-    }
-
     public void addNewCheakpoint(String chip) {
 
         Participant participant = participantDAO.getParticipantByChip(chip);
@@ -414,12 +349,31 @@ public class MarksMonitorCompetitionController implements Initializable {
         int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
         checkpointDAO.create(new Checkpoint(participant, LocalTime.now(), lap));
 
-        buildNewEntityPS(participant,lap,table);
+        if (table != null) buildNewEntityPS(participant,lap,table);
+    }
 
+    private void buildNewEntityPS(Participant participant, int lap,TableView<ParticipantStartView> tab) {
+        ParticipantStartView participantStartView = new ParticipantStartView(
+                participant.getId(),
+                LocalTime.now(),
+                calculateTimeOnDistance(participant.getStart().getStartTime()),
+                participant.getChip(),
+                participant.getStartNumber(),
+                participant.getSportsman().getLastname(),
+                participant.getSportsman().getName(),
+                participant.getStart().getGroup().getName(),
+                lap,
+                checkpointDAO.getParticipiantPlace(participant, lap)
+        );
+        tab.getItems().add(participantStartView);
+    }
 
-        //Создает новую запись в табе "Участники"
-//        ParticipantCompetitionView newPartitionCompetition = buildNewEntityPC(participant);
-//        createEntityPC(newPartitionCompetition);
+    private LocalTime calculateTimeOnDistance(LocalTime startTime) {
+        LocalTime now = LocalTime.now();
+        now = now.minusHours(startTime.getHour());
+        now = now.minusMinutes(startTime.getMinute());
+        now = now.minusSeconds(startTime.getSecond());
+        return now;
     }
 
     @FXML
