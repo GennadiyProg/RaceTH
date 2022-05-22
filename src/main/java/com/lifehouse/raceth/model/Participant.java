@@ -27,9 +27,6 @@ public class Participant {
     private int relayStage;
     private int startNumber;
 
-    @ManyToOne
-    private Group group;
-
     public Participant(String chip, Sportsman sportsman, int startNumber) {
         this.chip = chip;
         this.sportsman = sportsman;

@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.logic.marksmonitorpage;
 
+import java.lang.*;
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.*;
 import com.lifehouse.raceth.logic.MainPageController;
@@ -8,7 +9,6 @@ import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.model.dto.TabDto;
 import com.lifehouse.raceth.rfid.RFID;
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,7 +22,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import lombok.Data;
 import javafx.scene.control.*;
 import javafx.event.Event;
@@ -30,12 +29,10 @@ import javafx.event.Event;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Data
 public class MarksMonitorCompetitionController implements Initializable {
-
     @FXML
     private Button addGroup;
     @FXML
@@ -45,7 +42,9 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     public TextField lastNumber;
     @FXML
-    private Button startButton;
+    private Button startTimerButton;
+    @FXML
+    private Button startReadingButton;
 
     @FXML
     private TableView<ParticipantCompetitionView> participantCompetitionTable;
@@ -116,14 +115,10 @@ public class MarksMonitorCompetitionController implements Initializable {
     private SportsmanDAO sportsmanDAO;
 
     private List<TabDto> openedTabs;
-
-    private Boolean isButtonGreen = true;
+    private Boolean isRunningReader = true;
     private RFID thread;
 
-    private LocalTime localTime;
-    private int timing = 0;
-    private String hours, minutes, seconds, milliseconds;
-    private Timeline timeline;
+    TimerHandler timerHandler;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -137,11 +132,12 @@ public class MarksMonitorCompetitionController implements Initializable {
         initStartTable();
         initParticipantTable();
         initStartTab();
-        initTimeline();
         initTabs();
         initTabAddButton();
-    }
 
+
+        timerHandler = new TimerHandler(stopwatch, timeStarted, startTimerButton);
+    }
     @FXML
     private void attachStart(ActionEvent event) {
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
@@ -156,7 +152,7 @@ public class MarksMonitorCompetitionController implements Initializable {
             return;
         }
 
-        var popup = openPopup("/view/marksmonitor/MarksGroupPopup.fxml");
+        FXMLLoader popup = openPopup("/view/marksmonitor/MarksGroupPopup.fxml");
         if (popup == null) {
             System.out.println("Class: MarksMonitorCompetitionController\nMethod: attachStart\n Error opening popup,");
             return;
@@ -221,22 +217,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         return fxmlLoader;
     }
 
-    public void initTimeline() {
-        DateTimeFormatter formatForDateNow = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
-        localTime = LocalTime.of(0, 0, 0, 0);
-        timeline = new Timeline(
-                new KeyFrame(
-                        Duration.millis(10),
-                        ae -> {
-                            localTime = localTime.plusNanos(10000000);
-                            stopwatch.setText(localTime.format(formatForDateNow));
-                        }
-                )
-        );
-        timeline.setCycleCount(Timeline.INDEFINITE);
-    }
-
-    public void initStartTable() {
+    public void initStartTable(){
         groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
@@ -349,49 +330,42 @@ public class MarksMonitorCompetitionController implements Initializable {
         tab.setOnSelectionChanged(this::updateStartsTable);
     }
 
-    public void startButtonClick() {
-        //Изменение цвета и текста кнопки при нажатии
-        if (isButtonGreen) {
-            startButton.setText("Стоп");
-            timeline.play();
-            startButton.getStyleClass().set(3, "btn-danger");
 
-            // Для будущего использования потоков
-            if (thread == null) {
-                thread = new RFID("Potok dlya metok", this);
+    public void addNewCheakpoint(String chip) {
+
+        Participant participant = participantDAO.getParticipantByChip(chip);
+
+        //Поиск искомой вкладки
+        TableView<ParticipantStartView> table = null;
+        for (TabDto tab : openedTabs) {
+            if (tab.getStarts().stream().anyMatch(start -> start.getId() == participant.getStart().getId())) {
+                //Получение ссылки на таблицу внутри вкладки
+                table = (TableView<ParticipantStartView>) tab.getReferenceTab().getContent();
+                break;
             }
-            thread.threadResume();
-
-            isButtonGreen = false;
-        } else if (!isButtonGreen) {
-            startButton.setText("Старт");
-            startButton.getStyleClass().set(3, "btn-success");
-            timeline.stop();
-            thread.threadSuspend();
-            isButtonGreen = true;
         }
+
+        lastNumber.setText(Integer.toString(participant.getStartNumber()));
+        int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
+        checkpointDAO.create(new Checkpoint(participant, LocalTime.now(), lap));
+
+        if (table != null) buildNewEntityPS(participant,lap,table);
     }
 
-    private void buildNewEntityPC(Participant participant) {
-        ParticipantCompetitionView participantCompetitionView = new ParticipantCompetitionView();
-
-        participantCompetitionView.setName(participant.getSportsman().getName());
-        participantCompetitionView.setLastname(participant.getSportsman().getLastname());
-        participantCompetitionView.setPatronymic(participant.getSportsman().getPatronymic());
-        participantCompetitionView.setGender(participant.getSportsman().getGender());
-        participantCompetitionView.setChip(participant.getChip());
-        participantCompetitionView.setStartNumber(participant.getStartNumber());
-        participantCompetitionView.setBirthdate(participant.getSportsman().getBirthdate());
-        participantCompetitionView.setRegion(participant.getSportsman().getRegion());
-        participantCompetitionView.setGroup(participant.getGroup().getName());
-
-        participantCompetitionTable.getItems().add(participantCompetitionView);
-        participantCompetitionTable.refresh();
-
-    }
-
-    private void createEntityPC(ParticipantCompetitionView participantCompetitionView) {
-
+    private void buildNewEntityPS(Participant participant, int lap,TableView<ParticipantStartView> tab) {
+        ParticipantStartView participantStartView = new ParticipantStartView(
+                participant.getId(),
+                LocalTime.now(),
+                calculateTimeOnDistance(participant.getStart().getStartTime()),
+                participant.getChip(),
+                participant.getStartNumber(),
+                participant.getSportsman().getLastname(),
+                participant.getSportsman().getName(),
+                participant.getStart().getGroup().getName(),
+                lap,
+                checkpointDAO.getParticipiantPlace(participant, lap)
+        );
+        tab.getItems().add(participantStartView);
     }
 
     private LocalTime calculateTimeOnDistance(LocalTime startTime) {
@@ -402,74 +376,39 @@ public class MarksMonitorCompetitionController implements Initializable {
         return now;
     }
 
-    private void buildNewEntityPS(Participant participant, int lap,TableView tab) {
-        ParticipantStartView participantStartView = new ParticipantStartView(
-                participant.getId(),
-                LocalTime.now(),
-                calculateTimeOnDistance(participant.getStart().getStartTime()),
-                participant.getChip(),
-                participant.getStartNumber(),
-                participant.getSportsman().getLastname(),
-                participant.getSportsman().getName(),
-                participant.getGroup().getName(),
-                lap,
-                checkpointDAO.getParticipiantPlace(participant, lap)
-        );
-
-
-
-//        participantStartView.setId(participant.getId());
-//        participantStartView.setCurrentTime(LocalTime.now());
-//        participantStartView.setTimeOnDistance(calculateTimeOnDistance(participant.getStart().getStartTime()));
-//        participantStartView.setChip(participant.getChip());
-//        participantStartView.setStartNumber(participant.getStartNumber());
-//        participantStartView.setLastname(participant.getSportsman().getLastname());
-//        participantStartView.setName(participant.getSportsman().getName());
-//        participantStartView.setGroup(participant.getGroup().getName());
-//        participantStartView.setLap(lap);
-//        participantStartView.setPlace(checkpointDAO.getParticipiantPlace(participant, lap));
-//        participantStartView.setBehindTheLeader();
-//        participantStartView.setLapTime();
-
-        tab.getItems().add(participantStartView);
+    @FXML
+    public void startWithTimerTimer() {
+        timerHandler.schedule();
     }
 
+    @FXML
+    public void resetTimer() {
+        timerHandler.reset();
+    }
 
-    public void addNewCheakpoint(String chip) {
+    @FXML
+    public void startTimer() {
+        timerHandler.startOrStop();
+    }
 
-        Participant participant = participantDAO.getParticipantByChip(chip);
+    @FXML
+    public void changeReadingStatus(){
+        if(isRunningReader){
+            startReadingButton.setText("Остановить считывание");
+            startReadingButton.getStyleClass().set(3, "btn-danger");
 
-        //Поиск искомой вкладки
-        TableView table = null;
-        for (TabDto tab : openedTabs) {
-            if (tab.getStarts().stream().anyMatch(start -> start.getId() == participant.getStart().getId())) {
-                //Получение ссылки на таблицу внутри вкладки
-                table = (TableView) tab.getReferenceTab().getContent();
-                break;
+            // Для будущего использования потоков
+            if (thread == null) {
+                thread = new RFID("Potok dlya metok", this);
             }
+            thread.threadResume();
+
+            isRunningReader = false;
+        } else {
+            startReadingButton.setText("Начать считывание");
+            startReadingButton.getStyleClass().set(3, "btn-success");
+            thread.threadSuspend();
+            isRunningReader = true;
         }
-
-        lastNumber.setText(Integer.toString(participant.getStartNumber()));
-        int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
-        checkpointDAO.create(new Checkpoint(participant, LocalTime.now(), lap));
-
-        buildNewEntityPS(participant,lap,table);
-
-
-        //Создает новую запись в табе "Участники"
-//        ParticipantCompetitionView newPartitionCompetition = buildNewEntityPC(participant);
-//        createEntityPC(newPartitionCompetition);
-    }
-
-
-    public void resetTimeButton(ActionEvent actionEvent) {
-        stopwatch.setText("00:00:00:00");
-        timing = 0;
-        localTime = LocalTime.of(0, 0, 0, 0);
-    }
-
-    public void timeStartButton(ActionEvent actionEvent) {
-        timeStarted.setText("В разработке");
-        System.out.println(LocalTime.now());
     }
 }
