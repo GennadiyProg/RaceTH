@@ -13,6 +13,7 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -109,7 +110,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     private TextField stopwatch, timeStarted;
     @FXML
-    private ChoiceBox<CompetitionDay> competitionDay;
+    public ChoiceBox<CompetitionDay> competitionDay;
 
     private ParticipantDAO participantDAO;
     private CheckpointDAO checkpointDAO;
@@ -133,14 +134,18 @@ public class MarksMonitorCompetitionController implements Initializable {
         sportsmanDAO = (SportsmanDAO) Main.appContext.getBean("sportsmanDAO");
         competitionDayDAO = (CompetitionDayDAO) Main.appContext.getBean("competitionDayDAO");
         openedTabs = new ArrayList<>();
+        competitionDay.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                initTabs();
+                initTabAddButton();
+            }
+        });
 
         setCompetitionDays();
         initStartTable();
         initParticipantTable();
         initStartTab();
-        initTabs();
-        initTabAddButton();
-
 
         timerHandler = new TimerHandler(stopwatch, timeStarted, startTimerButton);
     }
@@ -153,8 +158,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         // Поиск нужного Dto экземпляра в
         TabDto currentTabDto = openedTabs
                                     .stream()
-                                    .filter(tabDto -> tabDto.getReferenceTab()
-                                    .equals(currentTab))
+                                    .filter(tabDto -> tabDto.getReferenceTab().equals(currentTab))
                                     .findFirst().orElse(null);
         if (currentTab.equals(participantTab)) {
             alertWrongTab();
@@ -167,8 +171,8 @@ public class MarksMonitorCompetitionController implements Initializable {
             return;
         }
         MarksGroupPopupController popupController = popup.getController();
-        popupController.assignCurrentTab(currentTabDto);
         popupController.marksMonitorCompetitionController = this;
+        popupController.assignCurrentTab(currentTabDto);
     }
 
     private void alertWrongTab() {
@@ -266,11 +270,11 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     private void initTabs() {
         openedTabs.clear();
+        tabPane.getTabs().removeAll(tabPane.getTabs().stream().filter(tab -> !tab.equals(participantTab)).toList());
 
-        List<Start> starts = startDAO.getStartsByCompetitionDayId(MainPageController.currentCompetitionDay.getId());
+        List<Start> starts = startDAO.getStartsByCompetitionDayId(competitionDay.getValue().getId());
         starts.forEach(start -> {
             if (start.getTab() == null) return;
-            if (start.getCompetitionDay().getId() != MainPageController.currentCompetitionDay.getId()) return;
 
             // Проверяем существует ли вкладка с данным ID
             TabDto tab = findTab(start.getTab());
@@ -287,6 +291,7 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     private void initTabAddButton() {
         Tab newTab = new Tab("+");
+        newTab.setId("addNewTab");
         newTab.setOnSelectionChanged(this::createNewTab);
         tabPane.getTabs().add(newTab);
         participantCompetitionTable.focusedProperty().addListener((obs, oldVal, newVal) -> {
@@ -338,7 +343,6 @@ public class MarksMonitorCompetitionController implements Initializable {
 
         tab.setOnSelectionChanged(this::updateStartsTable);
     }
-
 
     public void addNewCheakpoint(String chip) {
 
@@ -426,6 +430,8 @@ public class MarksMonitorCompetitionController implements Initializable {
             return;
         }
         competitionDay.setItems(FXCollections.observableList(new ArrayList<>(competitionDayDAO.getAllByCompetition(MainPageController.currentCompetition.getId()))));
-        competitionDay.setValue(competitionDay.getItems().get(0));
+        if (competitionDay.getValue() == null) {
+            competitionDay.setValue(competitionDay.getItems().get(0));
+        }
     }
 }
