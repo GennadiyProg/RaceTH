@@ -10,6 +10,7 @@ import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.model.dto.TabDto;
 import com.lifehouse.raceth.rfid.RFID;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -107,6 +108,8 @@ public class MarksMonitorCompetitionController implements Initializable {
     private TableColumn<Start, String> lapColumn;
     @FXML
     private TextField stopwatch, timeStarted;
+    @FXML
+    private ChoiceBox<CompetitionDay> competitionDay;
 
     private ParticipantDAO participantDAO;
     private CheckpointDAO checkpointDAO;
@@ -117,6 +120,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     private List<TabDto> openedTabs;
     private Boolean isRunningReader = true;
     private RFID thread;
+    private CompetitionDayDAO competitionDayDAO;
 
     TimerHandler timerHandler;
 
@@ -127,8 +131,10 @@ public class MarksMonitorCompetitionController implements Initializable {
         startDAO = (StartDAO) Main.appContext.getBean("startDAO");
         startTabDAO = (StartTabDAO) Main.appContext.getBean("startTabDAO");
         sportsmanDAO = (SportsmanDAO) Main.appContext.getBean("sportsmanDAO");
+        competitionDayDAO = (CompetitionDayDAO) Main.appContext.getBean("competitionDayDAO");
         openedTabs = new ArrayList<>();
 
+        setCompetitionDays();
         initStartTable();
         initParticipantTable();
         initStartTab();
@@ -137,6 +143,9 @@ public class MarksMonitorCompetitionController implements Initializable {
 
 
         timerHandler = new TimerHandler(stopwatch, timeStarted, startTimerButton);
+    }
+    public void onMounted() {
+        setCompetitionDays();
     }
     @FXML
     private void attachStart(ActionEvent event) {
@@ -410,5 +419,13 @@ public class MarksMonitorCompetitionController implements Initializable {
             thread.threadSuspend();
             isRunningReader = true;
         }
+    }
+
+    private void setCompetitionDays() {
+        if (MainPageController.currentCompetition == null) {
+            return;
+        }
+        competitionDay.setItems(FXCollections.observableList(new ArrayList<>(competitionDayDAO.getAllByCompetition(MainPageController.currentCompetition.getId()))));
+        competitionDay.setValue(competitionDay.getItems().get(0));
     }
 }

@@ -3,6 +3,7 @@ package com.lifehouse.raceth.logic;
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.StartDAO;
 import com.lifehouse.raceth.logic.competitionpage.CompetitionPageController;
+import com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController;
 import com.lifehouse.raceth.logic.startpage.StartPageController;
 import com.lifehouse.raceth.model.CompetitionDay;
 import com.lifehouse.raceth.model.competition.Competition;
@@ -42,23 +43,21 @@ public class MainPageController implements Initializable {
 
     @FXML
     public AnchorPane competitionPage;
-//    @FXML
-//    public AnchorPane run_page;
     @FXML
     public AnchorPane relay_run_page;
     @FXML
     public AnchorPane club_page;
     @FXML
-    public AnchorPane marks_monitor_page;//Вехнее меню выбора
-    @FXML
     private Label activeCompetitionLabel;
     @FXML
     private AnchorPane firstAnch;
 
-    private AnchorPane pane = null;
+    private AnchorPane StartPane = null;
+    private AnchorPane MarksMonitorPane = null;
 
     private StartDAO startDAO;
     private StartPageController startPageController;
+    private MarksMonitorCompetitionController marksMonitorCompetitionController;
 
     @FXML
     private CompetitionPageController competitionPageController;
@@ -78,6 +77,7 @@ public class MainPageController implements Initializable {
         competitionPageController.getValue().addListener((observable, oldValue, newValue) -> activeCompetitionLabel.setText(newValue));
 
         defineStartPageController();
+        defineMarksMonitorCompetitionController();
 
         frontCompetitionPage(null);
     }
@@ -94,7 +94,7 @@ public class MainPageController implements Initializable {
         }
 
         startPageController.onMounted();
-        pane.toFront();
+        StartPane.toFront();
     }
     @FXML
     private void frontRelayRunPage(ActionEvent event) {
@@ -116,7 +116,8 @@ public class MainPageController implements Initializable {
             return;
         }
 
-        marks_monitor_page.toFront();
+        marksMonitorCompetitionController.onMounted();
+        MarksMonitorPane.toFront();
     }
 
     private void alertNoSelectedCompetition() {
@@ -129,12 +130,24 @@ public class MainPageController implements Initializable {
     public void defineStartPageController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/start/StartPage.fxml"));
         try {
-            pane = loader.load();
-            pane.managedProperty().bind(pane.visibleProperty());
+            StartPane = loader.load();
+            StartPane.managedProperty().bind(StartPane.visibleProperty());
         } catch (IOException e) {
             e.printStackTrace();
         }
         startPageController = loader.getController();
-        firstAnch.getChildren().add(pane);
+        firstAnch.getChildren().add(StartPane);
+    }
+
+    public void defineMarksMonitorCompetitionController() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/marksmonitor/MarksMonitorCompetition.fxml"));
+        try {
+            MarksMonitorPane = loader.load();
+            MarksMonitorPane.managedProperty().bind(MarksMonitorPane.visibleProperty());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        marksMonitorCompetitionController = loader.getController();
+        firstAnch.getChildren().add(MarksMonitorPane);
     }
 }
