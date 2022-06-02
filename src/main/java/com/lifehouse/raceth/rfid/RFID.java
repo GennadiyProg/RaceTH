@@ -86,8 +86,8 @@ public class RFID implements Runnable{
             String receivedData = new String(inputPacket.getData());
             receivedData = receivedData.substring(receivedData.indexOf("Tag:")+4,receivedData.indexOf(0x0));
             System.out.println("SoutFromClass: "+ receivedData);
-            int delZeros = Integer.parseInt(receivedData);
-            receivedData = Integer.toString(delZeros);
+//            int delZeros = Integer.parseInt(receivedData);
+//            receivedData = Integer.toString(delZeros);
 
             guiController.addNewCheakpoint(receivedData);
 
