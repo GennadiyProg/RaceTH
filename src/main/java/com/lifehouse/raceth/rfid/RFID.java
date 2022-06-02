@@ -28,13 +28,13 @@ public class RFID implements Runnable{
     public static Thread getTagThread;
     private boolean suspendFlag;
     public DatagramSocket serverSocket;
-    private MarksMonitorCompetitionController guiController;
+    private final MarksMonitorCompetitionController guiController;
     public static final int SERVICE_PORT=50007;
     public static boolean threadFlag = true;
 
     public RFID(String threadName, MarksMonitorCompetitionController controller) {
         this.threadName = threadName;
-        this.getTagThread = new Thread(this,threadName);
+        getTagThread = new Thread(this,threadName);
         this.suspendFlag = true;
         guiController = controller;
         getTagThread.start();
