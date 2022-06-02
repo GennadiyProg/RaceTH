@@ -20,6 +20,7 @@ import lombok.Data;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /*
@@ -97,10 +98,8 @@ public class MarksGroupPopupController implements Initializable {
     // ЭТО ТОЖЕ НЕ ВЫЗЫВАТЬ ИЗ КОНСТРУКТОРА И initialize()
     private void initializeRecords() {
         tableList = runTable.getItems();
-        for (Start run : startDAO.getAllRuns()) {
-            if (run.getCompetitionDay().getId() != MainPageController.currentCompetitionDay.getId())
-                continue;
-
+        List<Start> starts = startDAO.getStartsByCompetitionDayId(marksMonitorCompetitionController.competitionDay.getValue().getId());
+        for (Start run : starts) {
             if (run.getTab() != null && run.getTab().getId() != currentTab.getTabInfo().getId())
                 continue;
 

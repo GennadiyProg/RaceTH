@@ -1,6 +1,7 @@
 package com.lifehouse.raceth.logic.marksmonitorpage;
 
 import java.lang.*;
+
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.*;
 import com.lifehouse.raceth.logic.MainPageController;
@@ -9,7 +10,7 @@ import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.model.dto.TabDto;
 import com.lifehouse.raceth.rfid.RFID;
-import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -107,6 +108,8 @@ public class MarksMonitorCompetitionController implements Initializable {
     private TableColumn<Start, String> lapColumn;
     @FXML
     private TextField stopwatch, timeStarted;
+    @FXML
+    public ChoiceBox<CompetitionDay> competitionDay;
 
     private ParticipantDAO participantDAO;
     private CheckpointDAO checkpointDAO;
@@ -117,6 +120,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     private List<TabDto> openedTabs;
     private Boolean isRunningReader = true;
     private RFID thread;
+    private CompetitionDayDAO competitionDayDAO;
 
     TimerHandler timerHandler;
 
@@ -127,26 +131,36 @@ public class MarksMonitorCompetitionController implements Initializable {
         startDAO = (StartDAO) Main.appContext.getBean("startDAO");
         startTabDAO = (StartTabDAO) Main.appContext.getBean("startTabDAO");
         sportsmanDAO = (SportsmanDAO) Main.appContext.getBean("sportsmanDAO");
+        competitionDayDAO = (CompetitionDayDAO) Main.appContext.getBean("competitionDayDAO");
         openedTabs = new ArrayList<>();
 
+        competitionDay.setOnAction(event -> {
+            initTabs();
+            initTabAddButton();
+            updateStartsTable(participantTab);
+        });
+
+        setCompetitionDays();
         initStartTable();
         initParticipantTable();
         initStartTab();
-        initTabs();
-        initTabAddButton();
 
-
+        participantTab.setOnSelectionChanged(this::updateStartsTable);
         timerHandler = new TimerHandler(stopwatch, timeStarted, startTimerButton);
     }
+
+    public void onMounted() {
+        setCompetitionDays();
+    }
+
     @FXML
     private void attachStart(ActionEvent event) {
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
         // Поиск нужного Dto экземпляра в
         TabDto currentTabDto = openedTabs
-                                    .stream()
-                                    .filter(tabDto -> tabDto.getReferenceTab()
-                                    .equals(currentTab))
-                                    .findFirst().orElse(null);
+                .stream()
+                .filter(tabDto -> tabDto.getReferenceTab().equals(currentTab))
+                .findFirst().orElse(null);
         if (currentTab.equals(participantTab)) {
             alertWrongTab();
             return;
@@ -158,8 +172,8 @@ public class MarksMonitorCompetitionController implements Initializable {
             return;
         }
         MarksGroupPopupController popupController = popup.getController();
-        popupController.assignCurrentTab(currentTabDto);
         popupController.marksMonitorCompetitionController = this;
+        popupController.assignCurrentTab(currentTabDto);
     }
 
     private void alertWrongTab() {
@@ -217,7 +231,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         return fxmlLoader;
     }
 
-    public void initStartTable(){
+    public void initStartTable() {
         groupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         lapColumn.setCellValueFactory(new PropertyValueFactory<>("laps"));
@@ -257,11 +271,11 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     private void initTabs() {
         openedTabs.clear();
+        tabPane.getTabs().removeAll(tabPane.getTabs().stream().filter(tab -> !tab.equals(participantTab)).toList());
 
-        List<Start> starts = startDAO.getStartsByCompetitionDayId(MainPageController.currentCompetitionDay.getId());
+        List<Start> starts = startDAO.getStartsByCompetitionDayId(competitionDay.getValue().getId());
         starts.forEach(start -> {
             if (start.getTab() == null) return;
-            if (start.getCompetitionDay().getId() != MainPageController.currentCompetitionDay.getId()) return;
 
             // Проверяем существует ли вкладка с данным ID
             TabDto tab = findTab(start.getTab());
@@ -278,6 +292,7 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     private void initTabAddButton() {
         Tab newTab = new Tab("+");
+        newTab.setId("addNewTab");
         newTab.setOnSelectionChanged(this::createNewTab);
         tabPane.getTabs().add(newTab);
         participantCompetitionTable.focusedProperty().addListener((obs, oldVal, newVal) -> {
@@ -310,9 +325,15 @@ public class MarksMonitorCompetitionController implements Initializable {
     public void updateStartsTable(Tab tab) {
 //        Tab tab = (Tab) event.getSource();
         if (tab.isSelected()) {
+            startTable.getItems().clear();
+
+            if (tab.equals(participantTab)) {
+                startTable.getItems().addAll(startDAO.getStartsByCompetitionDayId(competitionDay.getValue().getId()));
+                return;
+            }
+
             TabDto tabDto = openedTabs.stream().filter(el -> el.getReferenceTab().equals(tab)).findFirst().orElse(null);
             if (tabDto == null) return;
-            startTable.getItems().clear();
             startTable.getItems().addAll(tabDto.getStarts());
             startTable.refresh();
         }
@@ -329,7 +350,6 @@ public class MarksMonitorCompetitionController implements Initializable {
 
         tab.setOnSelectionChanged(this::updateStartsTable);
     }
-
 
     public void addNewCheakpoint(String chip) {
 
@@ -349,10 +369,10 @@ public class MarksMonitorCompetitionController implements Initializable {
         int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
         checkpointDAO.create(new Checkpoint(participant, LocalTime.now(), lap));
 
-        if (table != null) buildNewEntityPS(participant,lap,table);
+        if (table != null) buildNewEntityPS(participant, lap, table);
     }
 
-    private void buildNewEntityPS(Participant participant, int lap,TableView<ParticipantStartView> tab) {
+    private void buildNewEntityPS(Participant participant, int lap, TableView<ParticipantStartView> tab) {
         ParticipantStartView participantStartView = new ParticipantStartView(
                 participant.getId(),
                 LocalTime.now(),
@@ -392,8 +412,8 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
     @FXML
-    public void changeReadingStatus(){
-        if(isRunningReader){
+    public void changeReadingStatus() {
+        if (isRunningReader) {
             startReadingButton.setText("Остановить считывание");
             startReadingButton.getStyleClass().set(3, "btn-danger");
 
@@ -409,6 +429,16 @@ public class MarksMonitorCompetitionController implements Initializable {
             startReadingButton.getStyleClass().set(3, "btn-success");
             thread.threadSuspend();
             isRunningReader = true;
+        }
+    }
+
+    private void setCompetitionDays() {
+        if (MainPageController.currentCompetition == null) {
+            return;
+        }
+        competitionDay.setItems(FXCollections.observableList(new ArrayList<>(competitionDayDAO.getAllByCompetition(MainPageController.currentCompetition.getId()))));
+        if (competitionDay.getValue() == null || competitionDay.getValue().getCompetition().getId() != MainPageController.currentCompetition.getId()) {
+            competitionDay.setValue(competitionDay.getItems().get(0));
         }
     }
 }
