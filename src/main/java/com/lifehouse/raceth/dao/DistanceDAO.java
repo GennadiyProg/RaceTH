@@ -1,7 +1,9 @@
 package com.lifehouse.raceth.dao;
 
 import com.lifehouse.raceth.Main;
+import com.lifehouse.raceth.logic.MainPageController;
 import com.lifehouse.raceth.model.Distance;
+import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.view.DistanceView;
 import com.lifehouse.raceth.repository.DistanceRepository;
@@ -58,5 +60,9 @@ public class DistanceDAO {
 
         distanceRepository.deleteCompetitionRelation(distance.getId(), competition.getId());
         distanceRepository.saveAndFlush(distance);
+    }
+
+    public List<Distance> getCurrentCompetitionDistances() {
+        return distanceRepository.findAllByCompetitions(MainPageController.currentCompetition);
     }
 }
