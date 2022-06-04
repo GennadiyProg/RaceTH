@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController">
+<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController">
    <children>
       <GridPane alignment="TOP_CENTER" layoutX="13.0" layoutY="2.0" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="2.0">
         <columnConstraints>
@@ -171,7 +182,7 @@
                         <String fx:value="btn-warning" />
                      </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Загрузить из файла" onAction="#addFileExcel" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.halignment="LEFT">
+                  <Button mnemonicParsing="false" onAction="#addFileExcel" stylesheets="@../../assets/css/Buttons.css" text="Загрузить из файла" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -225,8 +236,8 @@
                                     <TableColumn fx:id="pcStartNumberColumn" prefWidth="116.79995727539062" resizable="false" text="Стартовый номер" />
                                     <TableColumn fx:id="pcBirthdateColumn" prefWidth="95.199951171875" resizable="false" text="Дата рождения" />
                                     <TableColumn fx:id="pcCityColumn" prefWidth="101.5999755859375" resizable="false" text="Город" />
-                                    <TableColumn prefWidth="100.800048828125" resizable="false" text="Клуб" />
-                                    <TableColumn prefWidth="103.2000732421875" resizable="false" text="Разряд" />
+                                    <TableColumn fx:id="pcClubColumn" prefWidth="100.800048828125" resizable="false" text="Клуб" />
+                                    <TableColumn fx:id="pcDischargeColumn" prefWidth="103.2000732421875" resizable="false" text="Разряд" />
                                     <TableColumn fx:id="pcGroupColumn" prefWidth="92.800048828125" resizable="false" text="Группа" />
                                  </columns>
                               </TableView>

@@ -72,6 +72,10 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     private TableColumn<ParticipantCompetitionView, String> pcCityColumn;
     @FXML
+    private TableColumn<ParticipantCompetitionView, String> pcClubColumn;
+    @FXML
+    private TableColumn<ParticipantCompetitionView, String> pcDischargeColumn;
+    @FXML
     private TableColumn<ParticipantCompetitionView, String> pcGroupColumn;
 
 
@@ -214,7 +218,7 @@ public class MarksMonitorCompetitionController implements Initializable {
                 int ageParticipant = LocalDate.now().getYear() - newValue.getSportsman().getBirthdate().getYear();
                 Start participantStart = starts.stream()
                         .filter(start -> ageParticipant < start.getGroup().getAgeTo() &&
-                                                ageParticipant > start.getGroup().getAgeFrom()).findFirst().orElse(null);
+                                ageParticipant > start.getGroup().getAgeFrom()).findFirst().orElse(null);
                 newValue.setStart(participantStart);
             }
             sportsmanDAO.create(newValue.getSportsman());
@@ -261,6 +265,8 @@ public class MarksMonitorCompetitionController implements Initializable {
         pcStartNumberColumn.setCellValueFactory(new PropertyValueFactory<>("startNumber"));
         pcBirthdateColumn.setCellValueFactory(new PropertyValueFactory<>("birthdate"));
         pcCityColumn.setCellValueFactory(new PropertyValueFactory<>("region"));
+        pcClubColumn.setCellValueFactory(new PropertyValueFactory<>("club"));
+        pcDischargeColumn.setCellValueFactory(new PropertyValueFactory<>("discharge"));
         pcGroupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
 
         ObservableList<ParticipantCompetitionView> participantViews = participantCompetitionTable.getItems();
@@ -391,8 +397,6 @@ public class MarksMonitorCompetitionController implements Initializable {
         if (table != null) buildNewEntityPS(participant, lap, table);
     }
 
-    // отставание от лидера, время на круге
-    //если первый, то нет отставания
     private void buildNewEntityPS(Participant participant, int lap, TableView<ParticipantStartView> tab) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
         ParticipantStartView participantStartView = new ParticipantStartView(
@@ -476,5 +480,38 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     public void addFileExcel() {
         excelRead.readExcel();
+    }
+
+    public void addNewParticipant(List<String> rowValue) {
+        buildNewEntityPC(rowValue, participantCompetitionTable);
+    }
+
+    private void buildNewEntityPC(List<String> rowValue, TableView<ParticipantCompetitionView> participantCompetitionTable) {
+        participantCompetitionTable.getItems().add(
+                new ParticipantCompetitionView(
+                        1,
+                        rowValue.get(0), //фамилия
+                        rowValue.get(1), //имя
+                        rowValue.get(2), //отчество
+                        Gender.valueOf(rowValue.get(3).toUpperCase(Locale.ROOT)), //пол
+                        buildChipString(rowValue.get(4)), //чип
+                        Integer.parseInt(rowValue.get(5)), //стартовый номер
+                        LocalDate.parse(rowValue.get(6)), //дата рождения
+                        rowValue.get(7), //город
+                        rowValue.get(8), //клуб
+                        rowValue.get(9), //разряд
+                        rowValue.get(10) //группа
+                        )
+        );
+    }
+
+    private String buildChipString(String chip) {
+        if (chip.length() < 8) {
+            char[] arr = new char[8 - chip.length()];
+            Arrays.fill(arr, '0');
+            return new String(arr) + chip;
+        } else {
+            return chip;
+        }
     }
 }
