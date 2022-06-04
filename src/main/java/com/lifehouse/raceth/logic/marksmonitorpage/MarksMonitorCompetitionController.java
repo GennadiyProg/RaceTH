@@ -29,6 +29,7 @@ import javafx.event.Event;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -202,6 +203,14 @@ public class MarksMonitorCompetitionController implements Initializable {
                 newValue.setStart(storedParticipant.getStart());
                 newValue.getSportsman().setId(storedParticipant.getSportsman().getId());
                 newValue.setId(storedParticipant.getId());
+            } else {
+                List<Start> starts = startDAO.getStartsByCompetitionDayId(competitionDay.getSelectionModel().getSelectedItem().getId());
+                starts = starts.stream().filter(start -> newValue.getSportsman().getGender() == start.getGroup().getGender()).toList();
+                int ageParticipant = LocalDate.now().getYear() - newValue.getSportsman().getBirthdate().getYear();
+                Start participantStart = starts.stream()
+                        .filter(start -> ageParticipant < start.getGroup().getAgeTo() &&
+                                                ageParticipant > start.getGroup().getAgeFrom()).findFirst().orElse(null);
+                newValue.setStart(participantStart);
             }
             sportsmanDAO.create(newValue.getSportsman());
             ParticipantCompetitionView newParticipant = ParticipantCompetitionView.convertToView(participantDAO.update(newValue));
