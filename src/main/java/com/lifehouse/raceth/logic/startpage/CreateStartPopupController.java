@@ -139,8 +139,8 @@ public class CreateStartPopupController implements Initializable {
     }
 
     private void updateEntity(Start start) {
-        startDAO.update(start);
         currentStart.setFields(start);
+        startDAO.update(currentStart);
         startTable.refresh();
     }
 

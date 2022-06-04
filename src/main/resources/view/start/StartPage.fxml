@@ -68,7 +68,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#RemoveRows" stylesheets="@../../assets/css/Buttons.css" text="Удалить" textAlignment="RIGHT" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#removeRows" stylesheets="@../../assets/css/Buttons.css" text="Удалить" textAlignment="RIGHT" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-common" />
@@ -82,7 +82,7 @@
                         <String fx:value="btn-common" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="createRun_button" mnemonicParsing="false" onAction="#AddRun" stylesheets="@../../assets/css/Buttons.css" text="Создать старт" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="createRun_button" mnemonicParsing="false" onAction="#addRun" stylesheets="@../../assets/css/Buttons.css" text="Создать старт" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
