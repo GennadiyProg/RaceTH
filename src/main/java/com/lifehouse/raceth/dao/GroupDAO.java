@@ -1,6 +1,7 @@
 package com.lifehouse.raceth.dao;
 
 import com.lifehouse.raceth.Main;
+import com.lifehouse.raceth.logic.MainPageController;
 import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.competition.Competition;
 import com.lifehouse.raceth.model.view.GroupView;
@@ -58,5 +59,9 @@ public class GroupDAO {
 
         groupRepository.deleteCompetitionRelation(group.getId(), competition.getId());
         groupRepository.saveAndFlush(group);
+    }
+
+    public List<Group> getCurrentCompetitionGroups() {
+        return groupRepository.findAllByCompetitions(MainPageController.currentCompetition);
     }
 }

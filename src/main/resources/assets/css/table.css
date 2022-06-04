@@ -61,7 +61,6 @@
 .table-view {
     -fx-background-color: #fafafa;
    /* -fx-background-radius: 17px 17px 0px 0px;*/
-    -fx-effect:  dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 6, 0, 0, 2);
 }
 
 .table-view .column-header-background{
@@ -81,6 +80,28 @@
 
 .table-view .column-header-background .filler {
     -fx-background-color: transparent;
+}
+
+.table-view *.scroll-bar:horizontal *.increment-button,
+.table-view *.scroll-bar:horizontal *.decrement-button {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.table-view *.scroll-bar:horizontal *.increment-arrow,
+.table-view *.scroll-bar:horizontal *.decrement-arrow {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-shape: null;
+}
+
+.pane{
+-fx-effect:dropshadow(three-pass-box, rgba(0, 0, 0, 0.25), 6, 0, 1, 1);
+-fx-background-color: #fafafa;
 }
 
 /*.scroll-bar:horizontal .track,

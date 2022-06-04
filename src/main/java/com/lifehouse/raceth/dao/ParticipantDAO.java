@@ -17,8 +17,8 @@ public class ParticipantDAO {
         this.participantRepository = (ParticipantRepository) Main.appContext.getBean("participantRepository");
     }
 
-    public void create(Participant participant) {
-        participantRepository.save(participant);
+    public Participant update(Participant participant) {
+        return participantRepository.save(participant);
     }
 
     public Participant getParticipant(long id) {
@@ -36,6 +36,10 @@ public class ParticipantDAO {
     public List<ParticipantStartView> getAllParticipantViewsByStarts(List<Long> startsId){
         return  participantRepository.findAllByStartsId(startsId).stream()
                 .map(ParticipantStartView::convertToView).toList();
+    }
+
+    public Participant getParticipantByChip(String chip) {
+        return participantRepository.findByChip(chip);
     }
 
     public void delete(Participant participant) {

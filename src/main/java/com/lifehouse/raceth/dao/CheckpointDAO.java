@@ -2,9 +2,11 @@ package com.lifehouse.raceth.dao;
 
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.Checkpoint;
+import com.lifehouse.raceth.model.Participant;
 import com.lifehouse.raceth.repository.CheckpointRepository;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Component
@@ -31,7 +33,25 @@ public class CheckpointDAO {
         return checkpointRepository.findAll();
     }
 
+    public int getCountCheakpointByParticipiant(Participant participant) {
+        return checkpointRepository.countCheckpointByParticipant(participant);
+    }
+
+    public int getParticipiantPlace(Participant participant,int lap) {
+        return checkpointRepository.countCheckpointByParticipant_StartAndLap(participant.getStart(),lap);
+    }
+
     public void delete(Checkpoint checkpoint) {
         checkpointRepository.delete(checkpoint);
     }
+
+    public LocalTime getlastLapTime(Participant participant, int lap) {
+        return checkpointRepository.findCheckpointByParticipantAndLap(participant,lap).getCrossingTime();
+    }
+
+    public Checkpoint getLeader(int lap) {
+        return checkpointRepository.getLeader(lap);
+    }
+
+    public Checkpoint getLastCheckpointByParticipant(Participant participant) {return checkpointRepository.findFirstByParticipantOrderByCrossingTimeDesc(participant);}
 }

@@ -57,7 +57,7 @@
 
       <AnchorPane layoutY="110.0" minWidth="-Infinity" prefHeight="610.0" prefWidth="190.0" style="-fx-background-color: #FAFAFA;">
          <children>
-            <ToggleButton fx:id="sorevButt" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleButtonAction" stylesheets="@../assets/css/table.css" text="Соревнование" wrapText="true">
+            <ToggleButton fx:id="sorevButt" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#frontCompetitionPage" stylesheets="@../assets/css/table.css" text="Соревнование" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -69,7 +69,7 @@
                <toggleGroup>
                   <ToggleGroup fx:id="ButtGroup" />
                </toggleGroup></ToggleButton>
-            <ToggleButton fx:id="zabegButt" alignment="CENTER_LEFT" layoutY="66.0" mnemonicParsing="false" onAction="#handleButtonAction2" stylesheets="@../assets/css/table.css" text="Старты" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="zabegButt" alignment="CENTER_LEFT" layoutY="66.0" mnemonicParsing="false" onAction="#frontStartPage" stylesheets="@../assets/css/table.css" text="Старты" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -78,7 +78,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="relayButt" alignment="CENTER_LEFT" layoutY="132.0" mnemonicParsing="false" onAction="#handleButtonAction3" stylesheets="@../assets/css/table.css" text="Эстафеты" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="relayButt" alignment="CENTER_LEFT" layoutY="132.0" mnemonicParsing="false" onAction="#frontRelayRunPage" stylesheets="@../assets/css/table.css" text="Эстафеты" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -87,7 +87,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="checkButt" alignment="CENTER_LEFT" layoutY="264.0" mnemonicParsing="false" onAction="#handleButtonAction7" stylesheets="@../assets/css/table.css" text="Монитор отметок" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="checkButt" alignment="CENTER_LEFT" layoutY="264.0" mnemonicParsing="false" onAction="#frontMarksMonitorPage" stylesheets="@../assets/css/table.css" text="Монитор отметок" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -96,7 +96,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="clubsButt" alignment="CENTER_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#handleButtonAction6" stylesheets="@../assets/css/table.css" text="Клубы" toggleGroup="$ButtGroup">
+            <ToggleButton fx:id="clubsButt" alignment="CENTER_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#frontClubPage" stylesheets="@../assets/css/table.css" text="Клубы" toggleGroup="$ButtGroup">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -121,7 +121,6 @@
             <fx:include fx:id="competitionPage" maxHeight="-Infinity" maxWidth="-Infinity" source="competition/CompetitionPage.fxml" />
             <fx:include fx:id="club_page" maxHeight="-Infinity" maxWidth="-Infinity" source="club/ClubPage.fxml" />
             <fx:include fx:id="relay_run_page" maxHeight="-Infinity" maxWidth="-Infinity" source="relayrun/RelayRunPage.fxml" />
-            <fx:include fx:id="marks_monitor_page" maxHeight="-Infinity" maxWidth="-Infinity" source="marksmonitor/MarksMonitorCompetition.fxml" />
          </children>
       </AnchorPane>
    </children>
