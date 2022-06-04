@@ -29,7 +29,7 @@ public class RFID implements Runnable{
     private boolean suspendFlag;
     public DatagramSocket serverSocket;
     private final MarksMonitorCompetitionController guiController;
-    public static final int SERVICE_PORT=50007;
+    public static final int SERVICE_PORT=27069;
     public static boolean threadFlag = true;
 
     public RFID(String threadName, MarksMonitorCompetitionController controller) {
@@ -84,14 +84,14 @@ public class RFID implements Runnable{
 
             // Выведите на экран отправленные клиентом данные
             String receivedData = new String(inputPacket.getData());
-            receivedData = receivedData.substring(receivedData.indexOf("Tag:")+4,receivedData.indexOf(0x0));
+            receivedData = receivedData.substring(receivedData.indexOf("Tag:")+4,receivedData.indexOf(0x0)).trim();
             System.out.println("SoutFromClass: "+ receivedData);
 //            int delZeros = Integer.parseInt(receivedData);
 //            receivedData = Integer.toString(delZeros);
 
             guiController.addNewCheakpoint(receivedData);
 
-        } catch (IOException e){
+        } catch (Exception e){
             System.out.println("ups in rfid");
         } finally {
             serverSocket.close();

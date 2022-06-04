@@ -363,6 +363,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     public void addNewCheakpoint(String chip) {
 
         Participant participant = participantDAO.getParticipantByChip(chip);
+        if (participant == null) return;
 
         //Поиск искомой вкладки
         TableView<ParticipantStartView> table = null;
