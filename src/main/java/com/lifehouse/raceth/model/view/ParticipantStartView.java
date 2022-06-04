@@ -47,7 +47,8 @@ public class ParticipantStartView {
             String name,
             String group,
             int lap,
-            int place) {
+            int place,
+            LocalTime behindTheLeader) {
         this.id = id;
         this.currentTime = currentTime;
         this.timeOnDistance = timeOnDistance;
@@ -58,6 +59,7 @@ public class ParticipantStartView {
         this.group = group;
         this.lap = lap;
         this.place = place;
+        this.behindTheLeader = behindTheLeader;
     }
 
     public static ParticipantStartView convertToView(Participant participant){

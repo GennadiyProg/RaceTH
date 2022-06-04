@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController">
+<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController">
    <children>
       <GridPane alignment="TOP_CENTER" layoutX="13.0" layoutY="2.0" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="2.0">
         <columnConstraints>
@@ -231,8 +220,8 @@
                                     <TableColumn fx:id="pcLastnameColumn" prefWidth="77.59994125366211" resizable="false" text="Фамилия" />
                                     <TableColumn fx:id="pcNameColumn" prefWidth="104.00000762939453" resizable="false" text="Имя" />
                                     <TableColumn fx:id="pcPatronymicColumn" prefWidth="91.20002746582031" resizable="false" text="Отчество" />
-                                    <TableColumn fx:id="pcGenderColumn" prefWidth="105.60003662109375" resizable="false" text="Пол" />
-                                    <TableColumn fx:id="pcChipColumn" prefWidth="33.5999755859375" resizable="false" text="Чип" />
+                                    <TableColumn fx:id="pcGenderColumn" prefWidth="38.0" resizable="false" text="Пол" />
+                                    <TableColumn fx:id="pcChipColumn" prefWidth="102.0" resizable="false" text="Чип" />
                                     <TableColumn fx:id="pcStartNumberColumn" prefWidth="116.79995727539062" resizable="false" text="Стартовый номер" />
                                     <TableColumn fx:id="pcBirthdateColumn" prefWidth="95.199951171875" resizable="false" text="Дата рождения" />
                                     <TableColumn fx:id="pcCityColumn" prefWidth="101.5999755859375" resizable="false" text="Город" />

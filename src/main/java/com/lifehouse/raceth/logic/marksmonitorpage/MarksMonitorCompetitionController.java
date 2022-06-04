@@ -30,6 +30,8 @@ import javafx.event.Event;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Data
@@ -352,9 +354,13 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
     public void addNewCheakpoint(String chip) {
-
         Participant participant = participantDAO.getParticipantByChip(chip);
+        int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
         if (participant == null) return;
+        if (lap != 1) {
+            if (ChronoUnit.SECONDS.between(checkpointDAO.getlastLapTime(participant, lap - 1), LocalTime.now()) < 10)
+                return;
+        }
 
         //Поиск искомой вкладки
         TableView<ParticipantStartView> table = null;
@@ -367,29 +373,42 @@ public class MarksMonitorCompetitionController implements Initializable {
         }
 
         lastNumber.setText(Integer.toString(participant.getStartNumber()));
-        int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
+
         checkpointDAO.create(new Checkpoint(participant, LocalTime.now(), lap));
 
         if (table != null) buildNewEntityPS(participant, lap, table);
     }
 
+    // отставание от лидера, время на круге
+    //если первый, то нет отставания
     private void buildNewEntityPS(Participant participant, int lap, TableView<ParticipantStartView> tab) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
         ParticipantStartView participantStartView = new ParticipantStartView(
                 participant.getId(),
-                LocalTime.now(),
-                calculateTimeOnDistance(participant.getStart().getStartTime()),
+                LocalTime.parse(LocalTime.now().format(formatter)),
+                LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(formatter)),
                 participant.getChip(),
                 participant.getStartNumber(),
                 participant.getSportsman().getLastname(),
                 participant.getSportsman().getName(),
                 participant.getStart().getGroup().getName(),
                 lap,
-                checkpointDAO.getParticipiantPlace(participant, lap)
+                checkpointDAO.getParticipiantPlace(participant, lap),
+                LocalTime.parse(calculateTime(checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(), checkpointDAO.getLeader(lap).getCrossingTime()).format(formatter)),
+                LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter))
         );
         tab.getItems().add(participantStartView);
     }
 
-    private LocalTime calculateTimeOnDistance(LocalTime startTime) {
+    private LocalTime calculateTime(LocalTime participant, LocalTime leader) {
+        participant = participant.minusHours(leader.getHour());
+        participant = participant.minusMinutes(leader.getMinute());
+        participant = participant.minusSeconds(leader.getSecond());
+        participant = participant.minusNanos(leader.getNano());
+        return participant;
+    }
+
+    private LocalTime calculateTimeToNow(LocalTime startTime) {
         LocalTime now = LocalTime.now();
         now = now.minusHours(startTime.getHour());
         now = now.minusMinutes(startTime.getMinute());
