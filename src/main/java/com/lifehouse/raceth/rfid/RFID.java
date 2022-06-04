@@ -22,19 +22,19 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
-public class RFID implements Runnable{
+public class RFID implements Runnable {
 
     private String threadName;
     public static Thread getTagThread;
     private boolean suspendFlag;
     public DatagramSocket serverSocket;
     private final MarksMonitorCompetitionController guiController;
-    public static final int SERVICE_PORT=27069;
+    public static final int SERVICE_PORT = 27069;
     public static boolean threadFlag = true;
 
     public RFID(String threadName, MarksMonitorCompetitionController controller) {
         this.threadName = threadName;
-        getTagThread = new Thread(this,threadName);
+        getTagThread = new Thread(this, threadName);
         this.suspendFlag = true;
         guiController = controller;
         getTagThread.start();
@@ -70,7 +70,7 @@ public class RFID implements Runnable{
 
         serverSocket = new DatagramSocket(SERVICE_PORT);
 
-        try{
+        try {
             /* Буфер для хранения получаемых данных,он временно хранит данные в случае задержек связи */
             byte[] receivingDataBuffer = new byte[1024];
 
@@ -84,15 +84,16 @@ public class RFID implements Runnable{
 
             // Выведите на экран отправленные клиентом данные
             String receivedData = new String(inputPacket.getData());
-            receivedData = receivedData.substring(receivedData.indexOf("Tag:")+4,receivedData.indexOf(0x0)).trim();
-            System.out.println("SoutFromClass: "+ receivedData);
+            receivedData = receivedData.substring(receivedData.indexOf("Tag:") + 4, receivedData.indexOf(0x0)).trim();
+            System.out.println("SoutFromClass: " + receivedData);
 //            int delZeros = Integer.parseInt(receivedData);
 //            receivedData = Integer.toString(delZeros);
 
             guiController.addNewCheakpoint(receivedData);
 
-        } catch (Exception e){
-            System.out.println("ups in rfid");
+        } catch (Exception e) {
+//            System.out.println("ups in rfid");
+            e.printStackTrace();
         } finally {
             serverSocket.close();
         }
@@ -106,7 +107,6 @@ public class RFID implements Runnable{
 //        Thread potok = new RFIDThread();
 //        potok.start();
 //    }
-
 
 
 }
