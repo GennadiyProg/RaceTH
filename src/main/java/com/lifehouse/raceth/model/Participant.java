@@ -24,12 +24,22 @@ public class Participant {
     @ManyToOne
     @Nullable
     private RelayTeam relayTeam;
+    @Nullable
     private int relayStage;
     private int startNumber;
+    private String club;
 
     public Participant(String chip, Sportsman sportsman, int startNumber) {
         this.chip = chip;
         this.sportsman = sportsman;
         this.startNumber = startNumber;
+    }
+
+    public Participant(String chip, Sportsman sportsman, Start start, int startNumber,String club) {
+        this.chip = chip;
+        this.sportsman = sportsman;
+        this.start = start;
+        this.startNumber = startNumber;
+        this.club = club;
     }
 }

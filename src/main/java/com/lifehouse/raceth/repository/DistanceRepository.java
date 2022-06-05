@@ -21,4 +21,6 @@ public interface DistanceRepository extends JpaRepository<Distance, Long> {
 
 
     List<Distance> findAllByCompetitions(Competition competition);
+
+    Distance findByLength(int length);
 }

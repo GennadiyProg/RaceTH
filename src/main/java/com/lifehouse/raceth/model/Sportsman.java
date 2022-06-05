@@ -26,10 +26,11 @@ public class Sportsman {
     @NotNull
     private LocalDate birthdate;
     @NotNull
-    @Enumerated (value = EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     private Gender gender;
     @NotNull
     private String region;
+    private String discharge;
 
     public Sportsman(String name, String lastname, String patronymic, LocalDate birthdate, Gender gender, String region) {
         this.name = name;
@@ -38,5 +39,15 @@ public class Sportsman {
         this.birthdate = birthdate;
         this.gender = gender;
         this.region = region;
+    }
+
+    public Sportsman(String name, String lastname, String patronymic, LocalDate birthdate, Gender gender, String region, String discharge) {
+        this.name = name;
+        this.lastname = lastname;
+        this.patronymic = patronymic;
+        this.birthdate = birthdate;
+        this.gender = gender;
+        this.region = region;
+        this.discharge = discharge;
     }
 }

@@ -65,4 +65,8 @@ public class DistanceDAO {
     public List<Distance> getCurrentCompetitionDistances() {
         return distanceRepository.findAllByCompetitions(MainPageController.currentCompetition);
     }
+
+    public Distance getDistanceByLength(int length) {
+        return distanceRepository.findByLength(length);
+    }
 }

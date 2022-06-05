@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController;
 import org.apache.poi.ss.usermodel.*;
@@ -101,6 +102,7 @@ public class ExcelRead {
         list.add(0, "Начало");
         for (Row row : sheet) {
             list.clear();
+            if (Objects.equals(row.getCell(0).getStringCellValue(), "Фамилия")) continue;
             for (Cell cell : row) {
                 list.add(formatCell(row, cell));
             }

@@ -124,11 +124,13 @@ public class MarksMonitorCompetitionController implements Initializable {
     private StartDAO startDAO;
     private StartTabDAO startTabDAO;
     private SportsmanDAO sportsmanDAO;
+    private CompetitionDayDAO competitionDayDAO;
+    private DistanceDAO distanceDAO;
 
     private List<TabDto> openedTabs;
     private Boolean isRunningReader = true;
     private RFID thread;
-    private CompetitionDayDAO competitionDayDAO;
+
 
     TimerHandler timerHandler;
 
@@ -142,6 +144,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         startTabDAO = (StartTabDAO) Main.appContext.getBean("startTabDAO");
         sportsmanDAO = (SportsmanDAO) Main.appContext.getBean("sportsmanDAO");
         competitionDayDAO = (CompetitionDayDAO) Main.appContext.getBean("competitionDayDAO");
+        distanceDAO = (DistanceDAO) Main.appContext.getBean("distanceDAO");
         openedTabs = new ArrayList<>();
 
         competitionDay.setOnAction(event -> {
@@ -486,25 +489,61 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
     public void addNewParticipant(List<String> rowValue) {
-        buildNewEntityPC(rowValue, participantCompetitionTable);
+        Sportsman sportsman = sportsmanDAO.getSportsmenByFioAndBirthdate(rowValue.get(0), rowValue.get(1), rowValue.get(2), LocalDate.parse(rowValue.get(6)));
+
+        if (sportsman == null) {
+            sportsmanDAO.create(new Sportsman(
+                    rowValue.get(1),
+                    rowValue.get(0),
+                    rowValue.get(2),
+                    LocalDate.parse(rowValue.get(6)),
+                    Gender.valueOf(rowValue.get(3).toUpperCase(Locale.ROOT)),
+                    rowValue.get(7),
+                    rowValue.get(9)
+            ));
+            sportsman = sportsmanDAO.getSportsmenByFioAndBirthdate(rowValue.get(0), rowValue.get(1), rowValue.get(2), LocalDate.parse(rowValue.get(6)));
+        }
+        List<Start> starts = startDAO.getStartsByCompetitionDayId(competitionDay.getSelectionModel().getSelectedItem().getId());
+        Sportsman finalSportsman = sportsman;
+        starts = starts.stream().filter(start -> finalSportsman.getGender() == start.getGroup().getGender()).toList();
+        int ageParticipant = LocalDate.now().getYear() - finalSportsman.getBirthdate().getYear();
+        Distance distance = distanceDAO.getDistanceByLength(Integer.parseInt(rowValue.get(10)));
+        Start participantStart = starts.stream()
+                .filter(start -> ageParticipant < start.getGroup().getAgeTo() &&
+                        ageParticipant > start.getGroup().getAgeFrom() &&
+                        start.getDistance().getId() == distance.getId())
+                .findFirst().orElse(null);
+
+        Participant participant = new Participant(
+                buildChipString(rowValue.get(4)),
+                finalSportsman,
+                participantStart,
+                Integer.parseInt(rowValue.get(5)),
+                rowValue.get(8)
+        );
+
+        participantDAO.update(participant);
+
+        buildNewEntityPC(participant, participantCompetitionTable);
+
     }
 
-    private void buildNewEntityPC(List<String> rowValue, TableView<ParticipantCompetitionView> participantCompetitionTable) {
+    private void buildNewEntityPC(Participant participant, TableView<ParticipantCompetitionView> participantCompetitionTable) {
         participantCompetitionTable.getItems().add(
                 new ParticipantCompetitionView(
                         1,
-                        rowValue.get(0), //фамилия
-                        rowValue.get(1), //имя
-                        rowValue.get(2), //отчество
-                        Gender.valueOf(rowValue.get(3).toUpperCase(Locale.ROOT)), //пол
-                        buildChipString(rowValue.get(4)), //чип
-                        Integer.parseInt(rowValue.get(5)), //стартовый номер
-                        LocalDate.parse(rowValue.get(6)), //дата рождения
-                        rowValue.get(7), //город
-                        rowValue.get(8), //клуб
-                        rowValue.get(9), //разряд
-                        rowValue.get(10) //группа
-                        )
+                        participant.getSportsman().getLastname(),
+                        participant.getSportsman().getName(),
+                        participant.getSportsman().getPatronymic(),
+                        participant.getSportsman().getGender(),
+                        participant.getChip(),
+                        participant.getStartNumber(),
+                        participant.getSportsman().getBirthdate(),
+                        participant.getSportsman().getRegion(),
+                        participant.getClub(),
+                        participant.getSportsman().getDischarge(),
+                        participant.getStart().getGroup().getName()
+                )
         );
     }
 
@@ -516,5 +555,9 @@ public class MarksMonitorCompetitionController implements Initializable {
         } else {
             return chip;
         }
+    }
+
+    private String getParticipantGroup(String distance, LocalDate birthdate) {
+        return "123";
     }
 }

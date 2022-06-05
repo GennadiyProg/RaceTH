@@ -5,6 +5,7 @@ import com.lifehouse.raceth.model.Sportsman;
 import com.lifehouse.raceth.repository.SportsmanRepository;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -27,8 +28,11 @@ public class SportsmanDAO {
         return sportsmanRepository.findAll();
     }
 
-
     public void delete(Sportsman sportsman) {
         sportsmanRepository.delete(sportsman);
+    }
+
+    public Sportsman getSportsmenByFioAndBirthdate(String lastname, String name, String patronymic, LocalDate birthdate) {
+        return sportsmanRepository.findSportsmanByLastnameAndNameAndPatronymicAndBirthdate(lastname, name, patronymic, birthdate);
     }
 }
