@@ -382,8 +382,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
         if (participant == null) return;
         if (lap != 1) {
-            if (ChronoUnit.SECONDS.between(checkpointDAO.getlastLapTime(participant, lap - 1), LocalTime.now()) < 10)
-                return;
+            if (ChronoUnit.SECONDS.between(checkpointDAO.getlastLapTime(participant, lap - 1), LocalTime.now()) < 10) return;
         }
 
         //Поиск искомой вкладки
@@ -419,7 +418,7 @@ public class MarksMonitorCompetitionController implements Initializable {
                 lap,
                 checkpointDAO.getParticipiantPlace(participant, lap),
                 LocalTime.parse(calculateTime(checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(), checkpointDAO.getLeader(lap).getCrossingTime()).format(formatter)),
-                LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter))
+                lap > 1 ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter)) : LocalTime.of(0,0,0)
         );
         tab.getItems().add(participantStartView);
     }
