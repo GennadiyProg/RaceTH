@@ -9,6 +9,7 @@ import com.lifehouse.raceth.model.*;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.model.dto.TabDto;
+import com.lifehouse.raceth.readingfiles.ExcelRead;
 import com.lifehouse.raceth.rfid.RFID;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -71,6 +72,10 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     private TableColumn<ParticipantCompetitionView, String> pcCityColumn;
     @FXML
+    private TableColumn<ParticipantCompetitionView, String> pcClubColumn;
+    @FXML
+    private TableColumn<ParticipantCompetitionView, String> pcDischargeColumn;
+    @FXML
     private TableColumn<ParticipantCompetitionView, String> pcGroupColumn;
 
 
@@ -119,13 +124,17 @@ public class MarksMonitorCompetitionController implements Initializable {
     private StartDAO startDAO;
     private StartTabDAO startTabDAO;
     private SportsmanDAO sportsmanDAO;
+    private CompetitionDayDAO competitionDayDAO;
+    private DistanceDAO distanceDAO;
 
     private List<TabDto> openedTabs;
     private Boolean isRunningReader = true;
     private RFID thread;
-    private CompetitionDayDAO competitionDayDAO;
+
 
     TimerHandler timerHandler;
+
+    ExcelRead excelRead = new ExcelRead(this);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -135,6 +144,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         startTabDAO = (StartTabDAO) Main.appContext.getBean("startTabDAO");
         sportsmanDAO = (SportsmanDAO) Main.appContext.getBean("sportsmanDAO");
         competitionDayDAO = (CompetitionDayDAO) Main.appContext.getBean("competitionDayDAO");
+        distanceDAO = (DistanceDAO) Main.appContext.getBean("distanceDAO");
         openedTabs = new ArrayList<>();
 
         competitionDay.setOnAction(event -> {
@@ -261,6 +271,8 @@ public class MarksMonitorCompetitionController implements Initializable {
         pcStartNumberColumn.setCellValueFactory(new PropertyValueFactory<>("startNumber"));
         pcBirthdateColumn.setCellValueFactory(new PropertyValueFactory<>("birthdate"));
         pcCityColumn.setCellValueFactory(new PropertyValueFactory<>("region"));
+        pcClubColumn.setCellValueFactory(new PropertyValueFactory<>("club"));
+        pcDischargeColumn.setCellValueFactory(new PropertyValueFactory<>("discharge"));
         pcGroupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
 
         ObservableList<ParticipantCompetitionView> participantViews = participantCompetitionTable.getItems();
@@ -370,8 +382,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
         if (participant == null) return;
         if (lap != 1) {
-            if (ChronoUnit.SECONDS.between(checkpointDAO.getlastLapTime(participant, lap - 1), LocalTime.now()) < 10)
-                return;
+            if (ChronoUnit.SECONDS.between(checkpointDAO.getlastLapTime(participant, lap - 1), LocalTime.now()) < 10) return;
         }
 
         //Поиск искомой вкладки
@@ -386,17 +397,17 @@ public class MarksMonitorCompetitionController implements Initializable {
 
         lastNumber.setText(Integer.toString(participant.getStartNumber()));
 
-        checkpointDAO.create(new Checkpoint(participant, LocalTime.now(), lap));
+        Checkpoint checkpoint = new Checkpoint(participant, LocalTime.now(), lap);
 
-        if (table != null) buildNewEntityPS(participant, lap, table);
+        checkpointDAO.create(checkpoint);
+
+        if (table != null) buildNewEntityPS(participant, lap, table, checkpoint);
     }
 
-    // отставание от лидера, время на круге
-    //если первый, то нет отставания
-    private void buildNewEntityPS(Participant participant, int lap, TableView<ParticipantStartView> tab) {
+    private void buildNewEntityPS(Participant participant, int lap, TableView<ParticipantStartView> tab, Checkpoint checkpoint) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
         ParticipantStartView participantStartView = new ParticipantStartView(
-                participant.getId(),
+                checkpoint.getId(),
                 LocalTime.parse(LocalTime.now().format(formatter)),
                 LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(formatter)),
                 participant.getChip(),
@@ -407,7 +418,7 @@ public class MarksMonitorCompetitionController implements Initializable {
                 lap,
                 checkpointDAO.getParticipiantPlace(participant, lap),
                 LocalTime.parse(calculateTime(checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(), checkpointDAO.getLeader(lap).getCrossingTime()).format(formatter)),
-                LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter))
+                lap > 1 ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter)) : LocalTime.of(0,0,0)
         );
         tab.getItems().add(participantStartView);
     }
@@ -472,5 +483,83 @@ public class MarksMonitorCompetitionController implements Initializable {
         if (competitionDay.getValue() == null || competitionDay.getValue().getCompetition().getId() != MainPageController.currentCompetition.getId()) {
             competitionDay.setValue(competitionDay.getItems().get(0));
         }
+    }
+
+    public void addFileExcel() {
+        excelRead.readExcel();
+    }
+
+    public void addNewParticipant(List<String> rowValue) {
+        Sportsman sportsman = sportsmanDAO.getSportsmenByFioAndBirthdate(rowValue.get(0), rowValue.get(1), rowValue.get(2), LocalDate.parse(rowValue.get(6)));
+
+        if (sportsman == null) {
+            sportsmanDAO.create(new Sportsman(
+                    rowValue.get(1),
+                    rowValue.get(0),
+                    rowValue.get(2),
+                    LocalDate.parse(rowValue.get(6)),
+                    Gender.valueOf(rowValue.get(3).toUpperCase(Locale.ROOT)),
+                    rowValue.get(7),
+                    rowValue.get(9)
+            ));
+            sportsman = sportsmanDAO.getSportsmenByFioAndBirthdate(rowValue.get(0), rowValue.get(1), rowValue.get(2), LocalDate.parse(rowValue.get(6)));
+        }
+        List<Start> starts = startDAO.getStartsByCompetitionDayId(competitionDay.getSelectionModel().getSelectedItem().getId());
+        Sportsman finalSportsman = sportsman;
+        starts = starts.stream().filter(start -> finalSportsman.getGender() == start.getGroup().getGender()).toList();
+        int ageParticipant = LocalDate.now().getYear() - finalSportsman.getBirthdate().getYear();
+        Distance distance = distanceDAO.getDistanceByLength(Integer.parseInt(rowValue.get(10)));
+        Start participantStart = starts.stream()
+                .filter(start -> ageParticipant < start.getGroup().getAgeTo() &&
+                        ageParticipant > start.getGroup().getAgeFrom() &&
+                        start.getDistance().getId() == distance.getId())
+                .findFirst().orElse(null);
+        if (participantStart == null) return;
+
+        Participant participant = new Participant(
+                buildChipString(rowValue.get(4)),
+                finalSportsman,
+                participantStart,
+                Integer.parseInt(rowValue.get(5)),
+                rowValue.get(8)
+        );
+
+        participantDAO.update(participant);
+
+        buildNewEntityPC(participant, participantCompetitionTable);
+
+    }
+
+    private void buildNewEntityPC(Participant participant, TableView<ParticipantCompetitionView> participantCompetitionTable) {
+        participantCompetitionTable.getItems().add(
+                new ParticipantCompetitionView(
+                        participant.getId(),
+                        participant.getSportsman().getLastname(),
+                        participant.getSportsman().getName(),
+                        participant.getSportsman().getPatronymic(),
+                        participant.getSportsman().getGender(),
+                        participant.getChip(),
+                        participant.getStartNumber(),
+                        participant.getSportsman().getBirthdate(),
+                        participant.getSportsman().getRegion(),
+                        participant.getClub(),
+                        participant.getSportsman().getDischarge(),
+                        participant.getStart().getGroup().getName()
+                )
+        );
+    }
+
+    private String buildChipString(String chip) {
+        if (chip.length() < 8) {
+            char[] arr = new char[8 - chip.length()];
+            Arrays.fill(arr, '0');
+            return new String(arr) + chip;
+        } else {
+            return chip;
+        }
+    }
+
+    private String getParticipantGroup(String distance, LocalDate birthdate) {
+        return "123";
     }
 }

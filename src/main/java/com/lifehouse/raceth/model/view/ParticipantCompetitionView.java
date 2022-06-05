@@ -22,7 +22,10 @@ public class ParticipantCompetitionView {
     private int startNumber;
     private LocalDate birthdate;
     private String region;
+    private String club;
+    private String discharge;
     private String group;
+
 
     public static ParticipantCompetitionView convertToView(Participant participant){
         return new ParticipantCompetitionView(
@@ -35,6 +38,8 @@ public class ParticipantCompetitionView {
                 participant.getStartNumber(),
                 participant.getSportsman().getBirthdate(),
                 participant.getSportsman().getRegion(),
+                participant.getClub(),
+                participant.getSportsman().getDischarge(),
                 participant.getStart().getGroup().getName()
         );
     }
