@@ -209,9 +209,12 @@ public class MarksMonitorCompetitionController implements Initializable {
                 List<Start> starts = startDAO.getStartsByCompetitionDayId(competitionDay.getSelectionModel().getSelectedItem().getId());
                 starts = starts.stream().filter(start -> newValue.getSportsman().getGender() == start.getGroup().getGender()).toList();
                 int ageParticipant = LocalDate.now().getYear() - newValue.getSportsman().getBirthdate().getYear();
+                Distance distance = controller.getDistanceChoiceBox().getValue();
                 Start participantStart = starts.stream()
                         .filter(start -> ageParticipant < start.getGroup().getAgeTo() &&
-                                                ageParticipant > start.getGroup().getAgeFrom()).findFirst().orElse(null);
+                                ageParticipant > start.getGroup().getAgeFrom() &&
+                                start.getDistance().getId() == distance.getId())
+                        .findFirst().orElse(null);
                 newValue.setStart(participantStart);
             }
             sportsmanDAO.create(newValue.getSportsman());

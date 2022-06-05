@@ -1,7 +1,9 @@
 package com.lifehouse.raceth.logic.marksmonitorpage;
 
 import com.lifehouse.raceth.Main;
+import com.lifehouse.raceth.dao.DistanceDAO;
 import com.lifehouse.raceth.dao.SportsmanDAO;
+import com.lifehouse.raceth.model.Distance;
 import com.lifehouse.raceth.model.Gender;
 import com.lifehouse.raceth.model.Participant;
 import com.lifehouse.raceth.model.Sportsman;
@@ -52,6 +54,8 @@ public class CreateOrEditParticipantPopupController implements Initializable {
     private ToggleGroup genderToggleGroup;
     @FXML
     private RadioButton maleGenderRadioButton;
+    @FXML
+    private ChoiceBox<Distance> distanceChoiceBox;
 
     @FXML
     private TableView<Sportsman> sportsmenTableView;
@@ -67,15 +71,18 @@ public class CreateOrEditParticipantPopupController implements Initializable {
     public ObjectProperty<Participant> newParticipant = new SimpleObjectProperty<>();
 
     private SportsmanDAO sportsmanDAO;
+    private DistanceDAO distanceDAO;
     private List<Sportsman> allSportsmen;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sportsmanDAO = (SportsmanDAO) Main.appContext.getBean("sportsmanDAO");
+        distanceDAO = (DistanceDAO) Main.appContext.getBean("distanceDAO");
         allSportsmen = sportsmanDAO.getAllSportsmen();
         initializeTable();
         addingListeners();
         addSelectingSportsmanListener();
+        distanceChoiceBox.setItems(FXCollections.observableList(new ArrayList<>(distanceDAO.getCurrentCompetitionDistances())));
     }
 
     private void initializeTable(){
@@ -114,6 +121,7 @@ public class CreateOrEditParticipantPopupController implements Initializable {
     }
 
     public void fillFieldsFromSportsman(Sportsman sportsman){
+        if (sportsman == null) return;
         nameTextField.setText(sportsman.getName());
         patronymicTextField.setText(sportsman.getPatronymic());
         surnameTextField.setText(sportsman.getLastname());
