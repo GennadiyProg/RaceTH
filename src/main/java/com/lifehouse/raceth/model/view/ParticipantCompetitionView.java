@@ -26,28 +26,6 @@ public class ParticipantCompetitionView {
     private String discharge;
     private String group;
 
-    public ParticipantCompetitionView(
-            long id,
-            String name,
-            String lastname,
-            String patronymic,
-            Gender gender,
-            String chip,
-            int startNumber,
-            LocalDate birthdate,
-            String region,
-            String group) {
-        this.id = id;
-        this.name = name;
-        this.lastname = lastname;
-        this.patronymic = patronymic;
-        this.gender = gender;
-        this.chip = chip;
-        this.startNumber = startNumber;
-        this.birthdate = birthdate;
-        this.region = region;
-        this.group = group;
-    }
 
     public static ParticipantCompetitionView convertToView(Participant participant){
         return new ParticipantCompetitionView(
@@ -60,6 +38,8 @@ public class ParticipantCompetitionView {
                 participant.getStartNumber(),
                 participant.getSportsman().getBirthdate(),
                 participant.getSportsman().getRegion(),
+                participant.getClub(),
+                participant.getSportsman().getDischarge(),
                 participant.getStart().getGroup().getName()
         );
     }
