@@ -398,15 +398,17 @@ public class MarksMonitorCompetitionController implements Initializable {
 
         lastNumber.setText(Integer.toString(participant.getStartNumber()));
 
-        checkpointDAO.create(new Checkpoint(participant, LocalTime.now(), lap));
+        Checkpoint checkpoint = new Checkpoint(participant, LocalTime.now(), lap);
 
-        if (table != null) buildNewEntityPS(participant, lap, table);
+        checkpointDAO.create(checkpoint);
+
+        if (table != null) buildNewEntityPS(participant, lap, table, checkpoint);
     }
 
-    private void buildNewEntityPS(Participant participant, int lap, TableView<ParticipantStartView> tab) {
+    private void buildNewEntityPS(Participant participant, int lap, TableView<ParticipantStartView> tab, Checkpoint checkpoint) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
         ParticipantStartView participantStartView = new ParticipantStartView(
-                participant.getId(),
+                checkpoint.getId(),
                 LocalTime.parse(LocalTime.now().format(formatter)),
                 LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(formatter)),
                 participant.getChip(),
@@ -532,7 +534,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     private void buildNewEntityPC(Participant participant, TableView<ParticipantCompetitionView> participantCompetitionTable) {
         participantCompetitionTable.getItems().add(
                 new ParticipantCompetitionView(
-                        1,
+                        participant.getId(),
                         participant.getSportsman().getLastname(),
                         participant.getSportsman().getName(),
                         participant.getSportsman().getPatronymic(),
