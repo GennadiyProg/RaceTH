@@ -513,6 +513,7 @@ public class MarksMonitorCompetitionController implements Initializable {
                         ageParticipant > start.getGroup().getAgeFrom() &&
                         start.getDistance().getId() == distance.getId())
                 .findFirst().orElse(null);
+        if (participantStart == null) return;
 
         Participant participant = new Participant(
                 buildChipString(rowValue.get(4)),
