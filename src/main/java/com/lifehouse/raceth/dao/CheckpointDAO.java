@@ -21,6 +21,10 @@ public class CheckpointDAO {
         checkpointRepository.save(checkpoint);
     }
 
+    public void update(Checkpoint checkpoint) {
+        checkpointRepository.save(checkpoint);
+    }
+
     public Checkpoint getCheckpointByParticipant(long id){
         return checkpointRepository.findByParticipantId(id);
     }

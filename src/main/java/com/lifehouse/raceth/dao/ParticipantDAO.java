@@ -2,6 +2,7 @@ package com.lifehouse.raceth.dao;
 
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.model.Participant;
+import com.lifehouse.raceth.model.Start;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
 import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.repository.ParticipantRepository;
@@ -33,7 +34,7 @@ public class ParticipantDAO {
         return  participantRepository.findAll().stream().map(ParticipantCompetitionView::convertToView).toList();
     }
 
-    public List<ParticipantStartView> getAllParticipantViewsByStarts(List<Long> startsId){
+    public List<ParticipantStartView> getAllParticipantViewsByStart(List<Long> startsId){
         return  participantRepository.findAllByStartsId(startsId).stream()
                 .map(ParticipantStartView::convertToView).toList();
     }
@@ -44,5 +45,9 @@ public class ParticipantDAO {
 
     public void delete(Participant participant) {
         participantRepository.delete(participant);
+    }
+
+    public List<Participant> getParticipantsByStart(Start start) {
+        return participantRepository.getParticipantByStart(start);
     }
 }

@@ -11,6 +11,7 @@ import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.model.dto.TabDto;
 import com.lifehouse.raceth.readingfiles.ExcelRead;
 import com.lifehouse.raceth.rfid.RFID;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,8 +21,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Data;
@@ -90,7 +93,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     private TableColumn<ParticipantStartView, String> psChipColumn;
     @FXML
-    private TableColumn<ParticipantStartView, Integer> psStartNumberColumn;
+    private TableColumn<ParticipantStartView, String> psStartNumberColumn;
     @FXML
     private TableColumn<ParticipantStartView, String> psLastnameColumn;
     @FXML
@@ -285,7 +288,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         psCurrentTimeColumn.setCellValueFactory(new PropertyValueFactory<>("currentTime"));
         psTimeOnDistanceColumn.setCellValueFactory(new PropertyValueFactory<>("timeOnDistance"));
         psChipColumn.setCellValueFactory(new PropertyValueFactory<>("chip"));
-        psStartNumberColumn.setCellValueFactory(new PropertyValueFactory<>("startNumber"));
+        psStartNumberColumn.setCellValueFactory(el -> new SimpleStringProperty(Integer.toString(el.getValue().getStartNumber())));
         psLastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         psNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         psGroupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
@@ -293,6 +296,53 @@ public class MarksMonitorCompetitionController implements Initializable {
         psPlaceColumn.setCellValueFactory(new PropertyValueFactory<>("place"));
         psBehindTheLeaderColumn.setCellValueFactory(new PropertyValueFactory<>("behindTheLeader"));
         psLapTimeColumn.setCellValueFactory(new PropertyValueFactory<>("lapTime"));
+
+        psStartNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        psStartNumberColumn.setOnEditCommit(this::updateCheckpoint);
+    }
+
+    private void updateCheckpoint(CellEditEvent<ParticipantStartView, String> newParticipantNumber) {
+        {
+            // Получение изменяемой отсечки (строки) из таблицы
+            var currentCheckpointView = newParticipantNumber.getTableView().getSelectionModel().getSelectedItem();
+            Checkpoint checkpoint = checkpointDAO.getCheckpoint(currentCheckpointView.getId());
+
+            if (newParticipantNumber.getNewValue().equals("")){
+                currentCheckpointView.attachParticipant(null);
+                checkpoint.setParticipant(null);
+                checkpointDAO.update(checkpoint);
+                participantStartTable.refresh();
+
+                // Обновление таблицы с выбранной меткой
+                newParticipantNumber.getTableView().refresh();
+                return;
+            }
+
+            int newParticipantNum = Integer.parseInt(newParticipantNumber.getNewValue());
+
+            TabDto currentTab = openedTabs.stream().filter(el -> el.getReferenceTab().equals(tabPane.getSelectionModel().getSelectedItem())).findFirst().orElse(null);
+            if (currentTab == null) return;
+
+            // В массив participants складываем всех участников из вкладки и среди них находим нужного
+            var participants = new ArrayList<Participant>();
+            for (var start : currentTab.getStarts()) {
+                participants.addAll(participantDAO.getParticipantsByStart(start));
+            }
+
+            Participant participant = participants.stream().filter(p -> p.getStartNumber() == newParticipantNum).findFirst().orElse(null);
+            if (participant == null) {
+                new Alert(Alert.AlertType.ERROR, "Участник с выбранным номером не существует").show();
+                return;
+            }
+
+            currentCheckpointView.attachParticipant(participant);
+            checkpoint.setParticipant(participant);
+            checkpointDAO.update(checkpoint);
+
+            // Обновление таблицы с выбранной меткой
+            newParticipantNumber.getTableView().refresh();
+        }
     }
 
     private void initTabs() {
@@ -368,11 +418,13 @@ public class MarksMonitorCompetitionController implements Initializable {
     private void createTableOnTab(Tab tab) {
         TableView<ParticipantStartView> table = new TableView<>();
         table.getColumns().setAll(participantStartTable.getColumns());
+        table.setEditable(true);
         tab.setContent(table);
 //        tab.setOnSelectionChanged(this::switchingTab);
 
         List<Long> startsIdOnTab = new ArrayList<>();
-        table.getItems().addAll(participantDAO.getAllParticipantViewsByStarts(startsIdOnTab));
+        table.getItems().addAll(participantDAO.getAllParticipantViewsByStart(startsIdOnTab));
+
 
         tab.setOnSelectionChanged(this::updateStartsTable);
     }
@@ -557,6 +609,11 @@ public class MarksMonitorCompetitionController implements Initializable {
         } else {
             return chip;
         }
+    }
+
+    @FXML
+    private void createCheckpoint() {
+
     }
 
     private String getParticipantGroup(String distance, LocalDate birthdate) {
