@@ -17,4 +17,6 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long> 
     List<Participant> findAllByStartsId(@Param("id") List<Long> id);
 
     Participant findByChip(String chip);
+
+    List<Participant> getParticipantByStart(Start start);
 }

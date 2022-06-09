@@ -11,6 +11,7 @@ import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.model.dto.TabDto;
 import com.lifehouse.raceth.readingfiles.ExcelRead;
 import com.lifehouse.raceth.rfid.RFID;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,8 +21,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Data;
@@ -90,7 +93,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     @FXML
     private TableColumn<ParticipantStartView, String> psChipColumn;
     @FXML
-    private TableColumn<ParticipantStartView, Integer> psStartNumberColumn;
+    private TableColumn<ParticipantStartView, String> psStartNumberColumn;
     @FXML
     private TableColumn<ParticipantStartView, String> psLastnameColumn;
     @FXML
@@ -285,7 +288,7 @@ public class MarksMonitorCompetitionController implements Initializable {
         psCurrentTimeColumn.setCellValueFactory(new PropertyValueFactory<>("currentTime"));
         psTimeOnDistanceColumn.setCellValueFactory(new PropertyValueFactory<>("timeOnDistance"));
         psChipColumn.setCellValueFactory(new PropertyValueFactory<>("chip"));
-        psStartNumberColumn.setCellValueFactory(new PropertyValueFactory<>("startNumber"));
+        psStartNumberColumn.setCellValueFactory(el -> new SimpleStringProperty(Integer.toString(el.getValue().getStartNumber())));
         psLastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         psNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         psGroupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
@@ -293,6 +296,92 @@ public class MarksMonitorCompetitionController implements Initializable {
         psPlaceColumn.setCellValueFactory(new PropertyValueFactory<>("place"));
         psBehindTheLeaderColumn.setCellValueFactory(new PropertyValueFactory<>("behindTheLeader"));
         psLapTimeColumn.setCellValueFactory(new PropertyValueFactory<>("lapTime"));
+
+        psStartNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        psStartNumberColumn.setOnEditCommit(this::updateCheckpoint);
+    }
+
+    private void updateCheckpoint(CellEditEvent<ParticipantStartView, String> newParticipantNumber) {
+        try {
+            // Получение изменяемой отсечки (строки) из таблицы
+            var currentCheckpointView = newParticipantNumber.getTableView().getSelectionModel().getSelectedItem();
+            Checkpoint checkpoint = checkpointDAO.getCheckpoint(currentCheckpointView.getId());
+
+            if (newParticipantNumber.getNewValue().equals("")) {
+                currentCheckpointView.attachParticipant(null);
+                checkpoint.setParticipant(null);
+                checkpointDAO.update(checkpoint);
+                participantStartTable.refresh();
+
+                // Обновление таблицы с выбранной меткой
+                newParticipantNumber.getTableView().refresh();
+                return;
+            }
+
+            int newParticipantNum = Integer.parseInt(newParticipantNumber.getNewValue());
+
+            TabDto currentTab = openedTabs.stream().filter(el -> el.getReferenceTab().equals(tabPane.getSelectionModel().getSelectedItem())).findFirst().orElse(null);
+            if (currentTab == null) return;
+
+            // В массив participants складываем всех участников из вкладки и среди них находим нужного
+            var participants = new ArrayList<Participant>();
+            for (var start : currentTab.getStarts()) {
+                participants.addAll(participantDAO.getParticipantsByStart(start));
+            }
+
+            Participant participant = participants.stream().filter(p -> p.getStartNumber() == newParticipantNum).findFirst().orElse(null);
+            if (participant == null) {
+                currentCheckpointView.setStartNumber(-1);
+                throw new Exception();
+            }
+
+            // Обновление информации о чекпоинте
+            if (checkpoint.getLap() == 0) {
+                checkpoint.setLap(checkpointDAO.getCountCheakpointByParticipiant(participant) + 1);
+            }
+            checkpoint.setParticipant(participant);
+            checkpointDAO.update(checkpoint);
+
+            // Привязка участника за вьюхой и отсечкой
+            currentCheckpointView.attachParticipant(participant);
+            currentCheckpointView.setTimeOnDistance(LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))));
+            currentCheckpointView.setLap(checkpoint.getLap());
+            currentCheckpointView.setBehindTheLeader(LocalTime.parse(calculateTime(checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(), checkpointDAO.getLeader(checkpoint.getLap()).getCrossingTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))));
+            currentCheckpointView.setLapTime(checkpoint.getLap() > 1 ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, checkpoint.getLap() - 1)).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))) : LocalTime.of(0, 0, 0));
+
+            // Обновление таблицы с выбранной меткой
+            newParticipantNumber.getTableView().refresh();
+
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "Некорректный номер участника").show();
+            newParticipantNumber.getTableView().refresh();
+            e.printStackTrace();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Участник с выбранным номером не существует").show();
+            newParticipantNumber.getTableView().refresh();
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void createCheckpoint() {
+        Checkpoint checkpoint = new Checkpoint(null, LocalTime.now(), 0);
+        checkpointDAO.create(checkpoint);
+
+        var participantView = new ParticipantStartView(checkpoint.getId(), LocalTime.now());
+
+        TableView<ParticipantStartView> table = (TableView<ParticipantStartView>) tabPane.getTabs().stream().filter(tab -> tab.equals(tabPane.getSelectionModel().getSelectedItem())).findFirst().orElse(null).getContent();
+        if (table == null) return;
+        table.getItems().add(participantView);
+        table.refresh();
+    }
+
+    @FXML
+    private void removeCheckpoint() {
+        var table = (TableView<ParticipantStartView>) tabPane.getTabs().stream().filter(tab -> tab.equals(tabPane.getSelectionModel().getSelectedItem())).findFirst().orElse(null).getContent();
+        var removableRow = table.getSelectionModel().getSelectedItem();
+        checkpointDAO.removeCheckpoint(removableRow.getId());
+        table.getItems().remove(removableRow);
     }
 
     private void initTabs() {
@@ -367,22 +456,90 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     private void createTableOnTab(Tab tab) {
         TableView<ParticipantStartView> table = new TableView<>();
-        table.getColumns().setAll(participantStartTable.getColumns());
+//        table.getColumns().setAll(participantStartTable.getColumns());
+        table.getColumns().setAll(copyStartColumns());
+        table.setEditable(true);
         tab.setContent(table);
 //        tab.setOnSelectionChanged(this::switchingTab);
 
         List<Long> startsIdOnTab = new ArrayList<>();
-        table.getItems().addAll(participantDAO.getAllParticipantViewsByStarts(startsIdOnTab));
+        table.getItems().addAll(participantDAO.getAllParticipantViewsByStart(startsIdOnTab));
 
         tab.setOnSelectionChanged(this::updateStartsTable);
     }
 
-    public void addNewCheakpoint(String chip) {
+    private List<TableColumn<ParticipantStartView, ?>> copyStartColumns() {
+        TableColumn<ParticipantStartView, Integer> psNumberColumn = new TableColumn<>("№");
+        TableColumn<ParticipantStartView, LocalTime> psCurrentTimeColumn = new TableColumn<>("Время текущее");
+        TableColumn<ParticipantStartView, LocalTime> psTimeOnDistanceColumn = new TableColumn<>("Время на дистанции");
+        TableColumn<ParticipantStartView, String> psChipColumn = new TableColumn<>("Метка");
+        TableColumn<ParticipantStartView, String> psStartNumberColumn = new TableColumn<>("Стартовый номер");
+        TableColumn<ParticipantStartView, String> psLastnameColumn = new TableColumn<>("Фамилия");
+        TableColumn<ParticipantStartView, String> psNameColumn = new TableColumn<>("Имя");
+        TableColumn<ParticipantStartView, String> psGroupColumn = new TableColumn<>("Группа");
+        TableColumn<ParticipantStartView, Integer> psLapColumn = new TableColumn<>("Круг");
+        TableColumn<ParticipantStartView, Integer> psPlaceColumn = new TableColumn<>("Место");
+        TableColumn<ParticipantStartView, LocalTime> psBehindTheLeaderColumn = new TableColumn<>("Отставание от лидера");
+        TableColumn<ParticipantStartView, LocalTime> psLapTimeColumn = new TableColumn<>("Время круга");
+
+        setColumnWidth(psNumberColumn, 25);
+        setColumnWidth(psCurrentTimeColumn, 100);
+        setColumnWidth(psTimeOnDistanceColumn, 130);
+        setColumnWidth(psChipColumn, 70);
+        setColumnWidth(psStartNumberColumn, 110);
+        setColumnWidth(psLastnameColumn, 100);
+        setColumnWidth(psNameColumn, 85);
+        setColumnWidth(psGroupColumn, 80);
+        setColumnWidth(psLapColumn, 50);
+        setColumnWidth(psPlaceColumn, 50);
+        setColumnWidth(psBehindTheLeaderColumn, 150);
+        setColumnWidth(psLapTimeColumn, 110);
+
+        psNumberColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        psCurrentTimeColumn.setCellValueFactory(new PropertyValueFactory<>("currentTime"));
+        psTimeOnDistanceColumn.setCellValueFactory(new PropertyValueFactory<>("timeOnDistance"));
+        psChipColumn.setCellValueFactory(new PropertyValueFactory<>("chip"));
+        psStartNumberColumn.setCellValueFactory(el -> new SimpleStringProperty(Integer.toString(el.getValue().getStartNumber())));
+        psLastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        psNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        psGroupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
+        psLapColumn.setCellValueFactory(new PropertyValueFactory<>("lap"));
+        psPlaceColumn.setCellValueFactory(new PropertyValueFactory<>("place"));
+        psBehindTheLeaderColumn.setCellValueFactory(new PropertyValueFactory<>("behindTheLeader"));
+        psLapTimeColumn.setCellValueFactory(new PropertyValueFactory<>("lapTime"));
+
+        psStartNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        psStartNumberColumn.setOnEditCommit(this::updateCheckpoint);
+
+        return new ArrayList<>(Arrays.asList(
+                psNumberColumn,
+                psCurrentTimeColumn,
+                psTimeOnDistanceColumn,
+                psChipColumn,
+                psStartNumberColumn,
+                psLastnameColumn,
+                psNameColumn,
+                psGroupColumn,
+                psLapColumn,
+                psPlaceColumn,
+                psBehindTheLeaderColumn,
+                psLapTimeColumn
+        ));
+    }
+
+    private void setColumnWidth(TableColumn column, double width) {
+        column.setMaxWidth(5000);
+        column.setMinWidth(10);
+        column.setPrefWidth(width);
+    }
+
+    public void addNewCheckpoint(String chip) {
         Participant participant = participantDAO.getParticipantByChip(chip);
         int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
         if (participant == null) return;
         if (lap != 1) {
-            if (ChronoUnit.SECONDS.between(checkpointDAO.getlastLapTime(participant, lap - 1), LocalTime.now()) < 10) return;
+            if (ChronoUnit.SECONDS.between(checkpointDAO.getlastLapTime(participant, lap - 1), LocalTime.now()) < 10)
+                return;
         }
 
         //Поиск искомой вкладки
@@ -418,7 +575,7 @@ public class MarksMonitorCompetitionController implements Initializable {
                 lap,
                 checkpointDAO.getParticipiantPlace(participant, lap),
                 LocalTime.parse(calculateTime(checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(), checkpointDAO.getLeader(lap).getCrossingTime()).format(formatter)),
-                lap > 1 ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter)) : LocalTime.of(0,0,0)
+                lap > 1 ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter)) : LocalTime.of(0, 0, 0)
         );
         tab.getItems().add(participantStartView);
     }
@@ -557,9 +714,5 @@ public class MarksMonitorCompetitionController implements Initializable {
         } else {
             return chip;
         }
-    }
-
-    private String getParticipantGroup(String distance, LocalDate birthdate) {
-        return "123";
     }
 }

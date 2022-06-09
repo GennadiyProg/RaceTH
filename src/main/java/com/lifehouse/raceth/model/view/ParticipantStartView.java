@@ -7,8 +7,10 @@ import com.lifehouse.raceth.model.Participant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.repository.query.parser.Part;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @NoArgsConstructor
@@ -27,7 +29,14 @@ public class ParticipantStartView {
     private LocalTime behindTheLeader;
     private LocalTime lapTime;
 
-    public ParticipantStartView(long id,LocalTime currentTime,String chip,int startNumber,String lastname,String name,String group) {
+    public ParticipantStartView(long id, LocalTime currentTime) {
+        this.id = id;
+        this.startNumber = -1;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
+        this.currentTime = LocalTime.parse(LocalTime.now().format(formatter));
+    }
+
+    public ParticipantStartView(long id, LocalTime currentTime, String chip, int startNumber, String lastname, String name, String group) {
         this.id = id;
         this.currentTime = currentTime;
         this.chip = chip;
@@ -37,7 +46,22 @@ public class ParticipantStartView {
         this.group = group;
     }
 
-    public static ParticipantStartView convertToView(Participant participant){
+    public void attachParticipant(Participant participant) {
+        if (participant == null) {
+            this.name = null;
+            this.lastname = null;
+            this.chip = null;
+            this.startNumber = -1;
+            return;
+        }
+
+        this.name = participant.getSportsman().getName();
+        this.lastname = participant.getSportsman().getLastname();
+        this.chip = participant.getChip();
+        this.startNumber = participant.getStartNumber();
+    }
+
+    public static ParticipantStartView convertToView(Participant participant) {
         CheckpointDAO checkpointDAO = (CheckpointDAO) Main.appContext.getBean("checkpointDAO");
         return new ParticipantStartView(
                 participant.getId(),

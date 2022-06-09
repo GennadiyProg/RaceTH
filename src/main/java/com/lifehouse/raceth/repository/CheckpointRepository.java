@@ -24,10 +24,10 @@ public interface CheckpointRepository extends JpaRepository<Checkpoint, Long> {
 
     int countCheckpointByParticipant_StartAndLap(Start start, int lap);
 
-    Checkpoint findCheckpointByParticipantAndLap(Participant participant, int lap);
+    List<Checkpoint> findCheckpointByParticipantAndLap(Participant participant, int lap);
 
     @Query(value = "select * from Checkpoint where crossingTime = (select min(crossingTime) from Checkpoint where lap = :lap) and lap = :lap", nativeQuery = true)
-    Checkpoint getLeader(@Param("lap") int lap);
+    List<Checkpoint> getLeader(@Param("lap") int lap);
 
     Checkpoint findFirstByParticipantOrderByCrossingTimeDesc(Participant participant);
 }
