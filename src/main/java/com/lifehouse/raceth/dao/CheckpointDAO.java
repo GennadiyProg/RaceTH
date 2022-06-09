@@ -50,12 +50,20 @@ public class CheckpointDAO {
     }
 
     public LocalTime getlastLapTime(Participant participant, int lap) {
-        return checkpointRepository.findCheckpointByParticipantAndLap(participant,lap).getCrossingTime();
+        return checkpointRepository.findCheckpointByParticipantAndLap(participant,lap).get(0).getCrossingTime();
     }
 
     public Checkpoint getLeader(int lap) {
-        return checkpointRepository.getLeader(lap);
+        return checkpointRepository.getLeader(lap).get(0);
     }
 
     public Checkpoint getLastCheckpointByParticipant(Participant participant) {return checkpointRepository.findFirstByParticipantOrderByCrossingTimeDesc(participant);}
+
+    public void removeCheckpoint(long id) {
+        removeCheckpoint(getCheckpoint(id));
+    }
+
+    public void removeCheckpoint(Checkpoint checkpoint) {
+        checkpointRepository.delete(checkpoint);
+    }
 }

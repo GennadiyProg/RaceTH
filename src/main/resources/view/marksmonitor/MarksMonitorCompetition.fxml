@@ -164,8 +164,8 @@
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.1999969482422" minWidth="10.0" prefWidth="175.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.00001525878906" minWidth="10.0" prefWidth="185.40001220703124" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.5999633789062" minWidth="10.0" prefWidth="246.99998779296868" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.7999328613281" minWidth="10.0" prefWidth="164.60001220703123" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.5999633789062" minWidth="10.0" prefWidth="164.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.7999328613281" minWidth="10.0" prefWidth="247.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
               </columnConstraints>
               <rowConstraints>
@@ -191,7 +191,7 @@
                         <String fx:value="btn-common" />
                         <String fx:value="btn-primary" />
                      </styleClass></Button>
-                  <Button mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                  <Button disable="true" mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="LEFT">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -199,6 +199,26 @@
                         <String fx:value="btn" />
                         <String fx:value="btn-common" />
                         <String fx:value="btn-success" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#createCheckpoint" prefHeight="36.0" prefWidth="139.0" stylesheets="@../../assets/css/Buttons.css" text="Создать отметку" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#removeCheckpoint" prefHeight="36.0" prefWidth="139.0" stylesheets="@../../assets/css/Buttons.css" text="Удалить отметку" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.columnIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                        <String fx:value="btn-danger" />
                      </styleClass>
                   </Button>
                </children>

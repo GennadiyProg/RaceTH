@@ -303,46 +303,75 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
     private void updateCheckpoint(CellEditEvent<ParticipantStartView, String> newParticipantNumber) {
-        {
-            // Получение изменяемой отсечки (строки) из таблицы
-            var currentCheckpointView = newParticipantNumber.getTableView().getSelectionModel().getSelectedItem();
-            Checkpoint checkpoint = checkpointDAO.getCheckpoint(currentCheckpointView.getId());
+        // Получение изменяемой отсечки (строки) из таблицы
+        var currentCheckpointView = newParticipantNumber.getTableView().getSelectionModel().getSelectedItem();
+        Checkpoint checkpoint = checkpointDAO.getCheckpoint(currentCheckpointView.getId());
 
-            if (newParticipantNumber.getNewValue().equals("")){
-                currentCheckpointView.attachParticipant(null);
-                checkpoint.setParticipant(null);
-                checkpointDAO.update(checkpoint);
-                participantStartTable.refresh();
-
-                // Обновление таблицы с выбранной меткой
-                newParticipantNumber.getTableView().refresh();
-                return;
-            }
-
-            int newParticipantNum = Integer.parseInt(newParticipantNumber.getNewValue());
-
-            TabDto currentTab = openedTabs.stream().filter(el -> el.getReferenceTab().equals(tabPane.getSelectionModel().getSelectedItem())).findFirst().orElse(null);
-            if (currentTab == null) return;
-
-            // В массив participants складываем всех участников из вкладки и среди них находим нужного
-            var participants = new ArrayList<Participant>();
-            for (var start : currentTab.getStarts()) {
-                participants.addAll(participantDAO.getParticipantsByStart(start));
-            }
-
-            Participant participant = participants.stream().filter(p -> p.getStartNumber() == newParticipantNum).findFirst().orElse(null);
-            if (participant == null) {
-                new Alert(Alert.AlertType.ERROR, "Участник с выбранным номером не существует").show();
-                return;
-            }
-
-            currentCheckpointView.attachParticipant(participant);
-            checkpoint.setParticipant(participant);
+        if (newParticipantNumber.getNewValue().equals("")) {
+            currentCheckpointView.attachParticipant(null);
+            checkpoint.setParticipant(null);
             checkpointDAO.update(checkpoint);
+            participantStartTable.refresh();
 
             // Обновление таблицы с выбранной меткой
             newParticipantNumber.getTableView().refresh();
+            return;
         }
+
+        int newParticipantNum = Integer.parseInt(newParticipantNumber.getNewValue());
+
+        TabDto currentTab = openedTabs.stream().filter(el -> el.getReferenceTab().equals(tabPane.getSelectionModel().getSelectedItem())).findFirst().orElse(null);
+        if (currentTab == null) return;
+
+        // В массив participants складываем всех участников из вкладки и среди них находим нужного
+        var participants = new ArrayList<Participant>();
+        for (var start : currentTab.getStarts()) {
+            participants.addAll(participantDAO.getParticipantsByStart(start));
+        }
+
+        Participant participant = participants.stream().filter(p -> p.getStartNumber() == newParticipantNum).findFirst().orElse(null);
+        if (participant == null) {
+            new Alert(Alert.AlertType.ERROR, "Участник с выбранным номером не существует").show();
+            return;
+        }
+
+        // Обновление информации о чекпоинте
+        if (checkpoint.getLap() == 0) {
+            checkpoint.setLap(checkpointDAO.getCountCheakpointByParticipiant(participant) + 1);
+        }
+        checkpoint.setParticipant(participant);
+        checkpointDAO.update(checkpoint);
+
+        // Привязка участника за вьюхой и отсечкой
+        currentCheckpointView.attachParticipant(participant);
+        currentCheckpointView.setTimeOnDistance(LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))));
+        currentCheckpointView.setLap(checkpoint.getLap());
+        currentCheckpointView.setBehindTheLeader(LocalTime.parse(calculateTime(checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(), checkpointDAO.getLeader(checkpoint.getLap()).getCrossingTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))));
+        currentCheckpointView.setLapTime(checkpoint.getLap() > 1 ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, checkpoint.getLap() - 1)).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))) : LocalTime.of(0, 0, 0));
+
+        // Обновление таблицы с выбранной меткой
+        newParticipantNumber.getTableView().refresh();
+    }
+
+    @FXML
+    private void createCheckpoint() {
+        Checkpoint checkpoint = new Checkpoint(null, LocalTime.now(), 0);
+        checkpointDAO.create(checkpoint);
+
+        var participantView = new ParticipantStartView(checkpoint.getId(), LocalTime.now());
+
+        TableView<ParticipantStartView> table = (TableView<ParticipantStartView>) tabPane.getTabs().stream().filter(tab -> tab.equals(tabPane.getSelectionModel().getSelectedItem())).findFirst().orElse(null).getContent();
+        if (table == null) return;
+        table.getItems().add(participantView);
+        table.refresh();
+    }
+
+    @FXML
+    private void removeCheckpoint() {
+        var table = (TableView<ParticipantStartView>) tabPane.getTabs().stream().filter(tab -> tab.equals(tabPane.getSelectionModel().getSelectedItem())).findFirst().orElse(null).getContent();
+        var removableRow = table.getSelectionModel().getSelectedItem();
+        checkpointDAO.removeCheckpoint(removableRow.getId());
+        table.getItems().remove(removableRow);
     }
 
     private void initTabs() {
@@ -429,12 +458,13 @@ public class MarksMonitorCompetitionController implements Initializable {
         tab.setOnSelectionChanged(this::updateStartsTable);
     }
 
-    public void addNewCheakpoint(String chip) {
+    public void addNewCheckpoint(String chip) {
         Participant participant = participantDAO.getParticipantByChip(chip);
         int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
         if (participant == null) return;
         if (lap != 1) {
-            if (ChronoUnit.SECONDS.between(checkpointDAO.getlastLapTime(participant, lap - 1), LocalTime.now()) < 10) return;
+            if (ChronoUnit.SECONDS.between(checkpointDAO.getlastLapTime(participant, lap - 1), LocalTime.now()) < 10)
+                return;
         }
 
         //Поиск искомой вкладки
@@ -470,7 +500,7 @@ public class MarksMonitorCompetitionController implements Initializable {
                 lap,
                 checkpointDAO.getParticipiantPlace(participant, lap),
                 LocalTime.parse(calculateTime(checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(), checkpointDAO.getLeader(lap).getCrossingTime()).format(formatter)),
-                lap > 1 ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter)) : LocalTime.of(0,0,0)
+                lap > 1 ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter)) : LocalTime.of(0, 0, 0)
         );
         tab.getItems().add(participantStartView);
     }
@@ -609,14 +639,5 @@ public class MarksMonitorCompetitionController implements Initializable {
         } else {
             return chip;
         }
-    }
-
-    @FXML
-    private void createCheckpoint() {
-
-    }
-
-    private String getParticipantGroup(String distance, LocalDate birthdate) {
-        return "123";
     }
 }

@@ -1,23 +1,7 @@
 package com.lifehouse.raceth.rfid;
 
 import com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.net.BindException;
-import java.util.HashMap;
-import java.util.List;
-
-import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
@@ -89,7 +73,7 @@ public class RFID implements Runnable {
 //            int delZeros = Integer.parseInt(receivedData);
 //            receivedData = Integer.toString(delZeros);
 
-            guiController.addNewCheakpoint(receivedData);
+            guiController.addNewCheckpoint(receivedData);
 
         } catch (Exception e) {
 //            System.out.println("ups in rfid");
