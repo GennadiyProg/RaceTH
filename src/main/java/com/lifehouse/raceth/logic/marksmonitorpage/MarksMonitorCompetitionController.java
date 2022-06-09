@@ -298,59 +298,69 @@ public class MarksMonitorCompetitionController implements Initializable {
         psLapTimeColumn.setCellValueFactory(new PropertyValueFactory<>("lapTime"));
 
         psStartNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
         psStartNumberColumn.setOnEditCommit(this::updateCheckpoint);
     }
 
     private void updateCheckpoint(CellEditEvent<ParticipantStartView, String> newParticipantNumber) {
-        // Получение изменяемой отсечки (строки) из таблицы
-        var currentCheckpointView = newParticipantNumber.getTableView().getSelectionModel().getSelectedItem();
-        Checkpoint checkpoint = checkpointDAO.getCheckpoint(currentCheckpointView.getId());
+        try {
+            // Получение изменяемой отсечки (строки) из таблицы
+            var currentCheckpointView = newParticipantNumber.getTableView().getSelectionModel().getSelectedItem();
+            Checkpoint checkpoint = checkpointDAO.getCheckpoint(currentCheckpointView.getId());
 
-        if (newParticipantNumber.getNewValue().equals("")) {
-            currentCheckpointView.attachParticipant(null);
-            checkpoint.setParticipant(null);
+            if (newParticipantNumber.getNewValue().equals("")) {
+                currentCheckpointView.attachParticipant(null);
+                checkpoint.setParticipant(null);
+                checkpointDAO.update(checkpoint);
+                participantStartTable.refresh();
+
+                // Обновление таблицы с выбранной меткой
+                newParticipantNumber.getTableView().refresh();
+                return;
+            }
+
+            int newParticipantNum = Integer.parseInt(newParticipantNumber.getNewValue());
+
+            TabDto currentTab = openedTabs.stream().filter(el -> el.getReferenceTab().equals(tabPane.getSelectionModel().getSelectedItem())).findFirst().orElse(null);
+            if (currentTab == null) return;
+
+            // В массив participants складываем всех участников из вкладки и среди них находим нужного
+            var participants = new ArrayList<Participant>();
+            for (var start : currentTab.getStarts()) {
+                participants.addAll(participantDAO.getParticipantsByStart(start));
+            }
+
+            Participant participant = participants.stream().filter(p -> p.getStartNumber() == newParticipantNum).findFirst().orElse(null);
+            if (participant == null) {
+                currentCheckpointView.setStartNumber(-1);
+                throw new Exception();
+            }
+
+            // Обновление информации о чекпоинте
+            if (checkpoint.getLap() == 0) {
+                checkpoint.setLap(checkpointDAO.getCountCheakpointByParticipiant(participant) + 1);
+            }
+            checkpoint.setParticipant(participant);
             checkpointDAO.update(checkpoint);
-            participantStartTable.refresh();
+
+            // Привязка участника за вьюхой и отсечкой
+            currentCheckpointView.attachParticipant(participant);
+            currentCheckpointView.setTimeOnDistance(LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))));
+            currentCheckpointView.setLap(checkpoint.getLap());
+            currentCheckpointView.setBehindTheLeader(LocalTime.parse(calculateTime(checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(), checkpointDAO.getLeader(checkpoint.getLap()).getCrossingTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))));
+            currentCheckpointView.setLapTime(checkpoint.getLap() > 1 ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, checkpoint.getLap() - 1)).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))) : LocalTime.of(0, 0, 0));
 
             // Обновление таблицы с выбранной меткой
             newParticipantNumber.getTableView().refresh();
-            return;
-        }
 
-        int newParticipantNum = Integer.parseInt(newParticipantNumber.getNewValue());
-
-        TabDto currentTab = openedTabs.stream().filter(el -> el.getReferenceTab().equals(tabPane.getSelectionModel().getSelectedItem())).findFirst().orElse(null);
-        if (currentTab == null) return;
-
-        // В массив participants складываем всех участников из вкладки и среди них находим нужного
-        var participants = new ArrayList<Participant>();
-        for (var start : currentTab.getStarts()) {
-            participants.addAll(participantDAO.getParticipantsByStart(start));
-        }
-
-        Participant participant = participants.stream().filter(p -> p.getStartNumber() == newParticipantNum).findFirst().orElse(null);
-        if (participant == null) {
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "Некорректный номер участника").show();
+            newParticipantNumber.getTableView().refresh();
+            e.printStackTrace();
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Участник с выбранным номером не существует").show();
-            return;
+            newParticipantNumber.getTableView().refresh();
+            e.printStackTrace();
         }
-
-        // Обновление информации о чекпоинте
-        if (checkpoint.getLap() == 0) {
-            checkpoint.setLap(checkpointDAO.getCountCheakpointByParticipiant(participant) + 1);
-        }
-        checkpoint.setParticipant(participant);
-        checkpointDAO.update(checkpoint);
-
-        // Привязка участника за вьюхой и отсечкой
-        currentCheckpointView.attachParticipant(participant);
-        currentCheckpointView.setTimeOnDistance(LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))));
-        currentCheckpointView.setLap(checkpoint.getLap());
-        currentCheckpointView.setBehindTheLeader(LocalTime.parse(calculateTime(checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(), checkpointDAO.getLeader(checkpoint.getLap()).getCrossingTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))));
-        currentCheckpointView.setLapTime(checkpoint.getLap() > 1 ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, checkpoint.getLap() - 1)).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))) : LocalTime.of(0, 0, 0));
-
-        // Обновление таблицы с выбранной меткой
-        newParticipantNumber.getTableView().refresh();
     }
 
     @FXML
@@ -446,7 +456,8 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     private void createTableOnTab(Tab tab) {
         TableView<ParticipantStartView> table = new TableView<>();
-        table.getColumns().setAll(participantStartTable.getColumns());
+//        table.getColumns().setAll(participantStartTable.getColumns());
+        table.getColumns().setAll(copyStartColumns());
         table.setEditable(true);
         tab.setContent(table);
 //        tab.setOnSelectionChanged(this::switchingTab);
@@ -454,8 +465,72 @@ public class MarksMonitorCompetitionController implements Initializable {
         List<Long> startsIdOnTab = new ArrayList<>();
         table.getItems().addAll(participantDAO.getAllParticipantViewsByStart(startsIdOnTab));
 
-
         tab.setOnSelectionChanged(this::updateStartsTable);
+    }
+
+    private List<TableColumn<ParticipantStartView, ?>> copyStartColumns() {
+        TableColumn<ParticipantStartView, Integer> psNumberColumn = new TableColumn<>("№");
+        TableColumn<ParticipantStartView, LocalTime> psCurrentTimeColumn = new TableColumn<>("Время текущее");
+        TableColumn<ParticipantStartView, LocalTime> psTimeOnDistanceColumn = new TableColumn<>("Время на дистанции");
+        TableColumn<ParticipantStartView, String> psChipColumn = new TableColumn<>("Метка");
+        TableColumn<ParticipantStartView, String> psStartNumberColumn = new TableColumn<>("Стартовый номер");
+        TableColumn<ParticipantStartView, String> psLastnameColumn = new TableColumn<>("Фамилия");
+        TableColumn<ParticipantStartView, String> psNameColumn = new TableColumn<>("Имя");
+        TableColumn<ParticipantStartView, String> psGroupColumn = new TableColumn<>("Группа");
+        TableColumn<ParticipantStartView, Integer> psLapColumn = new TableColumn<>("Круг");
+        TableColumn<ParticipantStartView, Integer> psPlaceColumn = new TableColumn<>("Место");
+        TableColumn<ParticipantStartView, LocalTime> psBehindTheLeaderColumn = new TableColumn<>("Отставание от лидера");
+        TableColumn<ParticipantStartView, LocalTime> psLapTimeColumn = new TableColumn<>("Время круга");
+
+        setColumnWidth(psNumberColumn, 25);
+        setColumnWidth(psCurrentTimeColumn, 100);
+        setColumnWidth(psTimeOnDistanceColumn, 130);
+        setColumnWidth(psChipColumn, 70);
+        setColumnWidth(psStartNumberColumn, 110);
+        setColumnWidth(psLastnameColumn, 100);
+        setColumnWidth(psNameColumn, 85);
+        setColumnWidth(psGroupColumn, 80);
+        setColumnWidth(psLapColumn, 50);
+        setColumnWidth(psPlaceColumn, 50);
+        setColumnWidth(psBehindTheLeaderColumn, 150);
+        setColumnWidth(psLapTimeColumn, 110);
+
+        psNumberColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        psCurrentTimeColumn.setCellValueFactory(new PropertyValueFactory<>("currentTime"));
+        psTimeOnDistanceColumn.setCellValueFactory(new PropertyValueFactory<>("timeOnDistance"));
+        psChipColumn.setCellValueFactory(new PropertyValueFactory<>("chip"));
+        psStartNumberColumn.setCellValueFactory(el -> new SimpleStringProperty(Integer.toString(el.getValue().getStartNumber())));
+        psLastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        psNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        psGroupColumn.setCellValueFactory(new PropertyValueFactory<>("group"));
+        psLapColumn.setCellValueFactory(new PropertyValueFactory<>("lap"));
+        psPlaceColumn.setCellValueFactory(new PropertyValueFactory<>("place"));
+        psBehindTheLeaderColumn.setCellValueFactory(new PropertyValueFactory<>("behindTheLeader"));
+        psLapTimeColumn.setCellValueFactory(new PropertyValueFactory<>("lapTime"));
+
+        psStartNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        psStartNumberColumn.setOnEditCommit(this::updateCheckpoint);
+
+        return new ArrayList<>(Arrays.asList(
+                psNumberColumn,
+                psCurrentTimeColumn,
+                psTimeOnDistanceColumn,
+                psChipColumn,
+                psStartNumberColumn,
+                psLastnameColumn,
+                psNameColumn,
+                psGroupColumn,
+                psLapColumn,
+                psPlaceColumn,
+                psBehindTheLeaderColumn,
+                psLapTimeColumn
+        ));
+    }
+
+    private void setColumnWidth(TableColumn column, double width) {
+        column.setMaxWidth(5000);
+        column.setMinWidth(10);
+        column.setPrefWidth(width);
     }
 
     public void addNewCheckpoint(String chip) {
