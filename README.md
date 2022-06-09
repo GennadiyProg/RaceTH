@@ -1,7 +1,7 @@
 Welkom to nash project RaceTH!!!
 
 ## Первые действия при установке
-Воспользуйтесь Intellij IDEA [Intellij IDEA](https://www.jetbrains.com/ru-ru/idea/download/#section=windows) для работы с проектом. <br><br>
+Воспользуйтесь [Intellij IDEA](https://www.jetbrains.com/ru-ru/idea/download/#section=windows) для работы с проектом. <br><br>
 
 При первом запуске и открытии .java файла среда
 предложит вам выбрать версию JDK для работы с проектом как на скриншоте ниже. 
