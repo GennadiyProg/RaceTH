@@ -574,8 +574,13 @@ public class MarksMonitorCompetitionController implements Initializable {
                 participant.getStart().getGroup().getName(),
                 lap,
                 checkpointDAO.getParticipiantPlace(participant, lap),
-                LocalTime.parse(calculateTime(checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(), checkpointDAO.getLeader(lap).getCrossingTime()).format(formatter)),
-                lap > 1 ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter)) : LocalTime.of(0, 0, 0)
+                LocalTime.parse(calculateTime(
+                        checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(),
+                        checkpointDAO.getLeader(lap).getCrossingTime()).format(formatter)
+                ),
+                lap > 1
+                        ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter))
+                        : LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(formatter))
         );
         tab.getItems().add(participantStartView);
     }
