@@ -46,7 +46,7 @@ public class StartProtocol {
 
     public void createStartProtocol(ParticipantDAO participantDAO) throws IOException {
         XSSFWorkbook protocol = new XSSFWorkbook();
-        XSSFSheet sheet = protocol.createSheet("Протокол");
+        XSSFSheet sheet = protocol.createSheet("Стартовый протокол");
         sheet.setDisplayGridlines(false); //Отключение отображения сетки
         XSSFCellStyle titleStyle = createStyleForTitle(protocol);
 
@@ -106,7 +106,7 @@ public class StartProtocol {
             sheet.autoSizeColumn(i);
         }
 
-        File file = new File("src/main/java/com/lifehouse/raceth/startprotocol/startprotocol.xlsx");
+        File file = new File("./startprotocol.xlsx");
         file.getParentFile().mkdirs();
 
         FileOutputStream outFile = new FileOutputStream(file);

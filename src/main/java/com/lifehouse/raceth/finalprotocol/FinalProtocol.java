@@ -46,7 +46,7 @@ public class FinalProtocol {
 
     public void createFinalProtocol(CheckpointDAO checkpointDAO) throws IOException {
         XSSFWorkbook protocol = new XSSFWorkbook();
-        XSSFSheet sheet = protocol.createSheet("Протокол");
+        XSSFSheet sheet = protocol.createSheet("Финишный протокол");
         sheet.setDisplayGridlines(false); //Отключение отображения сетки
         XSSFCellStyle titleStyle = createStyleForTitle(protocol);
 
@@ -151,7 +151,7 @@ public class FinalProtocol {
         }
 
 
-        File file = new File("src/main/java/com/lifehouse/raceth/finalprotocol/finalprotocol.xlsx");
+        File file = new File("./finalprotocol.xlsx");
         file.getParentFile().mkdirs();
 
         FileOutputStream outFile = new FileOutputStream(file);
