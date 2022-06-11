@@ -1,0 +1,1 @@
+java --module-path C:\Users\gruma\IdeaProjects\javafx-sdk-17.0.2\lib --add-modules javafx.controls,javafx.base,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web -jar C:\Users\gruma\IdeaProjects\RaceTH\target\RaceTH-1.0-SNAPSHOT-jar-with-dependencies.jar
