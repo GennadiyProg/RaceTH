@@ -16,7 +16,7 @@ import java.util.Date;
 public class Sportsman {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @NotNull
     private String name;
     @NotNull
@@ -32,7 +32,8 @@ public class Sportsman {
     private String region;
     private String discharge;
 
-    public Sportsman(String name, String lastname, String patronymic, LocalDate birthdate, Gender gender, String region) {
+    public Sportsman(Long id, String name, String lastname, String patronymic, LocalDate birthdate, Gender gender, String region) {
+        this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.patronymic = patronymic;
