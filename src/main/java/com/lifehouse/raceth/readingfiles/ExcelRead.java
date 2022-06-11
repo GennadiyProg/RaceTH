@@ -20,15 +20,15 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 
 public class ExcelRead {
-    private final String FILE = "src/main/java/com/lifehouse/raceth/readingfiles/example.xlsx";
+    private String FILE;
     private final boolean directly = false;
     private MarksMonitorCompetitionController fileController;
     private XSSFWorkbook book;
     private XSSFSheet sheet;
 
-    public ExcelRead(MarksMonitorCompetitionController controller) {
+    public ExcelRead(MarksMonitorCompetitionController controller,String filePath) {
         fileController = controller;
-
+        this.FILE = filePath;
     }
 
     public void readExcel() {

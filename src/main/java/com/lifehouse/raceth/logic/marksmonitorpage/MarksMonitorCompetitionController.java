@@ -1,5 +1,6 @@
 package com.lifehouse.raceth.logic.marksmonitorpage;
 
+import java.io.File;
 import java.lang.*;
 
 import com.lifehouse.raceth.Main;
@@ -27,6 +28,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Data;
@@ -138,7 +140,6 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     TimerHandler timerHandler;
 
-    ExcelRead excelRead = new ExcelRead(this);
 
     FinalProtocol finalProtocol = new FinalProtocol();
     StartProtocol startProtocol = new StartProtocol();
@@ -658,29 +659,33 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
     public void addFileExcel() {
+        FileChooser fc = new FileChooser();
+        File file = fc.showOpenDialog(null);
+        ExcelRead excelRead = new ExcelRead(this,file.getAbsolutePath());
+
         excelRead.readExcel();
     }
 
     public void addNewParticipant(List<String> rowValue) {
-        Sportsman sportsman = sportsmanDAO.getSportsmenByFioAndBirthdate(rowValue.get(0), rowValue.get(1), rowValue.get(2), LocalDate.parse(rowValue.get(6)));
+        Sportsman sportsman = sportsmanDAO.getSportsmenByFioAndBirthdate(rowValue.get(0), rowValue.get(1), rowValue.get(2), LocalDate.parse(rowValue.get(4)));
 
         if (sportsman == null) {
             sportsmanDAO.create(new Sportsman(
                     rowValue.get(1),
                     rowValue.get(0),
                     rowValue.get(2),
-                    LocalDate.parse(rowValue.get(6)),
+                    LocalDate.parse(rowValue.get(4)),
                     Gender.valueOf(rowValue.get(3).toUpperCase(Locale.ROOT)),
-                    rowValue.get(7),
-                    rowValue.get(9)
+                    rowValue.get(5),
+                    rowValue.get(7)
             ));
-            sportsman = sportsmanDAO.getSportsmenByFioAndBirthdate(rowValue.get(0), rowValue.get(1), rowValue.get(2), LocalDate.parse(rowValue.get(6)));
+            sportsman = sportsmanDAO.getSportsmenByFioAndBirthdate(rowValue.get(0), rowValue.get(1), rowValue.get(2), LocalDate.parse(rowValue.get(4)));
         }
         List<Start> starts = startDAO.getStartsByCompetitionDayId(competitionDay.getSelectionModel().getSelectedItem().getId());
         Sportsman finalSportsman = sportsman;
         starts = starts.stream().filter(start -> finalSportsman.getGender() == start.getGroup().getGender()).toList();
         int ageParticipant = LocalDate.now().getYear() - finalSportsman.getBirthdate().getYear();
-        Distance distance = distanceDAO.getDistanceByLength(Integer.parseInt(rowValue.get(10)));
+        Distance distance = distanceDAO.getDistanceByLength(Integer.parseInt(rowValue.get(8)));
         Start participantStart = starts.stream()
                 .filter(start -> ageParticipant < start.getGroup().getAgeTo() &&
                         ageParticipant > start.getGroup().getAgeFrom() &&
@@ -689,11 +694,9 @@ public class MarksMonitorCompetitionController implements Initializable {
         if (participantStart == null) return;
 
         Participant participant = new Participant(
-                buildChipString(rowValue.get(4)),
                 finalSportsman,
                 participantStart,
-                Integer.parseInt(rowValue.get(5)),
-                rowValue.get(8)
+                rowValue.get(6)
         );
 
         participantDAO.update(participant);
@@ -710,8 +713,6 @@ public class MarksMonitorCompetitionController implements Initializable {
                         participant.getSportsman().getName(),
                         participant.getSportsman().getPatronymic(),
                         participant.getSportsman().getGender(),
-                        participant.getChip(),
-                        participant.getStartNumber(),
                         participant.getSportsman().getBirthdate(),
                         participant.getSportsman().getRegion(),
                         participant.getClub(),

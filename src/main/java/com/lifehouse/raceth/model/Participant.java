@@ -35,11 +35,9 @@ public class Participant {
         this.startNumber = startNumber;
     }
 
-    public Participant(String chip, Sportsman sportsman, Start start, int startNumber,String club) {
-        this.chip = chip;
+    public Participant(Sportsman sportsman, Start start, String club) {
         this.sportsman = sportsman;
         this.start = start;
-        this.startNumber = startNumber;
         this.club = club;
     }
 }
