@@ -1,31 +1,23 @@
 package com.lifehouse.raceth.finalprotocol;
 
-import java.io.FileNotFoundException;
+
 import java.io.FileOutputStream;
-import java.sql.Time;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.*;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-
 import com.lifehouse.raceth.dao.CheckpointDAO;
-import com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController;
 import com.lifehouse.raceth.model.Checkpoint;
-import com.lifehouse.raceth.model.Participant;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 
 public class FinalProtocol {
 
-    private CheckpointDAO checkpointDAO;
     private ArrayList<String> titleValue = new ArrayList<String>((Arrays.asList("Место", "Фамилия", "Имя", "Год рождения", "Город", "Клуб", "Стартовый номер", "Финиш", "Категория")));
 
     private static XSSFCellStyle createStyleForTitle(XSSFWorkbook workbook) {
@@ -54,7 +46,7 @@ public class FinalProtocol {
 
     public void createFinalProtocol(CheckpointDAO checkpointDAO) throws IOException {
         XSSFWorkbook protocol = new XSSFWorkbook();
-        XSSFSheet sheet = protocol.createSheet("Метки");
+        XSSFSheet sheet = protocol.createSheet("Протокол");
         sheet.setDisplayGridlines(false); //Отключение отображения сетки
         XSSFCellStyle titleStyle = createStyleForTitle(protocol);
 
@@ -62,6 +54,7 @@ public class FinalProtocol {
         CreationHelper createHelper = protocol.getCreationHelper();
         CellStyle styleDate = protocol.createCellStyle();
         styleDate.setDataFormat(createHelper.createDataFormat().getFormat("yyyy"));
+        styleDate.setAlignment(HorizontalAlignment.CENTER);
 
         List<Checkpoint> checkpointList = checkpointDAO.getAllCheckpoints();
         int lapCount = checkpointList.get(0).getParticipant().getStart().getLaps();
@@ -119,7 +112,6 @@ public class FinalProtocol {
             cell = row.createCell(3);
             cell.setCellValue(Date.from(checkpoint.getParticipant().getSportsman().getBirthdate().atStartOfDay(ZoneId.systemDefault()).toOffsetDateTime().toInstant()));
             cell.setCellStyle(styleDate); //Год рождения(в Excel передается полностью дата, отображается только год)
-            cell.setCellStyle(createStyleCenterAlignment(protocol));
 
             cell = row.createCell(4, CellType.STRING);
             cell.setCellValue(checkpoint.getParticipant().getSportsman().getRegion()); //Город

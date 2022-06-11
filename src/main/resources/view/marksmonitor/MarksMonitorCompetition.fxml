@@ -192,7 +192,7 @@
                         <String fx:value="btn-common" />
                         <String fx:value="btn-primary" />
                      </styleClass></Button>
-                  <Button mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Стартовый протокол" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+                  <Button mnemonicParsing="false" onAction="#printStartProtocol" stylesheets="@../../assets/css/Buttons.css" text="Стартовый протокол" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
                      <font>
                         <Font size="14.0" />
                      </font>

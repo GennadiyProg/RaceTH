@@ -12,6 +12,7 @@ import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.model.dto.TabDto;
 import com.lifehouse.raceth.readingfiles.ExcelRead;
 import com.lifehouse.raceth.rfid.RFID;
+import com.lifehouse.raceth.startprotocol.StartProtocol;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -140,6 +141,7 @@ public class MarksMonitorCompetitionController implements Initializable {
     ExcelRead excelRead = new ExcelRead(this);
 
     FinalProtocol finalProtocol = new FinalProtocol();
+    StartProtocol startProtocol = new StartProtocol();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -732,7 +734,17 @@ public class MarksMonitorCompetitionController implements Initializable {
     public void printFinalProtocol() {
         try {
             finalProtocol.createFinalProtocol(checkpointDAO);
-            System.out.println("Файл сформирован");
+            System.out.println("Финишный протокол сформирован");
+        } catch (IOException e) {
+            System.out.print("Cant create final protocol:");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void printStartProtocol() {
+        try {
+            startProtocol.createStartProtocol(participantDAO);
+            System.out.println("Стартовый протокол сформирован");
         } catch (IOException e) {
             System.out.print("Cant create final protocol:");
             System.out.println(e.getMessage());
