@@ -8,26 +8,29 @@ import com.lifehouse.raceth.model.Gender;
 import com.lifehouse.raceth.model.Participant;
 import com.lifehouse.raceth.model.Sportsman;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
-import javafx.beans.InvalidationListener;
+import com.lifehouse.raceth.usbreader.UsbReader;
 import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import lombok.Data;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -73,6 +76,7 @@ public class CreateOrEditParticipantPopupController implements Initializable {
     private SportsmanDAO sportsmanDAO;
     private DistanceDAO distanceDAO;
     private List<Sportsman> allSportsmen;
+    private String inputChip = "";
 
     private Long changedSportsmenId;
 
@@ -87,7 +91,7 @@ public class CreateOrEditParticipantPopupController implements Initializable {
         distanceChoiceBox.setItems(FXCollections.observableList(new ArrayList<>(distanceDAO.getCurrentCompetitionDistances())));
     }
 
-    private void initializeTable(){
+    private void initializeTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         cityColumn.setCellValueFactory(new PropertyValueFactory<>("region"));
         patronymicColumn.setCellValueFactory(new PropertyValueFactory<>("patronymic"));
@@ -95,20 +99,20 @@ public class CreateOrEditParticipantPopupController implements Initializable {
         sportsmenTableView.getItems().addAll(allSportsmen);
     }
 
-    private void addingListeners(){
+    private void addingListeners() {
         surnameTextField.textProperty().addListener(this::sortingTable);
         nameTextField.textProperty().addListener(this::sortingTable);
         patronymicTextField.textProperty().addListener(this::sortingTable);
         birthdateDatePicker.valueProperty().addListener(this::sortingTable);
     }
 
-    private void sortingTable(Observable observable, Object oldValue, Object newValue){
+    private void sortingTable(Observable observable, Object oldValue, Object newValue) {
         sportsmenTableView.setItems(allSportsmen.stream()
                 .filter(sportsman -> sportsman.getLastname().contains(surnameTextField.getText()))
                 .filter(sportsman -> sportsman.getName().contains(nameTextField.getText()))
                 .filter(sportsman -> sportsman.getPatronymic().contains(patronymicTextField.getText()))
                 .filter(sportsman -> {
-                    if (birthdateDatePicker.getValue() != null){
+                    if (birthdateDatePicker.getValue() != null) {
                         return sportsman.getBirthdate().isEqual(birthdateDatePicker.getValue());
                     }
                     return true;
@@ -116,13 +120,13 @@ public class CreateOrEditParticipantPopupController implements Initializable {
                 .collect(Collectors.toCollection(FXCollections::observableArrayList)));
     }
 
-    private void addSelectingSportsmanListener(){
+    private void addSelectingSportsmanListener() {
         sportsmenTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             fillFieldsFromSportsman(sportsmenTableView.getSelectionModel().getSelectedItem());
         });
     }
 
-    public void fillFieldsFromSportsman(Sportsman sportsman){
+    public void fillFieldsFromSportsman(Sportsman sportsman) {
         if (sportsman == null) return;
         changedSportsmenId = sportsman.getId();
         nameTextField.setText(sportsman.getName());
@@ -135,8 +139,8 @@ public class CreateOrEditParticipantPopupController implements Initializable {
 
     @FXML
     public void saving(ActionEvent event) {
-        if(nameTextField.getText().isEmpty() ||
-                surnameTextField.getText().isEmpty()||
+        if (nameTextField.getText().isEmpty() ||
+                surnameTextField.getText().isEmpty() ||
                 patronymicTextField.getText().isEmpty() ||
                 birthdateDatePicker.getValue() == null ||
                 cityTextField.getText().isEmpty() ||
@@ -151,7 +155,7 @@ public class CreateOrEditParticipantPopupController implements Initializable {
                 surnameTextField.getText(),
                 patronymicTextField.getText(),
                 birthdateDatePicker.getValue(),
-                switch (selectedGender.getText()){
+                switch (selectedGender.getText()) {
                     case "М" -> Gender.MALE;
                     case "Ж" -> Gender.FEMALE;
                     default -> null;
@@ -181,13 +185,43 @@ public class CreateOrEditParticipantPopupController implements Initializable {
         genderToggleGroup.selectToggle(determineToggle(participant.getGender()));
     }
 
-    private RadioButton determineToggle(Gender gender){
+    private RadioButton determineToggle(Gender gender) {
         return gender == Gender.MALE ? maleGenderRadioButton : femaleGenderRadioButton;
     }
 
     @FXML
-    void cancel(ActionEvent event) {
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+    private void cancel(ActionEvent event) {
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+    }
+
+    @FXML
+    private void readChip() {
+        try {
+            UsbReader usbReader = new UsbReader();
+            Stage popup = new Stage();
+            popup.initModality(Modality.APPLICATION_MODAL); //Блокирует основное окно, пока выведен попап.
+            StackPane layout = new StackPane();
+            Text text = new Text("Сканируйте чип");
+            layout.getChildren().add(text);
+            Scene scene = new Scene(layout, 150, 100);
+
+            scene.setOnKeyPressed((event) -> {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    chipTextField.setText(usbReader.parseChip(inputChip));
+                    inputChip = "";
+                    popup.close();
+                    return;
+                }
+
+                inputChip += event.getText();
+            });
+
+            popup.setScene(scene);
+            popup.show();
+        } catch (Exception e) {
+            inputChip = "";
+            e.printStackTrace();
+        }
     }
 
     public void alertValidateFields(){
