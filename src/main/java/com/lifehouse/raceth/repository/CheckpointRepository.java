@@ -33,4 +33,6 @@ public interface CheckpointRepository extends JpaRepository<Checkpoint, Long> {
     List<Checkpoint> getLeaderOfGroup(@Param("lap") int lap, @Param("group_id") long group_id);
 
     Checkpoint findFirstByParticipantOrderByCrossingTimeDesc(Participant participant);
+
+    List<Checkpoint> findCheckpointByParticipant(Participant participant);
 }

@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController">
+<AnchorPane fx:id="main_pane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" style="-fx-background-color: ECF1FE;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lifehouse.raceth.logic.marksmonitorpage.MarksMonitorCompetitionController">
    <children>
       <GridPane alignment="TOP_CENTER" layoutX="13.0" layoutY="2.0" minHeight="-Infinity" prefHeight="610.0" prefWidth="1090.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="2.0">
         <columnConstraints>
@@ -162,11 +162,12 @@
             </GridPane>
             <GridPane prefWidth="1058.0" GridPane.rowIndex="3">
               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.1999969482422" minWidth="10.0" prefWidth="175.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.00001525878906" minWidth="10.0" prefWidth="185.40001220703124" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.5999633789062" minWidth="10.0" prefWidth="164.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.7999328613281" minWidth="10.0" prefWidth="247.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="176.0" prefWidth="176.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="182.0" prefWidth="182.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="159.0" prefWidth="159.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="159.0" prefWidth="159.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="204.0" prefWidth="204.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="179.0" prefWidth="179.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -191,7 +192,7 @@
                         <String fx:value="btn-common" />
                         <String fx:value="btn-primary" />
                      </styleClass></Button>
-                  <Button disable="true" mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Печать стартового протокола" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="LEFT">
+                  <Button mnemonicParsing="false" stylesheets="@../../assets/css/Buttons.css" text="Стартовый протокол" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -219,6 +220,16 @@
                         <String fx:value="btn" />
                         <String fx:value="btn-common" />
                         <String fx:value="btn-danger" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#printFinalProtocol" stylesheets="@../../assets/css/Buttons.css" text="Финишный протокол" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="RIGHT">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-common" />
+                        <String fx:value="btn-success" />
                      </styleClass>
                   </Button>
                </children>

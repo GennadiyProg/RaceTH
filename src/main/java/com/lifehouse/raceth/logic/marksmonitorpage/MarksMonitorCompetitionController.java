@@ -4,6 +4,7 @@ import java.lang.*;
 
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.*;
+import com.lifehouse.raceth.finalprotocol.FinalProtocol;
 import com.lifehouse.raceth.logic.MainPageController;
 import com.lifehouse.raceth.model.*;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
@@ -137,6 +138,8 @@ public class MarksMonitorCompetitionController implements Initializable {
     TimerHandler timerHandler;
 
     ExcelRead excelRead = new ExcelRead(this);
+
+    FinalProtocol finalProtocol = new FinalProtocol();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -723,6 +726,16 @@ public class MarksMonitorCompetitionController implements Initializable {
             return new String(arr) + chip;
         } else {
             return chip;
+        }
+    }
+
+    public void printFinalProtocol() {
+        try {
+            finalProtocol.createFinalProtocol(checkpointDAO);
+            System.out.println("Файл сформирован");
+        } catch (IOException e) {
+            System.out.print("Cant create final protocol:");
+            System.out.println(e.getMessage());
         }
     }
 }
