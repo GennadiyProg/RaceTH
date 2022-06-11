@@ -78,6 +78,8 @@ public class CreateOrEditParticipantPopupController implements Initializable {
     private List<Sportsman> allSportsmen;
     private String inputChip = "";
 
+    private Long changedSportsmenId;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sportsmanDAO = (SportsmanDAO) Main.appContext.getBean("sportsmanDAO");
@@ -126,6 +128,7 @@ public class CreateOrEditParticipantPopupController implements Initializable {
 
     public void fillFieldsFromSportsman(Sportsman sportsman) {
         if (sportsman == null) return;
+        changedSportsmenId = sportsman.getId();
         nameTextField.setText(sportsman.getName());
         patronymicTextField.setText(sportsman.getPatronymic());
         surnameTextField.setText(sportsman.getLastname());
@@ -141,16 +144,13 @@ public class CreateOrEditParticipantPopupController implements Initializable {
                 patronymicTextField.getText().isEmpty() ||
                 birthdateDatePicker.getValue() == null ||
                 cityTextField.getText().isEmpty() ||
-                chipTextField.getText().isEmpty() ||
-                startNumberTextField.getText().isEmpty() ||
-                distanceChoiceBox.getSelectionModel().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Невозможно создать участника, так как не заполнены все поля");
-            alert.show();
+        distanceChoiceBox.getSelectionModel().isEmpty()) {
+            alertValidateFields();
             return;
         }
         RadioButton selectedGender = (RadioButton) genderToggleGroup.getSelectedToggle();
         Sportsman sportsman = new Sportsman(
+                changedSportsmenId,
                 nameTextField.getText(),
                 surnameTextField.getText(),
                 patronymicTextField.getText(),
@@ -162,12 +162,16 @@ public class CreateOrEditParticipantPopupController implements Initializable {
                 },
                 cityTextField.getText()
         );
-        newParticipant.setValue(new Participant(
-                chipTextField.getText().equals("") ? "" : chipTextField.getText(),
-                sportsman,
-                startNumberTextField.getText().equals("") ? 0 : Integer.parseInt(startNumberTextField.getText())
-        ));
-        cancel(event);
+        try{
+            newParticipant.setValue(new Participant(
+                    chipTextField.getText(),
+                    sportsman,
+                    startNumberTextField.getText().equals("") ? 0 : Integer.parseInt(startNumberTextField.getText())
+            ));
+            cancel(event);
+        } catch (Exception e){
+            alertValidateFields();
+        }
     }
 
     public void fillFieldsFromEntity(ParticipantCompetitionView participant) {
@@ -218,5 +222,11 @@ public class CreateOrEditParticipantPopupController implements Initializable {
             inputChip = "";
             e.printStackTrace();
         }
+    }
+
+    public void alertValidateFields(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Невозможно создать участника, так как введены некорректные данные");
+        alert.show();
     }
 }
