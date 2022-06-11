@@ -45,6 +45,10 @@ public class CheckpointDAO {
         return checkpointRepository.countCheckpointByParticipant_StartAndLap(participant.getStart(),lap);
     }
 
+    public int getParticipantPlaceOfGroup(Participant participant, int lap) {
+        return checkpointRepository.countCheckpointByParticipant_Start_GroupAndLap(participant.getStart().getGroup(),lap);
+    }
+
     public void delete(Checkpoint checkpoint) {
         checkpointRepository.delete(checkpoint);
     }
@@ -53,8 +57,8 @@ public class CheckpointDAO {
         return checkpointRepository.findCheckpointByParticipantAndLap(participant,lap).get(0).getCrossingTime();
     }
 
-    public Checkpoint getLeader(int lap) {
-        return checkpointRepository.getLeader(lap).get(0);
+    public Checkpoint getLeaderOfGroup(int lap, Participant participant) {
+        return checkpointRepository.getLeaderOfGroup(lap, participant.getStart().getGroup().getId()).get(0);
     }
 
     public Checkpoint getLastCheckpointByParticipant(Participant participant) {return checkpointRepository.findFirstByParticipantOrderByCrossingTimeDesc(participant);}
