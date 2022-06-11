@@ -45,6 +45,10 @@ public class CheckpointDAO {
         return checkpointRepository.countCheckpointByParticipant_StartAndLap(participant.getStart(),lap);
     }
 
+    public int getParticipantPlaceOfGroup(Participant participant, int lap) {
+        return checkpointRepository.countCheckpointByParticipant_Start_GroupAndLap(participant.getStart().getGroup(),lap);
+    }
+
     public void delete(Checkpoint checkpoint) {
         checkpointRepository.delete(checkpoint);
     }

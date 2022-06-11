@@ -1,6 +1,7 @@
 package com.lifehouse.raceth.repository;
 
 import com.lifehouse.raceth.model.Checkpoint;
+import com.lifehouse.raceth.model.Group;
 import com.lifehouse.raceth.model.Participant;
 import com.lifehouse.raceth.model.Start;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,6 +24,8 @@ public interface CheckpointRepository extends JpaRepository<Checkpoint, Long> {
     int countCheckpointByParticipant(Participant participant);
 
     int countCheckpointByParticipant_StartAndLap(Start start, int lap);
+
+    int countCheckpointByParticipant_Start_GroupAndLap(Group group, int lap);
 
     List<Checkpoint> findCheckpointByParticipantAndLap(Participant participant, int lap);
 

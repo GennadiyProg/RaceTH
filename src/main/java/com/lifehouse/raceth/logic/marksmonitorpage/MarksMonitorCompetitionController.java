@@ -564,21 +564,21 @@ public class MarksMonitorCompetitionController implements Initializable {
     private void buildNewEntityPS(Participant participant, int lap, TableView<ParticipantStartView> tab, Checkpoint checkpoint) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
         ParticipantStartView participantStartView = new ParticipantStartView(
-                checkpoint.getId(),
-                LocalTime.parse(LocalTime.now().format(formatter)),
-                LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(formatter)),
-                participant.getChip(),
-                participant.getStartNumber(),
-                participant.getSportsman().getLastname(),
-                participant.getSportsman().getName(),
-                participant.getStart().getGroup().getName(),
-                lap,
-                checkpointDAO.getParticipiantPlace(participant, lap),
-                LocalTime.parse(calculateTime(
+                checkpoint.getId(), //id
+                LocalTime.parse(LocalTime.now().format(formatter)), //текущее время
+                LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(formatter)), //время на дистанции
+                participant.getChip(), //чип
+                participant.getStartNumber(), //стартовый номер
+                participant.getSportsman().getLastname(), //фамилия
+                participant.getSportsman().getName(), //имя
+                participant.getStart().getGroup().getName(), //название группы
+                lap, //круг
+                checkpointDAO.getParticipantPlaceOfGroup(participant, lap), //место
+                LocalTime.parse(calculateTime( //отставание от лидера
                         checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(),
                         checkpointDAO.getLeader(lap).getCrossingTime()).format(formatter)
                 ),
-                lap > 1
+                lap > 1 //время круга
                         ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter))
                         : LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(formatter))
         );
