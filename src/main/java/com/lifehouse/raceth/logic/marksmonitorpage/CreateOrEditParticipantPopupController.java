@@ -132,6 +132,19 @@ public class CreateOrEditParticipantPopupController implements Initializable {
 
     @FXML
     public void saving(ActionEvent event) {
+        if(nameTextField.getText().isEmpty() ||
+                surnameTextField.getText().isEmpty()||
+                patronymicTextField.getText().isEmpty() ||
+                birthdateDatePicker.getValue() == null ||
+                cityTextField.getText().isEmpty() ||
+                chipTextField.getText().isEmpty() ||
+                startNumberTextField.getText().isEmpty() ||
+        distanceChoiceBox.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Невозможно создать участника, так как не заполнены все поля");
+            alert.show();
+            return;
+        }
         RadioButton selectedGender = (RadioButton) genderToggleGroup.getSelectedToggle();
         Sportsman sportsman = new Sportsman(
                 nameTextField.getText(),
