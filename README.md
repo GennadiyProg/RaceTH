@@ -20,3 +20,5 @@ Welkom to nash project RaceTH!!!
 ![](./rdmscrs/setup_sdk9.png?raw=true) <br>
 
 На этом пока всё. В дальнейшем, вероятно, доработаем инструкцию.<br>
+
+[JavaFx JDK](https://download2.gluonhq.com/openjfx/17.0.2/openjfx-17.0.2_windows-x64_bin-sdk.zip)
