@@ -5,6 +5,7 @@ import com.lifehouse.raceth.model.Participant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.FetchNotFoundException;
 
 import java.time.LocalDate;
 
@@ -26,6 +27,18 @@ public class ParticipantCompetitionView {
     private String discharge;
     private String group;
 
+    public ParticipantCompetitionView(long id, String name, String lastname, String patronymic, Gender gender, LocalDate birthdate, String region, String club, String discharge, String group) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.patronymic = patronymic;
+        this.gender = gender;
+        this.birthdate = birthdate;
+        this.region = region;
+        this.club = club;
+        this.discharge = discharge;
+        this.group = group;
+    }
 
     public static ParticipantCompetitionView convertToView(Participant participant){
         return new ParticipantCompetitionView(

@@ -1,9 +1,11 @@
 package com.lifehouse.raceth.logic.marksmonitorpage;
 
+import java.io.File;
 import java.lang.*;
 
 import com.lifehouse.raceth.Main;
 import com.lifehouse.raceth.dao.*;
+import com.lifehouse.raceth.finalprotocol.FinalProtocol;
 import com.lifehouse.raceth.logic.MainPageController;
 import com.lifehouse.raceth.model.*;
 import com.lifehouse.raceth.model.view.ParticipantCompetitionView;
@@ -11,6 +13,7 @@ import com.lifehouse.raceth.model.view.ParticipantStartView;
 import com.lifehouse.raceth.model.dto.TabDto;
 import com.lifehouse.raceth.readingfiles.ExcelRead;
 import com.lifehouse.raceth.rfid.RFID;
+import com.lifehouse.raceth.startprotocol.StartProtocol;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +29,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.FileChooser;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -140,10 +144,11 @@ public class MarksMonitorCompetitionController implements Initializable {
     private Boolean isRunningReader = true;
     private RFID thread;
 
-
     TimerHandler timerHandler;
 
-    ExcelRead excelRead = new ExcelRead(this);
+
+    FinalProtocol finalProtocol = new FinalProtocol();
+    StartProtocol startProtocol = new StartProtocol();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -546,6 +551,7 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     public void addNewCheckpoint(String chip) {
         Participant participant = participantDAO.getParticipantByChip(chip);
+        if (checkpointDAO.getCountCheakpointByParticipiant(participant) == participant.getStart().getLaps()) return;
         int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
         if (participant == null) return;
         if (lap != 1) {
@@ -659,29 +665,33 @@ public class MarksMonitorCompetitionController implements Initializable {
     }
 
     public void addFileExcel() {
+        FileChooser fc = new FileChooser();
+        File file = fc.showOpenDialog(null);
+        ExcelRead excelRead = new ExcelRead(this,file.getAbsolutePath());
+
         excelRead.readExcel();
     }
 
     public void addNewParticipant(List<String> rowValue) {
-        Sportsman sportsman = sportsmanDAO.getSportsmenByFioAndBirthdate(rowValue.get(0), rowValue.get(1), rowValue.get(2), LocalDate.parse(rowValue.get(6)));
+        Sportsman sportsman = sportsmanDAO.getSportsmenByFioAndBirthdate(rowValue.get(0), rowValue.get(1), rowValue.get(2), LocalDate.parse(rowValue.get(4)));
 
         if (sportsman == null) {
             sportsmanDAO.create(new Sportsman(
                     rowValue.get(1),
                     rowValue.get(0),
                     rowValue.get(2),
-                    LocalDate.parse(rowValue.get(6)),
+                    LocalDate.parse(rowValue.get(4)),
                     Gender.valueOf(rowValue.get(3).toUpperCase(Locale.ROOT)),
-                    rowValue.get(7),
-                    rowValue.get(9)
+                    rowValue.get(5),
+                    rowValue.get(7)
             ));
-            sportsman = sportsmanDAO.getSportsmenByFioAndBirthdate(rowValue.get(0), rowValue.get(1), rowValue.get(2), LocalDate.parse(rowValue.get(6)));
+            sportsman = sportsmanDAO.getSportsmenByFioAndBirthdate(rowValue.get(0), rowValue.get(1), rowValue.get(2), LocalDate.parse(rowValue.get(4)));
         }
         List<Start> starts = startDAO.getStartsByCompetitionDayId(competitionDay.getSelectionModel().getSelectedItem().getId());
         Sportsman finalSportsman = sportsman;
         starts = starts.stream().filter(start -> finalSportsman.getGender() == start.getGroup().getGender()).toList();
         int ageParticipant = LocalDate.now().getYear() - finalSportsman.getBirthdate().getYear();
-        Distance distance = distanceDAO.getDistanceByLength(Integer.parseInt(rowValue.get(10)));
+        Distance distance = distanceDAO.getDistanceByLength(Integer.parseInt(rowValue.get(8)));
         Start participantStart = starts.stream()
                 .filter(start -> ageParticipant < start.getGroup().getAgeTo() &&
                         ageParticipant > start.getGroup().getAgeFrom() &&
@@ -690,11 +700,9 @@ public class MarksMonitorCompetitionController implements Initializable {
         if (participantStart == null) return;
 
         Participant participant = new Participant(
-                buildChipString(rowValue.get(4)),
                 finalSportsman,
                 participantStart,
-                Integer.parseInt(rowValue.get(5)),
-                rowValue.get(8)
+                rowValue.get(6)
         );
 
         participantDAO.update(participant);
@@ -711,8 +719,6 @@ public class MarksMonitorCompetitionController implements Initializable {
                         participant.getSportsman().getName(),
                         participant.getSportsman().getPatronymic(),
                         participant.getSportsman().getGender(),
-                        participant.getChip(),
-                        participant.getStartNumber(),
                         participant.getSportsman().getBirthdate(),
                         participant.getSportsman().getRegion(),
                         participant.getClub(),
@@ -729,6 +735,26 @@ public class MarksMonitorCompetitionController implements Initializable {
             return new String(arr) + chip;
         } else {
             return chip;
+        }
+    }
+
+    public void printFinalProtocol() {
+        try {
+            finalProtocol.createFinalProtocol(checkpointDAO);
+            System.out.println("Финишный протокол сформирован");
+        } catch (IOException e) {
+            System.out.print("Cant create final protocol:");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void printStartProtocol() {
+        try {
+            startProtocol.createStartProtocol(participantDAO);
+            System.out.println("Стартовый протокол сформирован");
+        } catch (IOException e) {
+            System.out.print("Cant create final protocol:");
+            System.out.println(e.getMessage());
         }
     }
 }
