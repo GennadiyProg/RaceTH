@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -43,9 +44,9 @@
                <children>
                   <GridPane prefHeight="301.0" prefWidth="523.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="229.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="10.0" prefWidth="77.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="217.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="182.80001220703124" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="10.0" prefWidth="80.39998779296874" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="182.00002441406247" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="35.60001220703125" minHeight="10.0" prefHeight="30.799995803833006" vgrow="SOMETIMES" />
@@ -88,7 +89,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="chipTextField" maxWidth="-Infinity" prefHeight="31.0" prefWidth="160.0" translateY="2.0" GridPane.rowIndex="7" />
+                        <TextField fx:id="chipTextField" editable="false" maxWidth="-Infinity" prefHeight="31.0" prefWidth="160.0" translateY="2.0" GridPane.rowIndex="7" />
                         <Label text="Дата рождения" GridPane.columnIndex="2">
                            <font>
                               <Font size="16.0" />
@@ -140,6 +141,12 @@
                            </font>
                         </Label>
                         <ChoiceBox fx:id="distanceChoiceBox" prefWidth="150.0" stylesheets="@../../assets/css/ChoiseBox.css" GridPane.rowIndex="9" />
+                        <Button mnemonicParsing="false" onAction="#readChip" stylesheets="@../../assets/css/Buttons.css" text="Считать" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                           <styleClass>
+                              <String fx:value="btn-small" />
+                              <String fx:value="btn-primary" />
+                           </styleClass>
+                        </Button>
                      </children>
                   </GridPane>
                   <TableView fx:id="sportsmenTableView" prefHeight="116.0" prefWidth="516.0" stylesheets="@../../assets/css/table.css" GridPane.columnIndex="1">

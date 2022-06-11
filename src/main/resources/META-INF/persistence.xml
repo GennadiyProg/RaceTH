@@ -6,6 +6,7 @@
              version="2.1">
 
     <persistence-unit name="TestDB">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:RaceTH.db" />
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
