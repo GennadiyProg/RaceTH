@@ -21,11 +21,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.3.3</version>
-        </dependency>
-        <dependency>
             <groupId>com.github.gwenn</groupId>
             <artifactId>sqlite-dialect</artifactId>
             <version>0.1.2</version>
@@ -52,11 +47,6 @@
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>19-ea+3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
             <version>19-ea+3</version>
         </dependency>
@@ -80,7 +70,6 @@
             <artifactId>threetenbp</artifactId>
             <version>1.6.0</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -93,14 +82,6 @@
                     <source>17</source>
                     <target>17</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.8</version>
-                    <configuration>
-                        <mainClass>com.lifehouse.raceth.Main</mainClass>
-                    </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
