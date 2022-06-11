@@ -134,7 +134,6 @@ public class MarksMonitorCompetitionController implements Initializable {
     private Boolean isRunningReader = true;
     private RFID thread;
 
-
     TimerHandler timerHandler;
 
     ExcelRead excelRead = new ExcelRead(this);
@@ -540,6 +539,7 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     public void addNewCheckpoint(String chip) {
         Participant participant = participantDAO.getParticipantByChip(chip);
+        if (checkpointDAO.getCountCheakpointByParticipiant(participant) == participant.getStart().getLaps()) return;
         int lap = checkpointDAO.getCountCheakpointByParticipiant(participant) + 1;
         if (participant == null) return;
         if (lap != 1) {
