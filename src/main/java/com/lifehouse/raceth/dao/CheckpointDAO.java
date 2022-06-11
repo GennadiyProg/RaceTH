@@ -72,4 +72,6 @@ public class CheckpointDAO {
     }
 
     public List<Checkpoint> getPartisipantsCheckpoint(Participant participant) { return checkpointRepository.findCheckpointByParticipant(participant);}
+
+    public List<Checkpoint> getCheckpointByLap(int lap) {return checkpointRepository.findCheckpointByLap(lap);}
 }

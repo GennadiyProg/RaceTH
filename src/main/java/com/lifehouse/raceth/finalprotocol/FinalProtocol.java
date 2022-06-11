@@ -33,7 +33,14 @@ public class FinalProtocol {
         font.setBold(true);
         XSSFCellStyle style = workbook.createCellStyle();
         style.setBorderBottom(BorderStyle.THIN);
+        style.setAlignment(HorizontalAlignment.CENTER);
         style.setFont(font);
+        return style;
+    }
+
+    private static XSSFCellStyle createStyleCenterAlignment(XSSFWorkbook workbook) {
+        XSSFCellStyle style = workbook.createCellStyle();
+        style.setAlignment(HorizontalAlignment.CENTER);
         return style;
     }
 
@@ -58,9 +65,15 @@ public class FinalProtocol {
 
         List<Checkpoint> checkpointList = checkpointDAO.getAllCheckpoints();
         int lapCount = checkpointList.get(0).getParticipant().getStart().getLaps();
+        List<Checkpoint> checkpointByLap = checkpointDAO.getCheckpointByLap(lapCount);
+        List<Long> participantByLap = new ArrayList<>();
+        for (Checkpoint checkpoint : checkpointByLap) {
+            participantByLap.add(checkpoint.getParticipant().getId());
+        }
+        checkpointByLap = null;
 
         //Заполнение списка заголовков столбцов
-        for (int i = 0; i < lapCount-1; i++) titleValue.add(i + 7, "Круг " + (i + 1));
+        for (int i = 0; i < lapCount - 1; i++) titleValue.add(i + 7, "Круг " + (i + 1));
 
         int rownum = 0;
         Cell cell;
@@ -73,12 +86,8 @@ public class FinalProtocol {
             cell.setCellStyle(titleStyle);
         }
 
-        List<Checkpoint> checkpointOfParticipant;
-        for (int i = 1; i < checkpointList.size(); i++) {
 
-        }
-
-        List<Long> ignoreList = new ArrayList<Long>();
+        List<Long> ignoreList = new ArrayList<>();
         for (Checkpoint checkpoint : checkpointList) {
             if (ignoreList.contains(checkpoint.getParticipant().getId())) {
                 continue;
@@ -91,37 +100,56 @@ public class FinalProtocol {
             List<Checkpoint> participantCheckpoints = checkpointDAO.getPartisipantsCheckpoint(checkpoint.getParticipant());
 
             cell = row.createCell(0, CellType.NUMERIC);
-            cell.setCellValue(1); //Место
+            if (participantByLap.contains(checkpoint.getParticipant().getId())) {
+                cell.setCellValue(participantByLap.indexOf(checkpoint.getParticipant().getId()) + 1); //Место
+                cell.setCellStyle(createStyleCenterAlignment(protocol));
+            } else {
+                cell.setCellValue("Н/Ф");
+                cell.setCellStyle(createStyleCenterAlignment(protocol));
+            }
 
             cell = row.createCell(1, CellType.STRING);
             cell.setCellValue(checkpoint.getParticipant().getSportsman().getLastname()); //Фамилия
+            cell.setCellStyle(createStyleCenterAlignment(protocol));
 
             cell = row.createCell(2, CellType.STRING);
             cell.setCellValue(checkpoint.getParticipant().getSportsman().getName()); //Имя
+            cell.setCellStyle(createStyleCenterAlignment(protocol));
 
             cell = row.createCell(3);
             cell.setCellValue(Date.from(checkpoint.getParticipant().getSportsman().getBirthdate().atStartOfDay(ZoneId.systemDefault()).toOffsetDateTime().toInstant()));
             cell.setCellStyle(styleDate); //Год рождения(в Excel передается полностью дата, отображается только год)
+            cell.setCellStyle(createStyleCenterAlignment(protocol));
 
             cell = row.createCell(4, CellType.STRING);
             cell.setCellValue(checkpoint.getParticipant().getSportsman().getRegion()); //Город
+            cell.setCellStyle(createStyleCenterAlignment(protocol));
 
             cell = row.createCell(5, CellType.STRING);
             cell.setCellValue(checkpoint.getParticipant().getClub()); //Клуб
+            cell.setCellStyle(createStyleCenterAlignment(protocol));
 
             cell = row.createCell(6, CellType.NUMERIC);
             cell.setCellValue(checkpoint.getParticipant().getStartNumber()); //Стартовый номер
+            cell.setCellStyle(createStyleCenterAlignment(protocol));
 
-            for (int i = 0; i < participantCheckpoints.size()-1; i++) {
-                cell = row.createCell(7+i, CellType.STRING);
-                cell.setCellValue(calculateTime(participantCheckpoints.get(i).getCrossingTime(),checkpoint.getParticipant().getStart().getStartTime()));
+            for (int i = 0; i < participantCheckpoints.size(); i++) {
+                cell = row.createCell(7 + i, CellType.STRING);
+                cell.setCellValue(calculateTime(participantCheckpoints.get(i).getCrossingTime(), checkpoint.getParticipant().getStart().getStartTime()));
+                cell.setCellStyle(createStyleCenterAlignment(protocol));
+            }
+            if (participantCheckpoints.size() == lapCount) {
+                cell = row.createCell(7 + participantCheckpoints.size() - 1, CellType.STRING);
+                cell.setCellValue(calculateTime(
+                        participantCheckpoints.get(lapCount - 1).getCrossingTime(),
+                        checkpoint.getParticipant().getStart().getStartTime()
+                )); //Финишное время(относительное)
+                cell.setCellStyle(createStyleCenterAlignment(protocol));
             }
 
-            cell = row.createCell(7+participantCheckpoints.size()-1, CellType.STRING);
-            cell.setCellValue(calculateTime(participantCheckpoints.get(lapCount-1).getCrossingTime(),checkpoint.getParticipant().getStart().getStartTime())); //Финишное время(относительное)
-
-            cell = row.createCell(8+participantCheckpoints.size()-1, CellType.STRING);
+            cell = row.createCell(8 + lapCount - 1, CellType.STRING);
             cell.setCellValue(checkpoint.getParticipant().getStart().getGroup().getName()); //Группа
+            cell.setCellStyle(createStyleCenterAlignment(protocol));
 
         }
 
@@ -129,6 +157,7 @@ public class FinalProtocol {
         for (int i = 0; i < titleValue.size(); i++) {
             sheet.autoSizeColumn(i);
         }
+
 
         File file = new File("src/main/java/com/lifehouse/raceth/finalprotocol/finalprotocol.xlsx");
         file.getParentFile().mkdirs();

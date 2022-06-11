@@ -35,4 +35,6 @@ public interface CheckpointRepository extends JpaRepository<Checkpoint, Long> {
     Checkpoint findFirstByParticipantOrderByCrossingTimeDesc(Participant participant);
 
     List<Checkpoint> findCheckpointByParticipant(Participant participant);
+
+    List<Checkpoint> findCheckpointByLap(int lap);
 }
