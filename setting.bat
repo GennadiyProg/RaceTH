@@ -1,1 +1,13 @@
-java --module-path C:\Users\gruma\IdeaProjects\javafx-sdk-17.0.2\lib --add-modules javafx.controls,javafx.base,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web -jar C:\Users\gruma\IdeaProjects\RaceTH\target\RaceTH-1.0-SNAPSHOT-jar-with-dependencies.jar
+.\wget "https://download.oracle.com/java/17/archive/jdk-17.0.3.1_windows-x64_bin.msi"
+.\wget "https://download2.gluonhq.com/openjfx/17.0.2/openjfx-17.0.2_windows-x64_bin-sdk.zip"
+
+7za x "openjfx-17.0.2_windows-x64_bin-sdk.zip" -o"javafx-sdk-17.0.2"
+
+chcp 65001
+echo Не выключайте терминал до полной установки Java
+
+.\jdk-17.0.3.1_windows-x64_bin.msi
+del "jdk-17.0.3.1_windows-x64_bin.msi"
+del "openjfx-17.0.2_windows-x64_bin-sdk.zip"
+
+java --module-path .\javafx-sdk-17.0.2\lib --add-modules javafx.controls,javafx.base,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web -jar .\target\RaceTH-1.0-SNAPSHOT-jar-with-dependencies.jar
