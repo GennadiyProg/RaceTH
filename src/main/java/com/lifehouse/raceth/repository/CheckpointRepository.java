@@ -29,8 +29,8 @@ public interface CheckpointRepository extends JpaRepository<Checkpoint, Long> {
 
     List<Checkpoint> findCheckpointByParticipantAndLap(Participant participant, int lap);
 
-    @Query(value = "select * from Checkpoint where crossingTime = (select min(crossingTime) from Checkpoint where lap = :lap) and lap = :lap", nativeQuery = true)
-    List<Checkpoint> getLeader(@Param("lap") int lap);
+    @Query(value = "select Checkpoint.id, Checkpoint.crossingTime, Checkpoint.lap, Checkpoint.participant_id from Checkpoint where Checkpoint.crossingTime = (select min(crossingTime) from Checkpoint join Participant P on Checkpoint.participant_id = P.id join Start S on P.start_id = S.id where lap = :lap and S.group_id = :group_id) and lap = :lap", nativeQuery = true)
+    List<Checkpoint> getLeaderOfGroup(@Param("lap") int lap, @Param("group_id") long group_id);
 
     Checkpoint findFirstByParticipantOrderByCrossingTimeDesc(Participant participant);
 }

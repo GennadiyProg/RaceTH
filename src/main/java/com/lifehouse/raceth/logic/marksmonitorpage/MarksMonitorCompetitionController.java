@@ -342,12 +342,17 @@ public class MarksMonitorCompetitionController implements Initializable {
             checkpoint.setParticipant(participant);
             checkpointDAO.update(checkpoint);
 
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
             // Привязка участника за вьюхой и отсечкой
             currentCheckpointView.attachParticipant(participant);
-            currentCheckpointView.setTimeOnDistance(LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))));
+            currentCheckpointView.setTimeOnDistance(LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(formatter)));
             currentCheckpointView.setLap(checkpoint.getLap());
-            currentCheckpointView.setBehindTheLeader(LocalTime.parse(calculateTime(checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(), checkpointDAO.getLeader(checkpoint.getLap()).getCrossingTime()).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))));
-            currentCheckpointView.setLapTime(checkpoint.getLap() > 1 ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, checkpoint.getLap() - 1)).format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))) : LocalTime.of(0, 0, 0));
+            currentCheckpointView.setBehindTheLeader(LocalTime.parse(calculateTime(
+                    checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(),
+                    checkpointDAO.getLeaderOfGroup(checkpoint.getLap(), participant).getCrossingTime()).format(formatter)));
+            currentCheckpointView.setLapTime(checkpoint.getLap() > 1
+                    ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, checkpoint.getLap() - 1)).format(formatter))
+                    : LocalTime.parse(calculateTimeToNow(participant.getStart().getStartTime()).format(formatter)));
 
             // Обновление таблицы с выбранной меткой
             newParticipantNumber.getTableView().refresh();
@@ -576,7 +581,7 @@ public class MarksMonitorCompetitionController implements Initializable {
                 checkpointDAO.getParticipantPlaceOfGroup(participant, lap), //место
                 LocalTime.parse(calculateTime( //отставание от лидера
                         checkpointDAO.getLastCheckpointByParticipant(participant).getCrossingTime(),
-                        checkpointDAO.getLeader(lap).getCrossingTime()).format(formatter)
+                        checkpointDAO.getLeaderOfGroup(lap, participant).getCrossingTime()).format(formatter)
                 ),
                 lap > 1 //время круга
                         ? LocalTime.parse(calculateTimeToNow(checkpointDAO.getlastLapTime(participant, lap - 1)).format(formatter))
