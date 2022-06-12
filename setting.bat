@@ -1,5 +1,5 @@
 .\wget "https://download.oracle.com/java/17/archive/jdk-17.0.3.1_windows-x64_bin.msi"
-.\wget "https://download2.gluonhq.com/openjfx/17.0.2/openjfx-17.0.2_windows-x64_bin-sdk.zip"
+.\wget --no-check-certificate "https://download2.gluonhq.com/openjfx/17.0.2/openjfx-17.0.2_windows-x64_bin-sdk.zip"
 
 7za x "openjfx-17.0.2_windows-x64_bin-sdk.zip"
 
