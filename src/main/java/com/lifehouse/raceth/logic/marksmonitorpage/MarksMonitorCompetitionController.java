@@ -146,10 +146,6 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     TimerHandler timerHandler;
 
-
-    FinalProtocol finalProtocol = new FinalProtocol();
-    StartProtocol startProtocol = new StartProtocol();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         participantDAO = (ParticipantDAO) Main.appContext.getBean("participantDAO");
@@ -740,6 +736,7 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     public void printFinalProtocol() {
         try {
+            FinalProtocol finalProtocol = new FinalProtocol();
             finalProtocol.createFinalProtocol(checkpointDAO);
             System.out.println("Финишный протокол сформирован");
         } catch (IOException e) {
@@ -750,6 +747,7 @@ public class MarksMonitorCompetitionController implements Initializable {
 
     public void printStartProtocol() {
         try {
+            StartProtocol startProtocol = new StartProtocol();
             startProtocol.createStartProtocol(participantDAO);
             System.out.println("Стартовый протокол сформирован");
         } catch (IOException e) {
